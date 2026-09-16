@@ -1,5 +1,5 @@
 {
-  "request_id": "initial-six-municipality-pilot",
+  "request_id": "six-municipality-pilot-package-install",
   "mode": "collect",
   "config": "examples/language_requirements.yaml",
   "municipalities": "research/municipalities-pilot.csv",
