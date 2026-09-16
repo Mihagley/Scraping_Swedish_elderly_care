@@ -1,6 +1,7 @@
 import io
 
 import httpx
+import pytest
 from pypdf import PdfWriter
 
 from municipal_research.config import Extraction
@@ -49,6 +50,16 @@ def test_html_cleanup_and_offsets(tmp_path):
     assert "evil()" not in result.text
     assert "språkregel" in result.text
     assert result.title == "Å"
+
+
+@pytest.mark.parametrize("title", ["Sidan saknas | MeetingPlus [sv]", "404 - Page not found"])
+def test_soft_404_preserved_but_not_classified(tmp_path, title):
+    body = f"<html><head><title>{title}</title></head><body><main>Requested document missing.</main></body></html>".encode()
+    result = extract(download(body, "text/html"), "demo", tmp_path, Extraction())
+    assert (tmp_path / result.raw_path).read_bytes() == body
+    assert (tmp_path / result.text_path).is_file()
+    assert "suspected_error_page_not_classified" in result.warnings
+    assert chunk_document(result, Extraction()) == ([], False)
 
 
 def test_chunks_cover_text_and_report_limit(document):

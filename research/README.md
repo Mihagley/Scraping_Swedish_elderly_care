@@ -34,7 +34,7 @@ The URLs in `municipalities-pilot.csv` were found through Codex web search on
 2026-09-16. They are candidates, not pre-approved findings. The downloader independently
 retrieves each candidate, records its final URL and content hash, and applies robots rules.
 
-- Alingsås: council protocol extract, 19 June 2023, concerning language requirements.
+- Alingsås: full council-board protocol, 19 June 2023, concerning language requirements.
 - Stockholm: elderly-care administration response dated 26 May 2023, presented to the board in August 2023.
 - Kungsbacka: care-board minutes from 12 June 2025, referring to an earlier council decision. Later reporting needs explicit historical support.
 - Sundsvall: care-board protocol dated 15 December 2022, including language verification.
@@ -44,3 +44,9 @@ retrieves each candidate, records its final URL and content hash, and applies ro
 Source dates above describe the documents, not the implementation dates of a requirement.
 Exact source URLs are preserved in the CSV and each run. Never copy classifications
 from the earlier conversation into this dataset without rechecking the retrieved evidence.
+
+The first collection (`35157955501-1-collect`) contains five usable sources and an
+Alingsås error page returned with HTTP 200. That historical run is preserved unchanged.
+On 17 September 2026 the stale extract URL was replaced with the independently downloaded
+full protocol. The extractor now flags recognized missing-page responses and excludes
+them from classification while retaining their raw bytes and cleaned text.

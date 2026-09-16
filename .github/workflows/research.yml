@@ -44,6 +44,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RESEARCH_MODE: ${{ inputs.mode }}
         run: python scripts/run_research.py
+      - name: Verify saved artifact hashes
+        if: steps.research.outcome == 'success'
+        run: |
+          python -c 'import json, subprocess; subprocess.run(["municipal-research", "verify-run", json.load(open("research/latest.json"))["run_directory"]], check=True)'
       - name: Keep complete run artifacts
         if: always()
         uses: actions/upload-artifact@v4

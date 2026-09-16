@@ -1,5 +1,5 @@
 {
-  "request_id": "six-municipality-pilot-package-install",
+  "request_id": "six-municipality-pilot-corrected-alingsas-source",
   "mode": "collect",
   "config": "examples/language_requirements.yaml",
   "municipalities": "research/municipalities-pilot.csv",

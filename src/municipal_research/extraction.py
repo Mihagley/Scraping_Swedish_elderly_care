@@ -4,6 +4,7 @@ import io
 import re
 import unicodedata
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import trafilatura
 from bs4 import BeautifulSoup
@@ -14,7 +15,7 @@ from .models import Chunk, Document, Page
 from .network import Download
 from .storage import atomic_bytes, digest, write_json
 
-EXTRACTOR_VERSION = "text-v1"
+EXTRACTOR_VERSION = "text-v2"
 
 
 def clean_text(value: str) -> str:
@@ -71,6 +72,13 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             raise ValueError("Unsupported content type: " + download.content_type)
         soup = BeautifulSoup(download.body, "html.parser")
         title = soup.title.get_text(" ", strip=True) if soup.title else ""
+        error_title = re.match(
+            r"^(?:404\b|page not found\b|sidan (?:saknas|finns inte|kunde inte hittas)\b)",
+            title.strip(),
+            re.IGNORECASE,
+        )
+        if error_title or urlsplit(download.url).path.rstrip("/").casefold() == "/404":
+            warnings.append("suspected_error_page_not_classified")
         value = trafilatura.extract(
             download.body,
             include_tables=True,
@@ -119,6 +127,9 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
 
 
 def chunk_document(document: Document, config: Extraction) -> tuple[list[Chunk], bool]:
+    # Keep raw and extracted error pages for the audit, but do not send them to the LLM.
+    if "suspected_error_page_not_classified" in document.warnings:
+        return [], False
     chunks, start = [], 0
     while start < len(document.text) and len(chunks) < config.max_chunks_per_document:
         end = min(start + config.chunk_chars, len(document.text))
