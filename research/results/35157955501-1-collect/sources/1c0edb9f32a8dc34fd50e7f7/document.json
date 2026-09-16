@@ -1,0 +1,38 @@
+{
+  "id": "1c0edb9f32a8dc34fd50e7f7",
+  "municipality_id": "0180",
+  "url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+  "requested_url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+  "retrieved_at": "2026-09-16T22:30:16.447946+00:00",
+  "raw_sha256": "f37559c112fa04e6bf2949cfda988a6d7b5a738174732164ed332762181d2a13",
+  "text_sha256": "3521508889727c72dfc53ba7bf99ed4c8318c594eb2cd5e961a1f37e7185a93e",
+  "raw_path": "sources/1c0edb9f32a8dc34fd50e7f7/source.pdf",
+  "text_path": "sources/1c0edb9f32a8dc34fd50e7f7/text.txt",
+  "numbered_path": "sources/1c0edb9f32a8dc34fd50e7f7/text.lines.txt",
+  "media_type": "pdf",
+  "title": "Strateg",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 2006
+    },
+    {
+      "page": 2,
+      "start": 2009,
+      "end": 4095
+    },
+    {
+      "page": 3,
+      "start": 4098,
+      "end": 6481
+    },
+    {
+      "page": 4,
+      "start": 6484,
+      "end": 8394
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v1"
+}

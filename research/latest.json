@@ -1,0 +1,152 @@
+{
+  "run_directory": "research/results/35157955501-1-collect",
+  "mode": "collect",
+  "request": {
+    "request_id": "six-municipality-pilot-package-install",
+    "mode": "collect",
+    "config": "examples/language_requirements.yaml",
+    "municipalities": "research/municipalities-pilot.csv",
+    "limit": 6,
+    "max_documents": 1,
+    "max_chunks_per_document": 20,
+    "max_api_calls": 200
+  },
+  "municipalities": [
+    {
+      "municipality_id": "1489",
+      "municipality": "Alingsås",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "crawl_depth_limit",
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "0180",
+      "municipality": "Stockholm",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "1384",
+      "municipality": "Kungsbacka",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "2281",
+      "municipality": "Sundsvall",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "0580",
+      "municipality": "Linköping",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "1980",
+      "municipality": "Västerås",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "crawl_depth_limit",
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    }
+  ],
+  "errors": 0,
+  "github_commit": "7837cea2aed012a1da956f3147d27139c7a87e9a"
+}

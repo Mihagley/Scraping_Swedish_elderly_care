@@ -1,0 +1,178 @@
+{
+  "id": "0ad4353633f94e9304b9cb93",
+  "municipality_id": "1384",
+  "url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+  "requested_url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+  "retrieved_at": "2026-09-16T22:30:21.021273+00:00",
+  "raw_sha256": "1a60216c9286464c45d8d15b85ae8e466eaf8f765b58deb12c00ea101c15bad7",
+  "text_sha256": "19a0a41dd977d2275521c853d9cc1abed6ffc47d21655889bc5357323aec0c2a",
+  "raw_path": "sources/0ad4353633f94e9304b9cb93/source.pdf",
+  "text_path": "sources/0ad4353633f94e9304b9cb93/text.txt",
+  "numbered_path": "sources/0ad4353633f94e9304b9cb93/text.lines.txt",
+  "media_type": "pdf",
+  "title": "",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 1482
+    },
+    {
+      "page": 2,
+      "start": 1485,
+      "end": 1737
+    },
+    {
+      "page": 3,
+      "start": 1740,
+      "end": 3889
+    },
+    {
+      "page": 4,
+      "start": 3892,
+      "end": 4747
+    },
+    {
+      "page": 5,
+      "start": 4750,
+      "end": 5460
+    },
+    {
+      "page": 6,
+      "start": 5463,
+      "end": 6194
+    },
+    {
+      "page": 7,
+      "start": 6197,
+      "end": 8433
+    },
+    {
+      "page": 8,
+      "start": 8436,
+      "end": 10387
+    },
+    {
+      "page": 9,
+      "start": 10390,
+      "end": 12457
+    },
+    {
+      "page": 10,
+      "start": 12460,
+      "end": 13858
+    },
+    {
+      "page": 11,
+      "start": 13861,
+      "end": 14249
+    },
+    {
+      "page": 12,
+      "start": 14252,
+      "end": 16361
+    },
+    {
+      "page": 13,
+      "start": 16364,
+      "end": 17805
+    },
+    {
+      "page": 14,
+      "start": 17808,
+      "end": 18113
+    },
+    {
+      "page": 15,
+      "start": 18116,
+      "end": 20822
+    },
+    {
+      "page": 16,
+      "start": 20825,
+      "end": 23047
+    },
+    {
+      "page": 17,
+      "start": 23050,
+      "end": 23845
+    },
+    {
+      "page": 18,
+      "start": 23848,
+      "end": 25812
+    },
+    {
+      "page": 19,
+      "start": 25815,
+      "end": 26218
+    },
+    {
+      "page": 20,
+      "start": 26221,
+      "end": 27698
+    },
+    {
+      "page": 21,
+      "start": 27701,
+      "end": 29969
+    },
+    {
+      "page": 22,
+      "start": 29972,
+      "end": 31926
+    },
+    {
+      "page": 23,
+      "start": 31929,
+      "end": 32904
+    },
+    {
+      "page": 24,
+      "start": 32907,
+      "end": 33864
+    },
+    {
+      "page": 25,
+      "start": 33867,
+      "end": 34781
+    },
+    {
+      "page": 26,
+      "start": 34784,
+      "end": 36653
+    },
+    {
+      "page": 27,
+      "start": 36656,
+      "end": 38569
+    },
+    {
+      "page": 28,
+      "start": 38572,
+      "end": 40030
+    },
+    {
+      "page": 29,
+      "start": 40033,
+      "end": 42260
+    },
+    {
+      "page": 30,
+      "start": 42263,
+      "end": 42866
+    },
+    {
+      "page": 31,
+      "start": 42869,
+      "end": 44380
+    },
+    {
+      "page": 32,
+      "start": 44383,
+      "end": 45092
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v1"
+}

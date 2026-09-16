@@ -1,0 +1,908 @@
+{
+  "config": {
+    "research": {
+      "question": "Did the municipality have an explicit, formal Swedish-language proficiency requirement for staff in elderly care in operation before 1 January 2025? Identify the proficiency threshold, staff covered, enforcement and historical timing.",
+      "cutoff": "2025-01-01",
+      "instructions": "Include municipal elderly-care employers and clearly identified municipal contractors. Distinguish new hires from existing staff and municipality-wide rules from one unit. General expectations of good Swedish are not necessarily a formal tested threshold. A language-test pilot does not make an already established requirement a pilot. Code implementation of the underlying requirement separately from testing methods. A decision made in 2024 with implementation in 2025 is not a pre-2025 requirement. A dated account explicitly saying a rule already applies can establish that it was in force by that date, even if the exact introduction date is unknown. Leave effective_date null in that case. Never infer introduction from publication alone.",
+      "labels": {
+        "Yes": {
+          "definition": "Explicit formal requirement shown to be in operation before the cutoff.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "Pilot": {
+          "definition": "The requirement itself, not just a testing instrument, was piloted before the cutoff.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "No": {
+          "definition": "Explicit evidence that no such formal requirement applied in the defined pre-cutoff period and scope. Never infer this from a failed search.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "Later": {
+          "definition": "Explicit implementation only at or after the cutoff; no established pre-cutoff operation in this evidence.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": true
+        },
+        "Proposed": {
+          "definition": "Proposal or adoption decision without evidence of implementation in the target period.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "Unclear": {
+          "definition": "Relevant rule or activity is mentioned, but its historical timing, formality, attribution or scope remains uncertain.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "NoEvidence": {
+          "definition": "This retrieved material supplies no usable evidence to answer the question. This does not mean the municipality had no requirement.",
+          "requires_evidence": false,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "Irrelevant": {
+          "definition": "Material is outside the specified municipality, elderly-care employment scope or research topic.",
+          "requires_evidence": false,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        }
+      },
+      "unknown_label": "NoEvidence",
+      "fields": {
+        "language_level": "Explicit CEFR/GERS, SFI or Swedish course threshold; preserve the source's terminology.",
+        "staff_group": "New hires, existing staff, all staff, named occupations or another explicit group.",
+        "enforcement": "How compliance is tested or enforced, if explicitly stated.",
+        "provider_scope": "Municipal employer, municipal contractor, a specific unit or another explicit scope."
+      }
+    },
+    "discovery": {
+      "provider": "crawl",
+      "queries": [
+        "{municipality} äldreomsorg språkkrav språktest B1 B2 före 2025",
+        "{municipality} äldreomsorg SFI svenska nyanställning språkkrav protokoll 2022 2023 2024",
+        "{municipality} vård omsorg språkkrav infördes beslut pilot"
+      ],
+      "keywords": [
+        "språk",
+        "sprak",
+        "äldre",
+        "aldre",
+        "omsorg",
+        "protokoll",
+        "rekryter",
+        "anställ",
+        "anstall",
+        "personal"
+      ],
+      "max_searches_per_municipality": 3,
+      "max_documents": 1,
+      "max_depth": 0,
+      "max_sitemaps": 0,
+      "max_sitemap_urls": 10000
+    },
+    "network": {
+      "user_agent": "MunicipalResearch/0.1 (+https://github.com/Mihagley/Scraping_Swedish_elderly_care)",
+      "timeout_seconds": 30.0,
+      "interval_seconds": 1.0,
+      "retries": 3,
+      "max_bytes": 25000000,
+      "max_redirects": 5,
+      "respect_robots": true
+    },
+    "extraction": {
+      "chunk_chars": 14000,
+      "overlap_chars": 1500,
+      "max_chunks_per_document": 20,
+      "min_page_chars": 30
+    },
+    "llm": {
+      "models": [
+        "gpt-5-mini"
+      ],
+      "search_model": "gpt-5-mini",
+      "verifier_model": "gpt-5-mini",
+      "adjudicator_model": "gpt-5-mini",
+      "passes": 3,
+      "max_output_tokens": 6000,
+      "timeout_seconds": 120.0,
+      "max_retries": 3,
+      "interval_seconds": 1.0,
+      "max_calls": 200,
+      "reasoning_effort": null
+    }
+  },
+  "summary": [
+    {
+      "municipality_id": "1489",
+      "municipality": "Alingsås",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "crawl_depth_limit",
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "0180",
+      "municipality": "Stockholm",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "1384",
+      "municipality": "Kungsbacka",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "2281",
+      "municipality": "Sundsvall",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "0580",
+      "municipality": "Linköping",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "1980",
+      "municipality": "Västerås",
+      "category": "NotClassified",
+      "needs_review": true,
+      "documents": 1,
+      "chunks": 0,
+      "verified_quotes": 0,
+      "coverage": "bounded_with_gaps",
+      "gaps": [
+        "crawl_depth_limit",
+        "document_limit"
+      ],
+      "source_urls": [
+        "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "952b0fe37dcdbd06eb0a8425",
+      "municipality_id": "1489",
+      "url": "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf",
+      "requested_url": "https://sammantradesportal.alingsas.se/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf?downloadMode=download",
+      "retrieved_at": "2026-09-16T22:30:13.588193+00:00",
+      "raw_sha256": "cbf7645299c898f29070fec37a8a64658bbd76cce847c5faa13a1fb7604dbfdd",
+      "text_sha256": "e0f2b92a0489038c9bcd701993317a0263223f68254fa1a096f6b433138cccca",
+      "raw_path": "sources/952b0fe37dcdbd06eb0a8425/source.html",
+      "text_path": "sources/952b0fe37dcdbd06eb0a8425/text.txt",
+      "numbered_path": "sources/952b0fe37dcdbd06eb0a8425/text.lines.txt",
+      "media_type": "html",
+      "title": "Sidan saknas | MeetingPlus [sv]",
+      "pages": [
+        {
+          "page": null,
+          "start": 0,
+          "end": 218
+        }
+      ],
+      "warnings": [],
+      "extractor": "trafilatura/text-v1"
+    },
+    {
+      "id": "1c0edb9f32a8dc34fd50e7f7",
+      "municipality_id": "0180",
+      "url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+      "requested_url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+      "retrieved_at": "2026-09-16T22:30:16.447946+00:00",
+      "raw_sha256": "f37559c112fa04e6bf2949cfda988a6d7b5a738174732164ed332762181d2a13",
+      "text_sha256": "3521508889727c72dfc53ba7bf99ed4c8318c594eb2cd5e961a1f37e7185a93e",
+      "raw_path": "sources/1c0edb9f32a8dc34fd50e7f7/source.pdf",
+      "text_path": "sources/1c0edb9f32a8dc34fd50e7f7/text.txt",
+      "numbered_path": "sources/1c0edb9f32a8dc34fd50e7f7/text.lines.txt",
+      "media_type": "pdf",
+      "title": "Strateg",
+      "pages": [
+        {
+          "page": 1,
+          "start": 0,
+          "end": 2006
+        },
+        {
+          "page": 2,
+          "start": 2009,
+          "end": 4095
+        },
+        {
+          "page": 3,
+          "start": 4098,
+          "end": 6481
+        },
+        {
+          "page": 4,
+          "start": 6484,
+          "end": 8394
+        }
+      ],
+      "warnings": [],
+      "extractor": "pypdf/text-v1"
+    },
+    {
+      "id": "0ad4353633f94e9304b9cb93",
+      "municipality_id": "1384",
+      "url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+      "requested_url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+      "retrieved_at": "2026-09-16T22:30:21.021273+00:00",
+      "raw_sha256": "1a60216c9286464c45d8d15b85ae8e466eaf8f765b58deb12c00ea101c15bad7",
+      "text_sha256": "19a0a41dd977d2275521c853d9cc1abed6ffc47d21655889bc5357323aec0c2a",
+      "raw_path": "sources/0ad4353633f94e9304b9cb93/source.pdf",
+      "text_path": "sources/0ad4353633f94e9304b9cb93/text.txt",
+      "numbered_path": "sources/0ad4353633f94e9304b9cb93/text.lines.txt",
+      "media_type": "pdf",
+      "title": "",
+      "pages": [
+        {
+          "page": 1,
+          "start": 0,
+          "end": 1482
+        },
+        {
+          "page": 2,
+          "start": 1485,
+          "end": 1737
+        },
+        {
+          "page": 3,
+          "start": 1740,
+          "end": 3889
+        },
+        {
+          "page": 4,
+          "start": 3892,
+          "end": 4747
+        },
+        {
+          "page": 5,
+          "start": 4750,
+          "end": 5460
+        },
+        {
+          "page": 6,
+          "start": 5463,
+          "end": 6194
+        },
+        {
+          "page": 7,
+          "start": 6197,
+          "end": 8433
+        },
+        {
+          "page": 8,
+          "start": 8436,
+          "end": 10387
+        },
+        {
+          "page": 9,
+          "start": 10390,
+          "end": 12457
+        },
+        {
+          "page": 10,
+          "start": 12460,
+          "end": 13858
+        },
+        {
+          "page": 11,
+          "start": 13861,
+          "end": 14249
+        },
+        {
+          "page": 12,
+          "start": 14252,
+          "end": 16361
+        },
+        {
+          "page": 13,
+          "start": 16364,
+          "end": 17805
+        },
+        {
+          "page": 14,
+          "start": 17808,
+          "end": 18113
+        },
+        {
+          "page": 15,
+          "start": 18116,
+          "end": 20822
+        },
+        {
+          "page": 16,
+          "start": 20825,
+          "end": 23047
+        },
+        {
+          "page": 17,
+          "start": 23050,
+          "end": 23845
+        },
+        {
+          "page": 18,
+          "start": 23848,
+          "end": 25812
+        },
+        {
+          "page": 19,
+          "start": 25815,
+          "end": 26218
+        },
+        {
+          "page": 20,
+          "start": 26221,
+          "end": 27698
+        },
+        {
+          "page": 21,
+          "start": 27701,
+          "end": 29969
+        },
+        {
+          "page": 22,
+          "start": 29972,
+          "end": 31926
+        },
+        {
+          "page": 23,
+          "start": 31929,
+          "end": 32904
+        },
+        {
+          "page": 24,
+          "start": 32907,
+          "end": 33864
+        },
+        {
+          "page": 25,
+          "start": 33867,
+          "end": 34781
+        },
+        {
+          "page": 26,
+          "start": 34784,
+          "end": 36653
+        },
+        {
+          "page": 27,
+          "start": 36656,
+          "end": 38569
+        },
+        {
+          "page": 28,
+          "start": 38572,
+          "end": 40030
+        },
+        {
+          "page": 29,
+          "start": 40033,
+          "end": 42260
+        },
+        {
+          "page": 30,
+          "start": 42263,
+          "end": 42866
+        },
+        {
+          "page": 31,
+          "start": 42869,
+          "end": 44380
+        },
+        {
+          "page": 32,
+          "start": 44383,
+          "end": 45092
+        }
+      ],
+      "warnings": [],
+      "extractor": "pypdf/text-v1"
+    },
+    {
+      "id": "dcdcf713ab3994e8fef19f96",
+      "municipality_id": "2281",
+      "url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+      "requested_url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+      "retrieved_at": "2026-09-16T22:30:25.953840+00:00",
+      "raw_sha256": "d990d46cd2971c9d1e637d5a6400a4c8d5ce107c9e0452d5aea5c2fafdf11adc",
+      "text_sha256": "8ce9afc34e8793789039045021dbba28febbb0c6e6ca12b59ea61b1dc058a872",
+      "raw_path": "sources/dcdcf713ab3994e8fef19f96/source.pdf",
+      "text_path": "sources/dcdcf713ab3994e8fef19f96/text.txt",
+      "numbered_path": "sources/dcdcf713ab3994e8fef19f96/text.lines.txt",
+      "media_type": "pdf",
+      "title": "Agenda Vård- och omsorgsnämnden 15.12.2022 kl. 08:00",
+      "pages": [
+        {
+          "page": 1,
+          "start": 0,
+          "end": 1266
+        },
+        {
+          "page": 2,
+          "start": 1269,
+          "end": 2118
+        },
+        {
+          "page": 3,
+          "start": 2121,
+          "end": 2499
+        },
+        {
+          "page": 4,
+          "start": 2502,
+          "end": 2754
+        },
+        {
+          "page": 5,
+          "start": 2757,
+          "end": 3980
+        },
+        {
+          "page": 6,
+          "start": 3983,
+          "end": 5912
+        },
+        {
+          "page": 7,
+          "start": 5915,
+          "end": 8194
+        },
+        {
+          "page": 8,
+          "start": 8197,
+          "end": 9599
+        },
+        {
+          "page": 9,
+          "start": 9602,
+          "end": 9978
+        },
+        {
+          "page": 10,
+          "start": 9981,
+          "end": 11504
+        },
+        {
+          "page": 11,
+          "start": 11507,
+          "end": 13152
+        },
+        {
+          "page": 12,
+          "start": 13155,
+          "end": 14319
+        },
+        {
+          "page": 13,
+          "start": 14322,
+          "end": 16137
+        },
+        {
+          "page": 14,
+          "start": 16140,
+          "end": 17884
+        },
+        {
+          "page": 15,
+          "start": 17887,
+          "end": 18915
+        },
+        {
+          "page": 16,
+          "start": 18918,
+          "end": 20452
+        },
+        {
+          "page": 17,
+          "start": 20455,
+          "end": 20911
+        },
+        {
+          "page": 18,
+          "start": 20914,
+          "end": 22297
+        },
+        {
+          "page": 19,
+          "start": 22300,
+          "end": 23417
+        },
+        {
+          "page": 20,
+          "start": 23420,
+          "end": 24542
+        },
+        {
+          "page": 21,
+          "start": 24545,
+          "end": 26012
+        },
+        {
+          "page": 22,
+          "start": 26015,
+          "end": 26680
+        },
+        {
+          "page": 23,
+          "start": 26683,
+          "end": 27868
+        }
+      ],
+      "warnings": [],
+      "extractor": "pypdf/text-v1"
+    },
+    {
+      "id": "9cd65c889cc2994ca5b0afe0",
+      "municipality_id": "0580",
+      "url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+      "requested_url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+      "retrieved_at": "2026-09-16T22:30:29.555428+00:00",
+      "raw_sha256": "9b1f76add4852d625422a4971561bd340d1ce0436db99771bfa213d0af0880f2",
+      "text_sha256": "1b28d93048a1782c471bf26e2208feac1c7b2ce26157cb5b964b9d841abc7580",
+      "raw_path": "sources/9cd65c889cc2994ca5b0afe0/source.pdf",
+      "text_path": "sources/9cd65c889cc2994ca5b0afe0/text.txt",
+      "numbered_path": "sources/9cd65c889cc2994ca5b0afe0/text.lines.txt",
+      "media_type": "pdf",
+      "title": "Bilaga - Satsningar i budgeten 2025",
+      "pages": [
+        {
+          "page": 1,
+          "start": 0,
+          "end": 59
+        },
+        {
+          "page": 2,
+          "start": 62,
+          "end": 1084
+        },
+        {
+          "page": 3,
+          "start": 1087,
+          "end": 3950
+        },
+        {
+          "page": 4,
+          "start": 3953,
+          "end": 6831
+        },
+        {
+          "page": 5,
+          "start": 6834,
+          "end": 9727
+        },
+        {
+          "page": 6,
+          "start": 9730,
+          "end": 12510
+        },
+        {
+          "page": 7,
+          "start": 12513,
+          "end": 15761
+        },
+        {
+          "page": 8,
+          "start": 15764,
+          "end": 18305
+        },
+        {
+          "page": 9,
+          "start": 18308,
+          "end": 21295
+        },
+        {
+          "page": 10,
+          "start": 21298,
+          "end": 23548
+        },
+        {
+          "page": 11,
+          "start": 23551,
+          "end": 26440
+        },
+        {
+          "page": 12,
+          "start": 26443,
+          "end": 28578
+        }
+      ],
+      "warnings": [],
+      "extractor": "pypdf/text-v1"
+    },
+    {
+      "id": "0b210fed877a95d4eb9c2a36",
+      "municipality_id": "1980",
+      "url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+      "requested_url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+      "retrieved_at": "2026-09-16T22:30:34.279613+00:00",
+      "raw_sha256": "e0607039b6466ca1165833a2627f2759a70f8cdf356983492af65b804c3d474a",
+      "text_sha256": "ff06da745993d389f4a04c0c147a2461eb199e34d73cf02b1cd70788666dc66a",
+      "raw_path": "sources/0b210fed877a95d4eb9c2a36/source.html",
+      "text_path": "sources/0b210fed877a95d4eb9c2a36/text.txt",
+      "numbered_path": "sources/0b210fed877a95d4eb9c2a36/text.lines.txt",
+      "media_type": "html",
+      "title": "Språk inom vård och omsorg - Västerås",
+      "pages": [
+        {
+          "page": null,
+          "start": 0,
+          "end": 2130
+        }
+      ],
+      "warnings": [],
+      "extractor": "trafilatura/text-v1"
+    }
+  ],
+  "classifications": [],
+  "discovery": [
+    {
+      "municipality_id": "1489",
+      "url": "https://sammantradesportal.alingsas.se/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf?downloadMode=download",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1489",
+      "url": "https://alingsas.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1489",
+      "url": "https://sammantradesportal.alingsas.se/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf?downloadMode=download",
+      "final_url": "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "0180",
+      "url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "0180",
+      "url": "https://stockholm.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "0180",
+      "url": "https://start.stockholm/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "0180",
+      "url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+      "final_url": "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "1384",
+      "url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1384",
+      "url": "https://kungsbacka.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1384",
+      "url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+      "final_url": "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "2281",
+      "url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "2281",
+      "url": "https://sundsvall.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "2281",
+      "url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+      "final_url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "0580",
+      "url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "0580",
+      "url": "https://linkoping.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "0580",
+      "url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+      "final_url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "1980",
+      "url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1002,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1980",
+      "url": "https://vasteras.se/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "1980",
+      "url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+      "final_url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+      "method": "download",
+      "outcome": "downloaded"
+    }
+  ],
+  "errors": []
+}

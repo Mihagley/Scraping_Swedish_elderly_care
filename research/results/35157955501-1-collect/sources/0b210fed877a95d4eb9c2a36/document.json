@@ -1,0 +1,23 @@
+{
+  "id": "0b210fed877a95d4eb9c2a36",
+  "municipality_id": "1980",
+  "url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+  "requested_url": "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html",
+  "retrieved_at": "2026-09-16T22:30:34.279613+00:00",
+  "raw_sha256": "e0607039b6466ca1165833a2627f2759a70f8cdf356983492af65b804c3d474a",
+  "text_sha256": "ff06da745993d389f4a04c0c147a2461eb199e34d73cf02b1cd70788666dc66a",
+  "raw_path": "sources/0b210fed877a95d4eb9c2a36/source.html",
+  "text_path": "sources/0b210fed877a95d4eb9c2a36/text.txt",
+  "numbered_path": "sources/0b210fed877a95d4eb9c2a36/text.lines.txt",
+  "media_type": "html",
+  "title": "Språk inom vård och omsorg - Västerås",
+  "pages": [
+    {
+      "page": null,
+      "start": 0,
+      "end": 2130
+    }
+  ],
+  "warnings": [],
+  "extractor": "trafilatura/text-v1"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "952b0fe37dcdbd06eb0a8425",
+  "municipality_id": "1489",
+  "url": "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf",
+  "requested_url": "https://sammantradesportal.alingsas.se/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf?downloadMode=download",
+  "retrieved_at": "2026-09-16T22:30:13.588193+00:00",
+  "raw_sha256": "cbf7645299c898f29070fec37a8a64658bbd76cce847c5faa13a1fb7604dbfdd",
+  "text_sha256": "e0f2b92a0489038c9bcd701993317a0263223f68254fa1a096f6b433138cccca",
+  "raw_path": "sources/952b0fe37dcdbd06eb0a8425/source.html",
+  "text_path": "sources/952b0fe37dcdbd06eb0a8425/text.txt",
+  "numbered_path": "sources/952b0fe37dcdbd06eb0a8425/text.lines.txt",
+  "media_type": "html",
+  "title": "Sidan saknas | MeetingPlus [sv]",
+  "pages": [
+    {
+      "page": null,
+      "start": 0,
+      "end": 218
+    }
+  ],
+  "warnings": [],
+  "extractor": "trafilatura/text-v1"
+}
