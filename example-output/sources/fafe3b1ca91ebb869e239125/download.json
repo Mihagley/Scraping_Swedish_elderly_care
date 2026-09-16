@@ -1,0 +1,8 @@
+{
+  "url": "https://pilot.example/policy.pdf",
+  "requested_url": "https://pilot.example/policy.pdf",
+  "retrieved_at": "2026-09-16T17:46:58.803256+00:00",
+  "sha256": "fddfaf68b186edd8dd0a3f1beb8875e7ba8e18fe226cf581d9adbadbb008db4d",
+  "content_type": "application/pdf",
+  "raw_path": "sources\\fafe3b1ca91ebb869e239125\\source.pdf"
+}

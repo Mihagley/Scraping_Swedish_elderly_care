@@ -1,0 +1,28 @@
+name: Tests
+on:
+  push:
+    paths-ignore: ['research/results/**', 'research/latest.json', 'research/STATUS.md']
+  pull_request:
+    paths-ignore: ['research/results/**', 'research/latest.json', 'research/STATUS.md']
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps -e .
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - run: python -m pytest --cov=municipal_research --cov-report=term-missing
+      - run: municipal-research demo --run-dir runs/ci-demo
+      - run: municipal-research verify-run runs/ci-demo

@@ -1,0 +1,23 @@
+{
+  "id": "e50dedb59d3d7e6173036cc8",
+  "municipality_id": "demo_yes",
+  "url": "https://yes.example/policy.html",
+  "requested_url": "https://yes.example/policy.html",
+  "retrieved_at": "2026-09-16T17:46:58.068626+00:00",
+  "raw_sha256": "6f2011d2c796499366504e23bdd2bd276d628d8322e2efbbaa06dd67bd0b146f",
+  "text_sha256": "a210ed69ec5057dbf22a941ed61475efa8422cf1d28314a25bb707fc180fec86",
+  "raw_path": "sources/e50dedb59d3d7e6173036cc8/source.html",
+  "text_path": "sources/e50dedb59d3d7e6173036cc8/text.txt",
+  "numbered_path": "sources/e50dedb59d3d7e6173036cc8/text.lines.txt",
+  "media_type": "html",
+  "title": "Synthetic policy",
+  "pages": [
+    {
+      "page": null,
+      "start": 0,
+      "end": 146
+    }
+  ],
+  "warnings": [],
+  "extractor": "trafilatura/text-v1"
+}

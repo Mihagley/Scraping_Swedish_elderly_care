@@ -1,0 +1,22 @@
+[
+  {
+    "id": "demo_yes",
+    "name": "Exempelköping (synthetic)",
+    "domains": [
+      "yes.example"
+    ],
+    "seeds": [
+      "https://yes.example/policy.html"
+    ]
+  },
+  {
+    "id": "demo_pilot",
+    "name": "Demoorten (synthetic)",
+    "domains": [
+      "pilot.example"
+    ],
+    "seeds": [
+      "https://pilot.example/policy.pdf"
+    ]
+  }
+]

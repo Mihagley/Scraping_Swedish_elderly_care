@@ -1,0 +1,74 @@
+{
+  "chunk_id": "35a51e4a66ea4f81a169a6a3:0:75",
+  "document_id": "35a51e4a66ea4f81a169a6a3",
+  "municipality_id": "demo_pilot",
+  "url": "https://pilot.example/",
+  "chunk_start": 0,
+  "chunk_end": 75,
+  "decision": {
+    "category": "NoEvidence",
+    "rationale": "Synthetic no-evidence/disagreement fixture.",
+    "temporal_relation": "unknown",
+    "effective_date": null,
+    "scope": null,
+    "attributes": [],
+    "evidence": []
+  },
+  "quotes": [],
+  "method": "consensus_verified",
+  "agreement": true,
+  "passes": [
+    {
+      "stage": "classify_1",
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "issues": []
+    },
+    {
+      "stage": "classify_2",
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "issues": []
+    },
+    {
+      "stage": "classify_3",
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "issues": []
+    },
+    {
+      "stage": "verify_consensus",
+      "verdict": {
+        "supported": true,
+        "issues": [],
+        "explanation": "Synthetic verifier fixture, not an actual model assessment."
+      }
+    }
+  ],
+  "errors": [],
+  "needs_review": false
+}
