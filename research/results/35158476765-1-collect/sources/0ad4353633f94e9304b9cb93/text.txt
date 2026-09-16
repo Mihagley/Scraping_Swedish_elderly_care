@@ -1,0 +1,1051 @@
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Plats och tid för
+sammanträde
+Kommunfullmäktigesalen, Storgatan 37 Klockan 14:00 – 17:10
+Beslutande Ledamöter
+Hravn Forsne (M), ordförande
+Monica Neptun (L), 1:e vice ordförande,
+§§ 92-98
+Ermin Skoric (S), 2:e vice ordförande
+Barbro Hjelström (M)
+Astrid Börjesson (S),
+§§ 92-105, 107-108
+Eva Tingström (S)
+Per Hoel (SD)
+Göran Ottosson (SD)
+Bengt Alderin (C)
+Ulrika Högstrand (KD)
+Tjänstgörande ersättare
+Marcus Andersson (M) tjänstgör för
+Annika Carlsson (M)
+Marianne Kronbäck (KD) tjänstgör
+för Monica Neptun (L), §§ 99-110
+Ingela Hansson (S) tjänstgör för
+Astrid Börjesson (S), §§ 106, 109-110
+
+Övriga närvarande Ersättare
+Marcus Andersson (M)
+Ingela Hansson (S),
+§§ 92-105, 107-108
+Marianne Kronbäck (KD),
+§§ 92-98
+Tjänstepersoner
+Arian Faily, förvaltningschef,
+§§ 98–110
+Emelie Sandberg, biträdande
+förvaltningschef
+Vera Lagerström, nämndsekreterare
+Ann-Helen Svensson,
+verksamhetschef
+Rebecka Pettersson, verksamhetschef
+Annica Sommar, utvecklingschef
+Dana Alamine, verksamhetschef
+Isa Ürun, verksamhetschef
+Sabina Björk, utvecklingsledare, § 93
+Emma Renström, utvecklingsledare,
+§ 93
+Jeanette Hagelid, utvecklare,
+§§ 94–95
+Sofia Wirdmo, enhetschef, § 98
+Hanna Vestklev, utvecklingsledare,
+§ 99-101
+Katrin Wiklund, utvecklingsledare,
+§ 102
+Rebecca Apelvi, SAS, § 103
+Niclas Claesson, enhetschef § 103
+Lotta Kjellner, MAS, §§ 104-105
+
+Personalföreträdare
+Linda Johansson, vårdförbundet
+Övriga
+-
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 2 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Plats och tid för justering Digital justering.
+
+Sekreterare Vera Lagerström Paragrafer §§ 92-110
+Ordförande Hravn Forsne (M)
+Protokolljusterare Eva Tingström (S)
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 3 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Innehåll
+§ 92 Dnr VO-2025-00006
+Förändring av ärendelistan............................................................................ 5
+§ 93 Dnr VO-2023-00265
+Information - Utredning om system för valfrihetssystem enligt LOV inom
+vård- och omsorgsboenden ........................................................................... 6
+§ 94 Dnr VO-2025-00202
+Information - Omställning till nya socialtjänstlagen 2025 ........................... 7
+§ 95 Dnr VO-2025-00183
+Beslut om insatser utan behovsprövning enligt socialtjänstlagen (2025:000)
+- Nämnden för Vård & Omsorg .................................................................... 8
+§ 96 Dnr VO-2025-00189
+Delegeringsförteckning - Nämnden för Vård & Omsorg - revidering ......... 9
+§ 97 Dnr VO-2025-00237
+Initiativärende från Per Hoel (SD) m.fl. - Vägledning schablontider ......... 12
+§ 98 Dnr VO-2024-00343
+Information - Revidering av insatser och schablontider ............................. 15
+§ 99 Dnr VO-2025-00095
+Information - Svar till kommunrevisionens grundläggande granskning och
+uppföljande granskning av kompetensförsörjning 2025 ............................. 18
+§ 100 Dnr VO-2024-00432
+Information - Arbetet med semesterbemanning för 2025 ........................... 20
+§ 101 Dnr VO-2025-00192
+Information - Redovisning hur förvaltningen omhändertar språkkrav vid
+rekrytering ................................................................................................... 21
+§ 102 Dnr VO-2024-00412
+Information - Redovisning av medarbetarundersökningar ......................... 22
+§ 103 Dnr VO-2025-00019
+Information - Anmälan enligt lex Sarah ..................................................... 23
+§ 104 Dnr VO-2025-00225
+Information - Anmälan enligt lex Maria - Förväxling av läkemedel .......... 24
+§ 105 Dnr VO-2025-00226
+Information - Anmälan enligt lex Maria - Uteblivna doser fragmin .......... 25
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 4 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 106 Dnr VO-2025-00198
+Information - Ledarskap på Vård & Omsorg .............................................. 26
+§ 107 Dnr VO-2025-00004
+Anmälan av delegationsbeslut juni 2025 .................................................... 27
+§ 108 Dnr VO-2025-00001
+Redovisning av inkomna skrivelser juni 2025 ............................................ 29
+§ 109 Dnr VO-2025-00003
+Information från förvaltningen juni 2025 ................................................... 31
+§ 110 Dnr VO-2025-00002
+Information från nämnden juni 2025 .......................................................... 32
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 5 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 92 Dnr VO-2025-00006
+Förändring av ärendelistan
+Beslut
+Nämnden för Vård & Omsorg godkänner ärendelistan med tillägg av ett ärende
+Sammanfattning av ärendet
+Ordförande Hravn Forsne (M) anmäler ett ärende till dagens sammanträde.
+Initiativärende från Per Hoel (SD) m.fl. – Vägledning schablontider
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan godkänna ärendelistan med
+tillägg av ett ärende, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 6 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 93 Dnr VO-2023-00265
+Information - Utredning om system för valfrihetssystem enligt LOV
+inom vård- och omsorgsboenden
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Utvecklingsledare Sabina Björk och utvecklingsledare Emma Renström informerar i
+ärendet samt svarar på frågor.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 7 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 94 Dnr VO-2025-00202
+Information - Omställning till nya socialtjänstlagen 2025
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+
+Övergången till en ny socialtjänstlag i Sverige. Förvaltningen betonar behovet av
+förbättrad styrning och ledning för att möta de nya kraven i hela kommunen. Det
+finns också ett behov av att fortsätta utveckla och bredda arbetet med förebyggande
+åtgärder och att göra tjänsterna mer lättillgängliga. En annan viktig punkt är att
+identifiera och åtgärda eventuella ojämlikheter. För att säkerställa långsiktig effekt
+behöver förvaltningen utveckla lokal kunskap genom systematisk uppföljning på
+individ- och gruppnivå.
+
+Planerade aktiviteter inkluderar att innan sommaren 2025 utveckla en
+kommunikationsplan tillsammans med kommunikatörer, revidera rutiner och
+riktlinjer samt genomföra utbildning för biståndshandläggare och
+förebyggandeenheten. Under hösten 2025 kommer workshops att hållas med
+representanter från hela förvaltningen för att bli mer kunskapsbaserade,
+lättillgängliga, jämlika och förebyggande, samt dialoger med alla enhetschefer. År
+2026 planeras innovationsdagar med alla medarbetare och en utvärdering av
+omställningsarbetet med förslag om vidare åtgärder.
+För insatser utan behovsprövning behöver socialnämnden fatta beslut för att
+befintliga insatser ska kunna fortsätta efter 1 juli. Det finns ökade krav på
+dokumentation för att säkerställa att insatserna når rätt målgrupp och uppnår önskade
+resultat. Undantag från dokumentationskrav kan göras om det finns särskilda skäl, till
+exempel för att skydda brukarnas anonymitet. Dokumentation är viktig för att följa
+upp insatsernas kvalitet och effektivitet. Socialnämnden har ansvar för att säkerställa
+att insatserna håller god kvalitet och att de når den tilltänkta målgruppen.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 8 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 95 Dnr VO-2025-00183
+Beslut om insatser utan behovsprövning enligt socialtjänstlagen
+(2025:000) - Nämnden för Vård & Omsorg
+Beslut
+Nämnden för Vård & Omsorg antar Förteckning för insatser utan behovsprövning
+enligt socialtjänstlagen 2025.
+Sammanfattning av ärendet
+Den nya socialtjänstlagen, som träder i kraft den 1 juli 2025, ger kommunerna
+möjlighet att erbjuda insatser utan individuell behovsprövning (så kallat öppna
+insatser, biståndslösa insatser, serviceinsatser med mera).
+För att en insats ska kunna erbjudas utan individuell behovsprövning behöver
+ansvarig socialnämnd fatta beslut om detta. För att de öppna insatser som erbjuds
+idag ska fortsätta få erbjudas som insatser utan individuell behovsprövning, behöver
+alltså nämnden för Vård & Omsorg fatta beslut om det. Vidare behöver nämnden
+besluta vem som ska utföra insatserna, vilken målgrupp insatserna ska ha samt om
+någon av insatserna ska undantas från dokumentationsplikten.
+Nämnden behöver även föreslås ytterligare insatser som ska erbjudas utan individuell
+behovsprövning om förvaltningen vill erbjuda det. Samma ställningstaganden ska i
+så fall även göras för dem.
+
+Vid dagens sammanträde önskar nämnden en stående punkt på dagordningen för
+möjlighet att följa upp arbetet med insatser utan behovsprövning.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-22
+Förteckning insatser utan behovsprövning enligt socialtjänstlagen, 2025-05-26
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan anta Förteckning för insatser
+utan behovsprövning enligt socialtjänstlagen 2025, och finner att nämnden bifaller
+det.
+Beslutet skickas till
+Berörda verksamhetschefer inom Vård & Omsorg
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 9 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 96 Dnr VO-2025-00189
+Delegeringsförteckning - Nämnden för Vård & Omsorg - revidering
+Beslut
+Nämnden för Vård & Omsorg antar reviderad delegeringsförteckning samt att börja
+gälla från och med den 1 juli 2025.
+Delegeringsförteckningen antagen av Nämnden för Vård & Omsorg, 2025-02-20, §
+32, upphör att gälla den 30 juni 2025.
+Reservation
+Per Hoel (SD) och Göran Ottosson (SD) reserverar sig mot beslutet punkt 3.5.1 till
+förmån för eget förslag.
+Sammanfattning av ärendet
+Delegeringsförteckningen är ett levande dokument som löpande behöver uppdateras
+för att bibehålla sin aktualitet. Det föreligger nu skäl att revidera aktuell
+delegeringsförteckning, antagen den 20 februari 2025.
+I samband med att nya socialtjänstlagen träder i kraft 1 juli 2025 behöver nämnden
+justera hänvisningarna i delegeringsförteckningen som anger kapitel- och
+paragrafnumrering.
+En ny delegation kommer att läggas till i förteckningen, parboende, under kapitel tre.
+Följaktligen kommer nummerordningen för de befintliga delegationerna att
+uppdateras.
+Med den nya socialtjänstlagen som träder i kraft den 1 juli 2025, behöver
+förvaltningen för Vård & Omsorg anpassa sina arbetsmetoder och strukturer för att
+uppfylla de nya kraven och intentionerna. Därav föreslås nämnden att återta
+delegation för annan anställd, det vill säga socialsekreterare inom Individ &
+Familjeomsorg.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-30
+Delegeringsförteckning - revidering, 2025-05-30
+Förslag till beslut på sammanträdet
+Per Hoel (SD) och Göran Ottosson (SD) föreslår ändringsyrkande enligt följande:
+• att Delegeringsförteckning 3.5, Tillsyn, yttranden och anmälningar i
+verksamhet, punkt 3.5.1, Delegeringens omfattning, ändras till:
+”Bedöma rapporter om missförhållanden och risk för missförhållanden".
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 10 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Hravn Forsne (M) och Monica Neptun (L) yrkar bifall till förslaget.
+Beslutsgång
+Ordförande Hravn Forsne (M) finner att det finns två förslag till beslut, dels hans
+eget Hravn Forsnes (M) m.fl. bifallsyrkande, dels Per Hoels (SD) m.fl.
+ändringsyrkande.
+Ordföranden prövar Hravn Forsnes (M) m.fl. yrkande mot Per Hoels (SD) m.fl.
+yrkande och finner att nämnden beslutar enligt Hravn Forsnes (M) yrkande.
+Omröstning begärs och verkställs.
+Ordföranden redovisar följande propositionsordning som nämnden godkänner:
+Ja-röst innebär bifallsyrkande.
+Nej-röst innebär ändringsyrkande.
+Omröstningsresultat
+Ordföranden finner att nämnden, med 9 ja-röster mot 2 nej-röster, beslutar att bifalla
+Hravn Forsnes (M) m.fl. bifallsyrkande till förslaget, att anta reviderad
+delegeringsförteckning.
+Ledamot/tjänstgörande ersättare Ja-röst Nej-röst Avstår från att rösta
+Monica Neptun (L) 1:e vice
+ordförande
+X
+Ermin Škorić (S) 2:e vice
+ordförande
+X
+Marcus Andersson (M) X
+Barbro Hjelström (M) X
+Astrid Börjesson (S) X
+Eva Tingström (S) X
+Per Hoel (SD) X
+Göran Ottosson (SD) X
+Bengt Alderin (C) X
+Ulrika Högstrand (KD) X
+Hravn Forsne (M), ordförande X
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 11 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Beslutet skickas till
+Kommunledningskontoret
+Verksamhetschef myndighet, Individ & Familjeomsorg
+Kommunikatör,Vård & Omsorg
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 12 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 97 Dnr VO-2025-00237
+Initiativärende från Per Hoel (SD) m.fl. - Vägledning schablontider
+Beslut
+Nämnden för Vård & Omsorg avslår initiativet.
+Reservation
+Per Hoel (SD) och Göran Ottosson (SD) reserverar sig mot beslutet till förmån för
+eget förslag.
+Sammanfattning av ärendet
+Per Hoel (SD) m.fl har väckt ett initiativärende - Vägledning schablontider
+Med anledning av ärende "Information - Revidering av insatser och schablontider"
+på dagordningen Nämnden Vård och Omsorg 12 juni 2025.
+Återkommande signaler och nödrop från Hemtjänstpersonal, omsorgstagare och
+anhöriga visar på allvarliga brister i omsorgen som måste åtgärdas utan dröjsmål.
+Problemen är många och återkommande och en hel del orsaker kan härledas till
+Nämnden Vård och Omsorgs beslut 2024-09-05, §104, att förändra schablontiderna,
+som finns kvar som vägledning för Hemtjänsten, när Omsorgsförvaltningen
+"frångått" minutstyrning.
+Dessa schablontider minskades med 110 minuter gällande "Måltidshjäp", "Enklare
+måltider", "Stöd vid måltid", "Toalettbehov", "Förflyttning", och "Övrig omsorg".
+När det gäller "Servicebehov" minskade schablontider även med 20 minuter.
+Sverigedemokraterna reserverade sig redan då beslutet togs och SD varnade då också
+för att detta skulle innebära en väsentlig försämring för hemtjänstpersonal,
+omsorgstagare och anhöriga med negativ inverkan på arbetsmiljö och kvalité på
+omsorg. Detta har också visat sig bli resultatet.
+I samband med att Nämnden Vård och Omsorg den 12 juni ska revidera insatser
+schablontider/vägledning vill Sverigedemokraterna att ovan beskrivna besparingar
+återställes.
+Sverigedemokraterna yrkar på
+• att schablontiderna enligt rubriker beskrivna ovan, återställes såsom de var
+innan beslut av Nämnden Vård och Omsorg 2024-09-05 §104.
+Beslutsunderlag
+Initiativ Per Hoel (SD) m.fl. - Vägledning schablontider, 2025-06-11
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 13 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Förslag till beslut på sammanträdet
+Hravn Forsne (M) yrkar avslag till initiativet.
+Per Hoel (SD) och Göran Ottosson (SD) yrkar bifall till initiativet.
+Beslutsgång
+Ordförande Hravn Forsne (M) finner att det finns två förslag till beslut, dels hans
+eget Hravn Forsnes (M) avslagsyrkande, dels Per Hoels (SD) m.fl. bifallsyrkande.
+Ordföranden prövar Hravn Forsnes (M) yrkande mot Per Hoels (SD) m.fl. yrkande
+och finner att nämnden beslutar enligt Hravn Forsnes (M) yrkande.
+Omröstning begärs och verkställs.
+Ordföranden redovisar följande propositionsordning som nämnden godkänner:
+Ja-röst innebär avslag till initiativet.
+Nej-röst innebär bifall till initiativet.
+Omröstningsresultat
+Ordföranden finner att nämnden, med 9 ja-röster mot 2 nej-röster, beslutar att bifalla
+Hravn Forsnes (M) yrkande, avslag till initiativet.
+Ledamot/tjänstgörande ersättare Ja-röst Nej-röst Avstår från att rösta
+Monica Neptun (L) 1:e vice
+ordförande
+X
+Ermin Škorić (S) 2:e vice
+ordförande
+X
+Marcus Andersson (M) X
+Barbro Hjelström (M) X
+Astrid Börjesson (S) X
+Eva Tingström (S) X
+Per Hoel (SD) X
+Göran Ottosson (SD) X
+Bengt Alderin (C) X
+Ulrika Högstrand (KD) X
+Hravn Forsne (M), ordförande X
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 14 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Beslutet skickas till
+Förslagsställaren
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 15 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 98 Dnr VO-2024-00343
+Information - Revidering av insatser och schablontider
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Reservation
+Ermin Škorić (S), Astrid Börjesson (S) och Eva Tingström (S) reserverar sig mot
+beslutet till förmån för egna förslag.
+Per Hoel (SD) och Göran Ottosson (SD) reserverar sig mot beslutet då tidspressen
+inom Hemtjänsten är oacceptabel. Hemtjänsten får inte rätt förutsättningar att ge god
+daglig omsorg. Återkommande signaler och nödrop från Hemtjänstpersonal,
+omsorgstagare och anhöriga visar på allvarliga brister i omsorgen som måste
+åtgärdas utan dröjsmål. Problemen är många, återkommande och en hel del orsaker
+kan härledas till Nämnden Vård och Omsorgs beslut 2024-09-05 §104 att ändra
+schablontiderna, som finns kvar som vägledning för Hemtjänsten, när
+Omsorgsförvaltningen "frångått" minutstyrning.
+Dessa schablontider minskades med 110 minuter gällande "Måltidshjälp", "Enklare
+måltider", "Stöd vid måltid", "Toalettbehov", "Förflyttning", och "Övrig omsorg".
+När det gäller "Servicebehov" minskade schablontiderna med ytterligare 20 minuter.
+Sverigedemokraterna reserverade sig redan 2024 då beslutet togs och
+Sverigedemokraterna varnade då också för att detta skulle innebära en väsentlig
+försämring för hemtjänstpersonal, omsorgstagare och anhöriga med negativ inverkan
+på kvalité och omsorg. Detta har nu också visat sig bli resultatet.
+Sammanfattning av ärendet
+Förvaltningen för Vård & Omsorg arbetar i enlighet med direktivet ”Digitalt först”
+som norm. Det betyder att förvaltningen ständigt ser över befintliga arbetssätt och
+omvandlar insatser som kan genomföras digitalt eller kommer att kunna genomföras
+digitalt utifrån individens behov.
+Förvaltningen har en vägledning för skälighet för att säkerställa att bedömningar görs
+på ett likvärdigt, enhetligt och rättssäkert sätt i förvaltningen. Vägledningen syftar
+också till att stödja handläggare och beslutsfattare i sitt arbete genom att ge tydlig
+riktning. Biståndsbeslut utgår alltid utifrån individens behov. Bilaga två till
+vägledningen är ett dokument som anger insatser och dess schablontider, detta är ett
+arbetsdokument för handläggare. Förvaltningschef har delegation på att förändra
+innehållet i bilaga två.
+Information om förändringar i bilaga två:
+• Digitala besök är en enhet som utför insatser som kan genomföras digitalt
+genom samtal mellan omsorgspersonal och omsorgstagare via skärm. När en
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 16 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+insats går från att vara fysisk till digital kan det komma att påverka hur lång
+tid en insats utförs utifrån den enskildes behov. I och med detta revideras
+bilaga två till vägledningen där tillägg gjorts till befintliga insatser för att
+tydliggöra när de sker via digitala samtal samt förklaring till vad insatsen
+innebär. Likaså får de insatser som kan genomföras via digitala besök
+schablontider för att kunna anpassas efter omsorgstagarens behov.
+• I samband med ny upphandling för digitala inköp ändras schablontiden i och
+med att upphandlad leverantör tillgodoser hela kedjan där även leverans och
+upplock sker av leverantören efter den 1 april 2025.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-06-04
+Bilaga 2: Insatser & schabloner stöddokument, 2025-06-04
+NVO § 104 - Vägledning gällande stöd enligt Socialtjänstlag - Nämnden för Vård &
+Omsorg, 2024-09-05
+Förslag till beslut på sammanträdet
+Ermin Skoric (S) Astrid Börjesson (S) och Eva Tingström (S) föreslår
+ändringsyrkanden enligt följande:
+1. Nämnden för Vård & Omsorg upphäver den aktuella Vägledningen som
+initialt beslutades i nämnden 2024-01-25 (§ 2 Dnr VO-2023-00230) inklusive
+ändringar i schabloner.
+2. Nämnden för Vård & Omsorg beslutar att återställa insatsernas schablonstider
+och frekvens som gällde innan beslutet i nämnden 2024-01-25 (§ 2 Dnr VO-
+2023-00230).
+Hravn Forsne (M) yrkar bifall till förslaget, att notera informationen till protokollet.
+Beslutsgång
+Ordförande Hravn Forsne (M) finner att det finns två förslag till beslut, dels hans
+eget Hravn Forsnes (M) bifallsyrkande, dels Ermin Škorićs (S) m.fl.
+ändringsyrkanden.
+Ordföranden prövar Hravn Forsnes (M) yrkande mot Ermin Škorićs (S) m.fl.
+yrkanden och finner att nämnden beslutar enligt Hravn Forsnes (M) yrkande.
+Omröstning begärs och verkställs.
+Ordföranden redovisar följande propositionsordning som nämnden godkänner:
+Ja-röst innebär bifallsyrkande.
+Nej-röst innebär ändringsyrkanden.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 17 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Omröstningsresultat
+Ordföranden finner att nämnden, med 6 ja-röster mot 5 nej-röster, beslutar att bifalla
+Hravn Forsnes (M) yrkande, att informationen noteras till protokollet.
+Ledamot/tjänstgörande ersättare Ja-röst Nej-röst Avstår från att rösta
+Monica Neptun (L) 1:e vice
+ordförande
+X
+Ermin Škorić (S) 2:e vice
+ordförande
+X
+Marcus Andersson (M) X
+Barbro Hjelström (M) X
+Astrid Börjesson (S) X
+Eva Tingström (S) X
+Per Hoel (SD) X
+Göran Ottosson (SD) X
+Bengt Alderin (C) X
+Ulrika Högstrand (KD) X
+Hravn Forsne (M), ordförande X
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 18 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 99 Dnr VO-2025-00095
+Information - Svar till kommunrevisionens grundläggande granskning
+och uppföljande granskning av kompetensförsörjning 2025
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Reservation
+Ermin Škorić (S), Astrid Börjesson (S) och Eva Tingström (S) reserverar sig mot
+förslaget.
+Sammanfattning av ärendet
+Utvecklingsledare Hanna Vestklev och verksamhetschef Rebecka Pettersson
+informerar om svar till kommunrevisionens grundläggande granskning och
+uppföljande granskning av kompetensförsörjning 2025, samt svarar på frågor.
+Kommunrevisionen utför 2025 en ny grundläggande granskning och genomför då
+även en uppföljning av de rekommendationer som revisionen lämnade i 2023 års
+fördjupade granskning av kompetensförsörjningsarbetet.
+Kommunrevisionen har begärt att Nämnden för Vård & Omsorg ska svara på
+följande frågor:
+• Hur har arbetet med att se över möjligheter för kombinationstjänster över
+förvaltningsgränser fortgått?
+• Hur fungerar samverkan med andra förvaltningar?
+• Har några beslut fattats med bäring på frågan?
+• Hur har arbetet fortgått med att tillse att det finns
+kompetensutvecklingsplaner för enskilda medarbetare?
+• På vilket sätt kartläggs enskilda medarbetares behov av
+kompetensutveckling?
+• Hur har arbetet med att vidareutveckla den interna
+kompetensutvecklingsorganisationen fortlöpt under 2024?
+Beslutsunderlag
+Svar till revisionens grundläggande granskning 2025 samt uppföljande granskning av
+kompetensförsörjning – Förvaltningen för Vård & Omsorg, 2025-05-07
+Nämnden för Vård & Omsorg handlingar 2024-11-14
+Nämnden för Vård & Omsorg protokoll 2024-11-14
+Nämndbudget 2025
+Strategisk plan kompetensförsörjning (utkast april 2025)
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 19 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 20 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 100 Dnr VO-2024-00432
+Information - Arbetet med semesterbemanning för 2025
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Nämnden önskar att förvaltningen regelbundet rapporterar om arbetet med
+semesterbemanningen för 2025.
+Vikariecenter fokuserar på att rekrytera sommarvikarier för enheter med kvarstående
+behov, särskilt för nattarbete och sjuksköterskor. Flera enheter har nästan uppnått
+önskat antal vikarier, men vissa behöver fler. Schemaläggning och introduktion
+pågår intensivt, med majoriteten av introduktionstillfällena under maj och juni.
+Kontinuerliga avstämningar sker mellan Vikariecenter och enheterna för att bedöma
+behov och tillsättning.
+Det finns vakanta tjänster inom hemtjänst, vård- och omsorgsboende samt
+hemsjukvård, och det har varit svårt att hitta tillräckligt med sjuksköterskor. För
+natten/jour sjuksköterskor övervägs att avropa från bemanningsföretag. Planering för
+uppföljning och utvärdering har påbörjats.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-22
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 21 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 101 Dnr VO-2025-00192
+Information - Redovisning hur förvaltningen omhändertar språkkrav vid
+rekrytering
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Utvecklingsledare Hanna Vestklev upplyser om att Kommunfullmäktige har vid sitt
+sammanträde den 13 augusti 2024 bland annat beslutat att språkkravets miniminivå
+vid anställning i Kungsbacka kommun ska motsvara nivå B1, en självständig
+språkanvändare, enligt den gemensamma europeiska referensramen för språk
+(GERS).
+Hanna Vestklev förklarar att det finns ambition om att sträva mot nivå GERS B2
+inom Vård & Omsorg samt Individ & Familjeomsorg. Sammanfattningsvis innebär
+B2-nivån en högre grad av flyt och komplexitet i både förståelse och produktion av
+språket jämfört med B1-nivån. B2-nivån kräver att man kan hantera mer avancerade
+och abstrakta ämnen samt delta i samtal med större spontanitet och flyt.
+Hanna Vestklev informerar vidare att förvaltningen har implementerat ett
+systematiskt tillvägagångssätt för att säkerställa att språkkraven enligt SOU 2024:78
+och Socialstyrelsens kompetensmål för undersköterskor uppfylls vid rekrytering.
+Detta inkluderar en kartläggning av språkbehovet inom olika enheter, särskilt inom
+äldreomsorgen. Språktester används som en del av rekryteringsprocessen för att
+bedöma kandidaternas förmåga att kommunicera effektivt på svenska, både muntligt
+och skriftligt. Statsbidrag från Socialstyrelsen genom "Svenskalyftet" för att utveckla
+språkutvecklande arbetsplatser och ge personalen möjlighet att studera svenska på
+arbetstid.
+Kontinuerlig uppföljning och utvärdering av språkkraven genomförs regelbundet för
+att säkerställa att de uppfylls och att eventuella språkrelaterade utmaningar hanteras
+proaktivt. Språkkravet blir en integrerad del i verksamheternas kvalitetsutveckling
+snarare än ett krav på individnivå.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 22 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 102 Dnr VO-2024-00412
+Information - Redovisning av medarbetarundersökningar
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Utvecklingsledare Katrin Wiklund redovisar resultatet från Winningtemp
+pulsmätning avseende medarbetarundersökningar för perioden den 20 februari 2025
+till den 21 maj 2025.
+Kungsbacka kommun har satt upp arbetsmiljömål för att minska sjukfrånvaron och
+förbättra arbetsmiljön. Pulsmätningar används för att kontinuerligt undersöka
+arbetsmiljön och identifiera förbättringsområden. Resultaten diskuteras regelbundet
+på arbetsplatsträffar (APT).
+Under perioden 20 februari till 21 maj 2025 visade pulsmätningarna att arbetsmiljön
+inom vård och omsorg har ett index på 6,6, vilket är lägre än branschens genomsnitt
+på 7,2. Kategorier som ledarskap, arbetsglädje, meningsfullhet och autonomi har
+också bedömts.
+Socialstyrelsens rapport från januari 2025 betonar behovet av att förbättra
+arbetsmiljön i äldreomsorgen för att minska sjukfrånvaron och göra arbetet mer
+attraktivt. Faktorer som kontinuitet, jämställdhet och språkförmåga hos personalen
+lyfts fram.
+Winningtemp används för att mäta olika aspekter av arbetsmiljön, och arbetsglädje
+har identifierats som ett fokusområde för 2025. Forskning visar att arbetsglädje
+påverkar sjukfrånvaro, personalomsättning, prestationer, kundnöjdhet och finansiella
+resultat.
+Pågående insatser inkluderar gemensam insats- och bemanningsenhet,
+påverkningsbart schema, karriärvägsmodellen, och satsningar på ledarskap och
+medarbetarskap.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 23 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 103 Dnr VO-2025-00019
+Information - Anmälan enligt lex Sarah
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+En anmälan enligt lex Sarah har skickats in till Inspektionen för vård och omsorg
+(IVO) den 28 maj 2025. Missförhållandet har rapporterats och en utredning har
+genomförts. Förvaltningen inväntar nu vidare instruktioner från IVO.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-28
+Utredning med anledning av rapporterad händelse enligt lex Sarah gällande Vallda
+hemtjänst, 2025-05-26
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 24 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 104 Dnr VO-2025-00225
+Information - Anmälan enligt lex Maria - Förväxling av läkemedel
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+En anmälan enligt lex Maria har skickats in till Inspektionen för vård och omsorg
+(IVO) den 5 juni 2025. Utredning har gjorts, en anmälan som hade kunnat medföra
+allvarlig vårdskada då patientens läkemedel förväxlas och patienten får annan
+persons läkemedel. Förvaltningen inväntar nu vidare instruktioner från IVO.
+Beslutsunderlag
+Utredning – Läkemedel, 2025-06-05
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 25 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 105 Dnr VO-2025-00226
+Information - Anmälan enligt lex Maria - Uteblivna doser fragmin
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+En anmälan enligt lex Maria har skickats in till Inspektionen för vård och omsorg
+(IVO) den 12 juni 2025. Utredning har gjorts, en anmälan som hade kunnat medföra
+allvarlig vårdskada då uteblivna doser Fragmin. Förvaltningen inväntar nu vidare
+instruktioner från IVO.
+Beslutsunderlag
+Utredning gällande Fragmin, 2025-06-12
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 26 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 106 Dnr VO-2025-00198
+Information - Ledarskap på Vård & Omsorg
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Verksamhetschef Rebecka Pettersson informerar om ledarskap inom Vård & Omsorg
+och arbetet med chefers förutsättningar.
+Förvaltningen satsar på att stärka ledarskapet inom Vård & Omsorg för att möta
+framtidens utmaningar och skapa en trygg och enhetlig ledarkultur. Fokus ligger på
+att utveckla ett ledarskap som bygger på tydliga värderingar, mål och förväntningar,
+där chefer får verktyg, resurser och utbildning för att kunna agera som
+förändringsledare med personalansvar.
+Genom att investera i chefsförsörjning och erbjuda stöd i form av mentorskap,
+introduktion och tekniska hjälpmedel vill Vård & Omsorg skapa en attraktiv
+arbetsplats med god arbetsmiljö och hög motivation. Under 2025 genomförs
+ledardagar med fokus på både organisatoriska och personliga förutsättningar för att
+stärka ledarskapet. Förändringsledarskapet definieras som att ha en strategisk vision,
+kommunicera effektivt, vara flexibel, utveckla medarbetare, arbeta målstyrt och
+skapa psykologisk trygghet.
+För att förbättra balansen mellan krav och resurser i chefsrollen föreslås konkreta
+åtgärder som att minska antalet medarbetare per chef, införa delat ledarskap, tillsätta
+resurschefer och stärka stödfunktioner. Målet är att rusta ledare för att leda i
+förändring och bidra till en hållbar och framgångsrik organisation.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 27 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 107 Dnr VO-2025-00004
+Anmälan av delegationsbeslut juni 2025
+Beslut
+Nämnden för Vård & Omsorg noterar anmälda delegationsbeslut till protokollet.
+Sammanfattning av ärendet
+Nämnden för Vård & Omsorg har överlåtit sin beslutanderätt till ordförande och
+tjänstemän i enlighet med nämndens delegeringsförteckning. Dessa beslut ska
+redovisas till nämnden. Redovisningen innebär inte att nämnden omprövar eller
+fastställer delegeringsbesluten. Följande delegationsbeslut föreligger för perioden 1
+maj till 31 maj 2025.
+Delegationsrapport enligt lista från verksamhetssystemet Combine. Beslut enligt
+socialtjänstlagen (2001:453).
+2025-05-01 - 2025-05-31. Avser bistånd i form av hjälp i hemmet, städ, tvätt, digitalt
+inköp, ledsagning, trygghetslarm, hemtjänst, övrigt bistånd enligt riktlinjer, särskilt
+boende, korttidsplats/växelvård, erbjudande av plats utanför kommunens
+verksamheter, beslut om dagverksamhet, bistånd till sökande från annan kommun,
+beslut om kvarliggande för medicinskt utskrivningsklar.
+
+Delegationsrapport enligt lista från verksamhetssystemet Combine. Nämnden för
+Vård & Omsorgs delegering till Nämnden för Individ & Familjeomsorg. Beslut
+enligt socialtjänstlagen (2001:453).
+2025-05-01 - 2025-05-31. Avser bistånd i form av, hemtjänst, korttidsplats och
+växelvård, avlösning i hemmet, dagomsorg, trygghetslarm.
+
+Delegationsrapport enligt listor från verksamhetssystemet BAB online. Beslut enligt
+Lag (2018:222) om bostadsanpassningsbidrag, BAB.
+2025-05-01 - 2025-05-31. Avser bidrag till bostadsanpassning och återställning,
+reparationsbidrag, återkallande.
+
+Personal
+2025-05-01 - 2025-05-31
+
+Attester
+2025-05-01 - 2025-05-31
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 28 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Lex Sarah
+Diarienummer VO-2025-00052 Diarienummer VO-2025-00143
+Diarienummer VO-2025-00058 Diarienummer VO-2025-00146
+Diarienummer VO-2025-00061 Diarienummer VO-2025-00147
+Diarienummer VO-2025-00063 Diarienummer VO-2025-00161
+Diarienummer VO-2025-00115 Diarienummer VO-2025-00179
+Diarienummer VO-2025-00125 Diarienummer VO-2025-00190
+Diarienummer VO-2025-00134 -
+Diarienummer VO-2025-00139 -
+
+Avtal
+-
+
+Övrigt
+Diarienummer VO-2025-00155. Yttrande till Patientnämnden Halland, 2025-05-06.
+Diarienummer VO-2024-00350. Yttrande till samhällsbyggnadskontoret över
+granskningsutskick - Detaljplan för sjukhus inom Tölöberg 2 och Tölö 1:17 i
+Kungsbacka.
+Diarienummer VO-2022-00113. Yttrande till samhällsbyggnadskontoret över
+granskningsutskick - Detaljplan för blandad stadsbebyggelse inom sydöstra centrum i
+Kungsbacka stad.
+Diarienummer VO-2025-00024. Yttrande till samhällsbyggnadskontoret över
+granskningsutskick - Detaljplan för Kungsbackas arena i Kungsbacka stad.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-30
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera anmälda
+delegationsbeslut till protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 29 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 108 Dnr VO-2025-00001
+Redovisning av inkomna skrivelser juni 2025
+
+Beslut
+Nämnden för Vård & Omsorg noterar inkomna skrivelse till protokollet.
+Sammanfattning av ärendet
+Under perioden 1 maj till 31 maj 2025 har följande skrivelser inkommit till Nämnden
+för Vård & Omsorg.
+
+Diarienummer VO-2024-00484. (Socialstyrelsen) Informationsmejl om den
+nationella undersökningen Vad tycker de äldre om äldreomsorgen? 2025.
+Diarienummer VO-2023-00167. (Inspektionen för Vård & Omsorg) Beslut –
+Anmälan av klagomål enligt patientsäkerhetslagen (2010:659), PSL.
+Diarienummer VO-2025-00184. (Inspektionen för Vård & Omsorg) Begäran om
+yttrande och handlingar som gäller ett ej verkställt gynnande beslut.
+Diarienummer VO-2025-00014. (Inspektionen för Vård & Omsorg) Beslut – Tillsyn
+av ej verkställt beslut, avseende växelvård enligt SoL.
+Diarienummer VO-2025-00200. (Kommunledningskontoret) (Ernst & Young, EY)
+Skriftliga frågor från revisionen - arbete med kommunfullmäktiges direktiv
+Diarienummer VO-2025-00180 (Kommunrevisionen) Revisionsplan 2025 -
+Kungsbacka kommun.
+Diarienummer VO-2025-00048. (Kommunfullmäktige) KF, § 85. Ombudgeteringar
+och resultatfonder 2024.
+Diarienummer VO-2024-00141. (Kommunfullmäktige) KF, § 87. Rapport från
+nämnden för Vård & Omsorg av ej verkställda beslut enligt socialtjänstlagen, SoL,
+fjärde kvartalet 2024.
+Diarienummer VO-2025-00194. (Kommunfullmäktige) KF, § 96. Fördelning av
+statsbidrag 2025 avseende stöd till kommuner i omställningen till en långsiktigt
+hållbar, mer förebyggande och kunskapsbaserad socialtjänst.
+Diarienummer: VO-2025-00187. (Region Halland) Synpunktsrunda - Uppdaterad
+rutin Tuberkulosscreening i Region Halland.
+Diarienummer: VO-2023-00283. (Gemensam nämnd för Hemsjukvård och
+Hjälpmedel, GNHH) GNHH § 22. Grunduppdrag till Driftnämnd Ambulans,
+diagnostik och hälsa 2026.
+Diarienummer: VO-2023-00283. (Gemensam nämnd för Hemsjukvård och
+Hjälpmedel, GNHH) GNHH § 23. Uppföljningsrapport 1 (jan-april 2025).
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 30 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+Diarienummer: VO-2023-00283. (Gemensam nämnd för Hemsjukvård och
+Hjälpmedel, GNHH) Minnesanteckningar RUG 22 maj 2025.
+Beslutsunderlag
+Förvaltningen för Vård & Omsorgs tjänsteskrivelse, 2025-05-31
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera redovisning av
+inkomna skrivelser, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 31 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 109 Dnr VO-2025-00003
+Information från förvaltningen juni 2025
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Verksamhetschef Ann-Helen Svensson förklarar att det är svårt för förvaltningen att
+tillgodose sökandes behov av växelvårdsplatser. Förvaltningen har genomfört en
+upphandling med Attendo AB som omfattar 8 platser, var och en med en vistelsetid
+på 14 dagar. Detta resulterar i totalt 16 platser hos Attendo Ädelstenen i Västra
+Frölunda. Avtalstiden sträcker sig från 15 juni 2025 till 31 januari 2026.
+Förvaltningschef Arian Faily förklarar att det finns överenskommelse som gäller från
+1 januari 2025 till 30 september 2025, avseende samarbete mellan Region Halland
+och kommunerna Kungsbacka, Varberg, Falkenberg, Halmstad, Laholm och Hylte
+för att säkerställa en trygg och effektiv utskrivningsprocess från sluten hälso- och
+sjukvård.
+
+Arian Faily informerar om att pågående förhandlingar ännu inte har nått en
+överenskommelse, och det finns oenigheter mellan kommunerna och Region Halland
+angående hanteringen av utskrivningsklara patienter.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.
+
+KUNGSBACKA KOMMUN SAMMANTRÄDESPROTOKOLL 32 (32)
+Nämnden för Vård & Omsorg Datum
+2025-06-12
+
+Det här dokumentet är digitalt signerat
+
+Transaktionsidentitet: 84210E03A51C24D6B5DC93F78F9B66FE409E996813
+Transaktionsidentitet: 8F5D7FDB41DF76DD9AE08CE9C29D61F887B838B773
+
+§ 110 Dnr VO-2025-00002
+Information från nämnden juni 2025
+Beslut
+Nämnden för Vård & Omsorg noterar informationen till protokollet.
+Sammanfattning av ärendet
+Ledamot Ulrika Högstrand (KD) informerar om ett intressant besök hos enheten för
+Hälsofrämjande och Förebyggande inom förvaltningsledningskontoret.
+Beslutsgång
+Ordförande Hravn Forsne (M) prövar om nämnden kan notera informationen till
+protokollet, och finner att nämnden bifaller det.

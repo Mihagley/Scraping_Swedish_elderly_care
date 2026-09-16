@@ -1,6 +1,6 @@
 # Municipal research pilot
 
-Mode: **collect**. Results: `research/results/35157955501-1-collect`.
+Mode: **collect**. Results: `research/results/35158476765-1-collect`.
 
 | Municipality | Documents | Category | Review needed |
 |---|---:|---|---|

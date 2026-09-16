@@ -1,0 +1,148 @@
+{
+  "id": "095563af39da9d73655d734b",
+  "municipality_id": "1489",
+  "url": "https://sammantradesportal.alingsas.se/committees/kommunstyrelsen/mote-2023-06-19/protocol/protokoll-kommunstyrelsen-19-juni-2023pdf-16610?downloadMode=open",
+  "requested_url": "https://sammantradesportal.alingsas.se/committees/kommunstyrelsen/mote-2023-06-19/protocol/protokoll-kommunstyrelsen-19-juni-2023pdf-16610?downloadMode=open",
+  "retrieved_at": "2026-09-16T22:36:40.808546+00:00",
+  "raw_sha256": "367fcb894c48f42b89de19c1404ee59bba69fe56d9fae8b91fc6b90aad4a0013",
+  "text_sha256": "fa7c5582297b62d255aa4e1d58c7c92638f117ba5fe97ed742bbf5a28ac0f7b6",
+  "raw_path": "sources/095563af39da9d73655d734b/source.pdf",
+  "text_path": "sources/095563af39da9d73655d734b/text.txt",
+  "numbered_path": "sources/095563af39da9d73655d734b/text.lines.txt",
+  "media_type": "pdf",
+  "title": "",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 1187
+    },
+    {
+      "page": 2,
+      "start": 1190,
+      "end": 1461
+    },
+    {
+      "page": 3,
+      "start": 1464,
+      "end": 2311
+    },
+    {
+      "page": 4,
+      "start": 2314,
+      "end": 2709
+    },
+    {
+      "page": 5,
+      "start": 2712,
+      "end": 5427
+    },
+    {
+      "page": 6,
+      "start": 5430,
+      "end": 6903
+    },
+    {
+      "page": 7,
+      "start": 6906,
+      "end": 8597
+    },
+    {
+      "page": 8,
+      "start": 8600,
+      "end": 10909
+    },
+    {
+      "page": 9,
+      "start": 10912,
+      "end": 12366
+    },
+    {
+      "page": 10,
+      "start": 12369,
+      "end": 13704
+    },
+    {
+      "page": 11,
+      "start": 13707,
+      "end": 16571
+    },
+    {
+      "page": 12,
+      "start": 16574,
+      "end": 19438
+    },
+    {
+      "page": 13,
+      "start": 19441,
+      "end": 21276
+    },
+    {
+      "page": 14,
+      "start": 21279,
+      "end": 23043
+    },
+    {
+      "page": 15,
+      "start": 23046,
+      "end": 26089
+    },
+    {
+      "page": 16,
+      "start": 26092,
+      "end": 27790
+    },
+    {
+      "page": 17,
+      "start": 27793,
+      "end": 28842
+    },
+    {
+      "page": 18,
+      "start": 28845,
+      "end": 30244
+    },
+    {
+      "page": 19,
+      "start": 30247,
+      "end": 33214
+    },
+    {
+      "page": 20,
+      "start": 33217,
+      "end": 33908
+    },
+    {
+      "page": 21,
+      "start": 33911,
+      "end": 36029
+    },
+    {
+      "page": 22,
+      "start": 36032,
+      "end": 36278
+    },
+    {
+      "page": 23,
+      "start": 36281,
+      "end": 37887
+    },
+    {
+      "page": 24,
+      "start": 37890,
+      "end": 40375
+    },
+    {
+      "page": 25,
+      "start": 40378,
+      "end": 40783
+    },
+    {
+      "page": 26,
+      "start": 40786,
+      "end": 41122
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v2"
+}

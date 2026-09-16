@@ -1,8 +1,8 @@
 {
-  "run_directory": "research/results/35157955501-1-collect",
+  "run_directory": "research/results/35158476765-1-collect",
   "mode": "collect",
   "request": {
-    "request_id": "six-municipality-pilot-package-install",
+    "request_id": "six-municipality-pilot-corrected-alingsas-source",
     "mode": "collect",
     "config": "examples/language_requirements.yaml",
     "municipalities": "research/municipalities-pilot.csv",
@@ -22,11 +22,10 @@
       "verified_quotes": 0,
       "coverage": "bounded_with_gaps",
       "gaps": [
-        "crawl_depth_limit",
         "document_limit"
       ],
       "source_urls": [
-        "https://sammantradesportal.alingsas.se/404?aspxerrorpath=/welcome-sv/namnder-styrelser/barn-och-ungdomsnamnden/mote-2023-09-12/agenda/protokollsutdrag-ss116-ks-uppdrag-sprakkrav-inom-social-valfardpdf"
+        "https://sammantradesportal.alingsas.se/committees/kommunstyrelsen/mote-2023-06-19/protocol/protokoll-kommunstyrelsen-19-juni-2023pdf-16610?downloadMode=open"
       ],
       "effective_dates": [],
       "scopes": [],
@@ -148,5 +147,5 @@
     }
   ],
   "errors": 0,
-  "github_commit": "7837cea2aed012a1da956f3147d27139c7a87e9a"
+  "github_commit": "dca4028d6883b4b2f9cfe23281c7c512a408db0c"
 }

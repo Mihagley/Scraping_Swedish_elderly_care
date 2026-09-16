@@ -1,0 +1,63 @@
+[
+  {
+    "id": "1489",
+    "name": "Alingsås",
+    "domains": [
+      "alingsas.se"
+    ],
+    "seeds": [
+      "https://sammantradesportal.alingsas.se/committees/kommunstyrelsen/mote-2023-06-19/protocol/protokoll-kommunstyrelsen-19-juni-2023pdf-16610?downloadMode=open"
+    ]
+  },
+  {
+    "id": "0180",
+    "name": "Stockholm",
+    "domains": [
+      "stockholm.se",
+      "start.stockholm"
+    ],
+    "seeds": [
+      "https://meetingspublic.stockholm.se/welcome-sv/namnder-styrelser/aldrenamnden/mote-2023-08-29/agenda/tjansteutlatande-svar-pa-skrivelse-fran-sd-om-sprakkravpdf?downloadMode=open"
+    ]
+  },
+  {
+    "id": "1384",
+    "name": "Kungsbacka",
+    "domains": [
+      "kungsbacka.se"
+    ],
+    "seeds": [
+      "https://kungsbacka.se/download/18.59d0699119783959f721aa9a/1750315975371/N%C3%A4mnden%20f%C3%B6r%20V%C3%A5rd%20%26%20Omsorg%20protokoll%202025-06-12%20%C2%A7%C2%A7%2092-110.pdf"
+    ]
+  },
+  {
+    "id": "2281",
+    "name": "Sundsvall",
+    "domains": [
+      "sundsvall.se"
+    ],
+    "seeds": [
+      "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf"
+    ]
+  },
+  {
+    "id": "0580",
+    "name": "Linköping",
+    "domains": [
+      "linkoping.se"
+    ],
+    "seeds": [
+      "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download"
+    ]
+  },
+  {
+    "id": "1980",
+    "name": "Västerås",
+    "domains": [
+      "vasteras.se"
+    ],
+    "seeds": [
+      "https://www.vasteras.se/kommun-och-politik/sa-jobbar-vi-med/vard-och-omsorg/sprak-inom-vard-och-omsorg.html"
+    ]
+  }
+]

@@ -1,0 +1,882 @@
+000001	Kommunstyrelsen
+000002	Protokoll
+000003	
+000004	2023-06-19
+000005	
+000006	Utdragsbestyrkande
+000007	Plats och tid Rådslaget, Rådhuset, Alingsås Paragrafer §§111-123
+000008	kl. 14:00-16:40
+000009	
+000010	Beslutande Daniel Filipsson (M) (ordförande)
+000011	Simon Waern (S) (vice ordförande)
+000012	Anita Hedén-Unosson (S)
+000013	Peter Norlander (S)
+000014	Pamela Nilsson Ludvigsson (S)
+000015	Anders Julin (S)
+000016	Inger Carlborg (M)
+000017	Mats Bjelkemyr (SD)
+000018	Gunilla Gomér (SD)
+000019	Emily Munter (V)
+000020	Lady France Mulumba (KD)
+000021	Heidi Hankanen Ängberg (C)
+000022	Jens Christian Berlin (L)
+000023	Amanda Andersson (MP)
+000024	Jimmy Lanevik (M) ersätter Linn Wirdemo (M)
+000025	
+000026	Ej tjänstgörande
+000027	ersättare
+000028	Irene Jonsson (S)
+000029	Morgan Fredvi (S)
+000030	Lena Karlsson (S)
+000031	Martin Lindberg (V)
+000032	David Skoog (KD)
+000033	Kjerstin Hansson (SD)
+000034	
+000035	Övriga deltagare Maria Standar (kommundirektör)
+000036	Ulrika Månsson (kommunsekreterare)
+000037	Carolina Dolff (punkt A, miljö- och klimatstrateg) §111
+000038	Simon Lindau (punkt B, ekonomichef) §111
+000039	Jerker Gussmo (punkt C, personalchef) §111
+000040	Markus Thunberg (punkt D, chef strategisk samhällsplanering) §111
+000041	Cecilia Knutsson (punkt E, stabschef) §111
+000042	
+000043	Utses att justera Simon Waern (S)
+000044	
+000045	Justeringens plats och
+000046	tid
+000047	Protokollet justeras på distans.
+000048	
+000049	Sekreterare
+000050	Ulrika Månsson
+000051	Ordförande
+000052	Daniel Filipsson (M)
+000053	Justerande
+000054	Simon Waern (S)
+000055	1
+000056	
+000057	Protokollet är justerat. Justeringen har tillkännagivits på Alingsås kommuns digitala anslagstavla.
+000058	Organ Kommunstyrelsen
+000059	Sammanträdesdatum 2023-06-19
+000060	Datum för publicering 2023-06-21 Datum för
+000061	avpublicering
+000062	2023-07-13
+000063	Förvaringsplats för
+000064	protokollet
+000065	Rådhuset, Alingsås
+000066	2
+000067	
+000068	Kommunstyrelsen
+000069	Protokoll
+000070	
+000071	2023-06-19
+000072	
+000073	Utdragsbestyrkande
+000074	§ 111 Information och överläggningar
+000075	§ 112 Svar på motion gällande att inrätta en kemikalieplan - Amanda Andersson
+000076	(MP)
+000077	§ 113 Svar på motion gällande fria arbetsskor - Marcus Wallin (V)
+000078	§ 114 Svar på motion gällande slopa minutstyrningen - Marcus Wallin (V)
+000079	§ 115 Svar på motion gällande snabb digital kontakt med vårdnadshavare, vid hot i
+000080	eller i närheten av skolor i Alingsås kommun - Gunilla Gomér (SD)
+000081	§ 116 Uppdrag språkkrav inom social välfärd
+000082	§ 117 Ramar 2024-2026 för Alingsås kommun
+000083	§ 118 Kommunernas klimatlöften 2024-2026
+000084	§ 119 Förlängning av överenskommelse in- och utskrivning från sluten hälso- och
+000085	sjukvård
+000086	§ 120 Överlåtelse av Nolby 37:25
+000087	§ 121 Överlåtelse av befintligt arrendeavtal på Vitsippan 3
+000088	§ 122 Marktilldelning, Kavlås Äng
+000089	§ 123 Redovisning av delegationsbeslut
+000090	3
+000091	
+000092	Kommunstyrelsen
+000093	Protokoll
+000094	
+000095	2023-06-19
+000096	
+000097	Utdragsbestyrkande
+000098	§ 111
+000099	Information och överläggningar
+000100	Ärendebeskrivning
+000101	A/ Kommunernas klimatlöften 2024-2026
+000102	B/ Ramar 2024-2026
+000103	C/ Uppdrag språkkrav inom social välfärd
+000104	D/ Statusuppdatering och information kring infrastruktursfrågor
+000105	E/ Kommundirektörens information
+000106	Information om värme och torka
+000107	Sommarens bemanning och beredskap
+000108	Gothia cup vecka 29
+000109	
+000110	4
+000111	
+000112	Kommunstyrelsen
+000113	Protokoll
+000114	
+000115	2023-06-19
+000116	
+000117	Utdragsbestyrkande
+000118	§ 112 2023.101 KS
+000119	Svar på motion gällande att inrätta en kemikalieplan - Amanda
+000120	Andersson (MP)
+000121	Ärendebeskrivning
+000122	Amanda Andersson (MP) har till kommunfullmäktige den 22 februari 2023, § 17, lämnat en
+000123	motion om att inrätta en kemikalieplan.
+000124	Motionären föreslår att Alingsås kommun upprättar en kemikalieplan.
+000125	Kommunfullmäktige beslutade den 22 februari 2023 § 17 att lämna motionen till
+000126	kommunstyrelsen för beredning.
+000127	Kommunstyrelsens arbetsutskott beslutade den 22 mars 2023 § 56 att motionen lämnas till
+000128	Tekniska nämnden för beredning.
+000129	
+000130	Beredning
+000131	Kommunledningskontoret har i skrivelse den 26 maj 2023 lämnat följande yttrande:
+000132	Tekniska nämnden har behandlat ärendet och beslutade den 15 maj 2023 § 38 att avstyrka
+000133	motionen. Tekniska nämnden håller med motionären om vikten av ett systematiskt och
+000134	fungerande arbete gällande kemikalier som används inom den kommunala verksamheten.
+000135	Inom många verksamhetsområden bedöms det att det finns ett behov av att tydliggöra
+000136	kraven och ambitionerna kopplat till kemikalier. Tekniska nämnden bedömer vidare att en
+000137	mer kortfattad men välformulerad riktlinje, checklista eller vägledning skulle kunna få mer
+000138	genomslagskraft ute i verksamheterna, än föreslagen kemikalieplan.
+000139	Kommunledningskontoret är precis som tekniska nämnden positiva till motionens
+000140	andemening om att vidareutveckla kemikaliearbetet i kommunen, med fokus på hur
+000141	användningen av kemikalier ska minimeras och hur de farligaste ämnena kan ersättas, för att
+000142	bidra till bättre hälsa och miljö.
+000143	Kommunledningskontoret anser likt tekniska nämnden att det är ett mycket omfattande
+000144	arbete att ta fram ett styrdokument i likhet med de kommuners kemikalieplaner som
+000145	motionären hänvisar till. För att ta fram en kemikaliplan krävs bland annat att en
+000146	förvaltningsövergripande projektgrupp bildas, inventering av kemikalier i kommunens
+000147	verksamheter samt årlig uppföljning och implementering av åtgärder. Det innebär som
+000148	nämnts ett omfattande arbete att ta fram kemikalieplan, men även en större organisation
+000149	kring att upprätthålla planen. Att utveckla en kemikalieplan innebär således att det krävs mer
+000150	personella resurser än vad samhällsbyggnadsförvaltningen och kommunledningskontoret har
+000151	att tillgå för närvarande.
+000152	Kommunledningskontoret bedömer i likhet med tekniska nämnden att det är angeläget att
+000153	kemikaliearbetet utvecklas på ett sätt som har potential för stor genomslagskraft i
+000154	verksamheterna och som med mindre personella resurser ändå kan leda till förflyttningar
+000155	inom området i närtid. Kommunledningskontoret föreslår därför att motionen avstyrks, med
+000156	ett förslag till beslut i kommunstyrelsen om ett riktat uppdrag till kommunledningskontoret att i
+000157	5
+000158	
+000159	Kommunstyrelsen
+000160	Protokoll
+000161	
+000162	2023-06-19
+000163	
+000164	Utdragsbestyrkande
+000165	samverkan med samhällsbyggnadsförvaltningen påbörja en utredning för att ta fram en
+000166	förvaltningsövergripande vägledning framöver. En sådan vägledning kan bland annat
+000167	inkludera checklistor för stöd i kemikaliearbetet och kan omfatta områden så som
+000168	upphandling och inköp, användning av kemiska produkter i kommunens verksamheter, tillsyn
+000169	och kontroll samt barns exponering för farliga ämnen.
+000170	
+000171	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 104 behandlat ärendet och föreslagit
+000172	att kommunledningskontorets förslag till beslut bifalls.
+000173	Förslag till beslut på sammanträdet
+000174	Amanda Andersson (MP) föreslår följande ändring i förslag till beslut i kommunstyrelsen:
+000175	Kommunledningskontoret får i uppdrag att ta fram en förvaltningsövergripande vägledning för
+000176	kemikalier i kommunen.
+000177	Simon Waern (S), Heidi Hankanen Ängberg (C) och Emily Munter (V) föreslår att Amanda
+000178	Anderssons (MP) ändringsförslag bifalls.
+000179	
+000180	Beslutsgång
+000181	Ordföranden ställer arbetsutskottets förslag till beslut i kommunstyrelsen mot Amanda
+000182	Anderssons ändringsförslag och finner att kommunstyrelsen bifaller Amanda Anderssons
+000183	förslag till beslut i kommunstyrelsen.
+000184	Ordföranden finner att kommunstyrelsen bifaller arbetsutskottets förslag till beslut i
+000185	kommunfullmäktige.
+000186	Beslut
+000187	Kommunledningskontoret får i uppdrag att ta fram en förvaltningsövergripande vägledning för
+000188	kemikalier i kommunen.
+000189	
+000190	Förslag till beslut i kommunfullmäktige
+000191	Motionen avslås.
+000192	6
+000193	
+000194	Kommunstyrelsen
+000195	Protokoll
+000196	
+000197	2023-06-19
+000198	
+000199	Utdragsbestyrkande
+000200	§ 113 2023.239 KS
+000201	Svar på motion gällande fria arbetsskor - Marcus Wallin (V)
+000202	Ärendebeskrivning
+000203	Marcus Wallin (V) har till kommunfullmäktige den 31 mars 2023, § 93 lämnat en motion om
+000204	att utreda införandet av fria arbetsskor.
+000205	Motionären föreslår följande:
+000206	Att utreda införandet av arbetsskor inom vård- och omsorgsnämnden
+000207	Att utreda införandet av arbetsskor inom barn- och ungdomsnämnden
+000208	
+000209	Beredning
+000210	Kommunledningskontoret har i skrivelse den 13 juni 2023 lämnat följande yttrande:
+000211	Motionären föreslår att kommunen ska utreda införande av arbetsskor inom vård- och
+000212	omsorgsnämnden och barn- och ungdomsnämnden. Frågan om fria arbetsskor har utretts
+000213	tidigare. Barn- och ungdomsnämnden beslutade då om en engångssatsning och köpte in
+000214	vinterkängor till tillsvidareanställd personal i förskola och fritidshem. Det är en skillnad mellan
+000215	skyddsskor och arbetsskor, och det är endast skyddsskor som inte är en skatteförmån. Fria
+000216	arbetsskor är en förmån som ska beskattas. Det finns personal som har skyddsskor i flera
+000217	olika nämnder beroende på vilket arbete det är som utförs. Inom måltidsverksamheten har
+000218	personalen skyddsskor och det förekommer även inom lokalvården.
+000219	Kommunledningskontoret ser sammantaget att det finns ett behov av att utreda att införa
+000220	arbetsskor bredare inom vård- och omsorgsnämnden och barn- och utbildningsnämnden.
+000221	Detta utifrån att det är en komplex fråga i och med att fria arbetsskor är beskattningsbart och
+000222	att nyttan och kostnaden behöver motsvara den enskildes behov och den administration som
+000223	det innebär att införa en beskattningsbar förmån.
+000224	Beslut
+000225	Förslag till beslut i kommunfullmäktige
+000226	Motionen bifalls.
+000227	7
+000228	
+000229	Kommunstyrelsen
+000230	Protokoll
+000231	
+000232	2023-06-19
+000233	
+000234	Utdragsbestyrkande
+000235	§ 114 2023.238 KS
+000236	Svar på motion gällande slopa minutstyrningen - Marcus Wallin (V)
+000237	Ärendebeskrivning
+000238	Marcus Wallin (V) har till kommunfullmäktige den 31 maj 2023, § 92 lämnat en motion om att
+000239	slopa minutstyrningen i vård- och omsorgsförvaltningen.
+000240	Motionären föreslår följande:
+000241	Att den nuvarande minutstyrningen inom vård- och omsorgsförvaltningen slopas och ersätts
+000242	av ett mer tillitsbaserat styrsystem, som utvecklas i samarbete mellan de fackliga
+000243	organisationerna och vård- och omsorgsförvaltningen.
+000244	
+000245	Beredning
+000246	Kommunledningskontoret har i skrivelse den 13 juni 2023 lämnat följande yttrande:
+000247	Vård- och omsorgsförvaltningen arbetar inte med minutstyrning inom hemtjänsten. Vård- och
+000248	omsorgsnämnden har gett förvaltningen i uppdrag att inte ha minutstyrning i Alingsås
+000249	kommun. På vård- och omsorgsnämnden den 27 april 2023, § 30 lämnade förvaltningen
+000250	information angående minutstyrning.
+000251	Det ser olika ut i kommunerna hur ersättning betalas ut till verksamheten. I vissa kommuner
+000252	utgår ersättning utifrån ett system där verksamheten checkar in och ut ärenden, och där
+000253	sedan ersättning ges per minut. I Alingsås kommun utgår ersättning till verksamhet utifrån
+000254	beslutad schablontid till hemtjänsten.
+000255	Det planeringssystem som infördes våren 2020 lägger in en schablontid i olika nivåer per
+000256	beslutad insats. Planeringssystemet behövs för att verksamheten ska kunna checka av att
+000257	alla insatser är utförda och att alla brukare har fått sin insats. Systemet kan inte användas
+000258	utan att schabloner per beslutad insats lägga in, men det ska inte ses som att insatsen är
+000259	minutstyrd, även om det kan upplevas så. Det är inte antal minuter hos brukaren som
+000260	räknas, utan att brukaren får sin insats med god kvalitet. Förvaltningen arbetar aktivt med att
+000261	omvärldsbevaka hur andra kommuner gör, för att i ännu högre grad skapa delaktighet och
+000262	minska upplevelsen av minutstyrning.
+000263	Förvaltningen kommer under hösten att hålla en workshop tillsammans med chefer,
+000264	arbetsplatsombud och huvudskyddsombud om hur arbetet ska planeras för att öka
+000265	delaktigheten i schemaläggningen. Under hösten kommer förvaltningen även att genomföra
+000266	stickprov för att se hur mycket tid som brukaren får per insats och hur mycket tid som är
+000267	kringtid, som exempelvis planerings- och restid.
+000268	8
+000269	
+000270	Kommunstyrelsen
+000271	Protokoll
+000272	
+000273	2023-06-19
+000274	
+000275	Utdragsbestyrkande
+000276	
+000277	Beslut
+000278	Kommunledningskontorets yttrande antas som kommunstyrelsens eget.
+000279	
+000280	Förslag till beslut i kommunfullmäktige
+000281	Motionen anses besvarad.
+000282	Anteckning
+000283	Emily Munter (V) och Martin Lindberg (V lämnar följande protokollsanteckning:
+000284	Vänsterpartiet tycker det är positivt att vård och omsorgsförvaltningen ej arbetar utifrån ett
+000285	system där ersättning utgår utifrån ett system där verksamheten checkar in och ut ärenden,
+000286	och där sedan ersättning ges per minut.
+000287	Dock så innebär styrningsmodellen som Alingsås kommun tillämpar, där ersättning
+000288	ersättning utgår till verksamheter utifrån beslutad schablontid till hemtjänsten, fortfarande en
+000289	form av minutstyrning. Förvaltningen skriver själva att det planeringssystem som infördes
+000290	våren 2020 lägger in en schablontid i olika nivåer per beslutad insats och att det kan
+000291	upplevas som minutstyrning.
+000292	Forskning visar att tillitsbaserad styrning och ledning både skapar en högre effektivitet och
+000293	en bättre arbetsmiljö genom att öka graden av delegering till rätt nivå av kompetens. Precis
+000294	som Tillitsdelegationen skriver är ökad tillit och handlingsutrymme för anställda inom
+000295	arbetslivet helt nödvändigt. Därför är det Vänsterpartiets avsikt att vi fortsatt kommer arbeta
+000296	för att både den faktiska och upplevda minutstyrningen inom vård och omsorgsförvaltningen
+000297	ska ersattas av ett system som bygger på en tillitsbaserad styrning, inte new public
+000298	management.
+000299	
+000300	9
+000301	
+000302	Kommunstyrelsen
+000303	Protokoll
+000304	
+000305	2023-06-19
+000306	
+000307	Utdragsbestyrkande
+000308	§ 115 2023.259 KS
+000309	Svar på motion gällande snabb digital kontakt med vårdnadshavare, vid
+000310	hot i eller i närheten av skolor i Alingsås kommun - Gunilla Gomér (SD)
+000311	Ärendebeskrivning
+000312	Gunilla Gomer (SD) har den 31 maj 2023, § 94 lämnat en motion gällande snabb digital
+000313	kontakt med vårdnadshavare, vid hot i eller i närheten av skolor i Alingsås kommun.
+000314	Motionären föreslår följande:
+000315	Att se över möjligheten att införa en digital lösning, så att vårdnadshavare snabbt blir
+000316	informera i en krissituation, där inrymning eller utrymning av en skola i Alingsås är aktuell.
+000317	
+000318	Beredning
+000319	Kommunledningskontoret har i skrivelse den 12 juni 2023 lämnat följande yttrande:
+000320	
+000321	Det motionären föreslår har redan införts i kommunen, det finns en digital lösning (Spirius)
+000322	för information till vårdnadshavare, som ger möjlighet att skicka ut SMS utskick till alla
+000323	vårdnadshavare i kommunen. Det är barn- och ungdomsförvaltningen och kultur- och
+000324	utbildningsförvaltningen som avgör när och hur kommunikation ska riktas till vårdnadshavare
+000325	på olika skolor. Informationen kan riktas geografiskt.
+000326	Kommunledningskontoret anser därför att motionen ska anses besvarad.
+000327	Beslut
+000328	Kommunledningskontorets yttrande antas som kommunstyrelsens eget.
+000329	
+000330	Förslag till beslut i kommunfullmäktige
+000331	Motionen anses besvarad.
+000332	10
+000333	
+000334	Kommunstyrelsen
+000335	Protokoll
+000336	
+000337	2023-06-19
+000338	
+000339	Utdragsbestyrkande
+000340	§ 116 2023.241 KS
+000341	Uppdrag språkkrav inom social välfärd
+000342	Ärendebeskrivning
+000343	Kommunstyrelsen beslutade 12 december, § 192 inom ramen för budget 2023-2025 att ge
+000344	uppdrag till Kommunledningskontoret att införa språkkrav och tillhörande obligatorisk
+000345	språkutbildning för all kommunal välfärdspersonal.
+000346	
+000347	Beredning
+000348	Kommunledningskontoret har i skrivelse den 29 maj 2023 lämnat följande yttrande:
+000349	Kommunledningskontoret har utrett frågan om möjligheterna att införa språkkrav och
+000350	tillhörande obligatorisk utbildning för all kommunal välfärdspersonal. För att säkerställa att
+000351	våra medarbetare har kompetens att möta våra brukares/barns/elevers behov på bästa sätt,
+000352	föreslås att införa språknivå B1 som ett krav vid rekrytering av nyanställda medarbetare inom
+000353	ramen för välfärdsuppdraget. Genom att fastställa denna språknivå som en standard för
+000354	språkkunskaper hos kommunal välfärdspersonal säkerställs en enhetlig och ändamålsenlig
+000355	kommunikationsförmåga inom organisationen.
+000356	Språknivå B1, enligt den gemensamma europeiska referensramen för språk (CEFR), innebär
+000357	en mellannivå av språkfärdighet där individer kan förstå och uttrycka sig på ett begripligt sätt
+000358	inom vardagliga ämnen. Genom att kräva språknivå B1 som minimikrav säkerställs att våra
+000359	medarbetare har tillräcklig språkkompetens för att interagera med våra brukare/barn/elever,
+000360	förstå deras behov och kunna kommunicera tydligt och effektivt.
+000361	Fördelarna med att införa språknivå B1 som krav för rekrytering av nyanställda är flera. Det
+000362	skulle säkerställa att våra medarbetare kan förstå och bemöta brukarnas/barnens/elevernas
+000363	förfrågningar och behov på ett tillfredsställande sätt. Det skulle också kunna minska risken
+000364	för missförstånd eller felaktig kommunikation och hantering, vilket i sin tur kan leda till ökad
+000365	brukarnöjdhet och förtroende för vår organisation. Dessutom skulle en enhetlig språknivå
+000366	underlätta intern kommunikation och samarbete mellan medarbetare.
+000367	Språknivå B1 innebär en grundläggande förståelse för språket och möjlighet att
+000368	kommunicera i vardagliga situationer.
+000369	Med kommunal välfärdspersonal menas i detta sammanhang verksamheter och yrken inom
+000370	kontaktyrken i förvaltningarna Vård- och omsorg, Barn- och utbildning, samt
+000371	Socialförvaltningen.
+000372	Undantagna är personer med svensk högskoleexamen eller yrkeslegitimation.
+000373	Språkkravet omfattar alla anställningar, men undantag kan göras för anställningar kortare än
+000374	en vecka. Vid undantag ansvarar respektive rekryterande chef för att planering finns för att
+000375	uppnå språknivå för aktuella medarbetare.
+000376	
+000377	Språkutbildningar för befintlig personal kan bedrivas på olika sätt, exempelvis med digitala
+000378	verktyg eller med mer traditionell undervisning. Utifrån de olika förutsättningar som finns
+000379	inom respektive förvaltning kommer två till tre olika alternativ till utbildningsmöjlighet att tas
+000380	11
+000381	
+000382	Kommunstyrelsen
+000383	Protokoll
+000384	
+000385	2023-06-19
+000386	
+000387	Utdragsbestyrkande
+000388	fram i syfte att säkerställa att befintliga personal uppfyller språkkravet. Det är respektive chef
+000389	som ska ansvara för att erbjuda språkutbildning i syfte att ge medarbetare möjlighet att nå
+000390	upp till önskad språknivå.
+000391	
+000392	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 107 behandlat ärendet och föreslagit
+000393	att kommunledningskontorets förslag till beslut bifalls.
+000394	Förslag till beslut på sammanträdet
+000395	Emily Munter (V) föreslår följande ändring i förslag till beslut:
+000396	Vid nyanställning inom kommunala välfärden ska kommunens rekryteringsprocess ta hänsyn
+000397	till den sökandes språknivå och vid behov erbjuda språkhandledning och/eller adekvat kurs
+000398	inom yrkessvenska utifrån tjänstens språkliga behov och krav.
+000399	
+000400	Beslutsgång
+000401	Ordföranden ställer arbetsutskottets förslag till beslut mot Emily Munters ändringsförslag och
+000402	finner att kommunstyrelsen bifaller arbetsutskottets förslag till beslut.
+000403	Efter förslag från Emily Munter (V) enas kommunstyrelsen vid dagens möte om förtydligande
+000404	om att utbildning ska ske på betald arbetstid i beslutspunkt 2.
+000405	
+000406	Beslut
+000407	1. Språkkrav baserad på CEFR – skalan, språknivå B1, införs som en del av
+000408	kommunens rekryteringsprocess avseende kommunal välfärdspersonal.
+000409	2. Kommunal välfärdspersonal som idag är befintliga medarbetare och som inte når upp
+000410	till CEFR-skalan, språknivå B1, ska erbjudas språkutbildning på betald arbetstid i
+000411	syfte att uppnå önskad språknivå.
+000412	Anteckning
+000413	Emily Munter (V) och Martin Lindberg (V) lämnar följande protokollsanteckning:
+000414	Vänsterpartiet tycker det är bra att det blir tydliggjort att det är arbetsgivarens ansvar
+000415	att medarbetare har tillräckliga språkkunskaper. Timrå kommun är ett bra exempel
+000416	där vårdpersonal som inte har svenska som modersmål fått möjligheten att förbättra
+000417	sina språkkunskaper på betald arbetstid. Även SpråkSam som genomfördes i sex kommuner
+000418	i Stockholms län är ett bra exempel på hur kommuner kan arbeta med
+000419	kompetenshöjande insatser. Vi delar även slutsatserna som Kommunal gör i sin rapport
+000420	”Svenska språket - A och O inom äldreomsorgen”. Det innebär att det bland annat är
+000421	arbetsgivarens ansvar att skapa rätt förutsättningar för språkutvecklande arbetsplatser. Att
+000422	ökade resurser krävs inom välfärden för att förbättra personalens språkkunskaper och på så
+000423	sätt ökar kvaliteten i verksamheten – inte minst vad gäller omsorgskvaliteten och
+000424	patientsäkerheten.
+000425	En som söker jobb inom Alingsås välfärd kan ha stor teoretisk och praktisk kompetens
+000426	för yrket, men behöva stöd i det formella språket. Därför är det viktigt att kommunen tar
+000427	tillvara på alla som kan och vill jobba inom vår kommunala välfärd för att ge dem rätt stöd
+000428	och stärka människor, istället för att ställa ineffektiva krav och stänga ute alingsåsare från
+000429	arbete och försämra integrationen. Dock anser vi att motionen i sin helhet har flertalet brister
+000430	12
+000431	
+000432	Kommunstyrelsen
+000433	Protokoll
+000434	
+000435	2023-06-19
+000436	
+000437	Utdragsbestyrkande
+000438	och kan komma att innebära praktiska problem vid implementering. Att vi yrkar avslag på att-
+000439	sats 1 är av flera anledningar. I Norrköping kommun infördes liknande förslag med resultatet
+000440	att det fick dras tillbaka eftersom det förvärrade personalbristen. Att-sats 1 säger även att det
+000441	är B1 (CEFR-skalan) som ska användas för bedömning. Men språkkravet för B1, baserad på
+000442	CEFR-skalan, kan likställas med SFI D (den högsta SFI-kursen) men SFI-kurserna är
+000443	generellt inte inriktat på yrkesspråk. Att en person har ett ordförråd motsvarande B1 innebär
+000444	inte att de har ett språk och ordförråd för det specifika välfärdsyrket som hen söker jobb
+000445	inom. Bättre alternativ vore att vid nyanställning erbjuda, genom Komvux, kursen
+000446	”yrkessvenska” som Komvux har rätt att skapa och erbjuda vid behov. Här kan återigen
+000447	Timrå kommun användas som gott exempel, där har kommunen skräddarsytt en utbildning i
+000448	vårdsvenska för undersköterskor och vårdbiträden, såväl fast anställda som vikarier, i
+000449	hemtjänst och på äldreboenden.
+000450	Vänsterpartiet anser det viktigt att personal och brukare kan förstå varandra för att
+000451	säkerställa god och patientsäker omsorg och vård. Vi behöver öka grundbemanningen inom
+000452	välfärden och ta tillvara på alla som vill arbeta inom välfärden. Samtidigt som vi säkerställer
+000453	rätt kompetens hos våra anställda. Språklig kommunikation handlar däremot om mer än bara
+000454	ens modersmål och andraspråk, problem vid kommunikation kan även uppstå
+000455	vid funktionsnedsättningar som språkstörningar. Därför anser vi att kommunen bör ta frågan
+000456	till en högre och bredare nivå för att diskutera hur vi skapar ett inkluderande arbetsliv,
+000457	oavsett funktion, för att få fler alingsåsare att arbeta inom välfärden.
+000458	Expedieras till
+000459	Socialnämnden, vård- och omsorgsnämnden, barn- och ungdomsnämnden
+000460	13
+000461	
+000462	Kommunstyrelsen
+000463	Protokoll
+000464	
+000465	2023-06-19
+000466	
+000467	Utdragsbestyrkande
+000468	§ 117 2023.010 KS
+000469	Ramar 2024-2026 för Alingsås kommun
+000470	Ärendebeskrivning
+000471	Styrmodellen för Alingsås kommun antogs av kommunfullmäktige den 27 november 2019, §
+000472	218. Enligt styrmodellen ska kommunstyrelsens arbetsutskott arbeta fram förslag till
+000473	ekonomiska ramar för nästkommande tre år under en ramberedning som sker under våren
+000474	varje år och som genomförs med tjänstemän från kommunledningskontoret.
+000475	Ramberedningen hölls den 17 maj 2023.
+000476	Ramberedningen har enats om att den generella uppräkningen för nämnderna ska uppgå till
+000477	100 procent av PKV 2024, 100 procent av PKV 2025 och 100 procent av PKV 2026.
+000478	Ramberedningen har enats om att resultatmål 2024 får avvika mot kommunens långsiktiga
+000479	mål för god ekonomisk hushållning.
+000480	Ramberedningen har enats om ett kompensera nämnderna för ej genomförd höjning av PO
+000481	2023. Ramberedning har även enats om en riktad besparing om 5 mnkr mot
+000482	kommunstyrelsen för att bland annat finansiera ett utökad medlemsbidrag till AVRF.
+000483	Med detta ärende lämnas förslag till ramar, det vill säga kommunbidrag för respektive nämnd
+000484	under ramperioden.
+000485	
+000486	Beredning
+000487	Kommunledningskontoret har i skrivelse den 26 maj 2023 lämnat följande yttrande:
+000488	Förslag till ramar redovisas av bilaga till ärendet. Ramarna har justerats enligt kommunens
+000489	befolkningsprognos eftersom resursfördelningsmodellens utgångspunkt är i de verksamheter
+000490	som direkt påverkas av förändrade volymer. Därtill justeras ramarna med en uppräkning i
+000491	form av Prisindex för kommunal verksamhet (PKV) samt en retroaktiv kompensation för höjt
+000492	PO.
+000493	
+000494	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 105 behandlat ärendet.
+000495	Beslut
+000496	Förslag till ramar för kommunens nämnder 2024–2026 godkänns.
+000497	Expedieras till
+000498	Samtliga nämnder
+000499	14
+000500	
+000501	Kommunstyrelsen
+000502	Protokoll
+000503	
+000504	2023-06-19
+000505	
+000506	Utdragsbestyrkande
+000507	§ 118 2023.122 KS
+000508	Kommunernas klimatlöften 2024-2026
+000509	Ärendebeskrivning
+000510	”Klimat 2030 - Västra Götaland ställer om” är en kraftsamling som drivs av Västra
+000511	Götalandsregionen och Länsstyrelsen Västra Götaland i samverkan med andra aktörer.
+000512	Kraftsamlingen samlar företag, kommuner, högskolor och andra organisationer i Västra
+000513	Götaland som vill bidra i omställningen till en klimatsmart region. Alla kommuner i länet har
+000514	undertecknat målet att Västra Götaland till 2030 ska vara en fossiloberoende region. Det
+000515	innebär att utsläppen av växthusgaser ska minska med 80 procent från 1990 års nivå till år
+000516	2030, samt att utsläppen från västsvenskarnas konsumtion ska minska med 30 procent till
+000517	2030 jämfört med 2010 års nivå.
+000518	För att stötta kommunerna i klimatarbetet och genomföra gemensamma åtgärder bjuds alla
+000519	kommuner i länet in att delta i ”Kommunernas klimatlöften 2024-2026”. Kommunernas
+000520	klimatlöften består av 30 konkreta åtgärder där kommunen har rådighet, som är beprövade
+000521	och som kan ge stor utsläppsminskning. Klimat 2030 arrangerar kunskapshöjande insatser
+000522	och samlar kompetens och goda exempel kring alla löften, som ett stöd för kommunernas
+000523	genomförande. Beskrivning av klimatlöftena finns i bilaga 1.
+000524	Alingsås har antagit klimatlöften för 2021 och 2022 och har nu möjlighet att anta nya för
+000525	perioden 2024-2026. Kommunstyrelsen tar beslut om vilka löften som ska genomföras under
+000526	perioden.
+000527	Beslut om vilka klimatlöften Alingsås kommun vill anta ska skickas till Länsstyrelsen i Västra
+000528	Götaland och Västra Götalandsregionen senast den 30 september 2023.
+000529	
+000530	Beredning
+000531	Kommunledningskontoret har i skrivelse den 1 juni 2023 lämnat följande yttrande:
+000532	
+000533	Kommunledningskontoret har tagit del av de Klimatlöften som gäller för 2024-2026.
+000534	Klimatlöftena omfattar 30 åtgärder inom 6 teman; övergripande, inköp och upphandling,
+000535	transporter, mat, cirkulär ekonomi samt byggnader. Ambitionsnivån är högre än tidigare
+000536	eftersom klimatlöftena är fleråriga och ligger närmare målåret för våra regionala klimatmål.
+000537	Hälften av löftena har funnits med tidigare men har skärpts och hälften är helt nya.
+000538	Vid Klimat 2030:s informationsmöte den 16 mars 2023 uppmanades kommunerna att anta
+000539	ett urval av de 30 klimatlöftena. Uppföljning av tidigare års klimatlöften pekar på att ett mer
+000540	avgränsat och fokuserat åtagande genererar ett gott genomförande av åtgärderna. För år
+000541	2022 antog Alingsås 11 av 20 föreslagna klimatlöften, jämfört med 9 av 20 klimatlöften under
+000542	2021.
+000543	I antagandet av Handlingsplan för Begränsad klimatpåverkan den 26 april 2023 beslutade
+000544	kommunfullmäktige att Alingsås ska fortsätta arbeta med klimatlöften och ska anta nya för
+000545	perioden 2024-2026. Kommunledningskontoret har haft dialog med förvaltningar och bolag
+000546	och tagit fram förslag på vilka klimatlöften som ska antas. Detta utifrån avvägningar av
+000547	resurser och vad som bedömts vara realistiskt att arbeta med och uppnå till 2026. Urvalet av
+000548	klimatlöften har även baserats på de klimatlöften som ligger i linje med åtgärdsplanen i
+000549	15
+000550	
+000551	Kommunstyrelsen
+000552	Protokoll
+000553	
+000554	2023-06-19
+000555	
+000556	Utdragsbestyrkande
+000557	Handlingsplan Begränsad klimatpåverkan samt åtaganden i Regionalt åtgärdsprogram för
+000558	miljömålen.
+000559	Mot den här bakgrunden så föreslår kommunledningskontoret att följande 18 av 30
+000560	klimatlöften antas:
+000561	Övergripande (5 av 8 löften)
+000562	1. Vi har en årlig uppföljning av klimatarbetet
+000563	3. Vi involverar invånare i alla åldrar i klimatarbetet
+000564	5. Vi minskar utsläppen tillsammans med näringslivet
+000565	6. Vi inkluderar lantbruket som samarbetspart i kommunens klimatomställning
+000566	8. Vi arbetar aktivt med vår energiplan
+000567	Inköp och upphandling (2 av 3 löften)
+000568	9. Vi arbetar strategiskt med att minska klimatpåverkan genom upphandling
+000569	10. Vi säkerställer kompetens och resurser för att upphandla med klimathänsyn
+000570	Transporter (5 av 9 löften)
+000571	12. Vi säkrar att planering och byggande bidrar till ett transporteffektivt samhälle
+000572	16. Våra nya personbilar körs på förnybar el, biogas eller vätgas
+000573	17. Vi ställer krav i upphandling för transportdelen i nya avtal
+000574	18. Våra nya arbetsmaskiner är fossilfria och upphandlingskrav ställs på entreprenader
+000575	20. Vi arbetar med hållbart resande för våra anställda
+000576	Mat (1 av 2 löften)
+000577	21. Vi minskar matsvinnet i offentliga måltider och når mål
+000578	Cirkulär ekonomi (3 av 5 löften)
+000579	23. Vi ökar livslängden på elektronik och möjliggör cirkulära flöden
+000580	25. Vi använder cirkulära möbler
+000581	27. Vi möjliggör för invånarna att låna/hyra produkter i stället för att köpa
+000582	Byggnader (2 av 3 löften)
+000583	28. Vi energieffektiviserar vårt fastighetsbestånd
+000584	30. Vi arbetar med återbruk av byggmaterial
+000585	
+000586	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 109 behandlat ärendet och föreslagit
+000587	att kommunledningskontorets förslag till beslut bifalls.
+000588	16
+000589	
+000590	Kommunstyrelsen
+000591	Protokoll
+000592	
+000593	2023-06-19
+000594	
+000595	Utdragsbestyrkande
+000596	
+000597	Förslag till beslut på sammanträdet
+000598	Amanda Andersson (MP) föreslår att alla klimatlöften antas.
+000599	Emily Munter (V) föreslår att klimatlöfte 2, 7, 11, 13, 14, 15, 22 och 26 läggs till i listan över
+000600	klimatlöften som antas.
+000601	Heidi Hankanen Ängberg förslår att klimatlöfte 2 och 11 läggs till i listan över klimatlöften
+000602	som antas.
+000603	
+000604	Beslutsgång
+000605	Ordföranden ställer arbetsutskottets förslag till beslut mot avslag och finner att
+000606	kommunstyrelsen bifaller arbetsutskottets förslag till beslut.
+000607	
+000608	Ordföranden ställer Amanda Anderssons förslag mot avslag och finner att kommunstyrelsen
+000609	avslår Amanda Anderssons förslag.
+000610	
+000611	Ordföranden ställer Emily Munters förslag mot avslag och finner att kommunstyrelsen avslår
+000612	Emily Munters förslag.
+000613	
+000614	Ordföranden ställer Heidi Hankanen Ängbergs förslag mot avslag
+000615	och finner att kommunstyrelsen avslår Heidi Hankanen Ängbergs förslag.
+000616	
+000617	Beslut
+000618	Klimatlöfte 1, 3, 5, 6, 8, 9, 10, 12, 16, 17, 18, 20, 21, 23, 25, 27, 28 och 30 i Kommunernas
+000619	klimatlöften 2024-2026 antas.
+000620	17
+000621	
+000622	Kommunstyrelsen
+000623	Protokoll
+000624	
+000625	2023-06-19
+000626	
+000627	Utdragsbestyrkande
+000628	
+000629	Anteckning
+000630	Amanda Andersson (MP) lämnar följande protokollsanteckning:
+000631	Klimatfrågan är vår tids stora ödesfråga. De beslut vi tar nu är avgörande för planeten och
+000632	kommande generationer, våra barn och barnbarn. Alla måste göra sitt yttersta för att ställa
+000633	om till ett klimatsmart och hållbart samhälle, även Alingsås kommun. För Miljöpartiet i
+000634	Alingsås är det därför självklart att kommunen antar alla klimatlöften.
+000635	
+000636	Emily Munter (V) och Martin Lindberg (V) lämnar följande protokollsanteckning:
+000637	Vi i Vänsterpartiet tycker att det är positivt att man valt att anta 18 av 30 klimatlöften. Vi hade
+000638	dock gärna sett att ytterligare ett par av dessa hade kunnat tas med då de antingen ligger i
+000639	linje med den redan antagna Handlingsplanen för begränsad klimatpåverkan (löfte 7 och 11)
+000640	eller är en åtgärd som innebär stor nytta till relativt liten kostnad (löfte 2, 22 och 26). Om vi
+000641	ska lyckas minska utsläppen av växthusgaser med 80 procent från 1990 års nivå till år 2030,
+000642	samt utsläppen från konsumtionen med 30 procent till 2030 jämfört med 2010 års nivå så
+000643	måste vi öka takten, annars är det som att säga att vi redan gett upp att nå målet. Vi hade
+000644	därför, som vi tidigare påpekat, önskat en ännu högre ambitionsnivå så att målet fortfarande
+000645	känns inom räckhåll.
+000646	Expedieras till
+000647	Samtliga nämnder och kommunala bolag, klimat2030@vgregion.se
+000648	18
+000649	
+000650	Kommunstyrelsen
+000651	Protokoll
+000652	
+000653	2023-06-19
+000654	
+000655	Utdragsbestyrkande
+000656	§ 119 2023.105 KS
+000657	Förlängning av överenskommelse in- och utskrivning från sluten hälso-
+000658	och sjukvård
+000659	Ärendebeskrivning
+000660	Överenskommelsen mellan Västra Götalands kommuner och Västra Götalandsregionen om
+000661	samverkan vid in- och utskrivning från sluten hälso- och sjukvård grundar sig i lagen om
+000662	samverkan vid utskrivning från sluten hälso-och sjukvård (lag 2017:612) och bygger på
+000663	Hälso- och sjukvårdsavtalet i Västra Götaland gällande från och med 1 april 2017. En
+000664	revidering av Hälso- och sjukvårdsavtalet i Västra Götaland är under arbete. Samtidigt med
+000665	denna revidering har underavtal och överenskommelser uppdaterats och därför är
+000666	överenskommelse om utskrivning från slutenvård också aktuell för förlängning.
+000667	Överenskommelsen har funnits sedan 2018-09-25, kommunstyrelsen beslutade om att
+000668	tillstyrka förlängning 2020-09-07, § 128. Parterna är VGR och var och en av kommunerna i
+000669	Västra Götaland. Samverkan vid utskrivning är den lag som reglerar in- och
+000670	utskrivningsprocessen för personer som har behov av insatser efter utskrivning från
+000671	slutenvården (vård på sjukhus). Syftet med lagen är att patientens övergång från slutenvård
+000672	till öppenvård ska vara trygg och säker.
+000673	Förslaget innebär att befintlig överenskommelse förlängs till och med 31 december 2024.
+000674	Senast tolv månader innan avtalstiden löper ut har part möjlighet att säga upp avtalet. Om
+000675	ingen part skriftligen sagt upp avtalet förlängs det med två år i taget med tolv månaders
+000676	uppsägningstid. Överenskommelsen är ett underavtal till hälso- och sjukvårdsavtalet i Västra
+000677	Götaland vilket innebär att överenskommelsens giltighet är beroende av ett gällande
+000678	huvudavtal.
+000679	Västkoms styrelse ställde sig bakom förslaget till en förlängning av överenskommelsen 2022-
+000680	12-06 och rekommenderar kommunalförbunden att rekommendera kommunerna att besluta i
+000681	enlighet med förslaget. Göteborgsregionens förbundsstyrelse beslutade 2023-02-06 att
+000682	rekommendera kommunerna fatta beslut om förlängning enligt förslaget och att beslut bör
+000683	meddelas GR senast 2023-06-30.
+000684	
+000685	Beredning
+000686	Kommunledningskontoret har i skrivelse den 30 maj 2023 lämnat följande yttrande:
+000687	Kommunledningskontoret anser att denna överenskommelse ligger i linje med kommunens
+000688	pågående samverkan vid in- och utskrivning från sluten hälso- och sjukvård, och därmed bör
+000689	förlängas enligt förslag.
+000690	Samverkan vid utskrivning syftar till att stärka den enskildes rätt till en trygg och effektiv
+000691	utskrivning och stärka samordningen mellan huvudmän och verksamheter. Västra
+000692	Götalandsregionen och länets kommuner är överens om att enskilda personer som inte
+000693	längre har behov av slutenvårdens resurser omgående ska kunna skrivas ut därifrån, på ett
+000694	tryggt och säkert sätt. Målgrupp för överenskommelsen är personer i alla åldrar som efter
+000695	utskrivning från sluten hälso- och sjukvård behöver insatser från socialtjänsten, den
+000696	kommunalt finansierade hälso- och sjukvården eller regionalt finansierad öppen vård.
+000697	19
+000698	
+000699	Kommunstyrelsen
+000700	Protokoll
+000701	
+000702	2023-06-19
+000703	
+000704	Utdragsbestyrkande
+000705	Kontakt har tagits med socialförvaltningens respektive vård- och omsorgsförvaltningen
+000706	ledning för ett yttrande gällande förlängning av överenskommelsen. Varken
+000707	socialförvaltningen eller vård- och omsorgsförvaltningen har några synpunkter på förslag till
+000708	förlängning av överenskommelsen.
+000709	
+000710	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 106 behandlat ärendet.
+000711	Beslut
+000712	Förlängning av överenskommelse vid in- och utskrivning vid sluten hälso- och sjukvård
+000713	mellan Västra Götalandsregionen och Västra Götalands kommuner godkänns.
+000714	Expedieras till
+000715	Socialnämnden, vård- och omsorgsnämnden, barn- och ungdomsnämnden,
+000716	Göteborgsregionen
+000717	20
+000718	
+000719	Kommunstyrelsen
+000720	Protokoll
+000721	
+000722	2023-06-19
+000723	
+000724	Utdragsbestyrkande
+000725	§ 120 2022.238 KS
+000726	Överlåtelse av Nolby 37:25
+000727	Ärendebeskrivning
+000728	Kommunstyrelsen beslutade den 4 april 2022, § 42, om att tilldela Alingsås Energi Nät AB
+000729	markanvisning för Nolby 37:25. Syftet med markanvisningen är att Alingsås Energi Nät AB är
+000730	i behov av att utöka sin energiförsörjning. Området är idag planlagt för ändamålen teknisk
+000731	försörjning, industri och lager.
+000732	Enligt kommunens riktlinjer för markanvisning, antagna av kommunstyrelsen den 7
+000733	september 2020, § 125, kan en direktanvisning ges när de kommunala bolagen har ett
+000734	markbehov och då kommunstyrelsen beslutar att det inte föreligger något behov av anbud
+000735	eller tävling.
+000736	Alingsås Energi Nät AB önskar nu gå vidare med ett förvärv av fastigheten.
+000737	
+000738	Beredning
+000739	Kommunledningskontoret har i skrivelse den 16 maj 2023 lämnat följande yttrande:
+000740	
+000741	Alingsås Energi AB har idag ett markanvisningsavtal för fastigheten Nolby 37:25 enligt
+000742	kartbilaga. Markanvisningsavtalet är en överenskommelse som ger Alingsås Energi AB
+000743	ensamrätt att under en begränsad tid förhandla med kommunen gällande en överlåtelse av
+000744	fastigheten.
+000745	Fastigheten Nolby 37:25 är belägen i Sävelunds industriområde, i direkt anslutning till
+000746	Alingsås Energi Nät AB’s egen fastighet Taljan 1. Inom Taljan 1 finns en av bolagets
+000747	mottagningsstationer (M3) placerad. Närheten till mottagningsstationen M3 är en viktig
+000748	förutsättning för att Alingsås Energi Nät AB ska kunna utveckla verksamheten.
+000749	Energiförsörjning är en kommunal angelägenhet och av stort allmänt intresse. I takt med att
+000750	nya bebyggelseområden utvecklas, bland annat Bälinge Företagspark, behöver Alingsås
+000751	Energi Nät AB expandera sin verksamhet och förstärka elförsörjningen, för att möta det
+000752	ökade behovet och elektrifieringen av samhället.
+000753	Kommunledningskontoret anser att det är angeläget att möjliggöra den ökade efterfrågan på
+000754	kapacitet. Alingsås Energi AB har för avsikt att genomföra utvecklingen på platsen och
+000755	kommunledningskontoret föreslår att markanvisningen övergår i ett överlåtelseavtal.
+000756	
+000757	Kommunstyrelsens arbetsutskott har den 24 maj 2023, § 99 behandlat ärendet.
+000758	21
+000759	
+000760	Kommunstyrelsen
+000761	Protokoll
+000762	
+000763	2023-06-19
+000764	
+000765	Utdragsbestyrkande
+000766	
+000767	Beslut
+000768	Tillväxtchef får i uppdrag att upprätta och underteckna överlåtelseavtal mellan kommunen
+000769	och Alingsås Energi Nät AB för fastigheten Nolby 37:25.
+000770	Expedieras till
+000771	Klk-exploatering
+000772	22
+000773	
+000774	Kommunstyrelsen
+000775	Protokoll
+000776	
+000777	2023-06-19
+000778	
+000779	Utdragsbestyrkande
+000780	§ 121 2022.404 KS
+000781	Överlåtelse av befintligt arrendeavtal på Vitsippan 3
+000782	Ärendebeskrivning
+000783	Högbergs Markisfabrik AB förvärvade den byggnad som är belägen på kommunens
+000784	arrendetomt Vitsippan 3, den 1 augusti 2022 och övertog därefter det befintliga arrendet.
+000785	Högbergs Markisfabrik AB avser att rusta upp byggnaden och även installera laddstolpar för
+000786	elbilar på platsen. För att ha möjlighet att genomföra investeringar inom arrendestället,
+000787	önskar de teckna ett tioårigt arrendeavtal.
+000788	
+000789	Beredning
+000790	Kommunledningskontoret har i skrivelse den 16 maj 2023 lämnat följande yttrande:
+000791	Fastigheten Vitsippan 3 är belägen i entrén till staden och har ett strategiskt läge ur ett
+000792	långsiktigt perspektiv. I nuläget finns inga planer på att bygga om korsningen eller ändra
+000793	markanvändningen, genom detaljplaneläggning för fastigheten på kort sikt. Avstämning har
+000794	skett med samhällsbyggnadsförvaltningen, då det finns önskemål om att möjliggöra en
+000795	cykelbana inom nuvarande arrendeområde. Arrendet kommer att ta hänsyn till planerna om
+000796	cykelbana och verksamheten kommer lämna tillräckligt utrymme för genomförandet. För att
+000797	ge Högbergs Markisfabrik AB möjligheten att genomföra utveckling av platsen, ser
+000798	kommunledningskontoret positivt på att de ges möjlighet att ersätta det befintliga ettåriga
+000799	arrendet, med ett nytt tioårigt arrende.
+000800	
+000801	Kommunstyrelsens arbetsutskott har den 25 maj 2023, § 98 behandlat ärendet.
+000802	Beslut
+000803	Tillväxtchef får i uppdrag att upprätta och underteckna ett tioårigt arrendeavtal för fastigheten
+000804	Vitsippan 3.
+000805	Expedieras till
+000806	Klk-exploatering
+000807	23
+000808	
+000809	Kommunstyrelsen
+000810	Protokoll
+000811	
+000812	2023-06-19
+000813	
+000814	Utdragsbestyrkande
+000815	§ 122 2022.270 KS
+000816	Marktilldelning, Kavlås Äng
+000817	Ärendebeskrivning
+000818	Kommunstyrelsen beslutade den 7 juni 2022, § 77, att ge kommunledningskontoret i uppdrag
+000819	att genomföra en markanvisningstävling för delar av kvartersmarken för bostadsbebyggelse.
+000820	Tävlingsområdet utgörs av två delområden, med en sammanlagd area om cirka 7 500 m2.
+000821	Huvudsyftet med markanvisningstävlingen är att tillskapa en väl gestaltad radhusbebyggelse,
+000822	i enlighet med den traditionella trädgårdsstadens arkitektur, där framtida bostäder besitter
+000823	småhusens kvaliteter i ett yteffektivt format.
+000824	
+000825	Beredning
+000826	Kommunledningskontoret har i skrivelse den 26 maj 2023 lämnat följande yttrande:
+000827	
+000828	Tävlingen har genomförts i två steg, där steg ett utgjordes av en intresseanmälan och steg
+000829	två utgjordes av den faktiska markanvisningstävlingen. För tävlingen togs en inbjudan fram,
+000830	som definierade förutsättningarna för tävlingen, baserat på tävlingens huvudsyfte.
+000831	Bedömningen av förslagen har gjorts utifrån kategorierna gestaltning, boendemiljö och
+000832	klimatpåverkan.
+000833	I steg ett fick alla aktörer som önskade lämna in ett övergripande förslag, som visar hur de
+000834	önskar bebygga fastigheten. I steg ett inkom 20 intresseanmälningar. Av inkomna
+000835	intresseanmälningar valdes tre aktörer ut för att tävla i steg två. Dessa hade presenterat de
+000836	bästa förslagen, sett till förutsättningarna som definierats i tävlingsinbjudan.
+000837	I steg två tog aktörerna fram illustrationsmaterial, vilket konkretiserade deras projektidé i ett
+000838	platsspecifikt tävlingsförslag. Tävlingsförslagen bedömdes utifrån tävlingens förutsättningar
+000839	och poängsattes utifrån en för tävlingen definierad skala.
+000840	Det bidrag som fick högst poäng i markanvisningstävlingen var bidraget från 4D-Gruppen,
+000841	vilka föreslås ges möjlighet att teckna ett markanvisningsavtal med kommunen avseende
+000842	området. Markanvisningsavtalet innebär att aktören får ensamrätt att förhandla med
+000843	kommunen om ett förvärv av området, under förutsättning att aktören efterlever det förslag
+000844	som aktören har lämnat in.
+000845	Markanvisningsavtalets giltighetstid är den 28 februari 2025. Aktören ska innan detta datum
+000846	ha ansökt om och erhållit beviljat bygglov för byggnationen i området. Efter beviljat bygglov,
+000847	när det står klart att aktören har uppfyllt villkoren i markanvisningsavtalet, upprättas ett
+000848	marköverlåtelseavtal, vilket utgör den formella överlåtelsen av området.
+000849	
+000850	Kommunstyrelsens arbetsutskott har den 7 juni 2023, § 108 behandlat ärendet.
+000851	24
+000852	
+000853	Kommunstyrelsen
+000854	Protokoll
+000855	
+000856	2023-06-19
+000857	
+000858	Utdragsbestyrkande
+000859	Beslut
+000860	1. Tillväxtchef får i uppdrag att underteckna markanvisningsavtal med den vinnande
+000861	aktören avseende tävlingsområdet.
+000862	2. Tillväxtchef får i uppdrag att underteckna marköverlåtelseavtal avseende
+000863	tävlingsområdet med den vinnande aktören, när aktören har uppfyllt sina åtaganden
+000864	enligt markanvisningsavtalet.
+000865	Expedieras till
+000866	Klk-exploatering
+000867	25
+000868	
+000869	Kommunstyrelsen
+000870	Protokoll
+000871	
+000872	2023-06-19
+000873	
+000874	Utdragsbestyrkande
+000875	§123
+000876	Redovisning av delegationsbeslut
+000877	Delegationsbeslut
+000878	 2023.001 KS-005 Delegationsbeslut kommundirektör - Enligt punkt 3.8 - Uppdatering av
+000879	attesträttigheter
+000880	 2023.273 KS-001 Delegationsbeslut exploateringschef - Enligt punkt 5.26 -
+000881	Överlåtelseavtal för del av Erska 1:55
+000882	26

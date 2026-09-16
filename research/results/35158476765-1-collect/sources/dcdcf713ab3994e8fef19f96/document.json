@@ -1,0 +1,133 @@
+{
+  "id": "dcdcf713ab3994e8fef19f96",
+  "municipality_id": "2281",
+  "url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+  "requested_url": "https://sundsvall.se/download/18.235b114b198e57425bc58665/1671523358788/Protokoll%20%20V%C3%A5rd-%20och%20omsorgsn%C3%A4mnden%202022-12-15.pdf",
+  "retrieved_at": "2026-09-16T22:30:25.953840+00:00",
+  "raw_sha256": "d990d46cd2971c9d1e637d5a6400a4c8d5ce107c9e0452d5aea5c2fafdf11adc",
+  "text_sha256": "8ce9afc34e8793789039045021dbba28febbb0c6e6ca12b59ea61b1dc058a872",
+  "raw_path": "sources/dcdcf713ab3994e8fef19f96/source.pdf",
+  "text_path": "sources/dcdcf713ab3994e8fef19f96/text.txt",
+  "numbered_path": "sources/dcdcf713ab3994e8fef19f96/text.lines.txt",
+  "media_type": "pdf",
+  "title": "Agenda Vård- och omsorgsnämnden 15.12.2022 kl. 08:00",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 1266
+    },
+    {
+      "page": 2,
+      "start": 1269,
+      "end": 2118
+    },
+    {
+      "page": 3,
+      "start": 2121,
+      "end": 2499
+    },
+    {
+      "page": 4,
+      "start": 2502,
+      "end": 2754
+    },
+    {
+      "page": 5,
+      "start": 2757,
+      "end": 3980
+    },
+    {
+      "page": 6,
+      "start": 3983,
+      "end": 5912
+    },
+    {
+      "page": 7,
+      "start": 5915,
+      "end": 8194
+    },
+    {
+      "page": 8,
+      "start": 8197,
+      "end": 9599
+    },
+    {
+      "page": 9,
+      "start": 9602,
+      "end": 9978
+    },
+    {
+      "page": 10,
+      "start": 9981,
+      "end": 11504
+    },
+    {
+      "page": 11,
+      "start": 11507,
+      "end": 13152
+    },
+    {
+      "page": 12,
+      "start": 13155,
+      "end": 14319
+    },
+    {
+      "page": 13,
+      "start": 14322,
+      "end": 16137
+    },
+    {
+      "page": 14,
+      "start": 16140,
+      "end": 17884
+    },
+    {
+      "page": 15,
+      "start": 17887,
+      "end": 18915
+    },
+    {
+      "page": 16,
+      "start": 18918,
+      "end": 20452
+    },
+    {
+      "page": 17,
+      "start": 20455,
+      "end": 20911
+    },
+    {
+      "page": 18,
+      "start": 20914,
+      "end": 22297
+    },
+    {
+      "page": 19,
+      "start": 22300,
+      "end": 23417
+    },
+    {
+      "page": 20,
+      "start": 23420,
+      "end": 24542
+    },
+    {
+      "page": 21,
+      "start": 24545,
+      "end": 26012
+    },
+    {
+      "page": 22,
+      "start": 26015,
+      "end": 26680
+    },
+    {
+      "page": 23,
+      "start": 26683,
+      "end": 27868
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v2"
+}

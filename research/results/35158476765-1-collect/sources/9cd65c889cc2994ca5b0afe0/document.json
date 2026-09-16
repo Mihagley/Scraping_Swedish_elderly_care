@@ -1,0 +1,78 @@
+{
+  "id": "9cd65c889cc2994ca5b0afe0",
+  "municipality_id": "0580",
+  "url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+  "requested_url": "https://sammantraden.linkoping.se/welcome-sv/namnder-styrelser/vard-och-aldreomsorgsnamnden/2025-02-13-vard-och-aldreomsorgsnamnden/agenda/bilaga-satsningar-i-budgeten-2025pdf?downloadMode=download",
+  "retrieved_at": "2026-09-16T22:30:29.555428+00:00",
+  "raw_sha256": "9b1f76add4852d625422a4971561bd340d1ce0436db99771bfa213d0af0880f2",
+  "text_sha256": "1b28d93048a1782c471bf26e2208feac1c7b2ce26157cb5b964b9d841abc7580",
+  "raw_path": "sources/9cd65c889cc2994ca5b0afe0/source.pdf",
+  "text_path": "sources/9cd65c889cc2994ca5b0afe0/text.txt",
+  "numbered_path": "sources/9cd65c889cc2994ca5b0afe0/text.lines.txt",
+  "media_type": "pdf",
+  "title": "Bilaga - Satsningar i budgeten 2025",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 59
+    },
+    {
+      "page": 2,
+      "start": 62,
+      "end": 1084
+    },
+    {
+      "page": 3,
+      "start": 1087,
+      "end": 3950
+    },
+    {
+      "page": 4,
+      "start": 3953,
+      "end": 6831
+    },
+    {
+      "page": 5,
+      "start": 6834,
+      "end": 9727
+    },
+    {
+      "page": 6,
+      "start": 9730,
+      "end": 12510
+    },
+    {
+      "page": 7,
+      "start": 12513,
+      "end": 15761
+    },
+    {
+      "page": 8,
+      "start": 15764,
+      "end": 18305
+    },
+    {
+      "page": 9,
+      "start": 18308,
+      "end": 21295
+    },
+    {
+      "page": 10,
+      "start": 21298,
+      "end": 23548
+    },
+    {
+      "page": 11,
+      "start": 23551,
+      "end": 26440
+    },
+    {
+      "page": 12,
+      "start": 26443,
+      "end": 28578
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v2"
+}

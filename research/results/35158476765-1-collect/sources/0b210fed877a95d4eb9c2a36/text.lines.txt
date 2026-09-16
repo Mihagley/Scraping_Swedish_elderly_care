@@ -1,0 +1,27 @@
+000001	Språk inom vård och omsorg
+000002	Alla våra medarbetare ska kunna tala, förstå instruktioner och dokumentera på svenska. Vi arbetar därför aktivt för att våra medarbetare ska ha rätt språkkunskaper och erbjuder stöd för de som vill utveckla sitt språk.
+000003	Språkkrav vid anställning
+000004	När vi anställer nya medarbetare som ska arbeta med vård och omsorg har vi krav på en viss nivå i svenska språket. Vi använder den gemensamma europeiska referensramen för språk (GERS) när vi bedömer språkkunskaper. För att bli anställd behöver den sökande nå minst nivå B1 på GERS-skalan.
+000005	Så bedömer vi språkkunskaper
+000006	Vi använder olika metoder för att bedöma språkkunskaper beroende på om man ansöker till en tillsvidareanställning eller ett vikariat.
+000007	Muntlig bedömning
+000008	Tillsvidareanställning
+000009	På en fysisk intervju berättar kandidaten om sig själv och svarar på frågor om hur den skulle agera i olika situationer på jobbet.
+000010	Vikariat
+000011	Kandidaten spelar in en kort presentation, berättar om sig själv och svarar på frågor från oss.
+000012	I båda fallen tittar vi på:
+000013	- Hur tydligt kandidaten pratar.
+000014	- Hur kandidaten förklarar och beskriver situationer.
+000015	- Hur väl kandidaten förstår frågorna.
+000016	Skriftlig bedömning
+000017	Alla sökande gör en skriftlig uppgift. Där får kandidaten svara på frågor om ett fiktivt scenario som kan uppstå på jobbet.
+000018	Vi bedömer:
+000019	- Hur tydligt kandidaten skriver.
+000020	- Hur kandidaten beskriver och bedömer en situation.
+000021	- Hur kandidaten dokumenterar på svenska.
+000022	Stöd för att utveckla språket
+000023	Vi erbjuder flera former av stöd för medarbetare som vill förbättra sina språkkunskaper.
+000024	Språkombud
+000025	Språkombud är våra ordinarie medarbetare som har ett extra uppdrag att stötta medarbetare och chefer. Till exempel genom att förklara svåra ord och begrepp som används inom vården. Vi har totalt 90 utbildade språkombud utspridda på flera av våra enheter.
+000026	Språkcoach
+000027	Vi har två språkcoacher som är utbildade lärare med lång erfarenhet av språk. De gör språkbedömningar och erbjuder behovsstyrda utbildningar, inom till exempel vårdsvenska, för både nya och nuvarande medarbetare. Utbildningarna sker på arbetstid och anpassas efter varje persons nivå och behov.
