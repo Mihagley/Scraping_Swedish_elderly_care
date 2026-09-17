@@ -92,6 +92,7 @@ jobs:
       TARGET_SIZE: ${{ inputs.target_size || '25' }}
       MUNICIPALITY_RETRIES: ${{ inputs.retries || '2' }}
       RESEARCH_MODE: ${{ inputs.mode || '' }}
+      CACHE_MODE: ${{ inputs.mode || 'request-mode' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -106,9 +107,9 @@ jobs:
           path: |
             research/shard-output/${{ matrix.id }}
             data/cache/shards/${{ matrix.id }}
-          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.CACHE_MODE }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
-            research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-
+            research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.CACHE_MODE }}-${{ matrix.id }}-
       - name: Run or resume shard ${{ matrix.id }}
         id: research
         continue-on-error: true
@@ -147,7 +148,7 @@ jobs:
           path: |
             research/shard-output/${{ matrix.id }}
             data/cache/shards/${{ matrix.id }}
-          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.CACHE_MODE }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Fail shard after state has been preserved
         if: steps.research.outcome == 'failure'
         run: exit 1
