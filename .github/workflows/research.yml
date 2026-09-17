@@ -1,29 +1,57 @@
-name: Research pilot
+name: Municipal research shards
 
 on:
-  push:
-    paths:
-      - research/request.json
   workflow_dispatch:
     inputs:
       mode:
-        description: Collect sources only, or classify sources using the API secret
+        description: Collect sources only, or classify relevant sources using the API secret
         required: true
         default: collect
         type: choice
         options: [collect, classify]
+      registry:
+        description: Validated 290-municipality CSV
+        required: true
+        default: research/municipalities.csv
+        type: string
+      request:
+        description: Full-scale research request JSON
+        required: true
+        default: research/request-full.json
+        type: string
+      target_size:
+        description: Target municipalities per shard (hard bounds remain 20-30)
+        required: true
+        default: '25'
+        type: string
+      retries:
+        description: Additional municipality attempts within each shard run
+        required: true
+        default: '2'
+        type: string
+  push:
+    paths:
+      - research/request-full.json
+      - research/municipalities.csv
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: research-pilot
+  group: municipal-research-shards-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  research:
+  plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      registry_sha256: ${{ steps.plan.outputs.registry_sha256 }}
+      input_sha256: ${{ steps.plan.outputs.input_sha256 }}
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      REQUEST: ${{ inputs.request || 'research/request-full.json' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,44 +60,143 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements.lock.txt
       - run: python -m pip install --no-deps --no-build-isolation .
-      - uses: actions/cache@v4
+      - name: Validate registry and build balanced shard plan
+        id: plan
+        run: |
+          python scripts/shard_plan.py \
+            --municipalities "$REGISTRY" \
+            --request "$REQUEST" \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30 \
+            --output research/shard-plan.json
+      - uses: actions/upload-artifact@v4
         with:
-          path: data/cache
-          key: research-cache-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: research-cache-${{ runner.os }}-
-      - name: Collect or classify the bounded pilot
+          name: research-shard-plan
+          path: research/shard-plan.json
+          if-no-files-found: error
+          retention-days: 90
+
+  shard:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      REQUEST: ${{ inputs.request || 'research/request-full.json' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
+      MUNICIPALITY_RETRIES: ${{ inputs.retries || '2' }}
+      RESEARCH_MODE: ${{ inputs.mode || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Restore this shard's checkpoints and network/API cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            research/shard-output/${{ matrix.id }}
+            data/cache/shards/${{ matrix.id }}
+          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-
+      - name: Run or resume shard ${{ matrix.id }}
         id: research
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          RESEARCH_MODE: ${{ inputs.mode }}
-        run: python scripts/run_research.py
-      - name: Verify saved artifact hashes
-        if: steps.research.outcome == 'success'
+        shell: bash
         run: |
-          python -c 'import json, subprocess; subprocess.run(["municipal-research", "verify-run", json.load(open("research/latest.json"))["run_directory"]], check=True)'
-      - name: Keep complete run artifacts
+          MODE_ARGS=()
+          if [ -n "$RESEARCH_MODE" ]; then
+            MODE_ARGS=(--mode "$RESEARCH_MODE")
+          fi
+          python scripts/run_shard.py \
+            --request "$REQUEST" \
+            --municipalities "$REGISTRY" \
+            --shard-index "${{ matrix.index }}" \
+            --state-root research/shard-output \
+            --cache-root data/cache/shards \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30 \
+            --retries "$MUNICIPALITY_RETRIES" \
+            "${MODE_ARGS[@]}"
+      - name: Preserve shard output even after a partial failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: research-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            research/results/
-            research/latest.json
-            research/STATUS.md
+          name: research-${{ matrix.id }}
+          path: research/shard-output/
           if-no-files-found: warn
           retention-days: 90
-      - name: Store research data in the repository
+      - name: Save updated shard checkpoints and cache
         if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --all -- research/results research/latest.json research/STATUS.md 2>/dev/null || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Store research pilot $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
-      - name: Report processing failure
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            research/shard-output/${{ matrix.id }}
+            data/cache/shards/${{ matrix.id }}
+          key: research-v2-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Fail shard after state has been preserved
         if: steps.research.outcome == 'failure'
+        run: exit 1
+
+  merge:
+    if: always() && needs.plan.result == 'success'
+    needs: [plan, shard]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Download all available shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: research-shard-*
+          path: research/merge-input
+          merge-multiple: true
+      - name: Merge verified shard runs
+        id: merge
+        continue-on-error: true
+        run: |
+          python scripts/merge_shards.py \
+            --shards-root research/merge-input \
+            --municipalities "$REGISTRY" \
+            --output-dir "research/merged/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30
+      - name: Verify final merged artifact hashes
+        if: steps.merge.outcome == 'success'
+        run: municipal-research verify-run "research/merged/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+      - name: Upload merged workbook, manifests and audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-merged-${{ github.run_id }}-${{ github.run_attempt }}
+          path: research/merged/
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Report incomplete matrix or merge
+        if: steps.merge.outcome == 'failure' || needs.shard.result != 'success'
         run: exit 1
