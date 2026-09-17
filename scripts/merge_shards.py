@@ -114,7 +114,10 @@ def main() -> int:
                 data["config"] = result["config"]
             elif signature != config_signature:
                 raise ValueError("Cannot merge municipality runs with different resolved configs")
-            if len(result["summary"]) != 1 or result["summary"][0]["municipality_id"] != municipality_id:
+            if (
+                len(result["summary"]) != 1
+                or result["summary"][0]["municipality_id"] != municipality_id
+            ):
                 raise ValueError(f"Unexpected summary membership in {run_dir}")
 
             completed_ids.add(municipality_id)
