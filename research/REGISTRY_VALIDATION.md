@@ -1,0 +1,317 @@
+# National municipality registry validation
+
+Generated: `2026-09-17T21:01:14.605214+00:00`
+Overall status: **invalid**
+Matrix safe: **false**
+
+Canonical municipality IDs/names are checked against SCB 2026; official municipal web domains are checked against SKR's municipality list.
+Meeting archives and research seeds are registry data and are reported as missing or invalid when absent/unusable; no research matrix was launched.
+
+## Summary
+
+- Expected municipalities: 290
+- Registry rows: 0
+- Municipalities with issues: 290
+- Total issues: 1177
+- Missing registry entries: 290
+- Invalid/mismatched IDs: 290
+- Missing/invalid official domains: 302
+- Missing/invalid meeting archives: 290
+- Missing/invalid seeds: 290
+
+## Municipality-level results
+
+| ID | Municipality | Expected official domain | ID | Domain | Meeting archive | Seed |
+|---|---|---|---|---|---|---|
+| 0114 | Upplands Väsby | `www.upplandsvasby.se` | missing | missing | missing | missing |
+| 0115 | Vallentuna | `www.vallentuna.se` | missing | missing | missing | missing |
+| 0117 | Österåker | `www.osteraker.se` | missing | missing | missing | missing |
+| 0120 | Värmdö | `www.varmdo.se` | missing | missing | missing | missing |
+| 0123 | Järfälla | `www.jarfalla.se` | missing | missing | missing | missing |
+| 0125 | Ekerö | `www.ekero.se` | missing | missing | missing | missing |
+| 0126 | Huddinge | `www.huddinge.se` | missing | missing | missing | missing |
+| 0127 | Botkyrka | `www.botkyrka.se` | missing | missing | missing | missing |
+| 0128 | Salem | `www.salem.se` | missing | missing | missing | missing |
+| 0136 | Haninge | `www.haninge.se` | missing | missing | missing | missing |
+| 0138 | Tyresö | `www.tyreso.se` | missing | missing | missing | missing |
+| 0139 | Upplands-Bro | `www.upplands-bro.se` | missing | missing | missing | missing |
+| 0140 | Nykvarn | `www.nykvarn.se` | missing | missing | missing | missing |
+| 0160 | Täby | `www.taby.se` | missing | missing | missing | missing |
+| 0162 | Danderyd | `www.danderyd.se` | missing | missing | missing | missing |
+| 0163 | Sollentuna | `www.sollentuna.se` | missing | missing | missing | missing |
+| 0180 | Stockholm | `www.stockholm.se` | missing | missing | missing | missing |
+| 0181 | Södertälje | `www.sodertalje.se` | missing | missing | missing | missing |
+| 0182 | Nacka | `www.nacka.se` | missing | missing | missing | missing |
+| 0183 | Sundbyberg | `www.sundbyberg.se` | missing | missing | missing | missing |
+| 0184 | Solna | `www.solna.se` | missing | missing | missing | missing |
+| 0186 | Lidingö | `www.lidingo.se` | missing | missing | missing | missing |
+| 0187 | Vaxholm | `www.vaxholm.se` | missing | missing | missing | missing |
+| 0188 | Norrtälje | `www.norrtalje.se` | missing | missing | missing | missing |
+| 0191 | Sigtuna | `www.sigtuna.se` | missing | missing | missing | missing |
+| 0192 | Nynäshamn | `www.nynashamn.se` | missing | missing | missing | missing |
+| 0305 | Håbo | `www.habo.se` | missing | missing | missing | missing |
+| 0319 | Älvkarleby | `www.alvkarleby.se` | missing | missing | missing | missing |
+| 0330 | Knivsta | `www.knivsta.se` | missing | missing | missing | missing |
+| 0331 | Heby | `www.heby.se` | missing | missing | missing | missing |
+| 0360 | Tierp | `www.tierp.se` | missing | missing | missing | missing |
+| 0380 | Uppsala | `www.uppsala.se` | missing | missing | missing | missing |
+| 0381 | Enköping | `enkoping.se` | missing | missing | missing | missing |
+| 0382 | Östhammar | `www.osthammar.se` | missing | missing | missing | missing |
+| 0428 | Vingåker | `www.vingaker.se` | missing | missing | missing | missing |
+| 0461 | Gnesta | `www.gnesta.se` | missing | missing | missing | missing |
+| 0480 | Nyköping | `www.nykoping.se` | missing | missing | missing | missing |
+| 0481 | Oxelösund | `www.oxelosund.se` | missing | missing | missing | missing |
+| 0482 | Flen | `www.flen.se` | missing | missing | missing | missing |
+| 0483 | Katrineholm | `www.katrineholm.se` | missing | missing | missing | missing |
+| 0484 | Eskilstuna | `www.eskilstuna.se` | missing | missing | missing | missing |
+| 0486 | Strängnäs | `www.strangnas.se` | missing | missing | missing | missing |
+| 0488 | Trosa | `www.trosa.se` | missing | missing | missing | missing |
+| 0509 | Ödeshög | `www.odeshog.se` | missing | missing | missing | missing |
+| 0512 | Ydre | `www.ydre.se` | missing | missing | missing | missing |
+| 0513 | Kinda | `www.kinda.se` | missing | missing | missing | missing |
+| 0560 | Boxholm | `www.boxholm.se` | missing | missing | missing | missing |
+| 0561 | Åtvidaberg | `www.atvidaberg.se` | missing | missing | missing | missing |
+| 0562 | Finspång | `www.finspang.se` | missing | missing | missing | missing |
+| 0563 | Valdemarsvik | `www.valdemarsvik.se` | missing | missing | missing | missing |
+| 0580 | Linköping | `www.linkoping.se` | missing | missing | missing | missing |
+| 0581 | Norrköping | `www.norrkoping.se` | missing | missing | missing | missing |
+| 0582 | Söderköping | `www.soderkoping.se` | missing | missing | missing | missing |
+| 0583 | Motala | `www.motala.se` | missing | missing | missing | missing |
+| 0584 | Vadstena | `www.vadstena.se` | missing | missing | missing | missing |
+| 0586 | Mjölby | `www.mjolby.se` | missing | missing | missing | missing |
+| 0604 | Aneby | `www.aneby.se` | missing | missing | missing | missing |
+| 0617 | Gnosjö | `www.gnosjo.se` | missing | missing | missing | missing |
+| 0642 | Mullsjö | `www.mullsjo.se` | missing | missing | missing | missing |
+| 0643 | Habo | `www.habokommun.se` | missing | missing | missing | missing |
+| 0662 | Gislaved | `www.gislaved.se` | missing | missing | missing | missing |
+| 0665 | Vaggeryd | `www.vaggeryd.se` | missing | missing | missing | missing |
+| 0680 | Jönköping | `www.jonkoping.se` | missing | missing | missing | missing |
+| 0682 | Nässjö | `www.nassjo.se` | missing | missing | missing | missing |
+| 0683 | Värnamo | `www.varnamo.se` | missing | missing | missing | missing |
+| 0684 | Sävsjö | `www.savsjo.se` | missing | missing | missing | missing |
+| 0685 | Vetlanda | `www.vetlanda.se` | missing | missing | missing | missing |
+| 0686 | Eksjö | `www.eksjo.se` | missing | missing | missing | missing |
+| 0687 | Tranås | `www.tranas.se` | missing | missing | missing | missing |
+| 0760 | Uppvidinge | `www.uppvidinge.se` | missing | missing | missing | missing |
+| 0761 | Lessebo | `www.lessebo.se` | missing | missing | missing | missing |
+| 0763 | Tingsryd | `www.tingsryd.se` | missing | missing | missing | missing |
+| 0764 | Alvesta | `www.alvesta.se` | missing | missing | missing | missing |
+| 0765 | Älmhult | `www.almhult.se` | missing | missing | missing | missing |
+| 0767 | Markaryd | `www.markaryd.se` | missing | missing | missing | missing |
+| 0780 | Växjö | `www.vaxjo.se` | missing | missing | missing | missing |
+| 0781 | Ljungby | `www.ljungby.se` | missing | missing | missing | missing |
+| 0821 | Högsby | `www.hogsby.se` | missing | missing | missing | missing |
+| 0834 | Torsås | `www.torsas.se` | missing | missing | missing | missing |
+| 0840 | Mörbylånga | `www.morbylanga.se` | missing | missing | missing | missing |
+| 0860 | Hultsfred | `www.hultsfred.se` | missing | missing | missing | missing |
+| 0861 | Mönsterås | `www.monsteras.se` | missing | missing | missing | missing |
+| 0862 | Emmaboda | `www.emmaboda.se` | missing | missing | missing | missing |
+| 0880 | Kalmar | `www.kalmar.se` | missing | missing | missing | missing |
+| 0881 | Nybro | `www.nybro.se` | missing | missing | missing | missing |
+| 0882 | Oskarshamn | `www.oskarshamn.se` | missing | missing | missing | missing |
+| 0883 | Västervik | `www.vastervik.se` | missing | missing | missing | missing |
+| 0884 | Vimmerby | `www.vimmerby.se` | missing | missing | missing | missing |
+| 0885 | Borgholm | `www.borgholm.se` | missing | missing | missing | missing |
+| 0980 | Gotland | `www.gotland.se` | missing | missing | missing | missing |
+| 1060 | Olofström | `www.olofstrom.se` | missing | missing | missing | missing |
+| 1080 | Karlskrona | `www.karlskrona.se` | missing | missing | missing | missing |
+| 1081 | Ronneby | `www.ronneby.se` | missing | missing | missing | missing |
+| 1082 | Karlshamn | `www.karlshamn.se` | missing | missing | missing | missing |
+| 1083 | Sölvesborg | `www.solvesborg.se` | missing | missing | missing | missing |
+| 1214 | Svalöv | `www.svalov.se` | missing | missing | missing | missing |
+| 1230 | Staffanstorp | `www.staffanstorp.se` | missing | missing | missing | missing |
+| 1231 | Burlöv | `www.burlov.se` | missing | missing | missing | missing |
+| 1233 | Vellinge | `www.vellinge.se` | missing | missing | missing | missing |
+| 1256 | Östra Göinge | `www.ostragoinge.se` | missing | missing | missing | missing |
+| 1257 | Örkelljunga | `www.orkelljunga.se` | missing | missing | missing | missing |
+| 1260 | Bjuv | `www.bjuv.se` | missing | missing | missing | missing |
+| 1261 | Kävlinge | `www.kavlinge.se` | missing | missing | missing | missing |
+| 1262 | Lomma | `www.lomma.se` | missing | missing | missing | missing |
+| 1263 | Svedala | `www.svedala.se` | missing | missing | missing | missing |
+| 1264 | Skurup | `www.skurup.se` | missing | missing | missing | missing |
+| 1265 | Sjöbo | `www.sjobo.se` | missing | missing | missing | missing |
+| 1266 | Hörby | `www.horby.se` | missing | missing | missing | missing |
+| 1267 | Höör | `www.hoor.se` | missing | missing | missing | missing |
+| 1270 | Tomelilla | `www.tomelilla.se` | missing | missing | missing | missing |
+| 1272 | Bromölla | `www.bromolla.se` | missing | missing | missing | missing |
+| 1273 | Osby | `www.osby.se` | missing | missing | missing | missing |
+| 1275 | Perstorp | `www.perstorp.se` | missing | missing | missing | missing |
+| 1276 | Klippan | `www.klippan.se` | missing | missing | missing | missing |
+| 1277 | Åstorp | `www.astorp.se` | missing | missing | missing | missing |
+| 1278 | Båstad | `www.bastad.se` | missing | missing | missing | missing |
+| 1280 | Malmö | `www.malmo.se` | missing | missing | missing | missing |
+| 1281 | Lund | `www.lund.se` | missing | missing | missing | missing |
+| 1282 | Landskrona | `www.landskrona.se` | missing | missing | missing | missing |
+| 1283 | Helsingborg | `www.helsingborg.se` | missing | missing | missing | missing |
+| 1284 | Höganäs | `www.hoganas.se` | missing | missing | missing | missing |
+| 1285 | Eslöv | `www.eslov.se` | missing | missing | missing | missing |
+| 1286 | Ystad | `www.ystad.se` | missing | missing | missing | missing |
+| 1287 | Trelleborg | `www.trelleborg.se` | missing | missing | missing | missing |
+| 1290 | Kristianstad | `www.kristianstad.se` | missing | missing | missing | missing |
+| 1291 | Simrishamn | `www.simrishamn.se` | missing | missing | missing | missing |
+| 1292 | Ängelholm | `www.engelholm.se` | missing | missing | missing | missing |
+| 1293 | Hässleholm | `www.hassleholm.se` | missing | missing | missing | missing |
+| 1315 | Hylte | `www.hylte.se` | missing | missing | missing | missing |
+| 1380 | Halmstad | `www.halmstad.se` | missing | missing | missing | missing |
+| 1381 | Laholm | `www.laholm.se` | missing | missing | missing | missing |
+| 1382 | Falkenberg | `kommun.falkenberg.se` | missing | missing | missing | missing |
+| 1383 | Varberg | `www.varberg.se` | missing | missing | missing | missing |
+| 1384 | Kungsbacka | `www.kungsbacka.se` | missing | missing | missing | missing |
+| 1401 | Härryda | `www.harryda.se` | missing | missing | missing | missing |
+| 1402 | Partille | `www.partille.se` | missing | missing | missing | missing |
+| 1407 | Öckerö | `www.ockero.se` | missing | missing | missing | missing |
+| 1415 | Stenungsund | `www.stenungsund.se` | missing | missing | missing | missing |
+| 1419 | Tjörn | `www.tjorn.se` | missing | missing | missing | missing |
+| 1421 | Orust | `www.orust.se` | missing | missing | missing | missing |
+| 1427 | Sotenäs | `www.sotenas.se` | missing | missing | missing | missing |
+| 1430 | Munkedal | `www.munkedal.se` | missing | missing | missing | missing |
+| 1435 | Tanum | `www.tanum.se` | missing | missing | missing | missing |
+| 1438 | Dals-Ed | `www.dalsed.se` | missing | missing | missing | missing |
+| 1439 | Färgelanda | `www.fargelanda.se` | missing | missing | missing | missing |
+| 1440 | Ale | `www.ale.se` | missing | missing | missing | missing |
+| 1441 | Lerum | `www.lerum.se` | missing | missing | missing | missing |
+| 1442 | Vårgårda | `www.vargarda.se` | missing | missing | missing | missing |
+| 1443 | Bollebygd | `www.bollebygd.se` | missing | missing | missing | missing |
+| 1444 | Grästorp | `www.grastorp.se` | missing | missing | missing | missing |
+| 1445 | Essunga | `www.essunga.se` | missing | missing | missing | missing |
+| 1446 | Karlsborg | `www.karlsborg.se` | missing | missing | missing | missing |
+| 1447 | Gullspång | `www.gullspang.se` | missing | missing | missing | missing |
+| 1452 | Tranemo | `www.tranemo.se` | missing | missing | missing | missing |
+| 1460 | Bengtsfors | `www.bengtsfors.se` | missing | missing | missing | missing |
+| 1461 | Mellerud | `www.mellerud.se` | missing | missing | missing | missing |
+| 1462 | Lilla Edet | `www.lillaedet.se` | missing | missing | missing | missing |
+| 1463 | Mark | `www.mark.se` | missing | missing | missing | missing |
+| 1465 | Svenljunga | `www.svenljunga.se` | missing | missing | missing | missing |
+| 1466 | Herrljunga | `www.herrljunga.se` | missing | missing | missing | missing |
+| 1470 | Vara | `www.vara.se` | missing | missing | missing | missing |
+| 1471 | Götene | `www.gotene.se` | missing | missing | missing | missing |
+| 1472 | Tibro | `www.tibro.se` | missing | missing | missing | missing |
+| 1473 | Töreboda | `www.toreboda.se` | missing | missing | missing | missing |
+| 1480 | Göteborg | `www.goteborg.se` | missing | missing | missing | missing |
+| 1481 | Mölndal | `www.molndal.se` | missing | missing | missing | missing |
+| 1482 | Kungälv | `www.kungalv.se` | missing | missing | missing | missing |
+| 1484 | Lysekil | `www.lysekil.se` | missing | missing | missing | missing |
+| 1485 | Uddevalla | `www.uddevalla.se` | missing | missing | missing | missing |
+| 1486 | Strömstad | `www.stromstad.se` | missing | missing | missing | missing |
+| 1487 | Vänersborg | `www.vanersborg.se` | missing | missing | missing | missing |
+| 1488 | Trollhättan | `www.trollhattan.se` | missing | missing | missing | missing |
+| 1489 | Alingsås | `www.alingsas.se` | missing | missing | missing | missing |
+| 1490 | Borås | `www.boras.se` | missing | missing | missing | missing |
+| 1491 | Ulricehamn | `www.ulricehamn.se` | missing | missing | missing | missing |
+| 1492 | Åmål | `www.amal.se` | missing | missing | missing | missing |
+| 1493 | Mariestad | `www.mariestad.se` | missing | missing | missing | missing |
+| 1494 | Lidköping | `www.lidkoping.se` | missing | missing | missing | missing |
+| 1495 | Skara | `www.skara.se` | missing | missing | missing | missing |
+| 1496 | Skövde | `www.skovde.se` | missing | missing | missing | missing |
+| 1497 | Hjo | `www.hjo.se` | missing | missing | missing | missing |
+| 1498 | Tidaholm | `www.tidaholm.se` | missing | missing | missing | missing |
+| 1499 | Falköping | `www.falkoping.se` | missing | missing | missing | missing |
+| 1715 | Kil | `www.kil.se` | missing | missing | missing | missing |
+| 1730 | Eda | `www.eda.se` | missing | missing | missing | missing |
+| 1737 | Torsby | `www.torsby.se` | missing | missing | missing | missing |
+| 1760 | Storfors | `www.storfors.se` | missing | missing | missing | missing |
+| 1761 | Hammarö | `www.hammaro.se` | missing | missing | missing | missing |
+| 1762 | Munkfors | `www.munkfors.se` | missing | missing | missing | missing |
+| 1763 | Forshaga | `www.forshaga.se` | missing | missing | missing | missing |
+| 1764 | Grums | `www.grums.se` | missing | missing | missing | missing |
+| 1765 | Årjäng | `www.arjang.se` | missing | missing | missing | missing |
+| 1766 | Sunne | `www.sunne.se` | missing | missing | missing | missing |
+| 1780 | Karlstad | `www.karlstad.se` | missing | missing | missing | missing |
+| 1781 | Kristinehamn | `www.kristinehamn.se` | missing | missing | missing | missing |
+| 1782 | Filipstad | `www.filipstad.se` | missing | missing | missing | missing |
+| 1783 | Hagfors | `www.hagfors.se` | missing | missing | missing | missing |
+| 1784 | Arvika | `www.arvika.se` | missing | missing | missing | missing |
+| 1785 | Säffle | `www.saffle.se` | missing | missing | missing | missing |
+| 1814 | Lekeberg | `www.lekeberg.se` | missing | missing | missing | missing |
+| 1860 | Laxå | `www.laxa.se` | missing | missing | missing | missing |
+| 1861 | Hallsberg | `www.hallsberg.se` | missing | missing | missing | missing |
+| 1862 | Degerfors | `www.degerfors.se` | missing | missing | missing | missing |
+| 1863 | Hällefors | `www.hellefors.se` | missing | missing | missing | missing |
+| 1864 | Ljusnarsberg | `www.ljusnarsberg.se` | missing | missing | missing | missing |
+| 1880 | Örebro | `www.orebro.se` | missing | missing | missing | missing |
+| 1881 | Kumla | `www.kumla.se` | missing | missing | missing | missing |
+| 1882 | Askersund | `www.askersund.se` | missing | missing | missing | missing |
+| 1883 | Karlskoga | `www.karlskoga.se` | missing | missing | missing | missing |
+| 1884 | Nora | `www.nora.se` | missing | missing | missing | missing |
+| 1885 | Lindesberg | `www.lindesberg.se` | missing | missing | missing | missing |
+| 1904 | Skinnskatteberg | `www.skinnskatteberg.se` | missing | missing | missing | missing |
+| 1907 | Surahammar | `www.surahammar.se` | missing | missing | missing | missing |
+| 1960 | Kungsör | `www.kungsor.se` | missing | missing | missing | missing |
+| 1961 | Hallstahammar | `www.hallstahammar.se` | missing | missing | missing | missing |
+| 1962 | Norberg | `www.norberg.se` | missing | missing | missing | missing |
+| 1980 | Västerås | `www.vasteras.se` | missing | missing | missing | missing |
+| 1981 | Sala | `www.sala.se` | missing | missing | missing | missing |
+| 1982 | Fagersta | `www.fagersta.se` | missing | missing | missing | missing |
+| 1983 | Köping | `www.koping.se` | missing | missing | missing | missing |
+| 1984 | Arboga | `www.arboga.se` | missing | missing | missing | missing |
+| 2021 | Vansbro | `www.vansbro.se` | missing | missing | missing | missing |
+| 2023 | Malung-Sälen | `malung-salen.se` | missing | missing | missing | missing |
+| 2026 | Gagnef | `www.gagnef.se` | missing | missing | missing | missing |
+| 2029 | Leksand | `www.leksand.se` | missing | missing | missing | missing |
+| 2031 | Rättvik | `www.rattvik.se` | missing | missing | missing | missing |
+| 2034 | Orsa | `www.orsa.se` | missing | missing | missing | missing |
+| 2039 | Älvdalen | `www.alvdalen.se` | missing | missing | missing | missing |
+| 2061 | Smedjebacken | `www.smedjebacken.se` | missing | missing | missing | missing |
+| 2062 | Mora | `morakommun.se` | missing | missing | missing | missing |
+| 2080 | Falun | `www.falun.se` | missing | missing | missing | missing |
+| 2081 | Borlänge | `www.borlange.se` | missing | missing | missing | missing |
+| 2082 | Säter | `www.sater.se` | missing | missing | missing | missing |
+| 2083 | Hedemora | `www.hedemora.se` | missing | missing | missing | missing |
+| 2084 | Avesta | `www.avesta.se` | missing | missing | missing | missing |
+| 2085 | Ludvika | `www.ludvika.se` | missing | missing | missing | missing |
+| 2101 | Ockelbo | `www.ockelbo.se` | missing | missing | missing | missing |
+| 2104 | Hofors | `www.hofors.se` | missing | missing | missing | missing |
+| 2121 | Ovanåker | `www.ovanaker.se` | missing | missing | missing | missing |
+| 2132 | Nordanstig | `www.nordanstig.se` | missing | missing | missing | missing |
+| 2161 | Ljusdal | `www.ljusdal.se` | missing | missing | missing | missing |
+| 2180 | Gävle | `www.gavle.se` | missing | missing | missing | missing |
+| 2181 | Sandviken | `www.sandviken.se` | missing | missing | missing | missing |
+| 2182 | Söderhamn | `www.soderhamn.se` | missing | missing | missing | missing |
+| 2183 | Bollnäs | `www.bollnas.se` | missing | missing | missing | missing |
+| 2184 | Hudiksvall | `www.hudiksvall.se` | missing | missing | missing | missing |
+| 2260 | Ånge | `www.ange.se` | missing | missing | missing | missing |
+| 2262 | Timrå | `www.timra.se` | missing | missing | missing | missing |
+| 2280 | Härnösand | `www.harnosand.se` | missing | missing | missing | missing |
+| 2281 | Sundsvall | `sundsvall.se` | missing | missing | missing | missing |
+| 2282 | Kramfors | `www.kramfors.se` | missing | missing | missing | missing |
+| 2283 | Sollefteå | `www.solleftea.se` | missing | missing | missing | missing |
+| 2284 | Örnsköldsvik | `www.ornskoldsvik.se` | missing | missing | missing | missing |
+| 2303 | Ragunda | `www.ragunda.se` | missing | missing | missing | missing |
+| 2305 | Bräcke | `www.bracke.se` | missing | missing | missing | missing |
+| 2309 | Krokom | `www.krokom.se` | missing | missing | missing | missing |
+| 2313 | Strömsund | `www.stromsund.se` | missing | missing | missing | missing |
+| 2321 | Åre | `www.are.se` | missing | missing | missing | missing |
+| 2326 | Berg | `www.berg.se` | missing | missing | missing | missing |
+| 2361 | Härjedalen | `www.herjedalen.se` | missing | missing | missing | missing |
+| 2380 | Östersund | `www.ostersund.se` | missing | missing | missing | missing |
+| 2401 | Nordmaling | `www.nordmaling.se` | missing | missing | missing | missing |
+| 2403 | Bjurholm | `www.bjurholm.se` | missing | missing | missing | missing |
+| 2404 | Vindeln | `www.vindeln.se` | missing | missing | missing | missing |
+| 2409 | Robertsfors | `www.robertsfors.se` | missing | missing | missing | missing |
+| 2417 | Norsjö | `www.norsjo.se` | missing | missing | missing | missing |
+| 2418 | Malå | `www.mala.se` | missing | missing | missing | missing |
+| 2421 | Storuman | `www.storuman.se` | missing | missing | missing | missing |
+| 2422 | Sorsele | `www.sorsele.se` | missing | missing | missing | missing |
+| 2425 | Dorotea | `www.dorotea.se` | missing | missing | missing | missing |
+| 2460 | Vännäs | `www.vannas.se` | missing | missing | missing | missing |
+| 2462 | Vilhelmina | `www.vilhelmina.se` | missing | missing | missing | missing |
+| 2463 | Åsele | `www.asele.se` | missing | missing | missing | missing |
+| 2480 | Umeå | `www.umea.se` | missing | missing | missing | missing |
+| 2481 | Lycksele | `www.lycksele.se` | missing | missing | missing | missing |
+| 2482 | Skellefteå | `www.skelleftea.se` | missing | missing | missing | missing |
+| 2505 | Arvidsjaur | `www.arvidsjaur.se` | missing | missing | missing | missing |
+| 2506 | Arjeplog | `www.arjeplog.se` | missing | missing | missing | missing |
+| 2510 | Jokkmokk | `www.jokkmokk.se` | missing | missing | missing | missing |
+| 2513 | Överkalix | `www.overkalix.se` | missing | missing | missing | missing |
+| 2514 | Kalix | `www.kalix.se` | missing | missing | missing | missing |
+| 2518 | Övertorneå | `www.overtornea.se` | missing | missing | missing | missing |
+| 2521 | Pajala | `www.pajala.se` | missing | missing | missing | missing |
+| 2523 | Gällivare | `gallivare.se` | missing | missing | missing | missing |
+| 2560 | Älvsbyn | `www.alvsbyn.se` | missing | missing | missing | missing |
+| 2580 | Luleå | `www.lulea.se` | missing | missing | missing | missing |
+| 2581 | Piteå | `www.pitea.se` | missing | missing | missing | missing |
+| 2582 | Boden | `www.boden.se` | missing | missing | missing | missing |
+| 2583 | Haparanda | `www.haparanda.se` | missing | missing | missing | missing |
+| 2584 | Kiruna | `kiruna.se` | missing | missing | missing | missing |
+
+The JSON report contains every issue, source hash, HTTP probe result, redirect target, and row-level validation detail.
