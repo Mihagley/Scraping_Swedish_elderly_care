@@ -184,13 +184,6 @@ def main() -> int:
     }
     write_json(args.output_dir / "manifest.json", manifest)
     export_workbook(args.output_dir)
-    manifest["artifacts"] = {
-        path.relative_to(args.output_dir).as_posix(): digest(path.read_bytes())
-        for path in sorted(args.output_dir.rglob("*"))
-        if path.is_file() and path.name != "manifest.json"
-    }
-    write_json(args.output_dir / "manifest.json", manifest)
-    verify_run_hashes(args.output_dir)
 
     report = [
         "# Shard merge status",
@@ -204,6 +197,14 @@ def main() -> int:
     if gaps:
         report += ["", "Merge gaps:", *[f"- {gap}" for gap in sorted(set(gaps))]]
     (args.output_dir / "MERGE_STATUS.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+
+    manifest["artifacts"] = {
+        path.relative_to(args.output_dir).as_posix(): digest(path.read_bytes())
+        for path in sorted(args.output_dir.rglob("*"))
+        if path.is_file() and path.name != "manifest.json"
+    }
+    write_json(args.output_dir / "manifest.json", manifest)
+    verify_run_hashes(args.output_dir)
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
     return 0 if complete else 2
 
