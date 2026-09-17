@@ -11,7 +11,9 @@ from municipal_research.storage import canonical, digest, write_json
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate the municipality registry and build matrix shards")
+    parser = argparse.ArgumentParser(
+        description="Validate the municipality registry and build matrix shards"
+    )
     parser.add_argument("--municipalities", type=Path, required=True)
     parser.add_argument("--request", type=Path)
     parser.add_argument("--expected", type=int, default=290)
