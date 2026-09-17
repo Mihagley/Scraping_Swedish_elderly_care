@@ -29,10 +29,6 @@ on:
         required: true
         default: '2'
         type: string
-  push:
-    paths:
-      - research/request-full.json
-      - research/municipalities.csv
 
 permissions:
   contents: read
