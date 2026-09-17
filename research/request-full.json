@@ -1,0 +1,10 @@
+{
+  "request_id": "all-290-language-requirements-v1",
+  "mode": "collect",
+  "config": "examples/language_requirements.yaml",
+  "municipalities": "research/municipalities.csv",
+  "limit": 290,
+  "max_documents": 40,
+  "max_chunks_per_document": 100,
+  "max_api_calls_per_municipality": 120
+}
