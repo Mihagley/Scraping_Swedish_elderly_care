@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-17T21:01:14.605214+00:00",
+  "generated_at": "2026-09-17T21:04:25.922144+00:00",
   "status": "invalid",
   "matrix_safe": false,
   "registry": {
@@ -23,7 +23,7 @@
     },
     "skr": {
       "url": "https://skr.se/kommunerochregioner/kommunerlista.8288.html",
-      "sha256": "4d79b3bb756aa09a7de5b2d5a84241973090e4e077f0daa2175345aaa1ff35f1",
+      "sha256": "035d9555d3398243c3b6de48d3180638ed3d50691a6f6a53cb0fbe1ceade754d",
       "official_domains": 290
     }
   },
@@ -31,10 +31,10 @@
     "expected_municipalities": 290,
     "registry_rows": 0,
     "municipalities_with_issues": 290,
-    "total_issues": 1177,
+    "total_issues": 1176,
     "missing_registry_entries": 290,
     "invalid_ids": 290,
-    "domain_issues": 302,
+    "domain_issues": 301,
     "meeting_archive_issues": 290,
     "seed_issues": 290,
     "issue_counts": {
@@ -43,7 +43,7 @@
       "missing_official_domain": 290,
       "missing_registry_entry": 290,
       "missing_seed": 290,
-      "skr_official_domain_unreachable": 12
+      "skr_official_domain_unreachable": 11
     }
   },
   "issues": [
@@ -3970,12 +3970,6 @@
       "municipality_id": "1470",
       "field": "seeds",
       "detail": "Vara (1470) is absent from the national registry"
-    },
-    {
-      "code": "skr_official_domain_unreachable",
-      "municipality_id": "1470",
-      "field": "domains",
-      "detail": "SKR-listed official URL could not be reached: http://www.vara.se/"
     },
     {
       "code": "missing_registry_entry",
@@ -12083,13 +12077,13 @@
       "expected_official_domain": "www.vara.se",
       "official_domain_probe": {
         "url": "http://www.vara.se/",
-        "status": "unreachable",
-        "status_code": null,
-        "final_url": null,
-        "content_type": null,
-        "error": "ConnectTimeout: ",
+        "status": "reachable",
+        "status_code": 200,
+        "final_url": "https://www.vara.se/",
+        "content_type": "text/html;charset=UTF-8",
+        "error": null,
         "suspected_error_page": false,
-        "language_relevance": null
+        "language_relevance": false
       },
       "registry_present": false,
       "registry_name": null,
@@ -12104,8 +12098,7 @@
         "missing_meeting_archive",
         "missing_official_domain",
         "missing_registry_entry",
-        "missing_seed",
-        "skr_official_domain_unreachable"
+        "missing_seed"
       ]
     },
     {
@@ -18597,13 +18590,13 @@
     },
     "http://www.vara.se/": {
       "url": "http://www.vara.se/",
-      "status": "unreachable",
-      "status_code": null,
-      "final_url": null,
-      "content_type": null,
-      "error": "ConnectTimeout: ",
+      "status": "reachable",
+      "status_code": 200,
+      "final_url": "https://www.vara.se/",
+      "content_type": "text/html;charset=UTF-8",
+      "error": null,
       "suspected_error_page": false,
-      "language_relevance": null
+      "language_relevance": false
     },
     "http://www.varberg.se/": {
       "url": "http://www.varberg.se/",

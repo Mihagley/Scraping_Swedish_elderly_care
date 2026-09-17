@@ -1,6 +1,6 @@
 # National municipality registry validation
 
-Generated: `2026-09-17T21:01:14.605214+00:00`
+Generated: `2026-09-17T21:04:25.922144+00:00`
 Overall status: **invalid**
 Matrix safe: **false**
 
@@ -12,10 +12,10 @@ Meeting archives and research seeds are registry data and are reported as missin
 - Expected municipalities: 290
 - Registry rows: 0
 - Municipalities with issues: 290
-- Total issues: 1177
+- Total issues: 1176
 - Missing registry entries: 290
 - Invalid/mismatched IDs: 290
-- Missing/invalid official domains: 302
+- Missing/invalid official domains: 301
 - Missing/invalid meeting archives: 290
 - Missing/invalid seeds: 290
 

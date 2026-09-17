@@ -53,8 +53,7 @@ LANGUAGE_TERMS = (
     "språknivå",
 )
 USER_AGENT = (
-    "MunicipalRegistryValidator/1.0 "
-    "(+https://github.com/Mihagley/Scraping_Swedish_elderly_care)"
+    "MunicipalRegistryValidator/1.0 (+https://github.com/Mihagley/Scraping_Swedish_elderly_care)"
 )
 
 
@@ -292,7 +291,9 @@ def main() -> int:
     if not 1 <= args.concurrency <= 50:
         parser.error("--concurrency must be between 1 and 50")
 
-    with httpx.Client(timeout=30.0, headers={"User-Agent": USER_AGENT}, follow_redirects=True) as client:
+    with httpx.Client(
+        timeout=30.0, headers={"User-Agent": USER_AGENT}, follow_redirects=True
+    ) as client:
         scb_response = client.get(SCB_URL)
         scb_response.raise_for_status()
         skr_response = client.get(SKR_URL)
@@ -302,7 +303,9 @@ def main() -> int:
     skr = parse_skr(skr_bytes, scb)
 
     rows, columns = load_registry(args.registry)
-    id_counts = Counter((row.get("id") or "").strip() for row in rows if (row.get("id") or "").strip())
+    id_counts = Counter(
+        (row.get("id") or "").strip() for row in rows if (row.get("id") or "").strip()
+    )
     rows_by_id = {
         (row.get("id") or "").strip(): row
         for row in rows
@@ -367,7 +370,9 @@ def main() -> int:
             if not registry_domains:
                 official_domain_status = "missing"
                 code = "missing_official_domain"
-                issues.append(issue(code, municipality_id, "domains", "No official domain supplied"))
+                issues.append(
+                    issue(code, municipality_id, "domains", "No official domain supplied")
+                )
                 item_issues.append(code)
             elif not any(domain_covers(domain, expected["host"]) for domain in registry_domains):
                 official_domain_status = "mismatch"
@@ -473,7 +478,12 @@ def main() -> int:
         municipality_id = (row.get("id") or "").strip()
         if not re.fullmatch(r"\d{4}", municipality_id):
             issues.append(
-                issue("invalid_municipality_id_format", municipality_id or None, "id", "ID must be four digits")
+                issue(
+                    "invalid_municipality_id_format",
+                    municipality_id or None,
+                    "id",
+                    "ID must be four digits",
+                )
             )
         elif municipality_id not in expected_ids:
             issues.append(
