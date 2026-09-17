@@ -16,13 +16,19 @@ def validate_registry(municipalities: list[Municipality], expected: int = 290) -
         raise ValueError("Municipality ids must be unique")
     if len(set(names)) != len(names):
         raise ValueError("Municipality names must be unique")
-    bad_ids = [municipality.id for municipality in municipalities if not re.fullmatch(r"\d{4}", municipality.id)]
+    bad_ids = [
+        municipality.id
+        for municipality in municipalities
+        if not re.fullmatch(r"\d{4}", municipality.id)
+    ]
     if bad_ids:
         raise ValueError("Swedish municipality ids must be four digits: " + ", ".join(bad_ids))
 
 
 def registry_sha256(municipalities: list[Municipality]) -> str:
-    return digest(canonical([municipality.model_dump(mode="json") for municipality in municipalities]))
+    return digest(
+        canonical([municipality.model_dump(mode="json") for municipality in municipalities])
+    )
 
 
 def balanced_shards(
