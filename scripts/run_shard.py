@@ -180,8 +180,16 @@ def main() -> int:
             failures.append(municipality.id)
 
     statuses = checkpoint["municipalities"]
-    complete_ids = [municipality_id for municipality_id, item in statuses.items() if item["status"] == "completed"]
-    failed_ids = [municipality_id for municipality_id, item in statuses.items() if item["status"] != "completed"]
+    complete_ids = [
+        municipality_id
+        for municipality_id, item in statuses.items()
+        if item["status"] == "completed"
+    ]
+    failed_ids = [
+        municipality_id
+        for municipality_id, item in statuses.items()
+        if item["status"] != "completed"
+    ]
     manifest = {
         "schema_version": 1,
         "status": "completed" if not failed_ids else "incomplete",
