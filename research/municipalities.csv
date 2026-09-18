@@ -53,6 +53,7 @@ id,name,domains,meeting_archives,seeds
 0581,Norrköping,norrkoping.se,,https://norrkoping.se/
 0582,Söderköping,soderkoping.se,,https://www.soderkoping.se//
 0583,Motala,motala.se,,https://www.motala.se/
+0584,Vadstena,vadstena.se,,https://www.vadstena.se/
 0586,Mjölby,mjolby.se,,https://www.mjolby.se/
 0604,Aneby,aneby.se,,https://www.aneby.se/
 0617,Gnosjö,gnosjo.se,,https://www.gnosjo.se/
@@ -113,6 +114,7 @@ id,name,domains,meeting_archives,seeds
 1276,Klippan,klippan.se,,https://www.klippan.se/
 1277,Åstorp,astorp.se,,https://astorp.se/
 1278,Båstad,bastad.se,,https://www.bastad.se/
+1280,Malmö,malmo.se,,https://malmo.se/
 1281,Lund,lund.se,,https://lund.se/
 1283,Helsingborg,helsingborg.se,,https://helsingborg.se/
 1284,Höganäs,hoganas.se,,https://www.hoganas.se/
@@ -150,6 +152,7 @@ id,name,domains,meeting_archives,seeds
 1447,Gullspång,gullspang.se,,https://gullspang.se/
 1452,Tranemo,tranemo.se,,https://tranemo.se/
 1460,Bengtsfors,bengtsfors.se,,https://www.bengtsfors.se/
+1461,Mellerud,mellerud.se,,https://mellerud.se/
 1462,Lilla Edet,lillaedet.se,,https://lillaedet.se/
 1463,Mark,mark.se,,https://www.mark.se/
 1465,Svenljunga,svenljunga.se,,https://www.svenljunga.se/
@@ -171,6 +174,8 @@ id,name,domains,meeting_archives,seeds
 1491,Ulricehamn,ulricehamn.se,,https://www.ulricehamn.se/
 1492,Åmål,amal.se,,https://amal.se/
 1493,Mariestad,mariestad.se,,https://mariestad.se/
+1494,Lidköping,lidkoping.se,,https://lidkoping.se/
+1495,Skara,skara.se,,https://www.skara.se/
 1496,Skövde,skovde.se,,https://www.skovde.se/
 1497,Hjo,hjo.se,,https://www.hjo.se/
 1498,Tidaholm,tidaholm.se,,https://www.tidaholm.se/
@@ -259,6 +264,8 @@ id,name,domains,meeting_archives,seeds
 2409,Robertsfors,robertsfors.se,,https://www.robertsfors.se/
 2417,Norsjö,norsjo.se,,https://norsjo.se/
 2418,Malå,mala.se,,http://www.mala.se/
+2421,Storuman,storuman.se,,https://storuman.se/
+2422,Sorsele,sorsele.se,,https://portal.sorsele.se/
 2425,Dorotea,dorotea.se,,https://www.dorotea.se/
 2460,Vännäs,vannas.se,,https://www.vannas.se/
 2462,Vilhelmina,vilhelmina.se,,https://www.vilhelmina.se/
@@ -269,8 +276,10 @@ id,name,domains,meeting_archives,seeds
 2505,Arvidsjaur,arvidsjaur.se,,https://arvidsjaur.se/
 2506,Arjeplog,arjeplog.se,,https://arjeplog.se/
 2510,Jokkmokk,jokkmokk.se,,https://www.jokkmokk.se/
+2513,Överkalix,overkalix.se,,https://www.overkalix.se/
 2514,Kalix,kalix.se,,https://www.kalix.se/
 2518,Övertorneå,overtornea.se,,https://overtornea.se/
+2521,Pajala,pajala.se,,https://www.pajala.se/
 2523,Gällivare,gallivare.se,,https://gallivare.se/
 2560,Älvsbyn,alvsbyn.se,,https://www.alvsbyn.se/
 2580,Luleå,lulea.se,,https://www.lulea.se/
