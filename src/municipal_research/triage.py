@@ -99,7 +99,7 @@ def select_chunks(
         values.sort(key=lambda item: (item.start, item.end, item.id))
 
     selected_ids = {row["chunk_id"] for row in rows if row["selected_direct"]}
-    for document_id, values in by_document.items():
+    for values in by_document.values():
         positions = {chunk.id: index for index, chunk in enumerate(values)}
         direct_ids = [chunk.id for chunk in values if chunk.id in selected_ids]
         for direct_id in direct_ids:
