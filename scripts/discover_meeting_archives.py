@@ -106,13 +106,13 @@ def content_marker_count(text: str) -> int:
 def canonical_adjustment(url: str) -> int:
     lowered = url.lower()
     score = 0
-    if re.search(r"20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2}", lowered):
+    if re.search(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", lowered):
         score -= 18
-    if re.search(r"/20\\d{2}(?:/|$)", lowered):
+    if re.search(r"/20\d{2}(?:/|$)", lowered):
         score -= 8
     if "/nyheter/" in lowered or "nyhetsarkiv" in lowered or "driftstorning" in lowered:
         score -= 8
-    if re.search(r"/details/\\d+", lowered):
+    if re.search(r"/details/\d+", lowered):
         score -= 4
     if "anslagstavla" in lowered and not any(
         token in lowered for token in ("moten", "sammantr", "protokoll", "handlingar", "kallel")
@@ -149,7 +149,7 @@ def generic_archive_signal(text: str) -> bool:
 def is_over_specific(url: str) -> bool:
     lowered = url.lower()
     return bool(
-        re.search(r"20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2}", lowered)
+        re.search(r"20\d{2}[-/]\d{1,2}[-/]\d{1,2}", lowered)
         or "/nyheter/" in lowered
         or "nyhetsarkiv" in lowered
         or "driftstorning" in lowered
