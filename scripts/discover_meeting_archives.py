@@ -103,6 +103,60 @@ def content_marker_count(text: str) -> int:
     return sum(1 for marker in CONTENT_MARKERS if marker in lowered)
 
 
+def canonical_adjustment(url: str) -> int:
+    lowered = url.lower()
+    score = 0
+    if re.search(r"20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2}", lowered):
+        score -= 18
+    if re.search(r"/20\\d{2}(?:/|$)", lowered):
+        score -= 8
+    if "/nyheter/" in lowered or "nyhetsarkiv" in lowered or "driftstorning" in lowered:
+        score -= 8
+    if re.search(r"/details/\\d+", lowered):
+        score -= 4
+    if "anslagstavla" in lowered and not any(
+        token in lowered for token in ("moten", "sammantr", "protokoll", "handlingar", "kallel")
+    ):
+        score -= 6
+    if (
+        any(token in lowered for token in ("moten", "sammantr"))
+        and any(token in lowered for token in ("protokoll", "handlingar", "kallel"))
+    ):
+        score += 6
+    if any(
+        phrase in lowered
+        for phrase in (
+            "moten-handlingar-och-protokoll",
+            "moten-och-protokoll",
+            "sammantraden-och-protokoll",
+            "sammantradeshandlingar",
+            "kallelser-och-protokoll",
+        )
+    ):
+        score += 5
+    depth = len([part for part in urlparse(url).path.split("/") if part])
+    if depth > 7:
+        score -= min(depth - 7, 4)
+    return score
+
+
+def generic_archive_signal(text: str) -> bool:
+    lowered = text.lower()
+    has_meeting = any(token in lowered for token in ("möten", "moten", "sammanträ", "sammantra"))
+    has_docs = any(token in lowered for token in ("protokoll", "handlingar", "kallel"))
+    return has_meeting and has_docs
+
+
+def is_over_specific(url: str) -> bool:
+    lowered = url.lower()
+    return bool(
+        re.search(r"20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2}", lowered)
+        or "/nyheter/" in lowered
+        or "nyhetsarkiv" in lowered
+        or "driftstorning" in lowered
+    )
+
+
 def clean_url(base: str, href: str) -> str | None:
     href = (href or "").strip()
     if not href or href.startswith(("#", "mailto:", "tel:", "javascript:")):
@@ -161,7 +215,10 @@ def links_from_html(
         if score <= 0:
             continue
         cand = Candidate(
-            url=url, score=score + (2 if vendor else 0), source=source, anchor=anchor[:240]
+            url=url,
+            score=score + canonical_adjustment(url) + (2 if vendor else 0),
+            source=source,
+            anchor=anchor[:240],
         )
         old = out.get(url)
         if old is None or cand.score > old.score:
@@ -227,7 +284,9 @@ async def sitemap_candidates(
             score = token_score(loc)
             if score >= 3:
                 old = found.get(loc)
-                cand = Candidate(url=loc, score=score + 1, source="sitemap")
+                cand = Candidate(
+                    url=loc, score=score + canonical_adjustment(loc) + 1, source="sitemap"
+                )
                 if old is None or cand.score > old.score:
                     found[loc] = cand
     return list(found.values()), diagnostics
@@ -238,6 +297,7 @@ async def discover_one(
     sem: asyncio.Semaphore,
     row: dict[str, str],
     max_candidates: int,
+    refresh: bool,
 ) -> dict:
     async with sem:
         mid = row["id"].strip()
@@ -256,9 +316,15 @@ async def discover_one(
             "sitemap_diagnostics": [],
             "errors": [],
         }
-        if existing or not seeds:
+        if existing and not refresh:
             result["finished_at"] = now()
             return result
+        if not seeds:
+            result["finished_at"] = now()
+            return result
+        if refresh:
+            result["selected_archive"] = None
+            result["selection_status"] = "unresolved"
 
         pool: dict[str, Candidate] = {}
         seed = seeds[0]
@@ -298,6 +364,8 @@ async def discover_one(
             visible = soup.get_text(" ", strip=True)[:120000]
             cand.content_markers = content_marker_count(visible)
             cand.score += min(cand.content_markers, 5)
+            cand.score += min(max(token_score(cand.title), 0), 10)
+            cand.score += canonical_adjustment(str(response.url))
             if host_allowed(str(response.url), domains):
                 for child in links_from_html(
                     response.text, str(response.url), domains, f"follow:{cand.url}"
@@ -326,6 +394,8 @@ async def discover_one(
                     visible = soup.get_text(" ", strip=True)[:120000]
                     cand.content_markers = content_marker_count(visible)
                     cand.score += min(cand.content_markers, 5)
+                    cand.score += min(max(token_score(cand.title), 0), 10)
+                    cand.score += canonical_adjustment(str(response.url))
             pool[cand.url] = cand
 
         ranked = sorted(pool.values(), key=lambda c: (-c.score, c.url))
@@ -333,10 +403,17 @@ async def discover_one(
             final = cand.final_url or cand.url
             ok_status = cand.status_code is not None and cand.status_code < 400
             archive_evidence = cand.content_markers >= 2
-            strong_link = token_score(cand.anchor + " " + cand.url) >= 5
+            descriptive_text = cand.anchor + " " + cand.url + " " + cand.title
+            strong_link = token_score(descriptive_text) >= 5
             vendor = any(hint in (urlparse(final).hostname or "").lower() for hint in VENDOR_HINTS)
+            generic = generic_archive_signal(descriptive_text)
             cand.accepted = bool(
-                ok_status and (archive_evidence or (vendor and strong_link)) and cand.score >= 8
+                ok_status
+                and not is_over_specific(final)
+                and strong_link
+                and cand.score >= 10
+                and (archive_evidence or vendor)
+                and (generic or vendor)
             )
 
         accepted = [c for c in ranked if c.accepted]
@@ -352,7 +429,9 @@ async def discover_one(
         return result
 
 
-async def run(rows: list[dict[str, str]], concurrency: int, max_candidates: int) -> list[dict]:
+async def run(
+    rows: list[dict[str, str]], concurrency: int, max_candidates: int, refresh: bool
+) -> list[dict]:
     timeout = httpx.Timeout(20.0, connect=10.0)
     limits = httpx.Limits(
         max_connections=max(concurrency * 2, 20), max_keepalive_connections=concurrency
@@ -365,7 +444,7 @@ async def run(rows: list[dict[str, str]], concurrency: int, max_candidates: int)
     async with httpx.AsyncClient(
         timeout=timeout, limits=limits, headers=headers, follow_redirects=True
     ) as client:
-        tasks = [discover_one(client, sem, row, max_candidates) for row in rows]
+        tasks = [discover_one(client, sem, row, max_candidates, refresh) for row in rows]
         return await asyncio.gather(*tasks)
 
 
@@ -379,6 +458,11 @@ def main() -> int:
     )
     parser.add_argument("--concurrency", type=int, default=24)
     parser.add_argument("--max-candidates", type=int, default=8)
+    parser.add_argument(
+        "--refresh",
+        action="store_true",
+        help="Re-evaluate and replace existing archive selections using the current quality gate.",
+    )
     args = parser.parse_args()
 
     with args.registry.open(encoding="utf-8-sig", newline="") as handle:
@@ -389,12 +473,14 @@ def main() -> int:
     if not required.issubset(fields):
         raise SystemExit(f"Registry lacks required columns: {sorted(required - set(fields))}")
 
-    results = asyncio.run(run(rows, args.concurrency, args.max_candidates))
+    results = asyncio.run(run(rows, args.concurrency, args.max_candidates, args.refresh))
     selected = {
         item["id"]: item["selected_archive"] for item in results if item["selected_archive"]
     }
     for row in rows:
-        if not split_values(row.get("meeting_archives")) and selected.get(row["id"]):
+        if args.refresh:
+            row["meeting_archives"] = selected.get(row["id"], "")
+        elif not split_values(row.get("meeting_archives")) and selected.get(row["id"]):
             row["meeting_archives"] = selected[row["id"]]
 
     with args.registry.open("w", encoding="utf-8", newline="") as handle:
