@@ -1,0 +1,1147 @@
+{
+  "config": {
+    "research": {
+      "question": "Did the municipality have an explicit, formal Swedish-language proficiency requirement for staff in elderly care in operation before 1 January 2025? Identify the proficiency threshold, staff covered, enforcement and historical timing.",
+      "cutoff": "2025-01-01",
+      "instructions": "Include municipal elderly-care employers and clearly identified municipal contractors. Distinguish new hires from existing staff and municipality-wide rules from one unit. General expectations of good Swedish are not necessarily a formal tested threshold. A language-test pilot does not make an already established requirement a pilot. Code implementation of the underlying requirement separately from testing methods. A decision made in 2024 with implementation in 2025 is not a pre-2025 requirement. A dated account explicitly saying a rule already applies can establish that it was in force by that date, even if the exact introduction date is unknown. Leave effective_date null in that case. Never infer introduction from publication alone.",
+      "labels": {
+        "Yes": {
+          "definition": "Explicit formal requirement shown to be in operation before the cutoff.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "Pilot": {
+          "definition": "The requirement itself, not just a testing instrument, was piloted before the cutoff.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "No": {
+          "definition": "Explicit evidence that no such formal requirement applied in the defined pre-cutoff period and scope. Never infer this from a failed search.",
+          "requires_evidence": true,
+          "requires_before_cutoff": true,
+          "conclusive": true
+        },
+        "Later": {
+          "definition": "Explicit implementation only at or after the cutoff; no established pre-cutoff operation in this evidence.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": true
+        },
+        "Proposed": {
+          "definition": "Proposal or adoption decision without evidence of implementation in the target period.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "Unclear": {
+          "definition": "Relevant rule or activity is mentioned, but its historical timing, formality, attribution or scope remains uncertain.",
+          "requires_evidence": true,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "NoEvidence": {
+          "definition": "This retrieved material supplies no usable evidence to answer the question. This does not mean the municipality had no requirement.",
+          "requires_evidence": false,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        },
+        "Irrelevant": {
+          "definition": "Material is outside the specified municipality, elderly-care employment scope or research topic.",
+          "requires_evidence": false,
+          "requires_before_cutoff": false,
+          "conclusive": false
+        }
+      },
+      "unknown_label": "NoEvidence",
+      "fields": {
+        "language_level": "Explicit CEFR/GERS, SFI or Swedish course threshold; preserve the source's terminology.",
+        "staff_group": "New hires, existing staff, all staff, named occupations or another explicit group.",
+        "enforcement": "How compliance is tested or enforced, if explicitly stated.",
+        "provider_scope": "Municipal employer, municipal contractor, a specific unit or another explicit scope."
+      }
+    },
+    "discovery": {
+      "provider": "crawl",
+      "queries": [
+        "{municipality} äldreomsorg språkkrav språktest B1 B2 före 2025",
+        "{municipality} äldreomsorg SFI svenska nyanställning språkkrav protokoll 2022 2023 2024",
+        "{municipality} vård omsorg språkkrav infördes beslut pilot"
+      ],
+      "keywords": [
+        "språk",
+        "sprak",
+        "äldre",
+        "aldre",
+        "omsorg",
+        "protokoll",
+        "rekryter",
+        "anställ",
+        "anstall",
+        "personal"
+      ],
+      "max_searches_per_municipality": 3,
+      "max_documents": 20,
+      "max_depth": 1,
+      "max_sitemaps": 0,
+      "max_sitemap_urls": 10000
+    },
+    "network": {
+      "user_agent": "MunicipalResearch/0.1 (public research; replace with your contact URL)",
+      "timeout_seconds": 30.0,
+      "interval_seconds": 0.0,
+      "retries": 3,
+      "max_bytes": 25000000,
+      "max_redirects": 5,
+      "respect_robots": true
+    },
+    "extraction": {
+      "chunk_chars": 14000,
+      "overlap_chars": 1500,
+      "max_chunks_per_document": 100,
+      "min_page_chars": 30
+    },
+    "llm": {
+      "models": [
+        "gpt-5-mini"
+      ],
+      "search_model": "gpt-5-mini",
+      "verifier_model": "gpt-5-mini",
+      "adjudicator_model": "gpt-5-mini",
+      "passes": 3,
+      "max_output_tokens": 6000,
+      "timeout_seconds": 120.0,
+      "max_retries": 3,
+      "interval_seconds": 0.0,
+      "max_calls": 1000,
+      "reasoning_effort": null
+    }
+  },
+  "summary": [
+    {
+      "municipality_id": "demo_yes",
+      "municipality": "Exempelköping (synthetic)",
+      "category": "Yes",
+      "needs_review": false,
+      "documents": 2,
+      "chunks": 2,
+      "verified_quotes": 2,
+      "coverage": "bounded",
+      "gaps": [],
+      "source_urls": [
+        "https://yes.example/",
+        "https://yes.example/policy.html"
+      ],
+      "effective_dates": [
+        "2023-09-01"
+      ],
+      "scopes": [],
+      "field:language_level": [
+        "B1"
+      ],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    },
+    {
+      "municipality_id": "demo_pilot",
+      "municipality": "Demoorten (synthetic)",
+      "category": "Pilot",
+      "needs_review": false,
+      "documents": 2,
+      "chunks": 2,
+      "verified_quotes": 2,
+      "coverage": "bounded",
+      "gaps": [],
+      "source_urls": [
+        "https://pilot.example/",
+        "https://pilot.example/policy.pdf"
+      ],
+      "effective_dates": [],
+      "scopes": [],
+      "field:language_level": [
+        "B1"
+      ],
+      "field:staff_group": [],
+      "field:enforcement": [],
+      "field:provider_scope": []
+    }
+  ],
+  "documents": [
+    {
+      "id": "e50dedb59d3d7e6173036cc8",
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/policy.html",
+      "requested_url": "https://yes.example/policy.html",
+      "retrieved_at": "2026-09-16T17:46:58.068626+00:00",
+      "raw_sha256": "6f2011d2c796499366504e23bdd2bd276d628d8322e2efbbaa06dd67bd0b146f",
+      "text_sha256": "a210ed69ec5057dbf22a941ed61475efa8422cf1d28314a25bb707fc180fec86",
+      "raw_path": "sources/e50dedb59d3d7e6173036cc8/source.html",
+      "text_path": "sources/e50dedb59d3d7e6173036cc8/text.txt",
+      "numbered_path": "sources/e50dedb59d3d7e6173036cc8/text.lines.txt",
+      "media_type": "html",
+      "title": "Synthetic policy",
+      "pages": [
+        {
+          "page": null,
+          "start": 0,
+          "end": 146
+        }
+      ],
+      "warnings": [],
+      "extractor": "trafilatura/text-v1"
+    },
+    {
+      "id": "5e491e6201cce8fce0d9fd64",
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/",
+      "requested_url": "https://yes.example/",
+      "retrieved_at": "2026-09-16T17:46:58.728901+00:00",
+      "raw_sha256": "3f5b2e557a7cb58673ff5b8aff0253796cf46371d80f67839ead4a80aa534eb7",
+      "text_sha256": "7e2e67282de50cf0c73ae7ba6c351cb2cc88d32f2ce9ebf0ae88bf14653e390d",
+      "raw_path": "sources/5e491e6201cce8fce0d9fd64/source.html",
+      "text_path": "sources/5e491e6201cce8fce0d9fd64/text.txt",
+      "numbered_path": "sources/5e491e6201cce8fce0d9fd64/text.lines.txt",
+      "media_type": "html",
+      "title": "Synthetic home",
+      "pages": [
+        {
+          "page": null,
+          "start": 0,
+          "end": 75
+        }
+      ],
+      "warnings": [],
+      "extractor": "trafilatura/text-v1"
+    },
+    {
+      "id": "fafe3b1ca91ebb869e239125",
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/policy.pdf",
+      "requested_url": "https://pilot.example/policy.pdf",
+      "retrieved_at": "2026-09-16T17:46:58.803256+00:00",
+      "raw_sha256": "fddfaf68b186edd8dd0a3f1beb8875e7ba8e18fe226cf581d9adbadbb008db4d",
+      "text_sha256": "eee2658c06108d80f90f9be4c74311b9ab782938db324870a51f7b3e2c5b3a38",
+      "raw_path": "sources/fafe3b1ca91ebb869e239125/source.pdf",
+      "text_path": "sources/fafe3b1ca91ebb869e239125/text.txt",
+      "numbered_path": "sources/fafe3b1ca91ebb869e239125/text.lines.txt",
+      "media_type": "pdf",
+      "title": "SYNTHETIC EXAMPLE - Demoorten pilot",
+      "pages": [
+        {
+          "page": 1,
+          "start": 0,
+          "end": 140
+        },
+        {
+          "page": 2,
+          "start": 143,
+          "end": 212
+        }
+      ],
+      "warnings": [],
+      "extractor": "pypdf/text-v1"
+    },
+    {
+      "id": "35a51e4a66ea4f81a169a6a3",
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/",
+      "requested_url": "https://pilot.example/",
+      "retrieved_at": "2026-09-16T17:46:58.853323+00:00",
+      "raw_sha256": "3f5b2e557a7cb58673ff5b8aff0253796cf46371d80f67839ead4a80aa534eb7",
+      "text_sha256": "7e2e67282de50cf0c73ae7ba6c351cb2cc88d32f2ce9ebf0ae88bf14653e390d",
+      "raw_path": "sources/35a51e4a66ea4f81a169a6a3/source.html",
+      "text_path": "sources/35a51e4a66ea4f81a169a6a3/text.txt",
+      "numbered_path": "sources/35a51e4a66ea4f81a169a6a3/text.lines.txt",
+      "media_type": "html",
+      "title": "Synthetic home",
+      "pages": [
+        {
+          "page": null,
+          "start": 0,
+          "end": 75
+        }
+      ],
+      "warnings": [],
+      "extractor": "trafilatura/text-v1"
+    }
+  ],
+  "classifications": [
+    {
+      "chunk_id": "e50dedb59d3d7e6173036cc8:0:146",
+      "document_id": "e50dedb59d3d7e6173036cc8",
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/policy.html",
+      "chunk_start": 0,
+      "chunk_end": 146,
+      "decision": {
+        "category": "Yes",
+        "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+        "temporal_relation": "before_cutoff",
+        "effective_date": "2023-09-01",
+        "scope": null,
+        "attributes": [
+          {
+            "name": "language_level",
+            "value": "B1",
+            "quote_indices": [
+              0
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+            "purpose": "finding"
+          },
+          {
+            "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+            "purpose": "timing"
+          }
+        ]
+      },
+      "quotes": [
+        {
+          "quote_index": 0,
+          "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+          "purpose": "finding",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 0,
+              "end": 88,
+              "line_start": 1,
+              "line_end": 1,
+              "page_start": null,
+              "page_end": null,
+              "page_char_start": null,
+              "page_char_end": null,
+              "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+            }
+          ],
+          "issue": null
+        },
+        {
+          "quote_index": 1,
+          "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+          "purpose": "timing",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 0,
+              "end": 88,
+              "line_start": 1,
+              "line_end": 1,
+              "page_start": null,
+              "page_end": null,
+              "page_char_start": null,
+              "page_char_end": null,
+              "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+            }
+          ],
+          "issue": null
+        }
+      ],
+      "method": "adjudicated_verified",
+      "agreement": false,
+      "passes": [
+        {
+          "stage": "classify_1",
+          "decision": {
+            "category": "Yes",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": "2023-09-01",
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "classify_2",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_3",
+          "decision": {
+            "category": "Yes",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": "2023-09-01",
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "adjudicate",
+          "decision": {
+            "category": "Yes",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": "2023-09-01",
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 0,
+                  "end": 88,
+                  "line_start": 1,
+                  "line_end": 1,
+                  "page_start": null,
+                  "page_end": null,
+                  "page_char_start": null,
+                  "page_char_end": null,
+                  "matched_text": "Från och med 1 september 2023 måste nyanställda i äldreomsorgen visa svenska på nivå B1."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "verify_adjudication",
+          "verdict": {
+            "supported": true,
+            "issues": [],
+            "explanation": "Synthetic verifier fixture, not an actual model assessment."
+          }
+        }
+      ],
+      "errors": [],
+      "needs_review": false
+    },
+    {
+      "chunk_id": "5e491e6201cce8fce0d9fd64:0:75",
+      "document_id": "5e491e6201cce8fce0d9fd64",
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/",
+      "chunk_start": 0,
+      "chunk_end": 75,
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "method": "consensus_verified",
+      "agreement": true,
+      "passes": [
+        {
+          "stage": "classify_1",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_2",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_3",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "verify_consensus",
+          "verdict": {
+            "supported": true,
+            "issues": [],
+            "explanation": "Synthetic verifier fixture, not an actual model assessment."
+          }
+        }
+      ],
+      "errors": [],
+      "needs_review": false
+    },
+    {
+      "chunk_id": "fafe3b1ca91ebb869e239125:0:212",
+      "document_id": "fafe3b1ca91ebb869e239125",
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/policy.pdf",
+      "chunk_start": 0,
+      "chunk_end": 212,
+      "decision": {
+        "category": "Pilot",
+        "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+        "temporal_relation": "before_cutoff",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [
+          {
+            "name": "language_level",
+            "value": "B1",
+            "quote_indices": [
+              0
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "finding"
+          },
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "timing"
+          }
+        ]
+      },
+      "quotes": [
+        {
+          "quote_index": 0,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "finding",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        },
+        {
+          "quote_index": 1,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "timing",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        }
+      ],
+      "method": "adjudicated_verified",
+      "agreement": false,
+      "passes": [
+        {
+          "stage": "classify_1",
+          "decision": {
+            "category": "Pilot",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "classify_2",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_3",
+          "decision": {
+            "category": "Pilot",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "adjudicate",
+          "decision": {
+            "category": "Pilot",
+            "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+            "temporal_relation": "before_cutoff",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [
+              {
+                "name": "language_level",
+                "value": "B1",
+                "quote_indices": [
+                  0
+                ]
+              }
+            ],
+            "evidence": [
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "finding"
+              },
+              {
+                "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+                "purpose": "timing"
+              }
+            ]
+          },
+          "quotes": [
+            {
+              "quote_index": 0,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "finding",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            },
+            {
+              "quote_index": 1,
+              "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+              "purpose": "timing",
+              "verified": true,
+              "locations": [
+                {
+                  "match": "exact",
+                  "start": 59,
+                  "end": 140,
+                  "line_start": 2,
+                  "line_end": 2,
+                  "page_start": 1,
+                  "page_end": 1,
+                  "page_char_start": 59,
+                  "page_char_end": 140,
+                  "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+                }
+              ],
+              "issue": null
+            }
+          ],
+          "issues": []
+        },
+        {
+          "stage": "verify_adjudication",
+          "verdict": {
+            "supported": true,
+            "issues": [],
+            "explanation": "Synthetic verifier fixture, not an actual model assessment."
+          }
+        }
+      ],
+      "errors": [],
+      "needs_review": false
+    },
+    {
+      "chunk_id": "35a51e4a66ea4f81a169a6a3:0:75",
+      "document_id": "35a51e4a66ea4f81a169a6a3",
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/",
+      "chunk_start": 0,
+      "chunk_end": 75,
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "method": "consensus_verified",
+      "agreement": true,
+      "passes": [
+        {
+          "stage": "classify_1",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_2",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "classify_3",
+          "decision": {
+            "category": "NoEvidence",
+            "rationale": "Synthetic no-evidence/disagreement fixture.",
+            "temporal_relation": "unknown",
+            "effective_date": null,
+            "scope": null,
+            "attributes": [],
+            "evidence": []
+          },
+          "quotes": [],
+          "issues": []
+        },
+        {
+          "stage": "verify_consensus",
+          "verdict": {
+            "supported": true,
+            "issues": [],
+            "explanation": "Synthetic verifier fixture, not an actual model assessment."
+          }
+        }
+      ],
+      "errors": [],
+      "needs_review": false
+    }
+  ],
+  "discovery": [
+    {
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/policy.html",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1000,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/policy.html",
+      "final_url": "https://yes.example/policy.html",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "demo_yes",
+      "url": "https://yes.example/",
+      "final_url": "https://yes.example/",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/policy.pdf",
+      "method": "seed",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 1000,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/",
+      "method": "homepage",
+      "parent": "",
+      "depth": 0,
+      "title": "",
+      "score": 0,
+      "outcome": "candidate"
+    },
+    {
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/policy.pdf",
+      "final_url": "https://pilot.example/policy.pdf",
+      "method": "download",
+      "outcome": "downloaded"
+    },
+    {
+      "municipality_id": "demo_pilot",
+      "url": "https://pilot.example/",
+      "final_url": "https://pilot.example/",
+      "method": "download",
+      "outcome": "downloaded"
+    }
+  ],
+  "errors": []
+}

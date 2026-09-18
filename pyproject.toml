@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "municipal-research"
+version = "0.1.0"
+description = "Evidence-first research on municipal websites, with auditable LLM coding"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openai>=2.0,<3", "pydantic>=2.10,<3", "httpx>=0.28,<1",
+  "beautifulsoup4>=4.13,<5", "trafilatura>=2.0,<3", "pypdf>=6.0,<7",
+  "openpyxl>=3.1.5,<4", "PyYAML>=6.0.2,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "reportlab>=4.4,<5", "build>=1.2,<2"]
+
+[project.scripts]
+municipal-research = "municipal_research.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/municipal_research"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = ["E501"]

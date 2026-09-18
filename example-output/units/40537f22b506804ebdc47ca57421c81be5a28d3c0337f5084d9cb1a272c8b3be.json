@@ -1,0 +1,328 @@
+{
+  "chunk_id": "fafe3b1ca91ebb869e239125:0:212",
+  "document_id": "fafe3b1ca91ebb869e239125",
+  "municipality_id": "demo_pilot",
+  "url": "https://pilot.example/policy.pdf",
+  "chunk_start": 0,
+  "chunk_end": 212,
+  "decision": {
+    "category": "Pilot",
+    "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+    "temporal_relation": "before_cutoff",
+    "effective_date": null,
+    "scope": null,
+    "attributes": [
+      {
+        "name": "language_level",
+        "value": "B1",
+        "quote_indices": [
+          0
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+        "purpose": "finding"
+      },
+      {
+        "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+        "purpose": "timing"
+      }
+    ]
+  },
+  "quotes": [
+    {
+      "quote_index": 0,
+      "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+      "purpose": "finding",
+      "verified": true,
+      "locations": [
+        {
+          "match": "exact",
+          "start": 59,
+          "end": 140,
+          "line_start": 2,
+          "line_end": 2,
+          "page_start": 1,
+          "page_end": 1,
+          "page_char_start": 59,
+          "page_char_end": 140,
+          "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+        }
+      ],
+      "issue": null
+    },
+    {
+      "quote_index": 1,
+      "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+      "purpose": "timing",
+      "verified": true,
+      "locations": [
+        {
+          "match": "exact",
+          "start": 59,
+          "end": 140,
+          "line_start": 2,
+          "line_end": 2,
+          "page_start": 1,
+          "page_end": 1,
+          "page_char_start": 59,
+          "page_char_end": 140,
+          "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+        }
+      ],
+      "issue": null
+    }
+  ],
+  "method": "adjudicated_verified",
+  "agreement": false,
+  "passes": [
+    {
+      "stage": "classify_1",
+      "decision": {
+        "category": "Pilot",
+        "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+        "temporal_relation": "before_cutoff",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [
+          {
+            "name": "language_level",
+            "value": "B1",
+            "quote_indices": [
+              0
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "finding"
+          },
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "timing"
+          }
+        ]
+      },
+      "quotes": [
+        {
+          "quote_index": 0,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "finding",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        },
+        {
+          "quote_index": 1,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "timing",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        }
+      ],
+      "issues": []
+    },
+    {
+      "stage": "classify_2",
+      "decision": {
+        "category": "NoEvidence",
+        "rationale": "Synthetic no-evidence/disagreement fixture.",
+        "temporal_relation": "unknown",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [],
+        "evidence": []
+      },
+      "quotes": [],
+      "issues": []
+    },
+    {
+      "stage": "classify_3",
+      "decision": {
+        "category": "Pilot",
+        "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+        "temporal_relation": "before_cutoff",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [
+          {
+            "name": "language_level",
+            "value": "B1",
+            "quote_indices": [
+              0
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "finding"
+          },
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "timing"
+          }
+        ]
+      },
+      "quotes": [
+        {
+          "quote_index": 0,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "finding",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        },
+        {
+          "quote_index": 1,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "timing",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        }
+      ],
+      "issues": []
+    },
+    {
+      "stage": "adjudicate",
+      "decision": {
+        "category": "Pilot",
+        "rationale": "Synthetic fixture establishes the stated pre-cutoff situation.",
+        "temporal_relation": "before_cutoff",
+        "effective_date": null,
+        "scope": null,
+        "attributes": [
+          {
+            "name": "language_level",
+            "value": "B1",
+            "quote_indices": [
+              0
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "finding"
+          },
+          {
+            "text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+            "purpose": "timing"
+          }
+        ]
+      },
+      "quotes": [
+        {
+          "quote_index": 0,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "finding",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        },
+        {
+          "quote_index": 1,
+          "quote": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen.",
+          "purpose": "timing",
+          "verified": true,
+          "locations": [
+            {
+              "match": "exact",
+              "start": 59,
+              "end": 140,
+              "line_start": 2,
+              "line_end": 2,
+              "page_start": 1,
+              "page_end": 1,
+              "page_char_start": 59,
+              "page_char_end": 140,
+              "matched_text": "Under 2024 prövades ett krav på svenska på nivå B1 i en pilot inom äldreomsorgen."
+            }
+          ],
+          "issue": null
+        }
+      ],
+      "issues": []
+    },
+    {
+      "stage": "verify_adjudication",
+      "verdict": {
+        "supported": true,
+        "issues": [],
+        "explanation": "Synthetic verifier fixture, not an actual model assessment."
+      }
+    }
+  ],
+  "errors": [],
+  "needs_review": false
+}

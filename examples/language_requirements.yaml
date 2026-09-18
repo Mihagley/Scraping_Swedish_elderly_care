@@ -1,0 +1,87 @@
+research:
+  question: >-
+    Did the municipality have an explicit, formal Swedish-language proficiency
+    requirement for staff in elderly care in operation before 1 January 2025?
+    Identify the proficiency threshold, staff covered, enforcement and historical timing.
+  cutoff: 2025-01-01
+  unknown_label: NoEvidence
+  instructions: >-
+    Include municipal elderly-care employers and clearly identified municipal contractors.
+    Distinguish new hires from existing staff and municipality-wide rules from one unit.
+    General expectations of good Swedish are not necessarily a formal tested threshold.
+    A language-test pilot does not make an already established requirement a pilot.
+    Code implementation of the underlying requirement separately from testing methods.
+    A decision made in 2024 with implementation in 2025 is not a pre-2025 requirement.
+    A dated account explicitly saying a rule already applies can establish that it was
+    in force by that date, even if the exact introduction date is unknown. Leave
+    effective_date null in that case. Never infer introduction from publication alone.
+  fields:
+    language_level: Explicit CEFR/GERS, SFI or Swedish course threshold; preserve the source's terminology.
+    staff_group: New hires, existing staff, all staff, named occupations or another explicit group.
+    enforcement: How compliance is tested or enforced, if explicitly stated.
+    provider_scope: Municipal employer, municipal contractor, a specific unit or another explicit scope.
+  labels:
+    'Yes':
+      definition: Explicit formal requirement shown to be in operation before the cutoff.
+      requires_before_cutoff: true
+    Pilot:
+      definition: The requirement itself, not just a testing instrument, was piloted before the cutoff.
+      requires_before_cutoff: true
+    'No':
+      definition: Explicit evidence that no such formal requirement applied in the defined pre-cutoff period and scope. Never infer this from a failed search.
+      requires_before_cutoff: true
+    Later:
+      definition: Explicit implementation only at or after the cutoff; no established pre-cutoff operation in this evidence.
+    Proposed:
+      definition: Proposal or adoption decision without evidence of implementation in the target period.
+      conclusive: false
+    Unclear:
+      definition: Relevant rule or activity is mentioned, but its historical timing, formality, attribution or scope remains uncertain.
+      conclusive: false
+    NoEvidence:
+      definition: This retrieved material supplies no usable evidence to answer the question. This does not mean the municipality had no requirement.
+      requires_evidence: false
+      conclusive: false
+    Irrelevant:
+      definition: Material is outside the specified municipality, elderly-care employment scope or research topic.
+      requires_evidence: false
+      conclusive: false
+
+discovery:
+  provider: hybrid
+  queries:
+    - '{municipality} Ã¤ldreomsorg sprÃ¥kkrav sprÃ¥ktest B1 B2 fÃ¶re 2025'
+    - '{municipality} Ã¤ldreomsorg SFI svenska nyanstÃ¤llning sprÃ¥kkrav protokoll 2022 2023 2024'
+    - '{municipality} vÃ¥rd omsorg sprÃ¥kkrav infÃ¶rdes beslut pilot'
+  keywords: [sprÃ¥k, sprak, Ã¤ldre, aldre, omsorg, protokoll, rekryter, anstÃ¤ll, anstall, personal]
+  max_searches_per_municipality: 3
+  max_documents: 20
+  max_depth: 2
+  max_sitemaps: 8
+  max_sitemap_urls: 10000
+network:
+  user_agent: 'MunicipalResearch/0.1 (public research; replace with your contact URL)'
+  interval_seconds: 1.0
+  timeout_seconds: 30
+  retries: 3
+  max_bytes: 25000000
+  respect_robots: true
+extraction:
+  chunk_chars: 14000
+  overlap_chars: 1500
+  max_chunks_per_document: 100
+  min_page_chars: 30
+llm:
+  # Examples, not a claim that these are the newest or best models.
+  # Choose models available to your API project. Use snapshot IDs when available.
+  models: [gpt-5-mini]
+  search_model: gpt-5-mini
+  verifier_model: gpt-5-mini
+  adjudicator_model: gpt-5-mini
+  passes: 3
+  max_output_tokens: 6000
+  timeout_seconds: 120
+  max_retries: 3
+  interval_seconds: 1
+  max_calls: 1000
+  reasoning_effort: null

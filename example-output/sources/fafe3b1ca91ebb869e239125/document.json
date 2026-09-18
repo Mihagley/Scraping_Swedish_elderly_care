@@ -1,0 +1,28 @@
+{
+  "id": "fafe3b1ca91ebb869e239125",
+  "municipality_id": "demo_pilot",
+  "url": "https://pilot.example/policy.pdf",
+  "requested_url": "https://pilot.example/policy.pdf",
+  "retrieved_at": "2026-09-16T17:46:58.803256+00:00",
+  "raw_sha256": "fddfaf68b186edd8dd0a3f1beb8875e7ba8e18fe226cf581d9adbadbb008db4d",
+  "text_sha256": "eee2658c06108d80f90f9be4c74311b9ab782938db324870a51f7b3e2c5b3a38",
+  "raw_path": "sources/fafe3b1ca91ebb869e239125/source.pdf",
+  "text_path": "sources/fafe3b1ca91ebb869e239125/text.txt",
+  "numbered_path": "sources/fafe3b1ca91ebb869e239125/text.lines.txt",
+  "media_type": "pdf",
+  "title": "SYNTHETIC EXAMPLE - Demoorten pilot",
+  "pages": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 140
+    },
+    {
+      "page": 2,
+      "start": 143,
+      "end": 212
+    }
+  ],
+  "warnings": [],
+  "extractor": "pypdf/text-v1"
+}

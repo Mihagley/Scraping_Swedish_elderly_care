@@ -1,0 +1,8 @@
+{
+  "url": "https://yes.example/policy.html",
+  "requested_url": "https://yes.example/policy.html",
+  "retrieved_at": "2026-09-16T17:46:58.068626+00:00",
+  "sha256": "6f2011d2c796499366504e23bdd2bd276d628d8322e2efbbaa06dd67bd0b146f",
+  "content_type": "text/html; charset=utf-8",
+  "raw_path": "sources\\e50dedb59d3d7e6173036cc8\\source.html"
+}

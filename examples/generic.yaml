@@ -1,0 +1,21 @@
+research:
+  question: Does the municipality publish an explicit target for reducing food waste in schools?
+  cutoff: null
+  unknown_label: Unknown
+  instructions: Include only explicit municipal targets; distinguish targets from reported outcomes.
+  fields:
+    target: The exact numerical reduction target, units and baseline if present.
+  labels:
+    Target:
+      definition: An explicit food-waste reduction target for schools is stated.
+    Unknown:
+      definition: No supported answer in the retrieved material. This is not a negative finding.
+      conclusive: false
+      requires_evidence: false
+discovery:
+  provider: crawl
+  keywords: [matsvinn, mÃ¥ltid, maltid, skola, hÃ¥llbar, hallbar]
+  max_documents: 10
+llm:
+  models: [gpt-5-mini]
+  passes: 2

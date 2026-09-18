@@ -1,0 +1,10 @@
+{
+  "request_id": "six-municipality-pilot-corrected-alingsas-source",
+  "mode": "collect",
+  "config": "examples/language_requirements.yaml",
+  "municipalities": "research/municipalities-pilot.csv",
+  "limit": 6,
+  "max_documents": 1,
+  "max_chunks_per_document": 20,
+  "max_api_calls": 200
+}

@@ -1,0 +1,3 @@
+# Install the project with the dependency bounds declared in pyproject.toml.
+# Use requirements.lock.txt for the exact tested environment.
+-e .
