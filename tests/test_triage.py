@@ -27,7 +27,9 @@ def test_selects_explicit_elderly_care_language_requirement():
 
 
 def test_does_not_select_generic_swedish_without_policy_context():
-    item = chunk("doc:0:100", "doc", 0, "Webbplatsen innehåller information på svenska och engelska.")
+    item = chunk(
+        "doc:0:100", "doc", 0, "Webbplatsen innehåller information på svenska och engelska."
+    )
     document = {"id": "doc", "title": "Kontakta kommunen", "url": "https://example.se/kontakt"}
     row = score_chunk(item, document)
     assert row["selected_direct"] is False
@@ -45,7 +47,11 @@ def test_keeps_adjacent_context_and_marks_budget_limit():
         chunk("doc:80:120", "doc", 80, "Kravet gäller från den 1 september 2023."),
     ]
     documents = {
-        "doc": {"id": "doc", "title": "Protokoll äldreomsorg", "url": "https://example.se/protokoll"}
+        "doc": {
+            "id": "doc",
+            "title": "Protokoll äldreomsorg",
+            "url": "https://example.se/protokoll",
+        }
     }
     selected, rows, limited = select_chunks(chunks, documents, max_selected=2, context_neighbors=1)
     assert len(selected) == 2
