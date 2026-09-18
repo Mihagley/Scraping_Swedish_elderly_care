@@ -7,7 +7,7 @@ import hashlib
 import json
 import re
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
