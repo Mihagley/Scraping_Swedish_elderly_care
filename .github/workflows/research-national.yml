@@ -71,7 +71,19 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        include:
+          - {index: 0, key: '00'}
+          - {index: 1, key: '01'}
+          - {index: 2, key: '02'}
+          - {index: 3, key: '03'}
+          - {index: 4, key: '04'}
+          - {index: 5, key: '05'}
+          - {index: 6, key: '06'}
+          - {index: 7, key: '07'}
+          - {index: 8, key: '08'}
+          - {index: 9, key: '09'}
+          - {index: 10, key: '10'}
+          - {index: 11, key: '11'}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -85,27 +97,26 @@ jobs:
           name: municipalities-290-${{ github.run_id }}
           path: research
       - name: Restore shard cache and checkpoints
-        id: restore
         uses: actions/cache/restore@v4
         with:
           path: |
-            data/national-cache/shard-${{ format('{0:D2}', matrix.shard) }}
-            research/national-runs/${{ github.run_id }}/shard-${{ format('{0:D2}', matrix.shard) }}
-          key: national-${{ github.run_id }}-shard-${{ matrix.shard }}-attempt-${{ github.run_attempt }}
+            data/national-cache/shard-${{ matrix.key }}
+            research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}
+          key: national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-${{ github.run_attempt }}
           restore-keys: |
-            national-${{ github.run_id }}-shard-${{ matrix.shard }}-attempt-
+            national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-
       - name: Run shard
         id: shard
         continue-on-error: true
         env:
-          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_INDEX: ${{ matrix.index }}
           RESEARCH_MODE: ${{ inputs.mode }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/run_shard.py
       - name: Verify every completed municipality artifact
         if: always()
         env:
-          SHARD_INDEX: ${{ matrix.shard }}
+          SHARD_INDEX: ${{ matrix.index }}
         run: |
           python - <<'PY'
           import os
@@ -124,15 +135,15 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: |
-            data/national-cache/shard-${{ format('{0:D2}', matrix.shard) }}
-            research/national-runs/${{ github.run_id }}/shard-${{ format('{0:D2}', matrix.shard) }}
-          key: national-${{ github.run_id }}-shard-${{ matrix.shard }}-attempt-${{ github.run_attempt }}
+            data/national-cache/shard-${{ matrix.key }}
+            research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}
+          key: national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-${{ github.run_attempt }}
       - name: Upload shard artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: national-shard-${{ matrix.shard }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: research/national-runs/${{ github.run_id }}/shard-${{ format('{0:D2}', matrix.shard) }}/
+          name: national-shard-${{ matrix.key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}/
           if-no-files-found: error
           retention-days: 90
       - name: Propagate shard failure
@@ -157,7 +168,20 @@ jobs:
         with:
           pattern: national-shard-*-${{ github.run_id }}-${{ github.run_attempt }}
           path: research/national-runs/${{ github.run_id }}
-          merge-multiple: true
+          merge-multiple: false
+      - name: Normalize downloaded artifact directories
+        run: |
+          python - <<'PY'
+          import os, shutil
+          from pathlib import Path
+          base = Path('research/national-runs') / os.environ['NATIONAL_RUN_ID']
+          for artifact in list(base.glob('national-shard-*')):
+              key = artifact.name.split('-')[2]
+              target = base / f'shard-{key}'
+              if target.exists():
+                  shutil.rmtree(target)
+              shutil.move(str(artifact), str(target))
+          PY
       - name: Merge manifests, sources, classifications and audit logs
         run: python scripts/merge_shards.py
       - name: Verify final artifact hashes
