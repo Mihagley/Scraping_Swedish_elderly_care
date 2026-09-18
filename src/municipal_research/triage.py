@@ -13,7 +13,7 @@ PATTERNS = {
     "sfi": r"\bsfi\b|svenska\s+för\s+invandrare",
     "gers_b1": r"\b(?:gers|cefr)\s*[-:]?\s*b1\b|\bb1[- ]nivå\b",
     "gers_b2": r"\b(?:gers|cefr)\s*[-:]?\s*b2\b|\bb2[- ]nivå\b",
-    "qualitative": r"språkkrav|språktest|språkförmåga|språkkunskap|kunskaper?\s+i\s+svenska|behärska\s+svenska|god\s+svenska|tillräcklig\w*\s+svenska",
+    "qualitative": r"språkkrav|språktest|språkförmåga|språkkunskap|kunskaper?\s+i\s+svenska|behärska\s+svenska|god\s+svenska|tillräcklig\w*\s+svenska|krav\s+(?:på|om)\s+svenska|svenska\s+på\s+nivå\s+[a-c][12]",
     "elderly_care": r"äldreomsorg|hemtjänst|särskilt\s+boende|äldreboende|vårdbiträde|underskötersk|vård\s+och\s+omsorg",
     "governance": r"protokoll|tjänsteskrivelse|sammanträde|nämnd|kommunstyrelse|kommunfullmäktige|beslut|yrkande|motion|budget|uppdrag",
     "employment": r"anställ|rekryter|personal|medarbet|nyanställ|kompetenskrav|utförare|entreprenör",
