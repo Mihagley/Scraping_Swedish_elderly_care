@@ -85,7 +85,10 @@ def normalize_host(host: str) -> str:
 
 def host_allowed(url: str, official_domains: list[str]) -> bool:
     host = normalize_host(urlparse(url).hostname or "")
-    return any(host == normalize_host(d) or host.endswith("." + normalize_host(d)) for d in official_domains)
+    return any(
+        host == normalize_host(d) or host.endswith("." + normalize_host(d))
+        for d in official_domains
+    )
 
 
 def token_score(text: str) -> int:
@@ -125,7 +128,9 @@ class Candidate:
     accepted: bool = False
 
 
-async def fetch(client: httpx.AsyncClient, url: str, retries: int = 2) -> tuple[httpx.Response | None, str | None]:
+async def fetch(
+    client: httpx.AsyncClient, url: str, retries: int = 2
+) -> tuple[httpx.Response | None, str | None]:
     last_error = None
     for attempt in range(retries + 1):
         try:
@@ -138,7 +143,9 @@ async def fetch(client: httpx.AsyncClient, url: str, retries: int = 2) -> tuple[
     return None, last_error
 
 
-def links_from_html(html: str, base: str, official_domains: list[str], source: str) -> list[Candidate]:
+def links_from_html(
+    html: str, base: str, official_domains: list[str], source: str
+) -> list[Candidate]:
     soup = BeautifulSoup(html, "html.parser")
     out: dict[str, Candidate] = {}
     for link in soup.find_all("a", href=True):
@@ -153,7 +160,9 @@ def links_from_html(html: str, base: str, official_domains: list[str], source: s
             continue
         if score <= 0:
             continue
-        cand = Candidate(url=url, score=score + (2 if vendor else 0), source=source, anchor=anchor[:240])
+        cand = Candidate(
+            url=url, score=score + (2 if vendor else 0), source=source, anchor=anchor[:240]
+        )
         old = out.get(url)
         if old is None or cand.score > old.score:
             out[url] = cand
@@ -173,7 +182,9 @@ async def sitemap_candidates(
     # Discover declared sitemaps too.
     robots_url = urljoin(root, "/robots.txt")
     robots, error = await fetch(client, robots_url, retries=1)
-    diagnostics.append({"url": robots_url, "status": robots.status_code if robots else None, "error": error})
+    diagnostics.append(
+        {"url": robots_url, "status": robots.status_code if robots else None, "error": error}
+    )
     if robots is not None and robots.status_code < 400:
         for line in robots.text.splitlines():
             if line.lower().startswith("sitemap:"):
@@ -190,14 +201,18 @@ async def sitemap_candidates(
             continue
         seen_sitemaps.add(sm)
         response, error = await fetch(client, sm, retries=1)
-        diagnostics.append({"url": sm, "status": response.status_code if response else None, "error": error})
+        diagnostics.append(
+            {"url": sm, "status": response.status_code if response else None, "error": error}
+        )
         if response is None or response.status_code >= 400:
             continue
         try:
             root_xml = ET.fromstring(response.content)
         except ET.ParseError:
             continue
-        locs = [elem.text.strip() for elem in root_xml.iter() if elem.tag.endswith("loc") and elem.text]
+        locs = [
+            elem.text.strip() for elem in root_xml.iter() if elem.tag.endswith("loc") and elem.text
+        ]
         if root_xml.tag.endswith("sitemapindex"):
             for loc in locs[:50]:
                 if host_allowed(loc, official_domains) and loc not in seen_sitemaps:
@@ -284,7 +299,9 @@ async def discover_one(
             cand.content_markers = content_marker_count(visible)
             cand.score += min(cand.content_markers, 5)
             if host_allowed(str(response.url), domains):
-                for child in links_from_html(response.text, str(response.url), domains, f"follow:{cand.url}"):
+                for child in links_from_html(
+                    response.text, str(response.url), domains, f"follow:{cand.url}"
+                ):
                     child.score += 1
                     old = second_wave.get(child.url)
                     if old is None or child.score > old.score:
@@ -300,7 +317,10 @@ async def discover_one(
             if response is not None:
                 cand.status_code = response.status_code
                 cand.final_url = str(response.url)
-                if response.status_code < 400 and "html" in response.headers.get("content-type", "").lower():
+                if (
+                    response.status_code < 400
+                    and "html" in response.headers.get("content-type", "").lower()
+                ):
                     soup = BeautifulSoup(response.text, "html.parser")
                     cand.title = soup.title.get_text(" ", strip=True)[:240] if soup.title else ""
                     visible = soup.get_text(" ", strip=True)[:120000]
@@ -315,7 +335,9 @@ async def discover_one(
             archive_evidence = cand.content_markers >= 2
             strong_link = token_score(cand.anchor + " " + cand.url) >= 5
             vendor = any(hint in (urlparse(final).hostname or "").lower() for hint in VENDOR_HINTS)
-            cand.accepted = bool(ok_status and (archive_evidence or (vendor and strong_link)) and cand.score >= 8)
+            cand.accepted = bool(
+                ok_status and (archive_evidence or (vendor and strong_link)) and cand.score >= 8
+            )
 
         accepted = [c for c in ranked if c.accepted]
         if accepted:
@@ -332,18 +354,29 @@ async def discover_one(
 
 async def run(rows: list[dict[str, str]], concurrency: int, max_candidates: int) -> list[dict]:
     timeout = httpx.Timeout(20.0, connect=10.0)
-    limits = httpx.Limits(max_connections=max(concurrency * 2, 20), max_keepalive_connections=concurrency)
-    headers = {"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"}
+    limits = httpx.Limits(
+        max_connections=max(concurrency * 2, 20), max_keepalive_connections=concurrency
+    )
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    }
     sem = asyncio.Semaphore(concurrency)
-    async with httpx.AsyncClient(timeout=timeout, limits=limits, headers=headers, follow_redirects=True) as client:
+    async with httpx.AsyncClient(
+        timeout=timeout, limits=limits, headers=headers, follow_redirects=True
+    ) as client:
         tasks = [discover_one(client, sem, row, max_candidates) for row in rows]
         return await asyncio.gather(*tasks)
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Discover municipality meeting/protocol archive landing pages")
+    parser = argparse.ArgumentParser(
+        description="Discover municipality meeting/protocol archive landing pages"
+    )
     parser.add_argument("--registry", type=Path, default=Path("research/municipalities.csv"))
-    parser.add_argument("--audit", type=Path, default=Path("research/meeting-archive-discovery.json"))
+    parser.add_argument(
+        "--audit", type=Path, default=Path("research/meeting-archive-discovery.json")
+    )
     parser.add_argument("--concurrency", type=int, default=24)
     parser.add_argument("--max-candidates", type=int, default=8)
     args = parser.parse_args()
@@ -357,7 +390,9 @@ def main() -> int:
         raise SystemExit(f"Registry lacks required columns: {sorted(required - set(fields))}")
 
     results = asyncio.run(run(rows, args.concurrency, args.max_candidates))
-    selected = {item["id"]: item["selected_archive"] for item in results if item["selected_archive"]}
+    selected = {
+        item["id"]: item["selected_archive"] for item in results if item["selected_archive"]
+    }
     for row in rows:
         if not split_values(row.get("meeting_archives")) and selected.get(row["id"]):
             row["meeting_archives"] = selected[row["id"]]
@@ -380,7 +415,9 @@ def main() -> int:
     }
     payload = {"schema_version": 1, "summary": summary, "municipalities": results}
     args.audit.parent.mkdir(parents=True, exist_ok=True)
-    args.audit.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.audit.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     return 0
 
