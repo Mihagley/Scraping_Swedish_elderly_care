@@ -28,7 +28,13 @@ def test_triage_preserves_explicit_language_levels():
 
 
 def test_irrelevant_triage_is_not_negative_evidence():
-    chunk = Chunk(id="c2", document_id="d2", start=0, end=50, text="Kommunens parkeringsregler ändrades i juni.")
+    chunk = Chunk(
+        id="c2",
+        document_id="d2",
+        start=0,
+        end=50,
+        text="Kommunens parkeringsregler ändrades i juni.",
+    )
     result = triage_chunk(chunk)
     assert result["status"] == "irrelevant"
     assert "category" not in result

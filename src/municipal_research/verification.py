@@ -55,14 +55,25 @@ def latest_date(value: str) -> date:
     return date(*parts)
 
 
-def verify_decision(decision: Decision, document: Document, chunk: Chunk, research: Research) -> tuple[list[QuoteCheck], list[str]]:
+def verify_decision(
+    decision: Decision, document: Document, chunk: Chunk, research: Research
+) -> tuple[list[QuoteCheck], list[str]]:
     issues, checks = [], []
     for i, quote in enumerate(decision.evidence):
         locations = locate_quote(quote.text, document, chunk)
         issue = None if locations else "Quote not found in the supplied source chunk"
         if len(quote.text.strip()) < 12:
             issue = "Quote is too short to provide meaningful evidence (minimum 12 characters)"
-        checks.append(QuoteCheck(quote_index=i, quote=quote.text, purpose=quote.purpose, verified=issue is None, locations=locations, issue=issue))
+        checks.append(
+            QuoteCheck(
+                quote_index=i,
+                quote=quote.text,
+                purpose=quote.purpose,
+                verified=issue is None,
+                locations=locations,
+                issue=issue,
+            )
+        )
         if issue:
             issues.append(f"quote_{i}: {issue}")
     rule = research.labels.get(decision.category)
@@ -91,7 +102,12 @@ def verify_decision(decision: Decision, document: Document, chunk: Chunk, resear
             continue
         try:
             bound = latest_date(value)
-            if field in {"implementation_date", "in_force_by_date", "effective_date"} and rule.requires_before_cutoff and research.cutoff and bound >= research.cutoff:
+            if (
+                field in {"implementation_date", "in_force_by_date", "effective_date"}
+                and rule.requires_before_cutoff
+                and research.cutoff
+                and bound >= research.cutoff
+            ):
                 issues.append(f"{field} interval is not wholly before cutoff")
         except ValueError:
             issues.append(f"Invalid {field}")
@@ -105,6 +121,8 @@ def verify_decision(decision: Decision, document: Document, chunk: Chunk, resear
         if attribute.name not in research.fields or attribute.name in seen:
             issues.append(f"Unknown or duplicate attribute: {attribute.name}")
         seen.add(attribute.name)
-        if not attribute.quote_indices or any(i < 0 or i >= len(checks) or not checks[i].verified for i in attribute.quote_indices):
+        if not attribute.quote_indices or any(
+            i < 0 or i >= len(checks) or not checks[i].verified for i in attribute.quote_indices
+        ):
             issues.append(f"Attribute lacks verified citations: {attribute.name}")
     return checks, issues

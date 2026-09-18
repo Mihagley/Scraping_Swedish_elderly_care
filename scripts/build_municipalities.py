@@ -1,4 +1,5 @@
 """Build the national municipality input from SCB + SKR and official sites."""
+
 from __future__ import annotations
 
 import csv
@@ -14,8 +15,18 @@ from bs4 import BeautifulSoup
 SCB = "https://www.scb.se/hitta-statistik/regional-statistik-och-kartor/regionala-indelningar/lan-och-kommuner/lan-och-kommuner-i-kodnummerordning/"
 SKR = "https://skr.se/kommunerochregioner/kommunerlista.8288.html"
 ARCHIVE_WORDS = (
-    "protokoll", "handlingar", "sammantrade", "sammanträde", "moten", "möten",
-    "diarium", "anslagstavla", "kommunfullmaktige", "kommunfullmäktige", "namnd", "nämnd",
+    "protokoll",
+    "handlingar",
+    "sammantrade",
+    "sammanträde",
+    "moten",
+    "möten",
+    "diarium",
+    "anslagstavla",
+    "kommunfullmaktige",
+    "kommunfullmäktige",
+    "namnd",
+    "nämnd",
 )
 POLITICS_WORDS = ("kommun-och-politik", "politik", "demokrati", "organisation")
 
@@ -90,7 +101,9 @@ def archive_seeds(client: httpx.Client, home: str, official_domain: str) -> list
 
 
 def build(output: Path, validation: Path) -> None:
-    headers = {"User-Agent": "MunicipalResearch/0.1 (+https://github.com/Mihagley/Scraping_Swedish_elderly_care)"}
+    headers = {
+        "User-Agent": "MunicipalResearch/0.1 (+https://github.com/Mihagley/Scraping_Swedish_elderly_care)"
+    }
     issues, rows = [], []
     with httpx.Client(timeout=25, headers=headers) as client:
         codes, sites = scb_codes(client), skr_sites(client)
@@ -109,14 +122,16 @@ def build(output: Path, validation: Path) -> None:
             archives = archive_seeds(client, home, domain)
             if not archives:
                 issues.append(f"meeting_archive_not_discovered:{code}:{name}")
-            rows.append({
-                "id": code,
-                "name": name,
-                "domains": domain,
-                "meeting_archives": ";".join(archives),
-                "seeds": ";".join(dict.fromkeys([home, *archives])),
-                "provenance": "SCB-2026+SKR+official-site-discovery",
-            })
+            rows.append(
+                {
+                    "id": code,
+                    "name": name,
+                    "domains": domain,
+                    "meeting_archives": ";".join(archives),
+                    "seeds": ";".join(dict.fromkeys([home, *archives])),
+                    "provenance": "SCB-2026+SKR+official-site-discovery",
+                }
+            )
     if len(rows) != 290:
         issues.append(f"row_count:{len(rows)}")
     if len({r["id"] for r in rows}) != len(rows):
@@ -130,7 +145,9 @@ def build(output: Path, validation: Path) -> None:
             issues.append(f"missing_domain_or_seed:{row['id']}")
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["id", "name", "domains", "meeting_archives", "seeds", "provenance"])
+        writer = csv.DictWriter(
+            handle, fieldnames=["id", "name", "domains", "meeting_archives", "seeds", "provenance"]
+        )
         writer.writeheader()
         writer.writerows(rows)
     report = {
@@ -150,4 +167,7 @@ def build(output: Path, validation: Path) -> None:
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
-    build(root / "research/municipalities-290.csv", root / "research/municipalities-290.validation.json")
+    build(
+        root / "research/municipalities-290.csv",
+        root / "research/municipalities-290.validation.json",
+    )

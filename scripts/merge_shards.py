@@ -1,4 +1,5 @@
 """Merge verified national shard checkpoints into one auditable workbook/package."""
+
 from __future__ import annotations
 
 import json
@@ -9,7 +10,15 @@ from municipal_research.export import export_workbook
 from municipal_research.national import sha256_file, verify_manifest
 from municipal_research.storage import digest, utc_now, write_json
 
-LIST_KEYS = ["summary", "documents", "classifications", "discovery", "triage", "pending_searches", "errors"]
+LIST_KEYS = [
+    "summary",
+    "documents",
+    "classifications",
+    "discovery",
+    "triage",
+    "pending_searches",
+    "errors",
+]
 
 
 def main() -> None:
@@ -33,13 +42,15 @@ def main() -> None:
         shard_manifest = json.loads(shard_manifest_path.read_text(encoding="utf-8"))
         if shard_manifest.get("status") != "completed":
             raise RuntimeError(f"Shard {shard_index} is not complete")
-        shard_manifests.append({
-            "shard_index": shard_index,
-            "status": shard_manifest["status"],
-            "municipality_count": shard_manifest["municipality_count"],
-            "manifest_path": shard_manifest_path.relative_to(base).as_posix(),
-            "manifest_sha256": sha256_file(shard_manifest_path),
-        })
+        shard_manifests.append(
+            {
+                "shard_index": shard_index,
+                "status": shard_manifest["status"],
+                "municipality_count": shard_manifest["municipality_count"],
+                "manifest_path": shard_manifest_path.relative_to(base).as_posix(),
+                "manifest_sha256": sha256_file(shard_manifest_path),
+            }
+        )
         for municipality_id in shard_manifest["municipality_ids"]:
             run = shard / "municipalities" / municipality_id
             issues = verify_manifest(run)
@@ -81,7 +92,9 @@ def main() -> None:
     manifest = {
         "mode": "national-merged",
         "started_at": utc_now(),
-        "status": "completed_with_gaps" if any(r.get("needs_review") or r.get("gaps") for r in merged["summary"]) else "completed",
+        "status": "completed_with_gaps"
+        if any(r.get("needs_review") or r.get("gaps") for r in merged["summary"])
+        else "completed",
         "municipalities": 290,
         "coverage_claim": "bounded_gap_aware",
         "shard_manifests": shard_manifests,
@@ -101,7 +114,11 @@ def main() -> None:
         actual = sha256_file(final / relative)
         if actual != expected:
             raise RuntimeError(f"Final artifact hash changed: {relative}")
-    print(json.dumps({"final": str(final), "municipalities": 290, "status": manifest["status"]}, indent=2))
+    print(
+        json.dumps(
+            {"final": str(final), "municipalities": 290, "status": manifest["status"]}, indent=2
+        )
+    )
 
 
 if __name__ == "__main__":

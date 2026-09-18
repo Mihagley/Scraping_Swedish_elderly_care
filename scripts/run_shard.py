@@ -1,4 +1,5 @@
 """Run one 20-30 municipality national shard with per-municipality checkpoints."""
+
 from __future__ import annotations
 
 import json
@@ -76,19 +77,30 @@ def main() -> None:
             if issues:
                 raise RuntimeError("Artifact hash verification failed: " + ", ".join(issues[:10]))
             checkpoint["completed"] = sorted(set(checkpoint["completed"] + [municipality.id]))
-            checkpoint["failed"] = [x for x in checkpoint["failed"] if x.get("municipality_id") != municipality.id]
+            checkpoint["failed"] = [
+                x for x in checkpoint["failed"] if x.get("municipality_id") != municipality.id
+            ]
         except Exception as error:
-            checkpoint["failed"] = [x for x in checkpoint["failed"] if x.get("municipality_id") != municipality.id]
-            checkpoint["failed"].append({"municipality_id": municipality.id, "error": f"{type(error).__name__}: {error}"})
+            checkpoint["failed"] = [
+                x for x in checkpoint["failed"] if x.get("municipality_id") != municipality.id
+            ]
+            checkpoint["failed"].append(
+                {"municipality_id": municipality.id, "error": f"{type(error).__name__}: {error}"}
+            )
             write_json(checkpoint_path, checkpoint)
             raise
         write_json(checkpoint_path, checkpoint)
 
-    write_json(shard / "shard-manifest.json", {
-        **checkpoint,
-        "status": "completed" if len(checkpoint["completed"]) == len(selected) and not checkpoint["failed"] else "incomplete",
-        "municipality_count": len(selected),
-    })
+    write_json(
+        shard / "shard-manifest.json",
+        {
+            **checkpoint,
+            "status": "completed"
+            if len(checkpoint["completed"]) == len(selected) and not checkpoint["failed"]
+            else "incomplete",
+            "municipality_count": len(selected),
+        },
+    )
     if len(checkpoint["completed"]) != len(selected) or checkpoint["failed"]:
         raise RuntimeError("Shard did not complete every municipality")
 
