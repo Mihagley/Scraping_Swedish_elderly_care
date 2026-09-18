@@ -29,6 +29,11 @@ on:
         required: true
         default: '2'
         type: string
+  push:
+    branches:
+      - feature/resumable-matrix-shards
+    paths:
+      - research/run-collection.trigger
 
 permissions:
   contents: read
@@ -87,8 +92,8 @@ jobs:
       REQUEST: ${{ inputs.request || 'research/request-full.json' }}
       TARGET_SIZE: ${{ inputs.target_size || '25' }}
       MUNICIPALITY_RETRIES: ${{ inputs.retries || '2' }}
-      RESEARCH_MODE: ${{ inputs.mode || '' }}
-      CACHE_MODE: ${{ inputs.mode || 'request-mode' }}
+      RESEARCH_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'collect' }}
+      CACHE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'collect' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
