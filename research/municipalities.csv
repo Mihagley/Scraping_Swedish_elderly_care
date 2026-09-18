@@ -4,12 +4,12 @@ id,name,domains,meeting_archives,seeds
 0117,Österåker,osteraker.se,,https://www.osteraker.se/
 0120,Värmdö,varmdo.se,https://opengov.360online.com/Meetings/varmdo/Boards/Details/206531,https://www.varmdo.se/
 0123,Järfälla,jarfalla.se,,https://www.jarfalla.se/
-0125,Ekerö,ekero.se,https://www.ekero.se/kommun-politik/moten-handlingar--protokoll/anslagstavla/anslagstavla---handelser/anslagstavla/2026-08-26-kommunfullmaktige,https://www.ekero.se/
+0125,Ekerö,ekero.se,https://www.ekero.se/kommun-politik/moten-handlingar--protokoll,https://www.ekero.se/
 0126,Huddinge,huddinge.se,,https://www.huddinge.se/
 0127,Botkyrka,botkyrka.se,https://www.botkyrka.se/kommun-och-politik/politik-och-organisation/moten-handlingar-och-protokoll,https://www.botkyrka.se/
 0128,Salem,salem.se,https://www.salem.se/kommunochpolitik/styrdokumentochekonomi/motenhandlingarochprotokoll.4.566cf51e192955939b2e116.html,https://www.salem.se/
 0136,Haninge,haninge.se,https://www.haninge.se/kommun-och-politik/politik-och-organisation/moten-och-handlingar/kallelser-handlingar-arenden/,https://www.haninge.se/
-0138,Tyresö,tyreso.se,https://www.tyreso.se/organisation--styrning/insyn-och-paverkan/sammantradeshandlingar-och-protokoll/kommunstyrelsens-sammantrade-2025-01-14.html,https://www.tyreso.se/
+0138,Tyresö,tyreso.se,https://www.tyreso.se/organisation--styrning/insyn-och-paverkan/sammantradeshandlingar-och-protokoll/sammanfattningar-ks-och-kf-2026.html,https://www.tyreso.se/
 0139,Upplands-Bro,upplands-bro.se,https://www.upplands-bro.se/kommun-och-politik/handlingar-och-protokoll/moten-och-protokoll/moten-och-protokoll-for-kommunfullmaktige.html,https://www.upplands-bro.se/
 0140,Nykvarn,nykvarn.se,https://nykvarn.se/kommun-och-politik/sammantraden-och-protokoll,https://nykvarn.se/
 0160,Täby,taby.se,,https://www.taby.se/
@@ -17,7 +17,7 @@ id,name,domains,meeting_archives,seeds
 0163,Sollentuna,sollentuna.se,https://www.sollentuna.se/kommun--politik/politik-och-demokrati/dagordningar-och-handlingar/sammantraden-i-sollentuna-kommun/,https://www.sollentuna.se/
 0180,Stockholm,stockholm.se,,https://start.stockholm
 0181,Södertälje,sodertalje.se,https://www.sodertalje.se/kommun-och-politik/politisk-organisation/namnder/aldreomsorgsnamnden/sammantradeshandlingar-och-protokoll/,https://www.sodertalje.se/
-0182,Nacka,nacka.se,,https://www.nacka.se/
+0182,Nacka,nacka.se,https://www.nacka.se/kommun--politik/politik-handlingar-och-protokoll/for-dig-som-ar-fortroendevald/praktiska-fragor/distanssammantrade/,https://www.nacka.se/
 0183,Sundbyberg,sundbyberg.se,https://www.sundbyberg.se/kommun-och-politik/sammantraden-och-handlingar,https://www.sundbyberg.se/
 0184,Solna,solna.se,https://www.solna.se/om-solna-stad/politik-och-namnder/sammantraden-och-handlingar/handlingar-2024/kommunfullmaktige/november,https://www.solna.se/
 0186,Lidingö,lidingo.se,https://lidingo.se/stad-politik/sa-styrs-lidingo/sammantraden-och-handlingar/sammantradeshandlingar/,https://lidingo.se/
@@ -39,7 +39,7 @@ id,name,domains,meeting_archives,seeds
 0481,Oxelösund,oxelosund.se,https://www.oxelosund.se/kommun-och-politik/moten-kallelser-och-protokoll,https://www.oxelosund.se/
 0482,Flen,flen.se,,https://flen.se/
 0483,Katrineholm,katrineholm.se,https://www.katrineholm.se/kommun-och-politik/moten-kallelser-och-protokoll.html,https://www.katrineholm.se/
-0484,Eskilstuna,eskilstuna.se,https://www.eskilstuna.se/kommun-och-politik/ta-del-av-beslut/anslagstavla/justerade-protokoll/2026-08-21-sammantradesprotokoll-fran-valnamnden,https://www.eskilstuna.se/
+0484,Eskilstuna,eskilstuna.se,https://www.eskilstuna.se/kommun-och-politik/ta-del-av-beslut/sammantradeshandlingar,https://www.eskilstuna.se/
 0486,Strängnäs,strangnas.se,https://www.strangnas.se/kommun-och-politik/kallelser-och-protokoll,https://www.strangnas.se/
 0488,Trosa,trosa.se,,https://www.trosa.se/
 0509,Ödeshög,odeshog.se,https://www.odeshog.se/kommunochpolitik/politikochdemokrati/motenhandlingarochprotokoll/kommunfullmaktigehandlingar.4.1db648081677d277bea28d9.html,https://www.odeshog.se/
@@ -48,7 +48,7 @@ id,name,domains,meeting_archives,seeds
 0560,Boxholm,boxholm.se,,https://www.boxholm.se/
 0561,Åtvidaberg,atvidaberg.se,https://www.atvidaberg.se/kommun-och-politik/politik-och-demokrati/moten-handlingar-och-protokoll,https://www.atvidaberg.se/
 0562,Finspång,finspang.se,https://finspang.se/kommunochpolitik/politik-och-paverkan/kommunfullmaktige/inspelade-moten-med-kommunfullmaktige?folder=19.243076b117f44ad50514b39e&sv.url=12.596fb02519618d616475ec4e,https://finspang.se/
-0563,Valdemarsvik,valdemarsvik.se,https://www.valdemarsvik.se/blog/anslag/protokoll-fran-kommunfullmaktiges-sammantrade-2023-02-06/,https://www.valdemarsvik.se/
+0563,Valdemarsvik,valdemarsvik.se,https://www.valdemarsvik.se/blog/anslag/kallelse-kommunstyrelsens-sammantrade-15-april/,https://www.valdemarsvik.se/
 0580,Linköping,linkoping.se,,https://www.linkoping.se/
 0581,Norrköping,norrkoping.se,,https://norrkoping.se/
 0582,Söderköping,soderkoping.se,,https://www.soderkoping.se//
@@ -61,7 +61,7 @@ id,name,domains,meeting_archives,seeds
 0643,Habo,habokommun.se,,https://habokommun.se/
 0662,Gislaved,gislaved.se,,https://www.gislaved.se/
 0665,Vaggeryd,vaggeryd.se,https://www.vaggeryd.se/kommun-och-politik/moten-kallelser-och-protokoll/kommunfullmaktige.html,https://www.vaggeryd.se/
-0680,Jönköping,jonkoping.se,https://www.jonkoping.se/kommun--politik/anslagstavla-for-jonkopings-kommun/anslagtavla/2024-02-02-protokoll-fran-kommunfullmaktiges-sammantrade-25-januari-2024,https://www.jonkoping.se/
+0680,Jönköping,jonkoping.se,https://www.jonkoping.se/kommunpolitik/anslagstavlaforjonkopingskommun/anslagtavla/protokollfransammantrademedindividochfamiljeomsorgsnamndensutskott3den26augusti2026.5.586993c71a05a51dffab7fc.html,https://www.jonkoping.se/
 0682,Nässjö,nassjo.se,https://nassjo.se/kommun-och-politik/politiska-sammantraden/kommunfullmaktiges-sammantraden/protokoll-kommunfullmaktige.html,https://nassjo.se/
 0683,Värnamo,varnamo.se,,https://www.varnamo.se/
 0684,Sävsjö,savsjo.se,,https://www.savsjo.se/
@@ -70,7 +70,7 @@ id,name,domains,meeting_archives,seeds
 0687,Tranås,tranas.se,https://tranaskommun.ondemand.formpipe.com/committees/,https://tranas.se/
 0760,Uppvidinge,uppvidinge.se,https://www.uppvidinge.se/kommun-och-politik/politik-och-demokrati/moten-kallelser-och-protokoll.html,https://www.uppvidinge.se/
 0761,Lessebo,lessebo.se,,https://www.lessebo.se/
-0763,Tingsryd,tingsryd.se,,https://tingsryd.se/
+0763,Tingsryd,tingsryd.se,https://tingsryd.se/kommun-och-politik/motenhandlingarprotokoll/,https://tingsryd.se/
 0764,Alvesta,alvesta.se,https://www.alvesta.se/kommun-och-politik/politik-och-demokrati/moten-kallelser-och-protokoll/,https://www.alvesta.se/
 0765,Älmhult,almhult.se,https://www.almhult.se/kommunpolitik/motenhandlingarprotokoll.1024.html,https://www.almhult.se/
 0767,Markaryd,markaryd.se,https://www.markaryd.se/sidor/kommun-och-politik/moten-kallelser-och-protokoll/sammantraden.html,https://www.markaryd.se/
@@ -125,7 +125,7 @@ id,name,domains,meeting_archives,seeds
 1291,Simrishamn,simrishamn.se,,https://www.simrishamn.se/
 1292,Ängelholm,engelholm.se,,https://www.engelholm.se/
 1293,Hässleholm,hassleholm.se,,https://www.hassleholm.se/
-1315,Hylte,hylte.se,https://meetings.hylte.se/committees/kommunfullmaktige/mote-2026-09-08,https://www.hylte.se/
+1315,Hylte,hylte.se,,https://www.hylte.se/
 1380,Halmstad,halmstad.se,https://www.halmstad.se/kommunochpolitik/overklagabeslutrattssakerhet/protokollochsammantraden.n3492.html,https://www.halmstad.se/
 1381,Laholm,laholm.se,https://laholm.se/kommun-och-politik/politik-och-demokrati/namnder/kultur--och-folkhalsonamnden,https://laholm.se/
 1382,Falkenberg,kommun.falkenberg.se,,https://kommun.falkenberg.se/
@@ -133,7 +133,7 @@ id,name,domains,meeting_archives,seeds
 1384,Kungsbacka,kungsbacka.se,,https://kungsbacka.se/
 1401,Härryda,harryda.se,https://www.harryda.se/kommunochpolitik/politikochdemokrati/motenhandlingarochprotokoll.4.1439a0061817fd1d9405498.html,https://www.harryda.se/
 1402,Partille,partille.se,,https://www.partille.se/
-1407,Öckerö,ockero.se,https://www.ockero.se/kommun-och-politik/anslagstavla/justerat-protokoll-fran-miljo--och-samhallsbyggnadsnamndens-sammantrade-2023-11-21,https://www.ockero.se/
+1407,Öckerö,ockero.se,https://www.ockero.se/kommun-och-politik/anslagstavla/sammantradesprotokoll-ifran-bygg--och-miljonamnden,https://www.ockero.se/
 1415,Stenungsund,stenungsund.se,https://www.stenungsund.se/kommun-och-politik/politik-och-demokrati/moten-och-protokoll/kommunfullmaktiges-protokoll-och-kallelser,https://www.stenungsund.se/
 1419,Tjörn,tjorn.se,https://www.tjorn.se/kommun-och-politik/motestider-protokoll-och-anslagstavla/sammantradeskalender,https://www.tjorn.se/
 1421,Orust,orust.se,https://www.orust.se/kommun-och-politik/moten-handlingar-och-protokoll/kallelser-handlingar-och-protokoll,https://www.orust.se/
@@ -153,7 +153,7 @@ id,name,domains,meeting_archives,seeds
 1452,Tranemo,tranemo.se,https://tranemo.se/kommun--politik/politik-och-demokrati/moten-och-protokoll,https://tranemo.se/
 1460,Bengtsfors,bengtsfors.se,https://www.netpublicator.com/reader/r26937924,https://www.bengtsfors.se/
 1461,Mellerud,mellerud.se,,https://mellerud.se/
-1462,Lilla Edet,lillaedet.se,https://lillaedet.se/kommun-och-politik/moten-handlingar-och-protokoll/kommunfullmaktige/kommunfullmaktiges-sammantraden/2026-09-14-kommunfullmaktige--onsdag-23-september-2026-kl.-18.00,https://lillaedet.se/
+1462,Lilla Edet,lillaedet.se,https://lillaedet.se/kommun-och-politik/moten-handlingar-och-protokoll,https://lillaedet.se/
 1463,Mark,mark.se,https://varberg.se/kommun-och-politik/politik-och-demokrati/moten-och-protokoll/overformyndarnamndens-protokoll-och-kallelser,https://www.mark.se/
 1465,Svenljunga,svenljunga.se,,https://www.svenljunga.se/
 1466,Herrljunga,herrljunga.se,,https://www.herrljunga.se/
@@ -175,7 +175,7 @@ id,name,domains,meeting_archives,seeds
 1492,Åmål,amal.se,,https://amal.se/
 1493,Mariestad,mariestad.se,https://mariestad.se/kommun-och-politik/politik-och-demokrati/sammantraden-och-protokoll/sammantradeshandlingar-for-kommunfullmaktige,https://mariestad.se/
 1494,Lidköping,lidkoping.se,,https://lidkoping.se/
-1495,Skara,skara.se,https://www.netpublicator.com/reader/r55635944,https://www.skara.se/
+1495,Skara,skara.se,,https://www.skara.se/
 1496,Skövde,skovde.se,https://www.skovde.se/kommun-och-politik/for-dig-som-ar-fortroendevald/sammantraden-protokoll-och-handlingar,https://www.skovde.se/
 1497,Hjo,hjo.se,https://www.hjo.se/kommun--politik/politik-och-organisation/anslagstavla2/sammantradesprotokoll-och-kungorelser/mall-anslag-protokoll262/,https://www.hjo.se/
 1498,Tidaholm,tidaholm.se,https://www.tidaholm.se/kommunochpolitik/overklagabeslut/anslagstavla/sammantradesprotokollfransocialochomvardnadsnamnden20260825.7786.html,https://www.tidaholm.se/
@@ -185,7 +185,7 @@ id,name,domains,meeting_archives,seeds
 1737,Torsby,torsby.se,https://torsby.se/kommunpolitik/sammantradenarendenhandlingarprotokoll/oppnasammantraden.4.2580b03b15896994ae4c2db.html,https://torsby.se/
 1760,Storfors,storfors.se,https://www.storfors.se/kommunochpolitik/motenkallelserochprotokoll/kallelserochprotokoll.4.e4d2db016037ff584e1032.html,https://www.storfors.se/
 1761,Hammarö,hammaro.se,,https://hammaro.se/
-1762,Munkfors,munkfors.se,https://www.munkfors.se/protokoll/kallelse-extra-sammantrdae-larande-och-stod-2023-07-13/,https://www.munkfors.se/
+1762,Munkfors,munkfors.se,,https://www.munkfors.se/
 1763,Forshaga,forshaga.se,,https://www.forshaga.se/
 1764,Grums,grums.se,https://www.grums.se/kommunpolitik/demokratiochpolitik/anslagstavla/sammantradesdatumochkallelser.4347.html,https://www.grums.se/
 1765,Årjäng,arjang.se,,https://www.arjang.se/
@@ -210,13 +210,13 @@ id,name,domains,meeting_archives,seeds
 1885,Lindesberg,lindesberg.se,https://www.lindesberg.se/kommun-och-politik/politik-och-demokrati/moten-och-protokoll,https://www.lindesberg.se/
 1904,Skinnskatteberg,skinnskatteberg.se,https://www.skinnskatteberg.se/kommun-och-demokrati/politisk-organisation/sammantraden/protokoll-arkiv/,https://www.skinnskatteberg.se/
 1907,Surahammar,surahammar.se,,https://surahammar.se/
-1960,Kungsör,kungsor.se,https://kungsor.se/anslagstavla/justerade-protokoll/2026-09-15-protokoll-fran-kommunfullmaktiges-sammantrade-2026-09-10.html,https://kungsor.se/
+1960,Kungsör,kungsor.se,,https://kungsor.se/
 1961,Hallstahammar,hallstahammar.se,,https://www.hallstahammar.se/
 1962,Norberg,norberg.se,https://hedemora.se/kommun-och-demokrati/moten-handlingar-och-protokoll/kallelser-och-protokoll/kallelser-och-protokoll-for-overformyndarnamnden/,https://norberg.se/
 1980,Västerås,vasteras.se,https://www.vasteras.se/kommun-och-politik/moten-handlingar-och-protokoll/namndhandlingssok.html,https://www.vasteras.se/
 1981,Sala,sala.se,,https://www.sala.se/
 1982,Fagersta,fagersta.se,https://fagersta.se/organisation--styrning/moten-handlingar-och-protokoll,https://fagersta.se/
-1983,Köping,koping.se,https://koping.se/anslagstavla/anslagstavla/anslagstavla/2026-08-28-sammantradesprotokoll-fran-social--och-arbetsmarknadsnamnden-2026-08-26.html,https://koping.se/
+1983,Köping,koping.se,,https://koping.se/
 1984,Arboga,arboga.se,http://arboga.se/kommun-och-politik/politik-och-beslut.html,http://arboga.se/
 2021,Vansbro,vansbro.se,,https://www.vansbro.se/
 2023,Malung-Sälen,malung-salen.se,,https://malung-salen.se/
