@@ -7,7 +7,7 @@ import traceback
 from pathlib import Path
 
 from municipal_research.classification import Classifier
-from municipal_research.config import load_config, load_municipalities
+from municipal_research.config import Municipality, load_config, load_municipalities
 from municipal_research.export import export_workbook
 from municipal_research.llm import Gateway
 from municipal_research.models import Chunk, Document
@@ -53,6 +53,16 @@ def classify_one(
     source = read_json(source_run / "results.json")
     if len(source["summary"]) != 1 or source["summary"][0]["municipality_id"] != municipality.id:
         raise ValueError("Source collection run has unexpected municipality membership")
+
+    # Classification must use the exact municipality metadata saved with collection,
+    # not a later registry revision (for example newly discovered meeting-archive URLs).
+    source_inputs = read_json(source_run / "municipalities.json")
+    if len(source_inputs) != 1:
+        raise ValueError("Source collection run must contain exactly one municipality input")
+    source_municipality = Municipality.model_validate(source_inputs[0])
+    if source_municipality.id != municipality.id:
+        raise ValueError("Source municipality input does not match planned municipality ID")
+    municipality = source_municipality
 
     source_documents = source["documents"]
     document_meta = {document["id"]: document for document in source_documents}
@@ -146,6 +156,7 @@ def classify_one(
             "shard_id": shard_id,
             "run": source_run_rel,
             "manifest_sha256": digest((source_run / "manifest.json").read_bytes()),
+            "municipality_input_sha256": digest(canonical(source_inputs)),
         },
     }
     write_json(output_run / "results.json", data)
@@ -159,6 +170,7 @@ def classify_one(
         "mode": "classify-collected",
         "municipality_id": municipality.id,
         "source_collection_manifest_sha256": data["source_collection"]["manifest_sha256"],
+        "source_municipality_input_sha256": data["source_collection"]["municipality_input_sha256"],
         "api_calls": gateway.calls,
         "triage_total_chunks": len(chunks),
         "triage_selected_chunks": len(selected),
@@ -218,11 +230,10 @@ def main() -> int:
     source_manifest = read_json(source_shard / "shard-manifest.json")
     if source_manifest.get("members") != shard["municipality_ids"]:
         raise ValueError("Source collection shard membership does not match current plan")
-    if source_manifest.get("registry_sha256") != plan["registry_sha256"]:
-        raise ValueError("Source collection registry fingerprint does not match current registry")
 
     fingerprint_data = {
         "registry_sha256": plan["registry_sha256"],
+        "source_registry_sha256": source_manifest.get("registry_sha256"),
         "request_sha256": digest(request_path.read_bytes()),
         "config_sha256": digest(config_path.read_bytes()),
         "mode": "classify-collected",
