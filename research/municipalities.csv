@@ -76,6 +76,7 @@ id,name,domains,meeting_archives,seeds
 0767,Markaryd,markaryd.se,https://www.markaryd.se/sidor/kommun-och-politik/moten-kallelser-och-protokoll/sammantraden.html,https://www.markaryd.se/
 0780,Växjö,vaxjo.se,,https://www.vaxjo.se/
 0781,Ljungby,ljungby.se,,https://www.ljungby.se/
+0821,Högsby,hogsby.se,,https://www.hogsby.se/
 0834,Torsås,torsas.se,https://www.torsas.se/kommun-och-politik/moten-kungorelser-och-protokoll/sammantradesdagar/,https://www.torsas.se/
 0840,Mörbylånga,morbylanga.se,https://www.morbylanga.se/kommun-och-politik/arkiv-och-allmanna-handlingar/moten-och-protokoll/,https://www.morbylanga.se/
 0860,Hultsfred,hultsfred.se,https://www.hultsfred.se/kategori/invanare/kommun-politik/sammantraden-protokoll/,https://www.hultsfred.se/
@@ -116,6 +117,7 @@ id,name,domains,meeting_archives,seeds
 1278,Båstad,bastad.se,https://www.bastad.se/kommun-och-politik/politik-och-demokrati/moten-och-protokoll.html,https://www.bastad.se/
 1280,Malmö,malmo.se,,https://malmo.se/
 1281,Lund,lund.se,,https://lund.se/
+1282,Landskrona,landskrona.se,,https://www.landskrona.se/
 1283,Helsingborg,helsingborg.se,,https://helsingborg.se/
 1284,Höganäs,hoganas.se,https://www.hoganas.se/kommun--ledning/arenden-och-handlingar/moten-kallelser-och-protokoll.html,https://www.hoganas.se/
 1285,Eslöv,eslov.se,https://eslov.se/kommun-politik/kommunens-organisation/kommunfullmaktige/fullmaktiges-sammantraden-och-protokoll/,https://www.eslov.se/
