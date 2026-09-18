@@ -92,7 +92,10 @@ def main() -> int:
                 data["config"] = result["config"]
             elif signature != config_signature:
                 raise ValueError("Classification runs used different resolved configs")
-            if len(result["summary"]) != 1 or result["summary"][0]["municipality_id"] != municipality_id:
+            if (
+                len(result["summary"]) != 1
+                or result["summary"][0]["municipality_id"] != municipality_id
+            ):
                 raise ValueError(f"Unexpected summary membership in {run_dir}")
             completed_ids.add(municipality_id)
             completed += 1
@@ -112,7 +115,8 @@ def main() -> int:
                 "size": shard["size"],
                 "completed": completed,
                 "source_incomplete": sum(
-                    municipality_id in source_incomplete_ids for municipality_id in shard["municipality_ids"]
+                    municipality_id in source_incomplete_ids
+                    for municipality_id in shard["municipality_ids"]
                 ),
                 "failed": failed,
                 "manifest_sha256": digest(manifest_path.read_bytes()),
@@ -124,7 +128,9 @@ def main() -> int:
     missing_ids = expected_ids - completed_ids
     unexpected_missing = sorted(missing_ids - source_incomplete_ids)
     if unexpected_missing:
-        failures.extend(f"missing_classification:{municipality_id}" for municipality_id in unexpected_missing)
+        failures.extend(
+            f"missing_classification:{municipality_id}" for municipality_id in unexpected_missing
+        )
     extra = sorted(completed_ids - expected_ids)
     if extra:
         raise ValueError("Merged unexpected municipalities: " + ", ".join(extra))
@@ -135,7 +141,13 @@ def main() -> int:
         for event in all_audit:
             handle.write(canonical(event) + "\n")
 
-    status = "completed_with_source_gaps" if source_incomplete_ids and not failures else "completed" if not failures else "incomplete"
+    status = (
+        "completed_with_source_gaps"
+        if source_incomplete_ids and not failures
+        else "completed"
+        if not failures
+        else "incomplete"
+    )
     manifest = {
         "version": 1,
         "started_at": utc_now(),
@@ -162,7 +174,11 @@ def main() -> int:
         "Source gaps remain explicit and are not interpreted as negative findings.",
     ]
     if source_incomplete_ids:
-        report += ["", "Source-incomplete municipalities:", *[f"- {item}" for item in sorted(source_incomplete_ids)]]
+        report += [
+            "",
+            "Source-incomplete municipalities:",
+            *[f"- {item}" for item in sorted(source_incomplete_ids)],
+        ]
     if failures:
         report += ["", "Classification failures:", *[f"- {item}" for item in sorted(set(failures))]]
     (args.output_dir / "MERGE_STATUS.md").write_text("\n".join(report) + "\n", encoding="utf-8")
