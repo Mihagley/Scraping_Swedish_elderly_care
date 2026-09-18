@@ -83,7 +83,7 @@ class Discoverer:
                 continue
             visited.add(url)
             try:
-                download = self.fetcher.get(url, municipality.allowed_domains)
+                download = self.fetcher.get(url, municipality.domains)
                 body = download.body
                 if body.startswith(b"\x1f\x8b"):
                     with gzip.GzipFile(fileobj=io.BytesIO(body)) as compressed:
@@ -161,7 +161,7 @@ class Discoverer:
             _, depth, _, url = heapq.heappop(self.queue)
             attempted += 1
             try:
-                download = self.fetcher.get(url, municipality.domains)
+                download = self.fetcher.get(url, municipality.allowed_domains)
                 identity = (download.url, download.sha256)
                 if identity in delivered:
                     continue
