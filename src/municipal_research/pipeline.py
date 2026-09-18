@@ -167,6 +167,8 @@ def run_pipeline(
             audit.emit("municipality_start", municipality_id=municipality.id)
             discovery = Discoverer(config, fetcher, gateway, audit)
             documents, records, gaps = [], [], []
+            if not municipality.meeting_archives:
+                gaps.append("meeting_archive_seed_missing")
             scanned = classified = 0
             for download in discovery.documents(municipality):
                 try:
@@ -249,6 +251,7 @@ def run_pipeline(
                         "crawl",
                         "document_limit",
                         "no_documents",
+                        "meeting_archive",
                     ]
                 ):
                     data["pending_searches"].append(
