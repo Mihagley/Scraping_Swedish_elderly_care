@@ -40,6 +40,7 @@ jobs:
           --audit research/meeting-archive-discovery.json
           --concurrency 24
           --max-candidates 8
+          --refresh
       - name: Upload archive discovery audit
         uses: actions/upload-artifact@v4
         with:
