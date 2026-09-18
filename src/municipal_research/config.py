@@ -5,6 +5,7 @@ import re
 from datetime import date
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlsplit
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -102,7 +103,18 @@ class Municipality(StrictModel):
     id: str
     name: str
     domains: list[str]
+    meeting_archives: list[str] = Field(default_factory=list)
     seeds: list[str] = Field(default_factory=list)
+
+    @property
+    def allowed_domains(self) -> list[str]:
+        """Explicit crawl allowlist: official domains plus configured seed/archive hosts."""
+        result = list(self.domains)
+        for url in [*self.seeds, *self.meeting_archives]:
+            host = (urlsplit(url).hostname or "").lower().rstrip(".")
+            if host and host not in result:
+                result.append(host)
+        return result
 
     @model_validator(mode="after")
     def validate_input(self):
@@ -114,6 +126,10 @@ class Municipality(StrictModel):
             if not re.fullmatch(r"[a-zA-Z0-9.-]+", domain) or "." not in domain:
                 raise ValueError("Use plain hostnames, without schemes, ports or wildcards")
         self.domains = [x.lower().strip(".") for x in self.domains]
+        for url in [*self.seeds, *self.meeting_archives]:
+            parsed = urlsplit(url)
+            if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+                raise ValueError("Seeds and meeting archives must be absolute HTTP(S) URLs")
         return self
 
 
@@ -129,6 +145,9 @@ def load_municipalities(path: Path) -> list[Municipality]:
             id=r["id"],
             name=r["name"],
             domains=[v.strip() for v in r["domains"].split(";") if v.strip()],
+            meeting_archives=[
+                v.strip() for v in r.get("meeting_archives", "").split(";") if v.strip()
+            ],
             seeds=[v.strip() for v in r.get("seeds", "").split(";") if v.strip()],
         )
         for r in rows
