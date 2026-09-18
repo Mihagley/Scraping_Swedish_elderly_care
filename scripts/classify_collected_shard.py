@@ -57,11 +57,14 @@ def classify_one(
     source_documents = source["documents"]
     document_meta = {document["id"]: document for document in source_documents}
     chunks = [
-        Chunk.model_validate(read_json(path)) for path in sorted((source_run / "chunks").glob("*.json"))
+        Chunk.model_validate(read_json(path))
+        for path in sorted((source_run / "chunks").glob("*.json"))
     ]
     unknown_document_ids = sorted({chunk.document_id for chunk in chunks} - set(document_meta))
     if unknown_document_ids:
-        raise ValueError("Collected chunks refer to unknown documents: " + ", ".join(unknown_document_ids))
+        raise ValueError(
+            "Collected chunks refer to unknown documents: " + ", ".join(unknown_document_ids)
+        )
 
     # Reserve for the worst case per chunk: independent passes + adjudication + verification.
     max_selected = max(1, config.llm.max_calls // (config.llm.passes + 2))
@@ -150,7 +153,9 @@ def classify_one(
         "version": 1,
         "started_at": utc_now(),
         "finished_at": utc_now(),
-        "status": "completed_with_gaps" if summary["needs_review"] or data["errors"] else "completed",
+        "status": "completed_with_gaps"
+        if summary["needs_review"] or data["errors"]
+        else "completed",
         "mode": "classify-collected",
         "municipality_id": municipality.id,
         "source_collection_manifest_sha256": data["source_collection"]["manifest_sha256"],
@@ -280,7 +285,9 @@ def main() -> int:
             attempt = state["attempts"]
             relative_run = Path("runs") / municipality_id / f"attempt-{attempt:03d}"
             output_run = shard_dir / relative_run
-            state.update(status="running", run=relative_run.as_posix(), started_at=utc_now(), last_error=None)
+            state.update(
+                status="running", run=relative_run.as_posix(), started_at=utc_now(), last_error=None
+            )
             save_checkpoint(checkpoint_path, checkpoint)
             try:
                 result = classify_one(
