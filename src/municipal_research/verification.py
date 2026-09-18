@@ -55,25 +55,14 @@ def latest_date(value: str) -> date:
     return date(*parts)
 
 
-def verify_decision(
-    decision: Decision, document: Document, chunk: Chunk, research: Research
-) -> tuple[list[QuoteCheck], list[str]]:
+def verify_decision(decision: Decision, document: Document, chunk: Chunk, research: Research) -> tuple[list[QuoteCheck], list[str]]:
     issues, checks = [], []
     for i, quote in enumerate(decision.evidence):
         locations = locate_quote(quote.text, document, chunk)
         issue = None if locations else "Quote not found in the supplied source chunk"
         if len(quote.text.strip()) < 12:
             issue = "Quote is too short to provide meaningful evidence (minimum 12 characters)"
-        checks.append(
-            QuoteCheck(
-                quote_index=i,
-                quote=quote.text,
-                purpose=quote.purpose,
-                verified=issue is None,
-                locations=locations,
-                issue=issue,
-            )
-        )
+        checks.append(QuoteCheck(quote_index=i, quote=quote.text, purpose=quote.purpose, verified=issue is None, locations=locations, issue=issue))
         if issue:
             issues.append(f"quote_{i}: {issue}")
     rule = research.labels.get(decision.category)
@@ -88,15 +77,27 @@ def verify_decision(
             issues.append("Category requires evidence of operation before the exclusive cutoff")
         if not any(q.purpose == "timing" for q in valid):
             issues.append("Pre-cutoff claim lacks a verified timing quote")
-    if decision.effective_date:
+
+    date_fields = [
+        "publication_date",
+        "decision_date",
+        "implementation_date",
+        "in_force_by_date",
+        "effective_date",
+    ]
+    for field in date_fields:
+        value = getattr(decision, field)
+        if not value:
+            continue
         try:
-            bound = latest_date(decision.effective_date)
-            if rule.requires_before_cutoff and research.cutoff and bound >= research.cutoff:
-                issues.append("Effective-date interval is not wholly before cutoff")
+            bound = latest_date(value)
+            if field in {"implementation_date", "in_force_by_date", "effective_date"} and rule.requires_before_cutoff and research.cutoff and bound >= research.cutoff:
+                issues.append(f"{field} interval is not wholly before cutoff")
         except ValueError:
-            issues.append("Invalid effective_date")
+            issues.append(f"Invalid {field}")
         if not any(q.purpose == "timing" for q in valid):
-            issues.append("Effective date requires a verified timing quote")
+            issues.append(f"{field} requires a verified timing quote")
+
     if decision.scope and not any(q.purpose == "scope" for q in valid):
         issues.append("Scope requires a verified scope quote")
     seen = set()
@@ -104,8 +105,6 @@ def verify_decision(
         if attribute.name not in research.fields or attribute.name in seen:
             issues.append(f"Unknown or duplicate attribute: {attribute.name}")
         seen.add(attribute.name)
-        if not attribute.quote_indices or any(
-            i < 0 or i >= len(checks) or not checks[i].verified for i in attribute.quote_indices
-        ):
+        if not attribute.quote_indices or any(i < 0 or i >= len(checks) or not checks[i].verified for i in attribute.quote_indices):
             issues.append(f"Attribute lacks verified citations: {attribute.name}")
     return checks, issues
