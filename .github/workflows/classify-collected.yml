@@ -1,0 +1,222 @@
+name: Classify collected municipal evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: GitHub Actions run ID containing research-shard-* collection artifacts
+        required: true
+        type: string
+      registry:
+        description: Validated 290-municipality CSV
+        required: true
+        default: research/municipalities.csv
+        type: string
+      request:
+        description: Research request JSON
+        required: true
+        default: research/request-full.json
+        type: string
+      target_size:
+        description: Target municipalities per shard
+        required: true
+        default: '25'
+        type: string
+      retries:
+        description: Additional classification attempts per municipality
+        required: true
+        default: '1'
+        type: string
+  push:
+    branches:
+      - feature/resumable-matrix-shards
+    paths:
+      - research/run-classification.trigger
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: municipal-evidence-classification-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      registry_sha256: ${{ steps.plan.outputs.registry_sha256 }}
+      input_sha256: ${{ steps.plan.outputs.input_sha256 }}
+      source_run_id: ${{ steps.source.outputs.source_run_id }}
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      REQUEST: ${{ inputs.request || 'research/request-full.json' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
+      INPUT_SOURCE_RUN_ID: ${{ inputs.source_run_id || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Resolve immutable source collection run
+        id: source
+        shell: bash
+        run: |
+          SOURCE_RUN_ID="$INPUT_SOURCE_RUN_ID"
+          if [ -z "$SOURCE_RUN_ID" ]; then
+            SOURCE_RUN_ID="$(python - <<'PY'
+          import json
+          from pathlib import Path
+          payload = json.loads(Path('research/run-classification.trigger').read_text(encoding='utf-8'))
+          print(payload['source_run_id'])
+          PY
+          )"
+          fi
+          if ! [[ "$SOURCE_RUN_ID" =~ ^[0-9]+$ ]]; then
+            echo "Invalid source run ID" >&2
+            exit 1
+          fi
+          echo "source_run_id=$SOURCE_RUN_ID" >> "$GITHUB_OUTPUT"
+      - name: Validate registry and build balanced shard plan
+        id: plan
+        run: |
+          python scripts/shard_plan.py \
+            --municipalities "$REGISTRY" \
+            --request "$REQUEST" \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30 \
+            --output research/classification-shard-plan.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: classification-shard-plan
+          path: research/classification-shard-plan.json
+          if-no-files-found: error
+          retention-days: 90
+
+  shard:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      REQUEST: ${{ inputs.request || 'research/request-full.json' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
+      CLASSIFICATION_RETRIES: ${{ inputs.retries || '1' }}
+      SOURCE_RUN_ID: ${{ needs.plan.outputs.source_run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Download immutable collected shard
+        uses: actions/download-artifact@v4
+        with:
+          name: research-${{ matrix.id }}
+          path: research/collection-input
+          github-token: ${{ github.token }}
+          run-id: ${{ env.SOURCE_RUN_ID }}
+      - name: Restore classification checkpoints and LLM cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            research/classification-output/${{ matrix.id }}
+            data/cache/classification/${{ matrix.id }}
+          key: classify-v1-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.SOURCE_RUN_ID }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            classify-v1-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.SOURCE_RUN_ID }}-${{ matrix.id }}-
+      - name: Classify preserved evidence for ${{ matrix.id }}
+        id: classify
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python scripts/classify_collected_shard.py \
+            --request "$REQUEST" \
+            --municipalities "$REGISTRY" \
+            --source-root research/collection-input \
+            --shard-index "${{ matrix.index }}" \
+            --state-root research/classification-output \
+            --cache-root data/cache/classification \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30 \
+            --retries "$CLASSIFICATION_RETRIES"
+      - name: Preserve classification output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: classification-${{ matrix.id }}
+          path: research/classification-output/
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Save classification checkpoints and cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            research/classification-output/${{ matrix.id }}
+            data/cache/classification/${{ matrix.id }}
+          key: classify-v1-${{ runner.os }}-${{ needs.plan.outputs.input_sha256 }}-${{ env.SOURCE_RUN_ID }}-${{ matrix.id }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Fail shard after preserving state
+        if: steps.classify.outcome == 'failure'
+        run: exit 1
+
+  merge:
+    if: always() && needs.plan.result == 'success'
+    needs: [plan, shard]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      REGISTRY: ${{ inputs.registry || 'research/municipalities.csv' }}
+      TARGET_SIZE: ${{ inputs.target_size || '25' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Download all classification shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: classification-shard-*
+          path: research/classification-merge-input
+          merge-multiple: true
+      - name: Merge verified classification outputs
+        id: merge
+        continue-on-error: true
+        run: |
+          python scripts/merge_classification_shards.py \
+            --shards-root research/classification-merge-input \
+            --municipalities "$REGISTRY" \
+            --output-dir "research/classified/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --expected 290 \
+            --target-size "$TARGET_SIZE" \
+            --min-size 20 \
+            --max-size 30
+      - name: Upload merged classification workbook and audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: classification-merged-${{ github.run_id }}-${{ github.run_attempt }}
+          path: research/classified/
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Report classification failures
+        if: steps.merge.outcome == 'failure' || needs.shard.result != 'success'
+        run: exit 1
