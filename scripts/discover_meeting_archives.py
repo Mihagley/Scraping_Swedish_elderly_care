@@ -118,9 +118,8 @@ def canonical_adjustment(url: str) -> int:
         token in lowered for token in ("moten", "sammantr", "protokoll", "handlingar", "kallel")
     ):
         score -= 6
-    if (
-        any(token in lowered for token in ("moten", "sammantr"))
-        and any(token in lowered for token in ("protokoll", "handlingar", "kallel"))
+    if any(token in lowered for token in ("moten", "sammantr")) and any(
+        token in lowered for token in ("protokoll", "handlingar", "kallel")
     ):
         score += 6
     if any(
