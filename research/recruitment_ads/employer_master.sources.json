@@ -1,0 +1,15 @@
+{
+  "retrieved_at": "2026-09-18T17:12:59.894992+00:00",
+  "n_municipalities": 290,
+  "sources": [
+    {
+      "url": "https://www.scb.se/hitta-statistik/regional-statistik-och-kartor/regionala-indelningar/lan-och-kommuner/lan-och-kommuner-i-kodnummerordning/",
+      "sha256": "01e2e57890cbd0a227df052f75a53c713dd0fee72ce107ab4efd43d53d630a40"
+    },
+    {
+      "url": "https://api.skolverket.se/skolenhetsregistret/export/skolenhet/adressfil",
+      "sha256": "0397cb6bab27f187e1c4e82cb7b81aa8bfcdcfeb348dff0740c59c480bcb1770"
+    }
+  ],
+  "historical_validity": "Unknown endpoints remain blank. Applying current legal entities to historical recruitment assumes continuity; exact-number matching does not validate historical municipal boundaries."
+}
