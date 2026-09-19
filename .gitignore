@@ -11,3 +11,8 @@ dist/
 data/
 runs/
 .DS_Store
+
+# Recruitment source archives and generated ad text are local research artifacts.
+research/recruitment_ads/cache/
+research/recruitment_ads/output*/
+research/recruitment_ads/reviews/

@@ -1,0 +1,23 @@
+schema_version: 1
+classifier_version: recruitment-sv-1.1.0
+seed: 20260918
+years: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
+pilot_years: [2017, 2021, 2024]
+# Explicit scope; large cities, midsize and small/rural municipalities, north and south.
+pilot_municipalities: ['0180', '1480', '1280', '0380', '0580', '0980', '2080', '2480', '2584', '2422']
+occupations: ['5321', '5330']
+fixed_occupation_weights: {'5321': 0.5, '5330': 0.5}
+reposting_window_days: 45
+text_similarity_threshold: 0.90
+historical_extension_enabled: false
+llm_enabled: false
+validation_quotas:
+  formal: 50
+  strong: 100
+  functional_generic: 100
+  preferred_support: 100
+  rejected_candidate: 100
+  no_requirement: 150
+false_negative_sample_size: 300
+# Override language_patterns or elderly_context.positive/negative explicitly, then rerun
+# into a new output directory. Config and all module hashes form the processing cache key.

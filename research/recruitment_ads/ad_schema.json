@@ -1,0 +1,582 @@
+[
+  {
+    "name": "record_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "ad_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "original_ad_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "publication_date",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employer_name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employer_orgnr",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employer_orgnr_normalized",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employer_match_method",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employer_validity_basis",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "municipality_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "municipality_name",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "workplace_municipality",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "workplace_municipality_code",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "occupation_code",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "occupation_label",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "occupation_codes_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "original_occupation_labels",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "occupation_match_method",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "original_job_title",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "normalized_job_title",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employment_type",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "employment_duration",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "description_text",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "normalized_text",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "source_file",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "source_member",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "source_url",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "source_hash",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "retrieved_at",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "data_version",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "elderly_care_context",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "elderly_context_basis",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "elderly_context_evidence",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "exclusion_context_evidence",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "af_must_have_languages_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "af_nice_to_have_languages_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "original_occupation_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "original_occupation_group_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "language_hits_json",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "sfi_level",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "classification_status",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "classifier_version",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "dictionary_hash",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "matched_phrase",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "matched_sentence",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "context_before",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "context_after",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "manual_validation_status",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "recruitment_spell_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "text_hash",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "eligibility_reason",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "candidate_employer_municipality_id",
+    "type": "string",
+    "nullable": true
+  },
+  {
+    "name": "occupation_candidate",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "occupation_eligible",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "primary_eligible",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sensitivity_eligible",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "swedish_any_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "swedish_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "swedish_preferred",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "our_required_swedish",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "our_preferred_swedish",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "formal_threshold",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "cefr_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "swedish_course_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "strong_qualitative_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "functional_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "generic_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "oral_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "written_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "reading_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "understanding_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "alternative_language_accepted",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "af_must_have_swedish",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "af_nice_to_have_swedish",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "is_sample",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "calendar_complete",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "duplicate_ad_id",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "gers_b1",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "gers_b2",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "other_cefr_level",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_1",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_som_andrasprak_1",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sva_1",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_a",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_som_andrasprak_a",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_a",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_b",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_c",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_d",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_unspecified",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "language_test",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "strong_qualitative",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "functional_oral_written",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "generic_swedish_requirement",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "gers_b1_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "gers_b2_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "other_cefr_level_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_1_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_som_andrasprak_1_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sva_1_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_a_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "svenska_som_andrasprak_a_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_a_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_b_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_c_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_d_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "sfi_unspecified_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "language_test_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "strong_qualitative_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "functional_oral_written_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "generic_swedish_requirement_hit",
+    "type": "bool",
+    "nullable": true
+  },
+  {
+    "name": "year",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "month",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "number_of_vacancies",
+    "type": "int64",
+    "nullable": true
+  },
+  {
+    "name": "source_line",
+    "type": "int64",
+    "nullable": true
+  }
+]

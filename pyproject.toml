@@ -15,13 +15,14 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+recruitment = ["pyarrow>=18,<26", "pandas>=2.2,<4", "matplotlib>=3.9,<4"]
 dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "reportlab>=4.4,<5", "build>=1.2,<2"]
 
 [project.scripts]
 municipal-research = "municipal_research.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/municipal_research"]
+packages = ["src/municipal_research", "src/recruitment_ads"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
