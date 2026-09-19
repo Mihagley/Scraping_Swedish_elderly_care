@@ -8,7 +8,7 @@ import pyarrow.parquet as pq
 
 from .aggregate import CATEGORY_MEASURES, build_panel, measures, national_trends
 from .deduplicate import assign_spells
-from .download import write_json
+from .download import sha256, write_json
 from .employer import EmployerMaster
 from .pipeline import read_config
 from .schemas import SCHEMA
@@ -219,6 +219,44 @@ def prepare_tables(output, master_path, config_path):
         )
         for k, v in METHODOLOGY
     ]
+    gaps = [str(y) for y, source in sources.items() if source["employer_identifier_gap"]]
+    methodology = [
+        (
+            k,
+            (
+                f"Scope: {scope}. Processed archives: {', '.join(map(str, sorted(sources)))}. "
+                "Other configured years remain NOT_PROCESSED. Pilot aggregates are not national estimates."
+            )
+            if k == "Scope"
+            else (
+                "Employer identifier gaps in processed years: "
+                + (", ".join(gaps) or "none detected at whole-file level")
+                + ". Whole-file gaps leave primary estimates missing. Validated-name results are separate sensitivities."
+            )
+            if k == "2017 gap"
+            else v,
+        )
+        for k, v in methodology
+    ]
+    methodology = [
+        ("Employer identifier gaps" if k == "2017 gap" else k, v) for k, v in methodology
+    ]
+    write_json(
+        output / "analysis_manifest.json",
+        {
+            "classification_fingerprint": run["fingerprint"],
+            "ads_hash": sha256(output / "ads_classified.parquet"),
+            "config_hash": sha256(config_path),
+            "analysis_modules": {
+                name: sha256(Path(__file__).with_name(name))
+                for name in ("aggregate.py", "export.py", "validate.py")
+            },
+            "geographic_scope": scope,
+            "manual_validation": "pending"
+            if not validation.manual_required.astype(str).str.strip().ne("").any()
+            else "partially_or_fully_reviewed",
+        },
+    )
     tables = {
         "Municipality_Year": panel,
         "National_Trends": national,
@@ -267,7 +305,7 @@ def prepare_tables(output, master_path, config_path):
     return tables, {
         "Validation": validation,
         "False_Negatives": negatives,
-        "Instructions": pd.DataFrame([{"instruction": METHODOLOGY[15][1]}]),
+        "Instructions": pd.DataFrame([{"instruction": METHODOLOGY[16][1]}]),
     }
 
 
@@ -347,13 +385,22 @@ def figures(tables, output):
     national, occupations, panel = (
         tables[k] for k in ("National_Trends", "Occupation_Trends", "Municipality_Year")
     )
-    subtitle = "Pilot municipalities only · unvalidated original-text classifier"
+    is_pilot = not (not national.empty and national.nationally_representative_scope.all())
+    subtitle = (
+        "Pilot municipalities only" if is_pilot else "Municipal Platsbanken recruitment"
+    ) + " · original-text classifier; see validation results"
+    gap_years = sorted(panel.loc[panel.coverage_flag.eq("EMPLOYER_ID_GAP"), "year"].unique())
+    gap_note = (
+        (", ".join(map(str, gap_years)) + " omitted: employer identifier gap. ")
+        if gap_years
+        else ""
+    )
 
     def save(fig, name):
         fig.text(
             0.01,
             0.01,
-            subtitle + "\n2017 omitted: employer identifier gap. No formal-policy inference.",
+            subtitle + "\n" + gap_note + "No formal-policy inference.",
             fontsize=8,
         )
         fig.tight_layout(rect=(0, 0.10, 1, 1))
@@ -400,6 +447,7 @@ def figures(tables, output):
                     label=field.removeprefix("share_").replace("_", " "),
                 )
         ax.set(title=title, xlabel="Publication year", ylabel="Share of eligible ads")
+        ax.set_xticks(national.year.tolist())
         ax.yaxis.set_major_formatter(PercentFormatter(1))
         ax.set_ylim(0, 1)
         ax.legend(fontsize=8)
@@ -414,6 +462,7 @@ def figures(tables, output):
         ylabel="Share of eligible ads",
         ylim=(0, 1),
     )
+    ax.set_xticks(sorted(occupations.year.unique()))
     ax.yaxis.set_major_formatter(PercentFormatter(1))
     ax.legend()
     save(fig, "02_occupations")
@@ -433,12 +482,13 @@ def figures(tables, output):
         ylim=(0, 1),
     )
     ax.yaxis.set_major_formatter(PercentFormatter(1))
+    ax.set_xticks(sorted(observed.year.unique()))
     save(fig, "05_municipality_distribution")
     fig, ax = plt.subplots(figsize=(9, 5))
     counts = observed.assign(good=observed.coverage_flag.eq("GOOD")).groupby("year").good.sum()
     ax.bar(counts.index.astype(str), counts.values, color="#315E76")
     ax.set(
-        title="Pilot municipalities with at least 20 eligible ads",
+        title="Municipalities in scope with at least 20 eligible ads",
         xlabel="Publication year",
         ylabel="Number of municipalities",
     )
