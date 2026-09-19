@@ -2,7 +2,7 @@
 
 import re
 
-VERSION = "recruitment-sv-1.1.0"
+VERSION = "recruitment-sv-1.2.0"
 CATEGORIES = {
     "gers_b1": r"\bb\s?1\b",
     "gers_b2": r"\bb\s?2\b",
@@ -20,11 +20,11 @@ CATEGORIES = {
     "language_test": r"\bspråk(?:test|prov)\w*|\b(?:test|prov)\s+i\s+svenska\b",
     "strong_qualitative": r"\b(?:mycket (?:goda|bra) (?:språk)?kunskaper i (?:det )?svenska|behärska[r]? (?:det )?svenska(?: språket)?|flytande svenska|obehindrat (?:på )?svenska|fullgod svenska)\b",
     "functional_oral_written": r"\bsvenska(?: språket)?[, ]*(?:(?:väl |både |i |gällande )*)(?:tal och (?:i )?skrift|skrift och tal|muntligt och skriftligt)|\b(?:tala och skriva|läsa, skriva och förstå) svenska|\buttryck(?:a|er) (?:dig|sig) (?:väl |bra )?på svenska|(?:kommunicera|uttryck\w*).{0,45}(?:muntligt och skriftligt|tal och skrift).{0,25}svenska",
-    "generic_swedish_requirement": r"\b(?:goda )?(?:språk)?kunskaper i (?:det )?svenska|\bsvenska (?:språket )?krävs",
+    "generic_swedish_requirement": r"\bsvensktalande\b|\bsvenskkunskaper\b|\b(?:goda )?(?:språk)?kunskaper i (?:det )?svenska|\bsvenska (?:språket )?krävs",
 }
 FORMAL = tuple(list(CATEGORIES)[:14])
 CANDIDATE = re.compile(
-    r"\bsvenska\w*|\bsvenskundervis\w*|\bsvensk[- ]|\b(?:sva|sas|sfi|gers|cefr)\b|\b[abc]\s?[12]\b|\bspråk(?:test|prov|stöd|utveckl)\w*",
+    r"\bsvensk\w*|\bsvensk[- ]|\b(?:sva|sas|sfi|gers|cefr)\b|\b[abc]\s?[12]\b|\bspråk(?:test|prov|stöd|utveckl)\w*",
     re.I,
 )
 STATUS = (

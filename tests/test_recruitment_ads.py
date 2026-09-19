@@ -347,11 +347,19 @@ def test_small_end_to_end_and_resume(tmp_path):
     sample, negatives, _ = validation_samples(ads, CONFIG["validation_quotas"])
     preserve_review(output / "validation.csv", sample)
     preserve_review(output / "false_negatives.csv", negatives)
+    review_before = (output / "validation.csv").read_bytes()
+    negatives_before = (output / "false_negatives.csv").read_bytes()
     tables, reviews = prepare_tables(
         output, ROOT / "research/recruitment_ads/employer_master.csv", config_path
     )
     assert {"Municipality_Year", "Validation", "Coverage", "Audit"} <= set(tables)
     assert len(reviews["Validation"]) == 3
+    assert (output / "validation.csv").read_bytes() == review_before
+    assert (output / "false_negatives.csv").read_bytes() == negatives_before
+    prepare_tables(output, ROOT / "research/recruitment_ads/employer_master.csv", config_path)
+    assert (output / "validation.csv").read_bytes() == review_before
+    assert (output / "false_negatives.csv").read_bytes() == negatives_before
+    assert (output / "tables/Validation.csv").exists()
     assert (output / "municipality_year.parquet").exists()
     assert not tables["National_Trends"].nationally_representative_scope.any()
     shutil.copyfile(config_path, tmp_path / "config-copy.yaml")
@@ -406,3 +414,24 @@ def test_workbook_import_preserves_both_review_samples(tmp_path):
     export_xlsx({"False_Negatives": negative}, workbook)
     with pytest.raises(ValueError, match="Conflicting"):
         import_reviews(workbook, path, "False_Negatives")
+
+
+def test_context_review_candidates_explain_empty_primary_denominator():
+    row = ad("Arbeta inom hemtjänst och LSS.")
+    panel = build_panel(
+        [row],
+        [{"municipality_id": "0180", "municipality_name": "Stockholm"}],
+        [2024],
+        {2024: SOURCE},
+    )
+    overall = panel[panel.occupation_group == "overall"].iloc[0]
+    assert overall.n_ads == 0 and pd.isna(overall.share_required_ads)
+    assert overall.n_candidate_ads == 1 and overall.n_context_mixed_candidates == 1
+
+
+@pytest.mark.parametrize(
+    "text", ["Du måste vara svensktalande.", "Du har goda svenskkunskaper i tal och skrift."]
+)
+def test_compound_swedish_proficiency_wording(text):
+    row = ad(text)
+    assert row["swedish_requirement"] and row["generic_requirement"]

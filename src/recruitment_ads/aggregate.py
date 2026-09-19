@@ -67,6 +67,15 @@ def measures(rows):
 
 def build_panel(records, municipalities, years, sources, occupations=("5321", "5330")):
     eligible = [r for r in records if r["primary_eligible"] and not r.get("duplicate_ad_id")]
+    candidate_groups = {}
+    for row in records:
+        municipality_id = row.get("municipality_id") or row.get(
+            "candidate_employer_municipality_id"
+        )
+        candidate_groups.setdefault((municipality_id, row["year"], "overall"), []).append(row)
+        candidate_groups.setdefault(
+            (municipality_id, row["year"], row["occupation_code"]), []
+        ).append(row)
     grouped = {}
     for row in eligible:
         grouped.setdefault(
@@ -102,6 +111,19 @@ def build_panel(records, municipalities, years, sources, occupations=("5321", "5
                 elif identifier_gap:
                     values = {k: None for k in values}
                     values["coverage_flag"] = "EMPLOYER_ID_GAP"
+                candidates = candidate_groups.get((municipality["municipality_id"], year, code), [])
+                candidate_counts = {
+                    "n_candidate_ads": len(candidates),
+                    "n_context_mixed_candidates": sum(
+                        r["elderly_care_context"] == "mixed" for r in candidates
+                    ),
+                    "n_context_uncertain_candidates": sum(
+                        r["elderly_care_context"] == "uncertain" for r in candidates
+                    ),
+                    "n_unresolved_employer_candidates": sum(
+                        r["employer_match_method"] == "unresolved" for r in candidates
+                    ),
+                }
                 row = {
                     "municipality_id": municipality["municipality_id"],
                     "municipality_name": municipality["municipality_name"],
@@ -119,6 +141,7 @@ def build_panel(records, municipalities, years, sources, occupations=("5321", "5
                     "complete_year_trend_eligible": year_complete,
                     "validation_status": "manual_validation_pending",
                     **values,
+                    **{k: v if source else None for k, v in candidate_counts.items()},
                 }
                 if code == "overall":
                     row.update({f"share_required_{occ}": per_occ.get(occ) for occ in occupations})

@@ -12,7 +12,7 @@ from .download import sha256, write_json
 from .employer import EmployerMaster
 from .pipeline import read_config
 from .schemas import SCHEMA
-from .validate import af_comparison, false_negative_metrics, metrics
+from .validate import af_comparison, false_negative_metrics, metrics, preserve_review
 
 METHODOLOGY = [
     (
@@ -275,6 +275,10 @@ def prepare_tables(output, master_path, config_path):
                 "n_recruitment_spells",
                 "coverage_flag",
                 "year_status",
+                "n_candidate_ads",
+                "n_context_mixed_candidates",
+                "n_context_uncertain_candidates",
+                "n_unresolved_employer_candidates",
             ]
         ],
         "Employer_Matches": employer,
@@ -283,9 +287,16 @@ def prepare_tables(output, master_path, config_path):
         "Spell_Trends": national_spells,
         "Sensitivity": pd.DataFrame(sensitivities),
     }
+    table_dir = output / "tables"
+    table_dir.mkdir(exist_ok=True)
     for name, frame in tables.items():
-        frame.to_csv(output / f"{name}.csv", index=False, encoding="utf-8-sig")
-    discordant.to_csv(output / "af_discordant.csv", index=False, encoding="utf-8-sig")
+        frame.to_csv(table_dir / f"{name}.csv", index=False, encoding="utf-8-sig")
+    if not discordant.empty:
+        preserve_review(output / "af_discordant.csv", discordant)
+        preserve_review(
+            output / "af_discordant_sample.csv",
+            discordant.sample(n=min(50, len(discordant)), random_state=config["seed"]),
+        )
     write_json(
         output / "workbook_tables.json",
         {k: json.loads(v.to_json(orient="records", force_ascii=False)) for k, v in tables.items()},
@@ -297,7 +308,7 @@ def prepare_tables(output, master_path, config_path):
             "False_Negatives": json.loads(negatives.to_json(orient="records", force_ascii=False)),
             "Instructions": [
                 {
-                    "instruction": "Read complete original text. Enter manual_required and manual_formal as true or false only when adjudicated. Leave uncertain cases blank with a note. Recruitment wording cannot establish municipal policy."
+                    "instruction": "Row height displays a preview only. Read the complete original text in the cell editor/formula bar or companion CSV before coding. Enter manual_required and manual_formal as true or false only when adjudicated. Leave uncertain cases blank with a note. Recruitment wording cannot establish municipal policy."
                 }
             ],
         },
@@ -388,7 +399,7 @@ def figures(tables, output):
     is_pilot = not (not national.empty and national.nationally_representative_scope.all())
     subtitle = (
         "Pilot municipalities only" if is_pilot else "Municipal Platsbanken recruitment"
-    ) + " · original-text classifier; see validation results"
+    ) + " · unvalidated classifier estimates"
     gap_years = sorted(panel.loc[panel.coverage_flag.eq("EMPLOYER_ID_GAP"), "year"].unique())
     gap_note = (
         (", ".join(map(str, gap_years)) + " omitted: employer identifier gap. ")
@@ -449,7 +460,23 @@ def figures(tables, output):
         ax.set(title=title, xlabel="Publication year", ylabel="Share of eligible ads")
         ax.set_xticks(national.year.tolist())
         ax.yaxis.set_major_formatter(PercentFormatter(1))
-        ax.set_ylim(0, 1)
+        ymax = (
+            max(
+                0.01,
+                max(
+                    (
+                        float(national[f].max())
+                        for f in fields
+                        if f in national and not national.empty
+                    ),
+                    default=0,
+                )
+                * 1.25,
+            )
+            if name == "04_formal_categories"
+            else 1
+        )
+        ax.set_ylim(0, ymax)
         ax.legend(fontsize=8)
         save(fig, name)
     fig, ax = plt.subplots(figsize=(9, 5))

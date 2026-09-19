@@ -2,8 +2,8 @@
 
 import hashlib
 import re
-from collections import defaultdict
-from datetime import date
+from collections import defaultdict, deque
+from datetime import date, timedelta
 
 
 def shingles(text):
@@ -19,6 +19,7 @@ def assign_spells(records, window_days=45, threshold=0.9):
         key=lambda r: (r["publication_date"] or "", r["ad_id"], r["record_id"]),
     )
     groups = defaultdict(list)
+    expiry = deque()
     seen = set()
     representatives = {}
     for row in rows:
@@ -28,6 +29,13 @@ def assign_spells(records, window_days=45, threshold=0.9):
         if same_id:
             row["primary_eligible"] = False
         when = date.fromisoformat(row["publication_date"][:10]) if row["publication_date"] else None
+        if when:
+            cutoff = when - timedelta(days=window_days)
+            while expiry and expiry[0][1]["date"] < cutoff:
+                old_key, old_candidate = expiry.popleft()
+                groups[old_key].remove(old_candidate)
+                if not groups[old_key]:
+                    del groups[old_key]
         key = (
             row["employer_orgnr_normalized"] or row["municipality_id"],
             row["municipality_id"],
@@ -37,7 +45,7 @@ def assign_spells(records, window_days=45, threshold=0.9):
         tokens = shingles(row["normalized_text"])
         found = None
         if when and key[0] and key[2] and key[3] and tokens:
-            for candidate in reversed(groups[key]):
+            for candidate in reversed(groups.get(key, [])):
                 # Compare to the first ad to prevent an indefinitely chained spell.
                 if (when - candidate["date"]).days > window_days:
                     continue
@@ -48,8 +56,10 @@ def assign_spells(records, window_days=45, threshold=0.9):
                     break
         spell_id = found or hashlib.sha256(("spell:" + row["record_id"]).encode()).hexdigest()[:24]
         row["recruitment_spell_id"] = spell_id
-        if not found:
-            groups[key].append({"date": when, "tokens": tokens, "spell_id": spell_id})
+        if not found and when and key[0] and key[2] and key[3] and tokens:
+            candidate = {"date": when, "tokens": tokens, "spell_id": spell_id}
+            groups[key].append(candidate)
+            expiry.append((key, candidate))
         # Only eligible ads define the analytical representative, chosen earliest.
         if row["primary_eligible"]:
             if spell_id not in representatives:

@@ -71,7 +71,7 @@ python scripts/build_municipality_year_panel.py --skip-review-workbook
 
 The roughly 600-ad sample uses mutually exclusive category strata, then balances period, occupation, recruitment-volume band and employment duration. Recruitment volume is not population size. Rare strata are exhausted and their unfilled quotas deterministically redistributed; the sampling inventory records target and effective allocations and each cell's inclusion probability. The sample includes clearly labelled name-fallback candidates so 2017 terminology can be reviewed. Overall, period-specific and employer-method metrics are separate. The extra 300 predicted-negative ads are a seeded random sample from the **primary** population and may overlap the stratified sample. They are a separate review exercise, not pooled with the stratified metrics.
 
-The development inspection in `validation/development_review.json` records three ad IDs used to investigate rule failures. It is agent-assisted rule development, not human gold coding; flag those examples if a later labelled test set contains them.
+The development inspection in `validation/development_review.json` records five ad IDs used to investigate rule failures. It is agent-assisted rule development, not human gold coding; flag those examples if a later labelled test set contains them.
 
 No gold labels are supplied for real ads. Missing human labels leave precision, recall, specificity and F1 missing. Confusion matrices are observed only after coding. Both unweighted review-sample and design-weighted metrics are exported; reviewing only convenient cases invalidates population interpretations. The 95% PPV target is never asserted as achieved. The negative-only sample estimates the **false omission rate**, FN/(FN+TN), not FN/(TP+FN). True classifier sensitivity comes from the broader labelled sample. Review date/annotator and adjudication procedures can be recorded in notes.
 
@@ -79,7 +79,7 @@ Regenerating a sample never overwrites an existing human coding CSV; differing s
 
 ## Outputs and coverage
 
-The output directory contains `ads_classified.parquet`, `recruitment_spells.parquet`, `language_hits.parquet`, `municipality_year.parquet`, `municipality_year_spells.parquet`, review CSVs, observed metric CSVs, per-source inventories, config/code/source hashes, a separate analysis-module manifest, `validation.xlsx`, `recruitment_language_requirements.xlsx`, machine-readable summary tables and six figures (PNG and SVG).
+The output directory contains `ads_classified.parquet`, `recruitment_spells.parquet`, `language_hits.parquet`, `municipality_year.parquet`, `municipality_year_spells.parquet`, review CSVs, observed metric CSVs, per-source inventories, config/code/source hashes, a separate analysis-module manifest, `validation.xlsx`, `recruitment_language_requirements.xlsx`, machine-readable summary tables under `tables/` (separate from human review CSVs on case-insensitive filesystems) and six figures (PNG and SVG).
 
 The analytical workbook includes Municipality_Year, National_Trends, Occupation_Trends, Language_Categories, Validation, False_Negatives, AF_Comparison, Coverage, Employer_Matches, Methodology, Audit, Spell_Trends and Sensitivity. During a pilot, even the requested National_Trends sheet is explicitly scoped to the pilot municipalities. Figures show pilot aggregates only. No 2016–2025 national trend is claimed.
 
@@ -91,7 +91,7 @@ The 2021 annual file includes records published outside its nominal year; these 
 
 Raw downloads have SHA-256 hashes, URLs, original filenames, timestamps, ETag/Last-Modified and explicit source versions. Existing cached files are verified before use; changed inputs are refused. Interrupted partial downloads restart from byte zero. Classification checkpoints resume completed years only when input/config/code fingerprints and checkpoint hashes match. An interrupted year is scanned again. Changing rules or scope requires a new output directory.
 
-After pilot human coding and a documented decision on the early employer-ID gap, full primary processing is explicitly requested with:
+After the pilot inspection and rule revision, run full processing with the commands below. These produce explicitly unvalidated estimates while human coding is pending. Analytically reliable trend interpretation still requires observed validation performance and a documented treatment of employer/context coverage gaps:
 
 ```sh
 python scripts/download_historical_ads.py --years 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025
@@ -100,7 +100,7 @@ python scripts/validate_language_classifier.py --output research/recruitment_ads
 python scripts/build_municipality_year_panel.py --output research/recruitment_ads/output-full-v1
 ```
 
-The first execution intentionally stops at the pilot/review checkpoint. 2006–2015 has no approved comparable adapter. 2026 quarterly data is not downloaded by the annual command; a separately scoped partial-year adapter is still needed. Both extension periods are excluded by default.
+The first execution uses the pilot/review checkpoint before downloading the remaining annual archives. Full-run estimates do not become validated merely because all annual files were processed. 2006–2015 has no approved comparable adapter. 2026 quarterly data is not downloaded by the annual command; a separately scoped partial-year adapter is still needed. Both extension periods are excluded by default.
 
 ```sh
 python -m ruff check .
@@ -110,3 +110,7 @@ python -m pytest tests/test_recruitment_ads.py -q
 ```
 
 The supplied pilot ad classifications use the frozen classification code recorded in `run.json`. Table/figure exports record their own module hashes in `analysis_manifest.json`; later presentation fixes need not be mistaken for new classification evidence. A changed checkout can intentionally require a fresh output directory even when only export code changed.
+
+The AF discordance audit has a separate seeded sample of up to 50 records in `af_discordant_sample.csv`. Its human coding is preserved. The pilot official `must_have.languages` lists were empty in every primary-eligible ad, so AF non-tagging cannot validate the text classifier.
+
+Classifier versions: the archived three-year pilot uses `recruitment-sv-1.1.0` and `config.pilot-v1.1.yaml`. The full run uses `recruitment-sv-1.2.0`, adding compound Swedish proficiency wording (`svenskkunskaper`, `svensktalande`). Keep these versions distinct. Coverage exports also include retained candidate and mixed/uncertain counts so zero primary eligibility is not mistaken for an absence of recruitment.

@@ -186,5 +186,53 @@
     "source_file": "2024_beta1_jsonl.zip",
     "source_hash": "c9e24e966da13bc7b02d04c2f89f38d8be89aae87ba8f9fdd2607b5323b82735",
     "classifier_version": "recruitment-sv-1.0.0"
+  },
+  {
+    "ad_id": "b24e11093c322be0161ffe47434af8d5dd7274dc",
+    "year": 2017,
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2017_beta1_jsonl.zip",
+    "source_hash": "b3bcd790aae11355094aa157f3704066544ede5a180d8758cf2b6f13d0f6929c",
+    "source_file": "2017_beta1_jsonl.zip",
+    "classifier_version": "recruitment-sv-1.1.0",
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Compound svenskkunskaper was missed in v1.1; v1.2 broadens Swedish-word candidates and adds this explicit proficiency category.",
+    "old_hits": [],
+    "revised_hits": [
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:explicit_requirement",
+        "matched_phrase": "svenskkunskaper",
+        "matched_sentence": " Då arbetet innefattar dokumentation och rapportering är det viktigt att du har tillräckligt goda svenskkunskaper i både tal och skrift.",
+        "context_before": " Ditt schema innehåller både vardag- och helgpass tillika arbetspass förlagda på både kväll och dag, vilket förutsätter flexibilitet.",
+        "context_after": " ÖVRIGT I Örgryte-Härlanda arbetar vi för att arbetsmiljön ska vara god och hälsofrämjande.  Som anställd erbjuds du bland annat friskvårdsbidrag och cykelförmån.",
+        "start": 3187,
+        "end": 3202
+      }
+    ]
+  },
+  {
+    "ad_id": "2e7ac1e0df370934ab7e721ec7beb2acbf906cac",
+    "year": 2017,
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2017_beta1_jsonl.zip",
+    "source_hash": "b3bcd790aae11355094aa157f3704066544ede5a180d8758cf2b6f13d0f6929c",
+    "source_file": "2017_beta1_jsonl.zip",
+    "classifier_version": "recruitment-sv-1.1.0",
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Compound svenskkunskaper was missed in v1.1; v1.2 broadens Swedish-word candidates and adds this explicit proficiency category.",
+    "old_hits": [],
+    "revised_hits": [
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:explicit_requirement",
+        "matched_phrase": "svenskkunskaper",
+        "matched_sentence": " Då arbetet innefattar dokumentation och rapportering är det viktigt att du har tillräckligt goda svenskkunskaper i både tal och skrift.",
+        "context_before": " Ditt schema innehåller både vardag- och helgpass tillika arbetspass förlagda på både kväll och dag, vilket förutsätter flexibilitet.",
+        "context_after": " ÖVRIGT I Örgryte-Härlanda arbetar vi för att arbetsmiljön ska vara god och hälsofrämjande.  Som anställd erbjuds du bland annat friskvårdsbidrag och cykelförmån.",
+        "start": 3557,
+        "end": 3572
+      }
+    ]
   }
 ]

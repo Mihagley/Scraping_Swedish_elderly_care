@@ -25,6 +25,7 @@ class EmployerMaster:
     def __init__(self, rows, aliases=()):
         self.rows = list(rows)
         self.by_org = {}
+        self.by_municipality = {}
         for row in self.rows:
             org = normalize_orgnr(row["municipality_orgnr"])
             if not org or not re.fullmatch(r"\d{4}", row["municipality_id"]) or not row["source"]:
@@ -40,6 +41,7 @@ class EmployerMaster:
                 ):
                     raise ValueError(f"Overlapping organisation-number intervals: {org}")
             self.by_org.setdefault(org, []).append(row)
+            self.by_municipality.setdefault(row["municipality_id"], []).append(row)
         self.aliases = {}
         for alias in aliases:
             if alias.get("validated") != "true" or not alias.get("source"):
@@ -86,7 +88,7 @@ class EmployerMaster:
             alias = self.aliases.get(normalize_name(name))
             matches = [
                 r
-                for r in self.rows
+                for r in self.by_municipality.get(alias["municipality_id"] if alias else None, [])
                 if alias
                 and self.active(alias, when)
                 and r["municipality_id"] == alias["municipality_id"]
