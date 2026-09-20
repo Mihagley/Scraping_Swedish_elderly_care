@@ -1,0 +1,102 @@
+{
+  "kind": "nonrandom_agent_development_review_not_gold_standard",
+  "classifier_version": "recruitment-sv-1.3.1",
+  "human_labels_entered": false,
+  "cases": [
+    {
+      "record_id": "071626f1036d68f34a6fa030",
+      "year": 2015,
+      "original_snippet": "I arbetet ingår dokumentation enligt gällande lagstiftning vilket innebär att du måste utrycka dig väl i tal och skrift på svenska samt ha en viss datavana.",
+      "development_note": "Explicit ability requirement; historical spelling now recognised.",
+      "current_hits": [
+        {
+          "category": "functional_oral_written",
+          "status": "required",
+          "rule_id": "functional_oral_written:explicit_requirement",
+          "matched_phrase": "utrycka dig väl i tal och skrift på svenska",
+          "matched_sentence": "I arbetet ingår dokumentation enligt gällande lagstiftning vilket innebär att du måste utrycka dig väl i tal och skrift på svenska samt ha en viss datavana.",
+          "context_before": "",
+          "context_after": "",
+          "start": 87,
+          "end": 130
+        }
+      ]
+    },
+    {
+      "record_id": "9ada441c05fe31ac79ba5779",
+      "year": 2021,
+      "original_snippet": "Om du har en tidigare gymnasial utbildning, eller motsvarande med godkänt betyg i Samhällskunskap 1, Svenska 1, eller Svenska som andra språk 1 på gymnasial nivå ska dessa betyg bifogas din ansökan.",
+      "development_note": "Conditional attachment of existing grades; not a mandatory course threshold.",
+      "current_hits": [
+        {
+          "category": "svenska_1",
+          "status": "application_instruction",
+          "rule_id": "svenska_1:conditional_existing_credentials_submission",
+          "matched_phrase": "Svenska 1",
+          "matched_sentence": "Om du har en tidigare gymnasial utbildning, eller motsvarande med godkänt betyg i Samhällskunskap 1, Svenska 1, eller Svenska som andra språk 1 på gymnasial nivå ska dessa betyg bifogas din ansökan.",
+          "context_before": "",
+          "context_after": "",
+          "start": 101,
+          "end": 110
+        }
+      ]
+    },
+    {
+      "record_id": "f70fe66291fec63d3ebe6e5c",
+      "year": 2020,
+      "original_snippet": "Komplettera din ansökan med intyg/betyg som visar att du är godkänd i svenska grund/svenska som andra språk så vi vet att du har rätt behörighet till utbildningen.",
+      "development_note": "Admission to training versus job entry needs contextual human review.",
+      "current_hits": [
+        {
+          "category": "untyped",
+          "status": "uncertain",
+          "rule_id": "untyped:training_admission_vs_job_entry_review",
+          "matched_phrase": "svenska",
+          "matched_sentence": "Komplettera din ansökan med intyg/betyg som visar att du är godkänd i svenska grund/svenska som andra språk så vi vet att du har rätt behörighet till utbildningen.",
+          "context_before": "",
+          "context_after": "",
+          "start": 70,
+          "end": 77
+        }
+      ]
+    },
+    {
+      "record_id": "f8b1951463bfeb42f64778fd",
+      "year": 2006,
+      "original_snippet": "   \" kan god svenska i tal och skrift",
+      "development_note": "Quotation-mark bullets remain uncertain without an unambiguous attached requirement cue.",
+      "current_hits": [
+        {
+          "category": "functional_oral_written",
+          "status": "uncertain",
+          "rule_id": "functional_oral_written:no_unambiguous_entry_requirement",
+          "matched_phrase": "svenska i tal och skrift",
+          "matched_sentence": "   \" kan god svenska i tal och skrift",
+          "context_before": "",
+          "context_after": "",
+          "start": 13,
+          "end": 37
+        }
+      ]
+    },
+    {
+      "record_id": "f996cb468e07fc0c270dafe4",
+      "year": 2006,
+      "original_snippet": "Kvalifikationer: har undersköterske-/ vårdbiträdesutbildning eller erfarenhet från vård och omsorgsarbete är en trygg och positiv person med ett öppet sinne goda kunskaper i svenska språket kan arbeta såväl självständigt som i grupp körkort, detta är ett krav och ska anges i din ansökan.",
+      "development_note": "Flattened qualification list; machine required status may borrow a driving-licence cue. Retain for human adjudication.",
+      "current_hits": [
+        {
+          "category": "generic_swedish_requirement",
+          "status": "required",
+          "rule_id": "generic_swedish_requirement:explicit_requirement",
+          "matched_phrase": "goda kunskaper i svenska",
+          "matched_sentence": "Kvalifikationer: har undersköterske-/ vårdbiträdesutbildning eller erfarenhet från vård och omsorgsarbete är en trygg och positiv person med ett öppet sinne goda kunskaper i svenska språket kan arbeta såväl självständigt som i grupp körkort, detta är ett krav och ska anges i din ansökan.",
+          "context_before": "",
+          "context_after": "",
+          "start": 157,
+          "end": 181
+        }
+      ]
+    }
+  ]
+}

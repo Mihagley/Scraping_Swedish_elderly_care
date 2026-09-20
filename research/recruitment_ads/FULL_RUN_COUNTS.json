@@ -1,0 +1,228 @@
+{
+  "source_records": 7367297,
+  "retained_ads": 74800,
+  "primary_ads": 26772,
+  "primary_spells": 24196,
+  "spell_output_rows": 24196,
+  "duplicate_ad_ids": 82,
+  "primary_required": 13936,
+  "primary_vacancies": 167654,
+  "missing_primary_vacancies": 4,
+  "municipality_year_rows": 8700,
+  "validation_ads": 600,
+  "negative_review_ads": 300,
+  "review_overlap": 4,
+  "validation_strata": {
+    "no_requirement": 150,
+    "strong": 100,
+    "preferred_support": 100,
+    "functional_generic": 100,
+    "rejected_candidate": 100,
+    "formal": 50
+  },
+  "validation_periods": {
+    "2022–2025": 227,
+    "2019–2021": 195,
+    "2016–2018": 178
+  },
+  "validation_occupations": {
+    "5321": 339,
+    "5330": 261
+  },
+  "validation_employer_methods": {
+    "employer_name_validated": 302,
+    "orgnr_exact": 298
+  },
+  "annual": [
+    {
+      "year": 2016,
+      "source_records": 718046,
+      "retained_candidates": 6868,
+      "missing_employer_orgnr": 718046,
+      "publication_year_mismatch_or_missing": 0,
+      "primary_ads": null,
+      "primary_spells": null,
+      "required_ads": null
+    },
+    {
+      "year": 2017,
+      "source_records": 715291,
+      "retained_candidates": 7324,
+      "missing_employer_orgnr": 715291,
+      "publication_year_mismatch_or_missing": 0,
+      "primary_ads": null,
+      "primary_spells": null,
+      "required_ads": null
+    },
+    {
+      "year": 2018,
+      "source_records": 682969,
+      "retained_candidates": 7393,
+      "missing_employer_orgnr": 682969,
+      "publication_year_mismatch_or_missing": 0,
+      "primary_ads": null,
+      "primary_spells": null,
+      "required_ads": null
+    },
+    {
+      "year": 2019,
+      "source_records": 640257,
+      "retained_candidates": 6663,
+      "missing_employer_orgnr": 640257,
+      "publication_year_mismatch_or_missing": 0,
+      "primary_ads": null,
+      "primary_spells": null,
+      "required_ads": null
+    },
+    {
+      "year": 2020,
+      "source_records": 490713,
+      "retained_candidates": 5382,
+      "missing_employer_orgnr": 490713,
+      "publication_year_mismatch_or_missing": 120,
+      "primary_ads": null,
+      "primary_spells": null,
+      "required_ads": null
+    },
+    {
+      "year": 2021,
+      "source_records": 730824,
+      "retained_candidates": 6453,
+      "missing_employer_orgnr": 6833,
+      "publication_year_mismatch_or_missing": 2538,
+      "primary_ads": 4278,
+      "primary_spells": 4044,
+      "required_ads": 1782
+    },
+    {
+      "year": 2022,
+      "source_records": 1061788,
+      "retained_candidates": 9882,
+      "missing_employer_orgnr": 7030,
+      "publication_year_mismatch_or_missing": 5753,
+      "primary_ads": 6458,
+      "primary_spells": 5826,
+      "required_ads": 3182
+    },
+    {
+      "year": 2023,
+      "source_records": 1028074,
+      "retained_candidates": 9731,
+      "missing_employer_orgnr": 5706,
+      "publication_year_mismatch_or_missing": 4757,
+      "primary_ads": 6366,
+      "primary_spells": 5667,
+      "required_ads": 3447
+    },
+    {
+      "year": 2024,
+      "source_records": 717094,
+      "retained_candidates": 7174,
+      "missing_employer_orgnr": 4899,
+      "publication_year_mismatch_or_missing": 4201,
+      "primary_ads": 4601,
+      "primary_spells": 4162,
+      "required_ads": 2578
+    },
+    {
+      "year": 2025,
+      "source_records": 582241,
+      "retained_candidates": 7930,
+      "missing_employer_orgnr": 4539,
+      "publication_year_mismatch_or_missing": 3030,
+      "primary_ads": 5069,
+      "primary_spells": 4620,
+      "required_ads": 2947
+    }
+  ],
+  "coverage_overall": [
+    {
+      "year": 2016,
+      "EMPLOYER_ID_GAP": 290
+    },
+    {
+      "year": 2017,
+      "EMPLOYER_ID_GAP": 290
+    },
+    {
+      "year": 2018,
+      "EMPLOYER_ID_GAP": 290
+    },
+    {
+      "year": 2019,
+      "EMPLOYER_ID_GAP": 290
+    },
+    {
+      "year": 2020,
+      "EMPLOYER_ID_GAP": 290
+    },
+    {
+      "year": 2021,
+      "MODERATE": 116,
+      "GOOD": 74,
+      "SPARSE": 67,
+      "NO_ADS": 33
+    },
+    {
+      "year": 2022,
+      "MODERATE": 113,
+      "GOOD": 103,
+      "NO_ADS": 38,
+      "SPARSE": 36
+    },
+    {
+      "year": 2023,
+      "MODERATE": 112,
+      "GOOD": 101,
+      "NO_ADS": 43,
+      "SPARSE": 34
+    },
+    {
+      "year": 2024,
+      "MODERATE": 137,
+      "GOOD": 64,
+      "SPARSE": 50,
+      "NO_ADS": 39
+    },
+    {
+      "year": 2025,
+      "MODERATE": 121,
+      "GOOD": 78,
+      "NO_ADS": 46,
+      "SPARSE": 45
+    }
+  ],
+  "af_comparison": [
+    {
+      "our_required_swedish": false,
+      "af_must_have_swedish": false,
+      "n_ads": 12794
+    },
+    {
+      "our_required_swedish": false,
+      "af_must_have_swedish": true,
+      "n_ads": 42
+    },
+    {
+      "our_required_swedish": false,
+      "af_must_have_swedish": null,
+      "n_ads": 0
+    },
+    {
+      "our_required_swedish": true,
+      "af_must_have_swedish": false,
+      "n_ads": 13935
+    },
+    {
+      "our_required_swedish": true,
+      "af_must_have_swedish": true,
+      "n_ads": 1
+    },
+    {
+      "our_required_swedish": true,
+      "af_must_have_swedish": null,
+      "n_ads": 0
+    }
+  ],
+  "human_labels": 0
+}

@@ -21,6 +21,7 @@ jobs:
           cache: pip
       - run: python -m pip install -r requirements.lock.txt
       - run: python -m pip install --no-deps -e .
+      - run: python -m pip install -r requirements-recruitment.lock.txt
       - run: python -m ruff check .
       - run: python -m ruff format --check .
       - run: python -m pytest --cov=municipal_research --cov-report=term-missing

@@ -292,3 +292,7 @@ Implementation patterns were checked against the official documentation on 2026-
 
 See `docs/architecture.md` for the module map and the boundaries of mechanical and
 semantic verification.
+
+## Separate recruitment advertisement analysis
+
+The [recruitment advertisement pipeline](research/recruitment_ads/README.md) measures Swedish-language wording in official historical Platsbanken ads. Its datasets, classifier, validation and outputs are separate from municipal-policy research. Advertisement wording never establishes formal policy. See the [pilot report](research/recruitment_ads/PILOT_REPORT.md) for counts and coverage limits.

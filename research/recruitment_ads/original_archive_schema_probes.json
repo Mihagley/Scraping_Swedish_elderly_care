@@ -1,0 +1,64 @@
+[
+  {
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/2017.jsonl.zip",
+    "retrieved_at": "2026-09-19T13:53:18.750154+00:00",
+    "prefix_file": "2017.jsonl.zip.prefix",
+    "prefix_bytes": 1048576,
+    "prefix_sha256": "c343d0bfa1774d4cf5bc484a77deea9a4cf76faaefc47ceea803d7d0a5fb261e",
+    "partial_probe_only": true,
+    "member": "2017.jsonl",
+    "n_records_probed": 10,
+    "organisation_number_present": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "employer_keys": [
+      "email",
+      "name",
+      "organization_number",
+      "phone_number",
+      "url",
+      "workplace"
+    ],
+    "content_range": "bytes 0-1048575/652857977"
+  },
+  {
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/2020.jsonl.zip",
+    "retrieved_at": "2026-09-19T13:53:19.127842+00:00",
+    "prefix_file": "2020.jsonl.zip.prefix",
+    "prefix_bytes": 1048576,
+    "prefix_sha256": "bfc601cd9288bb9f9b94c40f3aa44418fc3ab8a8666c4a8fe82998b9c4248c9c",
+    "partial_probe_only": true,
+    "member": "2020.jsonl",
+    "n_records_probed": 10,
+    "organisation_number_present": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "employer_keys": [
+      "email",
+      "name",
+      "organization_number",
+      "phone_number",
+      "url",
+      "workplace"
+    ],
+    "content_range": "bytes 0-1048575/552526668"
+  }
+]

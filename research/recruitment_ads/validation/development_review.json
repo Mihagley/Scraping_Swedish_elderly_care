@@ -1,0 +1,238 @@
+[
+  {
+    "ad_id": "4647863bff7323d79d9dd6dbc725787632805c53",
+    "year": 2024,
+    "old_required": false,
+    "old_hits": [
+      {
+        "category": "functional_oral_written",
+        "context_after": " Du ska ha fyllt 18 år senast 1 juni 2024, i enlighet med Arbetsmiljöverkets föreskrift om minderårigas arbetsmiljö (AFS 2018:8).  Ska du arbeta i hemtjänsten behöver du kunna cykla.",
+        "context_before": " Du utgår från allas lika värde och skapa en god atmosfär i mötet.",
+        "end": 3055,
+        "matched_phrase": "svenska i både tal och skrift",
+        "matched_sentence": " Dokumentation och kommunikation är en viktig del av arbetet, därför behöver du ha goda kunskaper i svenska i både tal och skrift.",
+        "rule_id": "functional_oral_written:no_unambiguous_entry_requirement",
+        "start": 3026,
+        "status": "uncertain"
+      },
+      {
+        "category": "generic_swedish_requirement",
+        "context_after": " Du ska ha fyllt 18 år senast 1 juni 2024, i enlighet med Arbetsmiljöverkets föreskrift om minderårigas arbetsmiljö (AFS 2018:8).  Ska du arbeta i hemtjänsten behöver du kunna cykla.",
+        "context_before": " Du utgår från allas lika värde och skapa en god atmosfär i mötet.",
+        "end": 3033,
+        "matched_phrase": "goda kunskaper i svenska",
+        "matched_sentence": " Dokumentation och kommunikation är en viktig del av arbetet, därför behöver du ha goda kunskaper i svenska i både tal och skrift.",
+        "rule_id": "generic_swedish_requirement:no_unambiguous_entry_requirement",
+        "start": 3009,
+        "status": "uncertain"
+      }
+    ],
+    "revised_hits": [
+      {
+        "category": "functional_oral_written",
+        "status": "required",
+        "rule_id": "functional_oral_written:explicit_requirement",
+        "matched_phrase": "svenska i både tal och skrift",
+        "matched_sentence": " Dokumentation och kommunikation är en viktig del av arbetet, därför behöver du ha goda kunskaper i svenska i både tal och skrift.",
+        "context_before": " Du utgår från allas lika värde och skapa en god atmosfär i mötet.",
+        "context_after": " Du ska ha fyllt 18 år senast 1 juni 2024, i enlighet med Arbetsmiljöverkets föreskrift om minderårigas arbetsmiljö (AFS 2018:8).  Ska du arbeta i hemtjänsten behöver du kunna cykla.",
+        "start": 3026,
+        "end": 3055
+      },
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:explicit_requirement",
+        "matched_phrase": "goda kunskaper i svenska",
+        "matched_sentence": " Dokumentation och kommunikation är en viktig del av arbetet, därför behöver du ha goda kunskaper i svenska i både tal och skrift.",
+        "context_before": " Du utgår från allas lika värde och skapa en god atmosfär i mötet.",
+        "context_after": " Du ska ha fyllt 18 år senast 1 juni 2024, i enlighet med Arbetsmiljöverkets föreskrift om minderårigas arbetsmiljö (AFS 2018:8).  Ska du arbeta i hemtjänsten behöver du kunna cykla.",
+        "start": 3009,
+        "end": 3033
+      }
+    ],
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Inspect qualification-list scope and inverse word order; remaining ambiguous evidence stays uncertain.",
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2024_beta1_jsonl.zip",
+    "source_file": "2024_beta1_jsonl.zip",
+    "source_hash": "c9e24e966da13bc7b02d04c2f89f38d8be89aae87ba8f9fdd2607b5323b82735",
+    "classifier_version": "recruitment-sv-1.0.0"
+  },
+  {
+    "ad_id": "488ccdac6c025068cc26ee7bc96be82bc386a417",
+    "year": 2024,
+    "old_required": false,
+    "old_hits": [
+      {
+        "category": "strong_qualitative",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "end": 2222,
+        "matched_phrase": "Mycket goda kunskaper i Svenska",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "rule_id": "strong_qualitative:no_unambiguous_entry_requirement",
+        "start": 2191,
+        "status": "uncertain"
+      },
+      {
+        "category": "functional_oral_written",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "end": 2239,
+        "matched_phrase": "Svenska i tal och skrift",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "rule_id": "functional_oral_written:no_unambiguous_entry_requirement",
+        "start": 2215,
+        "status": "uncertain"
+      },
+      {
+        "category": "generic_swedish_requirement",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "end": 2222,
+        "matched_phrase": "goda kunskaper i Svenska",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "rule_id": "generic_swedish_requirement:no_unambiguous_entry_requirement",
+        "start": 2198,
+        "status": "uncertain"
+      }
+    ],
+    "revised_hits": [
+      {
+        "category": "strong_qualitative",
+        "status": "required",
+        "rule_id": "strong_qualitative:qualification_list_heading",
+        "matched_phrase": "Mycket goda kunskaper i Svenska",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "start": 2191,
+        "end": 2222
+      },
+      {
+        "category": "functional_oral_written",
+        "status": "required",
+        "rule_id": "functional_oral_written:qualification_list_heading",
+        "matched_phrase": "Svenska i tal och skrift",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "start": 2215,
+        "end": 2239
+      },
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:qualification_list_heading",
+        "matched_phrase": "goda kunskaper i Svenska",
+        "matched_sentence": "• Mycket goda kunskaper i Svenska i tal och skrift",
+        "context_before": "• Du är bekväm med att ta emot delegeringar",
+        "context_after": "Har du en specialistundersköterskeutbildning med geriatrik som inriktning är det meriterande.  Vi ser gärna att du har erfarenhet av att arbeta med personer med demenssjukdom samt att du har erfarenhet av HBTQI frågor, men det är inget krav.",
+        "start": 2198,
+        "end": 2222
+      }
+    ],
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Inspect qualification-list scope and inverse word order; remaining ambiguous evidence stays uncertain.",
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2024_beta1_jsonl.zip",
+    "source_file": "2024_beta1_jsonl.zip",
+    "source_hash": "c9e24e966da13bc7b02d04c2f89f38d8be89aae87ba8f9fdd2607b5323b82735",
+    "classifier_version": "recruitment-sv-1.0.0"
+  },
+  {
+    "ad_id": "b6f48c55146c42830805d711f9d47e036a3a68c9",
+    "year": 2024,
+    "old_required": false,
+    "old_hits": [
+      {
+        "category": "functional_oral_written",
+        "context_after": "Det är meriterande om: du har utbildning inom demens (BPSD)",
+        "context_before": "ha god vana av dokumentation",
+        "end": 1971,
+        "matched_phrase": "svenska språket i både tal och skrift",
+        "matched_sentence": "ha goda kunskaper i det svenska språket i både tal och skrift",
+        "rule_id": "functional_oral_written:no_unambiguous_entry_requirement",
+        "start": 1934,
+        "status": "uncertain"
+      }
+    ],
+    "revised_hits": [
+      {
+        "category": "functional_oral_written",
+        "status": "uncertain",
+        "rule_id": "functional_oral_written:no_unambiguous_entry_requirement",
+        "matched_phrase": "svenska språket i både tal och skrift",
+        "matched_sentence": "ha goda kunskaper i det svenska språket i både tal och skrift",
+        "context_before": "ha god vana av dokumentation",
+        "context_after": "Det är meriterande om: du har utbildning inom demens (BPSD)",
+        "start": 1934,
+        "end": 1971
+      },
+      {
+        "category": "generic_swedish_requirement",
+        "status": "uncertain",
+        "rule_id": "generic_swedish_requirement:no_unambiguous_entry_requirement",
+        "matched_phrase": "goda kunskaper i det svenska",
+        "matched_sentence": "ha goda kunskaper i det svenska språket i både tal och skrift",
+        "context_before": "ha god vana av dokumentation",
+        "context_after": "Det är meriterande om: du har utbildning inom demens (BPSD)",
+        "start": 1913,
+        "end": 1941
+      }
+    ],
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Inspect qualification-list scope and inverse word order; remaining ambiguous evidence stays uncertain.",
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2024_beta1_jsonl.zip",
+    "source_file": "2024_beta1_jsonl.zip",
+    "source_hash": "c9e24e966da13bc7b02d04c2f89f38d8be89aae87ba8f9fdd2607b5323b82735",
+    "classifier_version": "recruitment-sv-1.0.0"
+  },
+  {
+    "ad_id": "b24e11093c322be0161ffe47434af8d5dd7274dc",
+    "year": 2017,
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2017_beta1_jsonl.zip",
+    "source_hash": "b3bcd790aae11355094aa157f3704066544ede5a180d8758cf2b6f13d0f6929c",
+    "source_file": "2017_beta1_jsonl.zip",
+    "classifier_version": "recruitment-sv-1.1.0",
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Compound svenskkunskaper was missed in v1.1; v1.2 broadens Swedish-word candidates and adds this explicit proficiency category.",
+    "old_hits": [],
+    "revised_hits": [
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:explicit_requirement",
+        "matched_phrase": "svenskkunskaper",
+        "matched_sentence": " Då arbetet innefattar dokumentation och rapportering är det viktigt att du har tillräckligt goda svenskkunskaper i både tal och skrift.",
+        "context_before": " Ditt schema innehåller både vardag- och helgpass tillika arbetspass förlagda på både kväll och dag, vilket förutsätter flexibilitet.",
+        "context_after": " ÖVRIGT I Örgryte-Härlanda arbetar vi för att arbetsmiljön ska vara god och hälsofrämjande.  Som anställd erbjuds du bland annat friskvårdsbidrag och cykelförmån.",
+        "start": 3187,
+        "end": 3202
+      }
+    ]
+  },
+  {
+    "ad_id": "2e7ac1e0df370934ab7e721ec7beb2acbf906cac",
+    "year": 2017,
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/berikade/kompletta/2017_beta1_jsonl.zip",
+    "source_hash": "b3bcd790aae11355094aa157f3704066544ede5a180d8758cf2b6f13d0f6929c",
+    "source_file": "2017_beta1_jsonl.zip",
+    "classifier_version": "recruitment-sv-1.1.0",
+    "review_type": "agent_development_inspection_not_human_gold",
+    "notes": "Compound svenskkunskaper was missed in v1.1; v1.2 broadens Swedish-word candidates and adds this explicit proficiency category.",
+    "old_hits": [],
+    "revised_hits": [
+      {
+        "category": "generic_swedish_requirement",
+        "status": "required",
+        "rule_id": "generic_swedish_requirement:explicit_requirement",
+        "matched_phrase": "svenskkunskaper",
+        "matched_sentence": " Då arbetet innefattar dokumentation och rapportering är det viktigt att du har tillräckligt goda svenskkunskaper i både tal och skrift.",
+        "context_before": " Ditt schema innehåller både vardag- och helgpass tillika arbetspass förlagda på både kväll och dag, vilket förutsätter flexibilitet.",
+        "context_after": " ÖVRIGT I Örgryte-Härlanda arbetar vi för att arbetsmiljön ska vara god och hälsofrämjande.  Som anställd erbjuds du bland annat friskvårdsbidrag och cykelförmån.",
+        "start": 3557,
+        "end": 3572
+      }
+    ]
+  }
+]
