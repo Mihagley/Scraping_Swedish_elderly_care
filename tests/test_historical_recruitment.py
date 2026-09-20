@@ -256,3 +256,17 @@ def test_application_mention_does_not_swallow_proficiency_requirement():
     )
     assert any(h["status"] == "required" for h in hits)
     assert not any(h["status"] == "application_instruction" for h in hits)
+
+
+def test_conditional_attachment_of_existing_grades_is_not_a_threshold():
+    hits = classify_language(
+        "Om du har en tidigare utbildning med godkänt betyg i Svenska 1 ska dessa betyg bifogas din ansökan."
+    )
+    assert hits and all(h["status"] == "application_instruction" for h in hits)
+
+
+def test_training_admission_is_not_automatically_a_job_entry_requirement():
+    hits = classify_language(
+        "Komplettera din ansökan med betyg som visar att du är godkänd i svenska så vi vet att du har rätt behörighet till utbildningen."
+    )
+    assert hits and all(h["status"] == "uncertain" for h in hits)

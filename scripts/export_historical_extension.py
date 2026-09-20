@@ -62,7 +62,9 @@ def figures(output):
     def segmented(ax, rows, field, label, color):
         rows = rows.sort_values("year")
         for i, (lo, hi) in enumerate([(2006, 2015), (2016, 2020), (2021, 2025)]):
-            part = rows[rows.year.between(lo, hi)]
+            part = (
+                rows.set_index("year").reindex(range(lo, hi + 1)).rename_axis("year").reset_index()
+            )
             ax.plot(
                 part.year,
                 part[field],
@@ -119,6 +121,11 @@ def figures(output):
                 if rows[field].notna().any():
                     segmented(ax, rows, field, label, color)
             ax.legend(loc="upper left", fontsize=8, frameon=False)
+        if name == "04_formal_levels":
+            upper = max(0.02, float(national[[field for field, _ in fields]].max().max()) * 1.35)
+            for ax in axes:
+                ax.set_ylim(0, upper)
+                ax.yaxis.set_major_formatter(PercentFormatter(1, decimals=1))
         save(fig, name)
 
     fig, axes = layout("Swedish requirements by occupation group")

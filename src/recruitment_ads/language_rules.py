@@ -2,7 +2,7 @@
 
 import re
 
-VERSION = "recruitment-sv-1.3.0"
+VERSION = "recruitment-sv-1.3.1"
 CATEGORIES = {
     "gers_b1": r"\bb\s?1\b",
     "gers_b2": r"\bb\s?2\b",
@@ -50,6 +50,12 @@ def sentences(text):
 
 def semantic(text, category, preceding=""):
     t = text.casefold()
+    if re.search(r"\bom du (?:har|redan)", t) and re.search(
+        r"(?:betyg|intyg).{0,35}bifoga|bifoga.{0,35}(?:betyg|intyg)", t
+    ):
+        return "application_instruction", "conditional_existing_credentials_submission"
+    if re.search(r"behörighet till utbildning|antagen till utbildning", t):
+        return "uncertain", "training_admission_vs_job_entry_review"
     if category == "untyped" and re.search(
         r"svensk(?:t|a)?\s+(?:medborgar\w*|körkort|undersköterskeutbildning|legitimation)|svenska kyrkan",
         t,
