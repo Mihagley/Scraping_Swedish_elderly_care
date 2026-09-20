@@ -1,0 +1,314 @@
+[
+  {
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/2006.jsonl.zip",
+    "retrieved_at": "2026-09-20T05:47:06.516417+00:00",
+    "prefix_file": "2006.jsonl.zip.prefix",
+    "prefix_bytes": 1048576,
+    "prefix_sha256": "d72ed7b13cccaa02c8400470d74af5a26d630aef9a2573eb557b5b59fdf3112d",
+    "partial_probe_only": true,
+    "content_range": "bytes 0-1048575/100408975",
+    "member": "2006.jsonl",
+    "n_records_probed": 20,
+    "fields": [
+      "access",
+      "access_to_own_car",
+      "application_deadline",
+      "application_details",
+      "description",
+      "driving_license",
+      "driving_license_required",
+      "duration",
+      "employer",
+      "employment_type",
+      "experience_required",
+      "external_id",
+      "headline",
+      "id",
+      "last_publication_date",
+      "logo_url",
+      "must_have",
+      "nice_to_have",
+      "number_of_vacancies",
+      "occupation",
+      "occupation_field",
+      "occupation_group",
+      "other_old_legacy_attributes",
+      "publication_date",
+      "removed",
+      "removed_date",
+      "salary_description",
+      "salary_type",
+      "scope_of_work",
+      "source_type",
+      "timestamp",
+      "webpage_url",
+      "working_hours_type",
+      "workplace_address"
+    ],
+    "field_types": {
+      "employer": "dict",
+      "description": "dict",
+      "occupation": "dict",
+      "occupation_group": "dict",
+      "must_have": "dict",
+      "nice_to_have": "dict"
+    },
+    "nonempty_counts": {
+      "id": 0,
+      "publication_date": 20,
+      "headline": 20,
+      "number_of_vacancies": 20
+    },
+    "organisation_number_present": 0,
+    "occupation_groups": [
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      }
+    ],
+    "publication_dates": [
+      "2006-05-11",
+      "2006-05-10",
+      "2006-06-22"
+    ],
+    "employer_keys": [
+      "email",
+      "name",
+      "organization_number",
+      "phone_number",
+      "url",
+      "workplace"
+    ],
+    "text_nonempty": 20,
+    "language_enrichment_present": 20
+  },
+  {
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/2010.jsonl.zip",
+    "retrieved_at": "2026-09-20T05:47:06.931700+00:00",
+    "prefix_file": "2010.jsonl.zip.prefix",
+    "prefix_bytes": 1048576,
+    "prefix_sha256": "1e073d651d1ee6d3fd17a66eb9ca1fb7166884169a7d044503be1aa7432ae74f",
+    "partial_probe_only": true,
+    "content_range": "bytes 0-1048575/160873785",
+    "member": "2010.jsonl",
+    "n_records_probed": 20,
+    "fields": [
+      "access",
+      "access_to_own_car",
+      "application_deadline",
+      "application_details",
+      "description",
+      "driving_license",
+      "driving_license_required",
+      "duration",
+      "employer",
+      "employment_type",
+      "experience_required",
+      "external_id",
+      "headline",
+      "id",
+      "last_publication_date",
+      "logo_url",
+      "must_have",
+      "nice_to_have",
+      "number_of_vacancies",
+      "occupation",
+      "occupation_field",
+      "occupation_group",
+      "other_old_legacy_attributes",
+      "publication_date",
+      "removed",
+      "removed_date",
+      "salary_description",
+      "salary_type",
+      "scope_of_work",
+      "source_type",
+      "timestamp",
+      "webpage_url",
+      "working_hours_type",
+      "workplace_address"
+    ],
+    "field_types": {
+      "employer": "dict",
+      "description": "dict",
+      "occupation": "dict",
+      "occupation_group": "dict",
+      "must_have": "dict",
+      "nice_to_have": "dict"
+    },
+    "nonempty_counts": {
+      "id": 0,
+      "publication_date": 20,
+      "headline": 20,
+      "number_of_vacancies": 20
+    },
+    "organisation_number_present": 0,
+    "occupation_groups": [
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      }
+    ],
+    "publication_dates": [
+      "2010-01-27",
+      "2010-01-27",
+      "2010-01-28"
+    ],
+    "employer_keys": [
+      "email",
+      "name",
+      "organization_number",
+      "phone_number",
+      "url",
+      "workplace"
+    ],
+    "text_nonempty": 20,
+    "language_enrichment_present": 20
+  },
+  {
+    "source_url": "https://data.jobtechdev.se/annonser/historiska/2015.jsonl.zip",
+    "retrieved_at": "2026-09-20T05:47:07.334107+00:00",
+    "prefix_file": "2015.jsonl.zip.prefix",
+    "prefix_bytes": 1048576,
+    "prefix_sha256": "a497bc1c4f57f0fed35504e894cc8cc9fca79bb73ce73607790739e8038cd04a",
+    "partial_probe_only": true,
+    "content_range": "bytes 0-1048575/481207723",
+    "member": "2015.jsonl",
+    "n_records_probed": 20,
+    "fields": [
+      "access",
+      "access_to_own_car",
+      "application_deadline",
+      "application_details",
+      "description",
+      "driving_license",
+      "driving_license_required",
+      "duration",
+      "employer",
+      "employment_type",
+      "experience_required",
+      "external_id",
+      "headline",
+      "id",
+      "last_publication_date",
+      "logo_url",
+      "must_have",
+      "nice_to_have",
+      "number_of_vacancies",
+      "occupation",
+      "occupation_field",
+      "occupation_group",
+      "other_old_legacy_attributes",
+      "publication_date",
+      "removed",
+      "removed_date",
+      "salary_description",
+      "salary_type",
+      "scope_of_work",
+      "source_type",
+      "timestamp",
+      "webpage_url",
+      "working_hours_type",
+      "workplace_address"
+    ],
+    "field_types": {
+      "employer": "dict",
+      "description": "dict",
+      "occupation": "dict",
+      "occupation_group": "dict",
+      "must_have": "dict",
+      "nice_to_have": "dict"
+    },
+    "nonempty_counts": {
+      "id": 0,
+      "publication_date": 20,
+      "headline": 20,
+      "number_of_vacancies": 20
+    },
+    "organisation_number_present": 0,
+    "occupation_groups": [
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      },
+      {
+        "concept_id": null,
+        "label": null,
+        "legacy_ams_taxonomy_id": null
+      }
+    ],
+    "publication_dates": [
+      "2015-07-02",
+      "2015-10-30",
+      "2015-11-01"
+    ],
+    "employer_keys": [
+      "email",
+      "name",
+      "organization_number",
+      "phone_number",
+      "url",
+      "workplace"
+    ],
+    "text_nonempty": 20,
+    "language_enrichment_present": 20
+  }
+]

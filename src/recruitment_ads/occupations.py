@@ -35,7 +35,7 @@ def occupation(raw, targets=("5321", "5330")):
             )
         )
         result["occupation_match_method"] = "title_candidate_only"
-    elif target and re.search(
+    elif set(target) & {"5321", "5330"} and re.search(
         r"\b(?:sjukskötersk\w*|arbetsterapeut\w*|fysioterapeut\w*|enhetschef\w*|verksamhetschef\w*|socionom\w*|kock\w*|städare|personlig assistent)\b",
         job_title,
         re.I,

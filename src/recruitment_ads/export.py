@@ -396,7 +396,7 @@ def figures(tables, output):
     national, occupations, panel = (
         tables[k] for k in ("National_Trends", "Occupation_Trends", "Municipality_Year")
     )
-    is_pilot = not (not national.empty and national.nationally_representative_scope.all())
+    is_pilot = not (not national.empty and national.all_municipalities_in_scope.all())
     subtitle = (
         "Pilot municipalities only" if is_pilot else "Municipal Platsbanken recruitment"
     ) + " · unvalidated classifier estimates"

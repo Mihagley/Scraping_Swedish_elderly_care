@@ -187,7 +187,7 @@ def national_trends(records, sources, weights, geographic_scope):
             {
                 "year": year,
                 "geographic_scope": geographic_scope,
-                "nationally_representative_scope": geographic_scope == "all_290_municipalities",
+                "all_municipalities_in_scope": geographic_scope == "all_290_municipalities",
                 "standardised_share_required": standard,
                 "fixed_weights": str(weights),
                 **measures(rows),
@@ -199,7 +199,7 @@ def national_trends(records, sources, weights, geographic_scope):
             columns=[
                 "year",
                 "geographic_scope",
-                "nationally_representative_scope",
+                "all_municipalities_in_scope",
                 "standardised_share_required",
                 "fixed_weights",
                 *measures([]),

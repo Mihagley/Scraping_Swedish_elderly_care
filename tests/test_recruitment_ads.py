@@ -361,7 +361,7 @@ def test_small_end_to_end_and_resume(tmp_path):
     assert (output / "false_negatives.csv").read_bytes() == negatives_before
     assert (output / "tables/Validation.csv").exists()
     assert (output / "municipality_year.parquet").exists()
-    assert not tables["National_Trends"].nationally_representative_scope.any()
+    assert not tables["National_Trends"].all_municipalities_in_scope.any()
     shutil.copyfile(config_path, tmp_path / "config-copy.yaml")
     config_path.write_text(yaml.safe_dump({**CONFIG, "seed": 9}))
     with pytest.raises(ValueError, match="Inputs/code/config changed"):
@@ -435,3 +435,12 @@ def test_context_review_candidates_explain_empty_primary_denominator():
 def test_compound_swedish_proficiency_wording(text):
     row = ad(text)
     assert row["swedish_requirement"] and row["generic_requirement"]
+
+
+def test_configured_additional_occupation_is_not_a_core_title_conflict():
+    raw = {
+        "occupation_group": {"legacy_ams_taxonomy_id": "2221"},
+        "headline": "Sjuksköterska till äldreomsorgen",
+    }
+    assert not occupation(raw)["occupation_eligible"]
+    assert occupation(raw, targets=("5321", "5330", "2221"))["occupation_eligible"]

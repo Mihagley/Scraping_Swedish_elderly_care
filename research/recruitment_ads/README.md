@@ -2,6 +2,8 @@
 
 This separate pipeline measures **recruitment wording** in official Platsbanken advertisements. It imports no municipal-policy modules and creates no policy adoption/status variables. An advertisement can never establish a formal municipal language policy. Future policy linkage is a separate municipality_id/year join, after selecting occupation_group=`overall` or an explicitly chosen occupation.
 
+The staged first execution is complete through the full 2016–2025 scan and a bounded older-file assessment. See [FULL_REPORT.md](FULL_REPORT.md) and [FULL_RUN_COUNTS.json](FULL_RUN_COUNTS.json) for exact counts and validation status. The scan read 7,367,297 records and retained 74,800 candidates, including 26,772 primary ads and 24,196 primary spells. **2016–2020 primary estimates are missing because all source employer organisation numbers are absent.** Real-ad accuracy metrics remain pending human coding. These outputs are not validated historical findings.
+
 ## Install and run the pilot
 
 Python 3.11–3.13. Run commands from the repository root in an isolated environment:
@@ -81,11 +83,11 @@ Regenerating a sample never overwrites an existing human coding CSV; differing s
 
 The output directory contains `ads_classified.parquet`, `recruitment_spells.parquet`, `language_hits.parquet`, `municipality_year.parquet`, `municipality_year_spells.parquet`, review CSVs, observed metric CSVs, per-source inventories, config/code/source hashes, a separate analysis-module manifest, `validation.xlsx`, `recruitment_language_requirements.xlsx`, machine-readable summary tables under `tables/` (separate from human review CSVs on case-insensitive filesystems) and six figures (PNG and SVG).
 
-The analytical workbook includes Municipality_Year, National_Trends, Occupation_Trends, Language_Categories, Validation, False_Negatives, AF_Comparison, Coverage, Employer_Matches, Methodology, Audit, Spell_Trends and Sensitivity. During a pilot, even the requested National_Trends sheet is explicitly scoped to the pilot municipalities. Figures show pilot aggregates only. No 2016–2025 national trend is claimed.
+The analytical workbook includes Municipality_Year, National_Trends, Occupation_Trends, Language_Categories, Validation, False_Negatives, AF_Comparison, Coverage, Employer_Matches, Methodology, Audit, Spell_Trends and Sensitivity. During a pilot, National_Trends is explicitly scoped to pilot municipalities. Full-run tables cover all 290 municipalities, but primary national rates are available only for 2021–2025. The `all_municipalities_in_scope` flag describes geography only; it does not assert representative or exhaustive recruitment coverage.
 
 Coverage is GOOD >=20, MODERATE 5–19, SPARSE 1–4, NO_ADS 0. A zero observed denominator yields **missing shares**, not 0%. Unprocessed years have missing counts/shares and NOT_PROCESSED. An entire archive without employer organisation numbers yields EMPLOYER_ID_GAP for primary results. All municipality/year/occupation combinations in the selected scope are retained.
 
-The 2021 annual file includes records published outside its nominal year; these are counted in `publication_year_mismatch_or_missing` and excluded from that annual partition. This does not prove that the appropriate annual archive contains them. Source coverage is bounded by Platsbanken, the supplied archive and employer matching. Calendar-complete file labels never assert exhaustive recruitment coverage. See `SCHEMA_COMPARABILITY.md` and `PILOT_REPORT.md`.
+The 2020–2025 annual files include records published outside their nominal year or with missing dates; these are counted in `publication_year_mismatch_or_missing` and excluded from that annual partition. This does not prove that the appropriate annual archive contains them. Source coverage is bounded by Platsbanken, the supplied archive and employer matching. Calendar-complete file labels never assert exhaustive recruitment coverage. See `SCHEMA_COMPARABILITY.md`, `PILOT_REPORT.md` and `FULL_REPORT.md`.
 
 ## Restartability, expansion and checks
 
@@ -101,6 +103,8 @@ python scripts/build_municipality_year_panel.py --output research/recruitment_ad
 ```
 
 The first execution uses the pilot/review checkpoint before downloading the remaining annual archives. Full-run estimates do not become validated merely because all annual files were processed. 2006–2015 has no approved comparable adapter. 2026 quarterly data is not downloaded by the annual command; a separately scoped partial-year adapter is still needed. Both extension periods are excluded by default.
+
+The completed full run is delivered at `research/recruitment_ads/output/`; `output-full-v1` was its execution directory. Earlier initial outputs and the classifier-1.1 pilot were preserved separately. Human review commands should target the canonical output. For fresh reclassification from a changed checkout, choose a new output directory. To resume the original full checkpoint, use the exact module byte snapshots in `output/classification_source/` matching `run.json`; final table exports have separate module hashes. The portable delivery includes this snapshot and actual environment freeze. Raw caches remain local and are reproducible from source URLs/hashes.
 
 ```sh
 python -m ruff check .
