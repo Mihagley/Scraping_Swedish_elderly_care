@@ -1,5 +1,7 @@
 # Full recruitment-ad execution report
 
+This is the frozen first execution at classifier 1.2. For subsequently recovered 2006–2015 cases and 2016–2020 employer-name sensitivity records, see [HISTORICAL_EXTENSION.md](HISTORICAL_EXTENSION.md). Those outputs use a separate cohort and classifier 1.3.1; this report's counts are unchanged.
+
 Execution: 19 September 2026; exports and checks: 20 September 2026. Classifier: `recruitment-sv-1.2.0`. These are **unvalidated recruitment-wording measures**. No advertisement establishes a formal municipal language policy.
 
 ## Completed scope and counts

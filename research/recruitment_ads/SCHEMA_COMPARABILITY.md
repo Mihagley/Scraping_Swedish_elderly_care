@@ -21,13 +21,13 @@ Every archive contains all 12 publication months. `source_inventory.json` record
 
 Use `occupation_group.legacy_ams_taxonomy_id` for the SSYK group, not the different occupation-title legacy code. Preserve both structured values and original job titles. Workplace geography never identifies the municipal legal employer. Original AF language fields are preserved independently: the primary full cohort has 43 AF-positive tags, versus 13,936 text-classifier positives. Disagreement is an audit target, not a gold standard.
 
-## Older extension assessment after the full scan
+## Initial older-file assessment (superseded by the separate extension)
 
 On 20 September 2026, bounded first-1-MiB HTTP Range requests were made to official original `2006.jsonl.zip`, `2010.jsonl.zip` and `2015.jsonl.zip`. Twenty complete records per year were parsed. Prefix hashes, URLs, member names, field types and sample counts are in `historical_extension_schema_probes.json`; prefix bytes are cached locally.
 
 All 60 sampled records had original text, headlines and publication dates. Standard `id` and employer organisation numbers were absent, and sampled modern `occupation_group` identifiers were null. Occupation/group structures were objects, not enriched lists. Legacy attributes and external IDs may permit reconstruction, but uniqueness, stable population mapping and SSYK-version crosswalks have not been established. These ordered prefix samples are **not representative samples or archive-wide missingness estimates**.
 
-Consequently **2006–2015 remains disabled and uncombined**. An extension requires an explicit validated legacy-ID adapter, occupation crosswalk, employer-source validation, historical municipality codes, vacancy/text comparability checks and separately coded historical terminology. Downloadable files alone are insufficient. The current employer master is a sourced cross-section with unknown historical validity intervals, and historical continuity remains an explicit assumption. Heby's pre-2007 code needs separate treatment.
+That initial checkpoint kept 2006–2015 disabled in the primary pipeline. A subsequent **separate** extension now reads all ten original annual files, uses the official legacy occupation crosswalk where unambiguous, assigns source-record locators where original IDs are absent, and distinguishes validated legal-name matches. Full-file missingness counts, historical terminology checks and exact retained counts are in [HISTORICAL_EXTENSION.md](HISTORICAL_EXTENSION.md). Unknown occupation codes remain a separate title/context exploratory group. These checks do not establish historical exhaustiveness or population comparability; no older years have been merged into the primary trend. Current legal-entity municipality IDs are explicitly distinguished from historical workplace geography.
 
 2026 has official quarterly files and is incomplete. It was not processed and is excluded from default complete-year estimates. A separately scoped partial-year adapter would be needed.
 

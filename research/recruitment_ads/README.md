@@ -4,6 +4,10 @@ This separate pipeline measures **recruitment wording** in official Platsbanken 
 
 The staged first execution is complete through the full 2016–2025 scan and a bounded older-file assessment. See [FULL_REPORT.md](FULL_REPORT.md) and [FULL_RUN_COUNTS.json](FULL_RUN_COUNTS.json) for exact counts and validation status. The scan read 7,367,297 records and retained 74,800 candidates, including 26,772 primary ads and 24,196 primary spells. **2016–2020 primary estimates are missing because all source employer organisation numbers are absent.** Real-ad accuracy metrics remain pending human coding. These outputs are not validated historical findings.
 
+## Older cases and employer-number gaps
+
+The separate historical extension now covers **2006–2015** and the **2016–2020 employer-number gap**, with 2021–2025 reference records classified by the same updated language rules. See [HISTORICAL_EXTENSION.md](HISTORICAL_EXTENSION.md) for exact counts, source-field comparisons, all commands and unresolved comparability issues. The original primary output and its full-run report remain frozen at classifier 1.2. The extension uses classifier 1.3.1 with separate mapped-occupation sensitivity and unmapped-title exploratory groups. It does not produce a combined primary trend.
+
 ## Install and run the pilot
 
 Python 3.11–3.13. Run commands from the repository root in an isolated environment:
@@ -40,7 +44,7 @@ To refresh, download the SCB page and the Skolverket workbook to a new cache dir
 python scripts/build_municipal_employers.py --scb-html path/to/scb.html --register-xlsx path/to/register.xlsx --output path/to/new/employer_master.csv
 ```
 
-`valid_from` and `valid_to` are blank where historical endpoints are unknown; they are **not invented founding dates**. Historical matching with this current register assumes entity continuity and records `current_snapshot_historical_continuity_unverified`. If historical evidence changes an identifier/name, add non-overlapping dated rows. Heby's pre-2007 code and other historical nomenclature need explicit treatment before a 2006 extension.
+`valid_from` and `valid_to` are blank where historical endpoints are unknown; they are **not invented founding dates**. Historical matching with this current register assumes entity continuity and records `current_snapshot_historical_continuity_unverified`. If historical evidence changes an identifier/name, add non-overlapping dated rows. The extension uses current legal-entity municipality keys, explicitly labelled as historically unverified; these are not historical geography codes. Heby's pre-2007 workplace code is retained separately.
 
 Primary identification is organisation-number exact matching only. An existing unrecognised/malformed number cannot be overridden by a name. Exact normalized legal names from the official register are separately validated name aliases. Department names, abbreviations and brand variants require an explicit reviewed alias row before becoming fallback matches. Unresolved employer-name candidates beginning with a pilot municipality's name and `kommun/stad` are retained for audit; their `municipality_id` stays missing, and `candidate_employer_municipality_id` is only a review-routing field. Workplace geography never identifies an employer. Private providers, agencies, contractors and municipal companies with different legal entities are excluded from the primary dataset.
 

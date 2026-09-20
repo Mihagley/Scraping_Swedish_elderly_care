@@ -16,3 +16,5 @@ runs/
 research/recruitment_ads/cache/
 research/recruitment_ads/output*/
 research/recruitment_ads/reviews/
+
+.matplotlib-cache/
