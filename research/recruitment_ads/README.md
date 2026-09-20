@@ -8,6 +8,10 @@ The staged first execution is complete through the full 2016–2025 scan and a b
 
 The separate historical extension now covers **2006–2015** and the **2016–2020 employer-number gap**, with 2021–2025 reference records classified by the same updated language rules. See [HISTORICAL_EXTENSION.md](HISTORICAL_EXTENSION.md) for exact counts, source-field comparisons, all commands and unresolved comparability issues. The original primary output and its full-run report remain frozen at classifier 1.2. The extension uses classifier 1.3.1 with separate mapped-occupation sensitivity and unmapped-title exploratory groups. It does not produce a combined primary trend.
 
+## Regional breakdown
+
+County (län) trends are available for the separate historical cohorts. See [REGIONAL_ANALYSIS.md](REGIONAL_ANALYSIS.md) for the 21-county plots, pooled ad-weighted and fixed-occupation-weighted measures, coverage counts and reproduction commands. The current SCB 2026 county grouping is held fixed across years.
+
 ## Install and run the pilot
 
 Python 3.11–3.13. Run commands from the repository root in an isolated environment:
