@@ -23,6 +23,40 @@ def classify_ad(raw, source, master, config, member="", line=0):
         config.get("elderly_context"),
     )
     ad.update({k: encoded(v) if isinstance(v, list) else v for k, v in ec.items()})
+    classify_text_fields(ad, config)
+    reasons = []
+    if ad["employer_match_method"] != "orgnr_exact":
+        reasons.append(ad["employer_match_method"])
+    if not ad["occupation_eligible"]:
+        reasons.append(
+            ad["occupation_match_method"]
+            if not ad["occupation_code"]
+            else "occupation_outside_target"
+        )
+    if ad["elderly_care_context"] != "yes":
+        reasons.append("elderly_context_" + ad["elderly_care_context"])
+    if not ad["description_text"].strip():
+        reasons.append("missing_text")
+    if not ad["publication_date"] or not ad["ad_id"]:
+        reasons.append("missing_id_or_date")
+    ad["primary_eligible"] = not reasons
+    ad["sensitivity_eligible"] = (
+        ad["employer_match_method"] != "unresolved"
+        and ad["occupation_eligible"]
+        and ad["elderly_care_context"] in ("yes", "mixed", "uncertain")
+        and bool(ad["description_text"].strip())
+        and bool(ad["publication_date"] and ad["ad_id"])
+    )
+    ad["eligibility_reason"] = "eligible" if not reasons else "|".join(reasons)
+    ad["text_hash"] = hashlib.sha256(ad["description_text"].encode()).hexdigest()
+    ad["record_id"] = hashlib.sha256(
+        json.dumps([ad["ad_id"], source["source_hash"], member, line]).encode()
+    ).hexdigest()[:24]
+    return ad
+
+
+def classify_text_fields(ad, config):
+    """Apply one versioned language classifier to an already adapted record in place."""
     hits = classify_language(ad["description_text"], config.get("language_patterns"))
     required = [h for h in hits if h["status"] == "required"]
     ad.update({k: any(h["category"] == k for h in required) for k in CATEGORIES})
@@ -73,32 +107,4 @@ def classify_ad(raw, source, master, config, member="", line=0):
     ad["language_hits_json"] = encoded(hits)
     for k in ("matched_phrase", "matched_sentence", "context_before", "context_after"):
         ad[k] = encoded(list(dict.fromkeys(h[k] for h in hits)))
-    reasons = []
-    if ad["employer_match_method"] != "orgnr_exact":
-        reasons.append(ad["employer_match_method"])
-    if not ad["occupation_eligible"]:
-        reasons.append(
-            ad["occupation_match_method"]
-            if not ad["occupation_code"]
-            else "occupation_outside_target"
-        )
-    if ad["elderly_care_context"] != "yes":
-        reasons.append("elderly_context_" + ad["elderly_care_context"])
-    if not ad["description_text"].strip():
-        reasons.append("missing_text")
-    if not ad["publication_date"] or not ad["ad_id"]:
-        reasons.append("missing_id_or_date")
-    ad["primary_eligible"] = not reasons
-    ad["sensitivity_eligible"] = (
-        ad["employer_match_method"] != "unresolved"
-        and ad["occupation_eligible"]
-        and ad["elderly_care_context"] in ("yes", "mixed", "uncertain")
-        and bool(ad["description_text"].strip())
-        and bool(ad["publication_date"] and ad["ad_id"])
-    )
-    ad["eligibility_reason"] = "eligible" if not reasons else "|".join(reasons)
-    ad["text_hash"] = hashlib.sha256(ad["description_text"].encode()).hexdigest()
-    ad["record_id"] = hashlib.sha256(
-        json.dumps([ad["ad_id"], source["source_hash"], member, line]).encode()
-    ).hexdigest()[:24]
     return ad

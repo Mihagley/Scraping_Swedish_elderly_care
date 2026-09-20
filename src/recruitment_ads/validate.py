@@ -11,7 +11,11 @@ import pandas as pd
 
 def period(year):
     return (
-        "2016–2018"
+        "2006–2010"
+        if year <= 2010
+        else "2011–2015"
+        if year <= 2015
+        else "2016–2018"
         if year <= 2018
         else "2019–2021"
         if year <= 2021
@@ -324,6 +328,8 @@ def import_reviews(workbook, review_csv, sheet="Validation"):
         if candidate["text_hash"] != row["text_hash"]:
             raise ValueError("Review text identity changed")
         for field in fields:
+            if field not in existing.columns:
+                continue
             value = "" if candidate.get(field) is None else str(candidate[field])
             if field in ("manual_required", "manual_formal"):
                 _bool(value)
