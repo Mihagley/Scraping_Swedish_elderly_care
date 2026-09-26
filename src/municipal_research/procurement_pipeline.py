@@ -187,6 +187,11 @@ def ted_notice_to_row(notice: dict[str, Any]) -> dict[str, Any]:
         if part
     )
     doc_urls = _urls(notice.get("document-url-lot"))
+    links = notice.get("links") or {}
+    html_direct = links.get("htmlDirect") or {}
+    notice_html = html_direct.get("SWE") or html_direct.get("ENG") or (
+        f"https://ted.europa.eu/sv/notice/{number}/html" if number else ""
+    )
     return {
         "notice_id": number,
         "publication_date": _flatten(notice.get("publication-date"))[:10],
@@ -196,9 +201,26 @@ def ted_notice_to_row(notice: dict[str, Any]) -> dict[str, Any]:
         "cpv": _flatten(notice.get("classification-cpv")),
         "description": description,
         "document_urls": doc_urls,
+        "notice_html_url": notice_html,
         "source_url": TED_NOTICE_URL.format(number=number) if number else "",
         "coverage_status": "ted_above_eu_threshold",
     }
+
+
+_NOT_DOCUMENT_HOSTS = ("ted.europa.eu", "europa.eu", "w3.org", "eur-lex")
+
+
+def document_urls_in_text(text: str) -> list[str]:
+    """Procurement-document links mentioned in a notice (e.g. e-Avrop, Tendsign, Opic)."""
+    urls = []
+    for raw in re.findall(r"(?:https?://|www\.)[^\s<>\"'()]+", text):
+        url = raw.rstrip(".,;:)]")
+        if url.startswith("www."):
+            url = "https://" + url
+        host = urlsplit(url).hostname or ""
+        if host and not any(bad in host for bad in _NOT_DOCUMENT_HOSTS) and "@" not in url:
+            urls.append(url)
+    return list(dict.fromkeys(urls))
 
 
 # --------------------------------------------------------------- Hitta LOV-uppdrag

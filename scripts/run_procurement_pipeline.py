@@ -25,10 +25,12 @@ from municipal_research.procurement import aggregate_by_year, is_elderly_care, n
 from municipal_research.procurement_pipeline import (
     TedClient,
     discover_lov_adverts,
+    document_urls_in_text,
     fetch_documents,
     parse_lov_advert,
     ted_default_query,
     ted_notice_to_row,
+    text_from_body,
 )
 from municipal_research.storage import Audit, utc_now, write_json
 
@@ -41,25 +43,44 @@ def run_ted(args, cache: Path, audit: Audit, fetcher: Fetcher, docs_dir: Path) -
     )
     query = args.ted_query or ted_default_query(args.from_year, args.to_year)
     audit.emit("ted_query", query=query)
-    rows = []
+    rows, skipped = [], 0
     try:
         for number, notice in enumerate(client.search(query, max_pages=args.ted_max_pages), 1):
             row = ted_notice_to_row(notice)
+            # Older TED notices return no description through the API, so fetch the
+            # notice's own full Swedish text (public HTML on ted.europa.eu).
+            notice_text = ""
+            if row["notice_html_url"]:
+                try:
+                    page = fetcher.get(row["notice_html_url"], ["ted.europa.eu"])
+                    _, notice_text = text_from_body(page.body, page.content_type)
+                except FetchError as error:
+                    audit.emit("ted_notice_error", url=row["notice_html_url"], error=str(error))
+            screen = {"title": row["title"], "cpv": row["cpv"],
+                      "description": row["description"] + "\n" + notice_text}
+            if not args.all_services and not is_elderly_care(screen):
+                skipped += 1
+                audit.emit("ted_skipped_not_elderly_care", notice=row["notice_id"], title=row["title"])
+                continue
+            urls = list(dict.fromkeys(row["document_urls"] + document_urls_in_text(notice_text)))
             doc_text, records = "", []
-            if args.ted_documents and row["document_urls"]:
+            if args.ted_documents and urls:
                 doc_text, records = fetch_documents(
-                    fetcher, row["document_urls"], docs_dir / "ted", audit,
-                    max_documents=args.max_documents,
+                    fetcher, urls, docs_dir / "ted", audit, max_documents=args.max_documents,
                 )
-            row["document_text"] = "\n\n".join(t for t in (row["description"], doc_text) if t)
+            row["notice_text_chars"] = len(notice_text)
+            row["document_text"] = "\n\n".join(
+                t for t in (row["description"], notice_text, doc_text) if t
+            )
             row["documents"] = [asdict(r) for r in records]
-            row["document_url"] = row["document_urls"][0] if row["document_urls"] else ""
+            row["document_url"] = urls[0] if urls else ""
             rows.append(row)
             if number % 50 == 0:
-                print(f"  TED: {number} annonser", flush=True)
+                print(f"  TED: {number} annonser genomgångna, {len(rows)} äldreomsorg", flush=True)
     except FetchError as error:
         print(f"TED stoppade: {error}", file=sys.stderr)
         audit.emit("ted_error", error=str(error))
+    print(f"  TED: {len(rows)} behållna, {skipped} bortfiltrerade (ej äldreomsorg)", flush=True)
     return rows
 
 

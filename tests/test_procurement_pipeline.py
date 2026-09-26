@@ -160,3 +160,23 @@ def test_ted_network_failure_raises_fetch_error_not_crash(tmp_path):
     client.pacer.sleep = lambda seconds: None
     with pytest.raises(FetchError):
         list(client.search("x"))
+
+
+def test_ted_row_uses_swedish_direct_html_link_and_finds_document_links():
+    from municipal_research.procurement_pipeline import document_urls_in_text
+
+    notice = {
+        "publication-number": "12196-2018",
+        "notice-title": {"eng": "Sweden-Örebro: Social work", "swe": "Sverige-Örebro: Social omsorg med inkvartering"},
+        "links": {"htmlDirect": {"ENG": "https://ted.europa.eu/en/notice/12196-2018/html",
+                                  "SWE": "https://ted.europa.eu/sv/notice/12196-2018/html"}},
+    }
+    row = ted_notice_to_row(notice)
+    assert row["title"].startswith("Sverige-Örebro")
+    assert row["notice_html_url"] == "https://ted.europa.eu/sv/notice/12196-2018/html"
+    text = ("Upphandlingsdokumenten finns på https://www.e-avrop.com/orebro/e-Upphandling/Default.aspx. "
+            "Se även www.tendsign.com och https://ted.europa.eu/x samt EUR-Lex.")
+    assert document_urls_in_text(text) == [
+        "https://www.e-avrop.com/orebro/e-Upphandling/Default.aspx",
+        "https://www.tendsign.com",
+    ]
