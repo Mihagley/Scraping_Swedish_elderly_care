@@ -39,34 +39,102 @@ class ProcurementNotice:
         return asdict(self)
 
 
+# Patterns run on casefolded, whitespace-collapsed text.
 _EXPLICIT = (
-    r"\bkrav(?:et)?\s+(?:på|om)\s+(?:det )?svenska\b",
-    r"\bgod svenska\b",
-    r"\bsvenska\s+i\s+(?:tal|tal och skrift|skrift)\b",
-    r"\bsvenska\s+språket\b",
+    r"\bkrav(?:et)?\s+(?:på|om)\s+(?:goda\s+)?(?:kunskaper\s+i\s+)?(?:det\s+)?svenska\b",
+    r"\bspråkkrav\b",
+    r"\bgod(?:a)?\s+(?:kunskaper\s+i\s+)?svenska\b",
+    r"\bsvenska\s+i\s+(?:tal|skrift)(?:\s+och\s+(?:tal|skrift))?\b",
+    r"\b(?:tala|läsa|skriva|förstå)(?:\s*,\s*|\s+och\s+|\s+)(?:(?:tala|läsa|skriva|förstå)(?:\s*,\s*|\s+och\s+|\s+))*svenska\b",
+    r"\bbehärska(?:r)?\s+(?:det\s+)?svenska\b",
+    r"\bkommunicera\s+på\s+svenska\b",
+    r"\b(?:kunskaper|kunskap|färdigheter|förmåga)\s+i\s+(?:det\s+)?svenska(?:\s+språket)?\b",
     r"\byrkessvenska\b",
     r"\b(?:svenska|sva)\s*(?:1|2|3)\b",
-    r"\b(?:cefr|gemsam europeisk referensram)[^\n]{0,30}\b(?:b2|c1)\b",
+    r"\bsvenska\s+som\s+andraspråk\b",
+    r"\b(?:cefr|gers|gemensam\s+europeisk\s+referensram)\b.{0,60}?\b(?:b1|b2|c1|c2)\b",
+    r"\b(?:b1|b2|c1|c2)\b.{0,40}?\b(?:cefr|gers|gemensam\s+europeisk\s+referensram)\b",
 )
-_RELATED = (r"\bspråkombud\b", r"\btolk(?:ning|)\b", r"\bspråkutbildning\b")
+_RELATED = (
+    r"\bspråkombud\b",
+    r"\btolk(?:ning|ar|en)?\b",
+    r"\bspråkutbildning\b",
+    r"\bspråkutvecklande\b",
+    r"\bsvenska\s+språket\b",
+    r"\bsfi\b",
+)
+# A match whose surrounding sentence concerns the service user's language
+# (right to an interpreter, minority languages, mother tongue) is not a
+# staff requirement. It is downgraded to "language_related".
+_USER_CONTEXT = re.compile(
+    r"\b(?:omsorgstagare\w*|brukare\w*|kund(?:en|er|erna)?|den enskilde|vårdtagare\w*|"
+    r"tolk\w*|minoritetsspråk\w*|modersmål\w*|finska|meänkieli|samiska|jiddisch|romani|"
+    r"inte talar|inte behärskar|annat språk än svenska)\b"
+)
+_STAFF_CONTEXT = re.compile(r"\b(?:personal\w*|medarbetare\w*|anställd\w*|utförare\w*|den som utför)\b")
+
+
+def _sentence_bounds(text: str, start: int, end: int) -> tuple[int, int]:
+    left = max(text.rfind(". ", 0, start), text.rfind("; ", 0, start), text.rfind("•", 0, start))
+    right_candidates = [i for i in (text.find(". ", end), text.find("; ", end)) if i != -1]
+    right = min(right_candidates) + 1 if right_candidates else len(text)
+    return (left + 1 if left != -1 else 0), right
+
+
+def _snippet(text: str, start: int, end: int) -> str:
+    return text[max(0, start - 100): min(len(text), end + 140)].strip()
 
 
 def classify_language_requirement(text: str | None) -> LanguageFinding:
-    """Classify only what is stated in the supplied notice/document text."""
+    """Classify only what is stated in the supplied notice/document text.
+
+    Matching and snippet extraction use the same normalized string, so the
+    evidence always contains the matched phrase.
+    """
     if not text or not text.strip():
         return LanguageFinding("missing_document")
-    normalized = re.sub(r"\s+", " ", text.casefold()).strip()
+    readable = re.sub(r"\s+", " ", text).strip()
+    normalized = readable.casefold()  # same length as ``readable`` for Swedish text
+    if len(normalized) != len(readable):
+        readable = normalized
+    downgraded: LanguageFinding | None = None
     for pattern in _EXPLICIT:
-        match = re.search(pattern, normalized, flags=re.IGNORECASE)
-        if match:
-            start, end = max(0, match.start() - 100), min(len(text), match.end() + 140)
-            return LanguageFinding("explicit_requirement", text[start:end].strip(), "high")
+        for match in re.finditer(pattern, normalized):
+            s_start, s_end = _sentence_bounds(normalized, match.start(), match.end())
+            sentence = normalized[s_start:s_end]
+            if _USER_CONTEXT.search(sentence) and not _STAFF_CONTEXT.search(sentence):
+                if downgraded is None:
+                    downgraded = LanguageFinding("language_related", _snippet(readable, match.start(), match.end()), "medium")
+                continue
+            return LanguageFinding("explicit_requirement", _snippet(readable, match.start(), match.end()), "high")
+    if downgraded is not None:
+        return downgraded
     for pattern in _RELATED:
-        match = re.search(pattern, normalized, flags=re.IGNORECASE)
+        match = re.search(pattern, normalized)
         if match:
-            start, end = max(0, match.start() - 100), min(len(text), match.end() + 140)
-            return LanguageFinding("language_related", text[start:end].strip(), "medium")
+            return LanguageFinding("language_related", _snippet(readable, match.start(), match.end()), "medium")
     return LanguageFinding("no_evidence", "", "high")
+
+
+# Screening for elderly-care procurements. CPV 85311100 = välfärdstjänster för äldre.
+_ELDERLY_CPV = ("85311100",)
+_ELDERLY_TERMS = re.compile(
+    r"\b(?:äldreomsorg\w*|hemtjänst\w*|särskil(?:t|da)\s+boende\w*|äldreboende\w*|"
+    r"vård-\s+och\s+omsorgsboende\w*|omsorgsboende\w*|korttidsboende\w*|dagverksamhet\w*|"
+    r"trygghetslarm\w*|serviceboende\w*|demensboende\w*|äldre\s+personer)\b"
+)
+
+
+def is_elderly_care(row: dict[str, Any]) -> bool:
+    """True if a raw export row looks like an elderly-care procurement."""
+    cpv = _first(row, "cpv", "cpv_code", "cpv_codes", "main_cpv", "classification-cpv")
+    if any(code in re.sub(r"\D", "", cpv) for code in _ELDERLY_CPV):
+        return True
+    title = _first(row, "title", "notice_title", "notice-title").casefold()
+    if _ELDERLY_TERMS.search(title):
+        return True
+    description = _first(row, "description", "short_description").casefold()
+    return bool(_ELDERLY_TERMS.search(description))
 
 
 def _first(row: dict[str, Any], *names: str) -> str:
