@@ -410,7 +410,8 @@ def fetch_documents(
         host = urlsplit(url).hostname or ""
         try:
             download = fetcher.get(url, [host])
-        except FetchError as error:
+        except (FetchError, OSError, httpx.HTTPError, ValueError) as error:
+            # One broken link (dead domain, bad URL, TLS error) must never stop the run.
             audit.emit("document_error", url=url, error=str(error))
             records.append(FetchedDocument(url, "error", "", 0, "", str(error)))
             continue

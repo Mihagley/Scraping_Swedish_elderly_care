@@ -54,7 +54,7 @@ def run_ted(args, cache: Path, audit: Audit, fetcher: Fetcher, docs_dir: Path) -
                 try:
                     page = fetcher.get(row["notice_html_url"], ["ted.europa.eu"])
                     _, notice_text = text_from_body(page.body, page.content_type)
-                except FetchError as error:
+                except (FetchError, OSError) as error:
                     audit.emit("ted_notice_error", url=row["notice_html_url"], error=str(error))
             screen = {"title": row["title"], "cpv": row["cpv"],
                       "description": row["description"] + "\n" + notice_text}
@@ -95,7 +95,7 @@ def run_lov(args, audit: Audit, fetcher: Fetcher, docs_dir: Path) -> list[dict]:
     for number, url in enumerate(adverts, 1):
         try:
             page = fetcher.get(url, [LOV_HOST])
-        except FetchError as error:
+        except (FetchError, OSError) as error:
             audit.emit("lov_advert_error", url=url, error=str(error))
             continue
         advert = parse_lov_advert(page.body, page.url)

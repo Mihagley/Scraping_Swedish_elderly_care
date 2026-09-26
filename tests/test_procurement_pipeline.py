@@ -180,3 +180,24 @@ def test_ted_row_uses_swedish_direct_html_link_and_finds_document_links():
         "https://www.e-avrop.com/orebro/e-Upphandling/Default.aspx",
         "https://www.tendsign.com",
     ]
+
+
+def test_dead_domain_is_recorded_not_raised(tmp_path):
+    import socket
+
+    from municipal_research.network import require_public_address
+
+    fetcher = Fetcher(
+        Network(interval_seconds=0), tmp_path / "cache", Audit(tmp_path / "a.jsonl"),
+        client=httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(200))),
+        address_check=require_public_address, sleep=lambda s: None,
+    )
+    original = socket.getaddrinfo
+    socket.getaddrinfo = lambda *a, **k: (_ for _ in ()).throw(socket.gaierror(11001, "getaddrinfo failed"))
+    try:
+        text, records = fetch_documents(
+            fetcher, ["https://no-such-domain.example/doc.pdf"], tmp_path / "docs", Audit(tmp_path / "a.jsonl")
+        )
+    finally:
+        socket.getaddrinfo = original
+    assert text == "" and records[0].kind == "error" and "DNS" in records[0].error

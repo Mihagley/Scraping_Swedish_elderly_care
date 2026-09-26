@@ -39,7 +39,10 @@ def domain_allowed(url: str, domains: list[str]) -> bool:
 
 def require_public_address(url: str) -> None:
     host = urlsplit(url).hostname
-    addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+    try:
+        addresses = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+    except OSError as error:
+        raise FetchError(f"DNS lookup failed for {host}: {error}") from error
     if not addresses or any(not ipaddress.ip_address(row[4][0]).is_global for row in addresses):
         raise FetchError("Non-public network address rejected")
 
