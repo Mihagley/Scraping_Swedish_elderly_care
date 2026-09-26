@@ -1,4 +1,11 @@
-from municipal_research.procurement import aggregate_by_year, classify_language_requirement, normalize_notice
+import pytest
+
+from municipal_research.procurement import (
+    aggregate_by_year,
+    classify_language_requirement,
+    is_elderly_care,
+    normalize_notice,
+)
 
 
 def test_explicit_swedish_requirement_keeps_evidence():
@@ -17,10 +24,6 @@ def test_normalization_and_year_aggregation():
     assert aggregate_by_year([notice])[0]["n_explicit_swedish"] == 1
 
 
-
-import pytest
-
-from municipal_research.procurement import is_elderly_care
 
 
 @pytest.mark.parametrize(
