@@ -21,10 +21,13 @@ Put UHM, TED, or other licensed exports in a directory as UTF-8 CSV, JSON, or JS
 PYTHONPATH=src python scripts/analyze_procurement.py \
   --input-dir research/procurement/raw \
   --output-dir research/procurement/outputs \
-  --source uhm
+  --source uhm \
+  --elderly-care-only
 ```
 
-Outputs are `notices.csv`, `year_summary.json`, and `manifest.json`. The classifier stores a short evidence snippet for explicit phrases such as “god svenska”, “svenska i tal och skrift”, “yrkessvenska”, and Swedish course levels. `missing_document`, `no_evidence`, `language_related`, and `explicit_requirement` are separate categories for review.
+`--elderly-care-only` keeps rows whose CPV code is 85311100 (welfare services for the elderly) or whose title/description mentions hemtjänst, särskilt boende, äldreboende, vård- och omsorgsboende and similar terms. Without the flag every row in the input directory is analysed. `manifest.json` records both the raw row count and the retained count.
+
+Outputs are `notices.csv`, `year_summary.json`, and `manifest.json`. The classifier stores a short evidence snippet for explicit staff requirements such as “god svenska”, “svenska i tal och skrift”, “tala, läsa och skriva svenska”, “behärska svenska”, “språkkrav”, “yrkessvenska”, Swedish course levels, and CEFR/Gers levels (B1–C2). A match in a sentence about the service user's language (interpreter, minority language, mother tongue) without a staff reference is downgraded to `language_related`, because tender documents often describe the user's right to an interpreter. `missing_document`, `no_evidence`, `language_related`, and `explicit_requirement` are separate categories for review.
 
 ## Review rules
 
