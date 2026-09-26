@@ -11,3 +11,5 @@ dist/
 data/
 runs/
 .DS_Store
+research/procurement/pipeline/cache/
+research/procurement/pipeline/documents/

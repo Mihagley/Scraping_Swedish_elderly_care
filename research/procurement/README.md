@@ -33,3 +33,22 @@ Outputs are `notices.csv`, `year_summary.json`, and `manifest.json`. The classif
 
 Do not publish raw tender attachments unless their licence permits redistribution. Cite UHM as `Uppgifter: Upphandlingsmyndigheten | Bearbetning: Mihagley/Scraping_Swedish_elderly_care`, with the retrieval date and original URL. Keep the source file and a checksum in the local manifest when making a release. Inspect `language_evidence` before treating a notice as an explicit Swedish requirement.
 
+
+## Automated pipeline (fetch → download → extract → classify)
+
+`scripts/run_procurement_pipeline.py` runs the whole flow in one command:
+
+```bash
+PYTHONPATH=src python scripts/run_procurement_pipeline.py \
+  --contact your.email@su.se \
+  --sources ted,lov \
+  --from-year 2018 --to-year 2025 \
+  --output-dir research/procurement/pipeline
+```
+
+Sources:
+
+* **TED** (`ted`): the open TED search API v3 (no key). Default query: CPV 85311100, 85311000, 85312100, 85144100, buyer country Sweden, publication date in the year range. Override with `--ted-query`. Only notices above the EU thresholds. The notice description is always classified; linked tender documents are downloaded when publicly reachable (skip with `--no-ted-documents`). Documents behind a login in commercial advertising databases end up as `missing_document`.
+* **Hitta LOV-uppdrag** (`lov`), formerly Valfrihetswebben: adverts are discovered from the listing page, filtered to elderly care, and the linked municipality page is followed one hop to its tender PDFs. These are the *currently published* adverts (`coverage_status = lov_current_adverts`), dated by the advert's last update. For earlier years, add archived or municipal document URLs with `--lov-seed-file`, or use the manual input path above. If the listing only renders through JavaScript, `LOV: 0 annonser hittade` is printed; put advert URLs in a seed file instead.
+
+Behaviour: all HTTP goes through `network.Fetcher` (robots.txt, per-host pacing via `--interval`, retries, cache, audit log in `audit.jsonl`). Re-running the same command resumes from the cache; `--offline` rebuilds outputs from the cache only. Outputs: `notices.csv`, `year_summary.json` (per source), `raw_rows.jsonl` (metadata and per-document records with SHA-256), and `manifest.json`. Downloaded PDFs and extracted text are stored under `documents/` and are git-ignored; check licences before sharing them.
