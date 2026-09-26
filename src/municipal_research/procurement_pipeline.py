@@ -337,6 +337,97 @@ def discover_lov_adverts(
 # ----------------------------------------------------------- documents and text
 
 
+_MONTHS = {
+    "januari": 1, "februari": 2, "mars": 3, "april": 4, "maj": 5, "juni": 6, "juli": 7,
+    "augusti": 8, "september": 9, "oktober": 10, "november": 11, "december": 12,
+}
+_DATE_PATTERNS = (
+    (re.compile(r"\b(20[0-3]\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b"), "ymd"),
+    (re.compile(r"\b(0?[1-9]|[12]\d|3[01])\s+(" + "|".join(_MONTHS) + r")\s+(20[0-3]\d)\b", re.I), "dmy_text"),
+    (re.compile(r"(?<!\d)(20[0-3]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])(?!\d)"), "compact"),
+)
+_DATE_CONTEXT = re.compile(
+    r"beslutad|beslutat|fastställd|fastställt|antagen|antaget|gäller\s+(?:från|fr\.?\s*o\.?\s*m)|"
+    r"giltig\s+från|publicerad|publicerat|daterad|version|reviderad|uppdaterad|senast\s+ändrad|datum",
+    re.IGNORECASE,
+)
+
+
+def _iso(match: re.Match, kind: str) -> str:
+    if kind == "dmy_text":
+        day, month, year = int(match.group(1)), _MONTHS[match.group(2).casefold()], int(match.group(3))
+    else:
+        year, month, day = int(match.group(1)), int(match.group(2)), int(match.group(3))
+    return f"{year:04d}-{month:02d}-{day:02d}"
+
+
+def find_dates(text: str) -> list[tuple[int, str]]:
+    found = []
+    for pattern, kind in _DATE_PATTERNS:
+        for match in pattern.finditer(text):
+            found.append((match.start(), _iso(match, kind)))
+    return sorted(found)
+
+
+def text_document_date(text: str, *, window: int = 80, head: int = 6000) -> str:
+    """Date written next to words like beslutad/fastställd/gäller från/version.
+
+    Only the beginning of the document is searched, where cover pages and
+    version blocks usually are; dates deeper in the text are often deadlines
+    or references to laws and are less reliable.
+    """
+    part = text[:head]
+    for start, iso in find_dates(part):
+        if _DATE_CONTEXT.search(part[max(0, start - window): start + 20]):
+            return iso
+    return ""
+
+
+def url_date(url: str) -> str:
+    from urllib.parse import unquote
+
+    dates = find_dates(unquote(url))
+    return dates[-1][1] if dates else ""
+
+
+def pdf_metadata_dates(body: bytes) -> tuple[str, str]:
+    """(created, modified) from the PDF info dictionary, as YYYY-MM-DD."""
+    try:
+        info = PdfReader(io.BytesIO(body)).metadata or {}
+    except Exception:  # noqa: BLE001
+        return "", ""
+
+    def convert(key: str) -> str:
+        value = str(info.get(key, "") or "")
+        match = re.search(r"(19|20)(\d{2})(\d{2})(\d{2})", value)
+        return f"{match.group(1)}{match.group(2)}-{match.group(3)}-{match.group(4)}" if match else ""
+
+    return convert("/CreationDate"), convert("/ModDate")
+
+
+def best_document_date(records: Iterable["FetchedDocument"]) -> tuple[str, str]:
+    """Pick one date per notice and say where it came from.
+
+    Tender PDFs come first (they are ranked first when downloaded). Within a
+    document, a date written in the text next to a decision/validity word is
+    preferred, then a date in the file name, then PDF metadata.
+    """
+    records = [r for r in records if not r.error]
+    ordered = [r for r in records if r.kind == "pdf"] + [r for r in records if r.kind != "pdf"]
+    fields = (
+        ("text_date", "text"),
+        ("url_date", "url"),
+        ("pdf_modified", "pdf_metadata_modified"),
+        ("pdf_created", "pdf_metadata_created"),
+    )
+    for record in ordered:
+        for field_name, label in fields:
+            value = getattr(record, field_name, "")
+            if value:
+                return value, f"{record.kind}_{label}"
+    return "", ""
+
+
 def text_from_body(body: bytes, content_type: str = "") -> tuple[str, str]:
     """Return (kind, text). kind is 'pdf', 'html' or 'unsupported'."""
     if body.lstrip().startswith(b"%PDF-"):
@@ -386,6 +477,10 @@ class FetchedDocument:
     chars: int
     path: str
     error: str = ""
+    text_date: str = ""
+    url_date: str = ""
+    pdf_created: str = ""
+    pdf_modified: str = ""
 
 
 def fetch_documents(
@@ -424,6 +519,7 @@ def fetch_documents(
         if text:
             atomic_bytes(folder / "text.txt", text.encode("utf-8"))
             texts.append(text)
+        created, modified = pdf_metadata_dates(download.body) if kind == "pdf" else ("", "")
         records.append(
             FetchedDocument(
                 download.url,
@@ -432,6 +528,10 @@ def fetch_documents(
                 len(text),
                 str(folder / "text.txt") if text else "",
                 "" if text or kind == "html" else "no_extractable_text",
+                text_date=text_document_date(text) if text else "",
+                url_date=url_date(download.url),
+                pdf_created=created,
+                pdf_modified=modified,
             )
         )
     return "\n\n".join(texts), records

@@ -201,3 +201,38 @@ def test_dead_domain_is_recorded_not_raised(tmp_path):
     finally:
         socket.getaddrinfo = original
     assert text == "" and records[0].kind == "error" and "DNS" in records[0].error
+
+
+def test_document_dates_from_text_url_and_metadata():
+    from municipal_research.procurement_pipeline import (
+        FetchedDocument,
+        best_document_date,
+        pdf_metadata_dates,
+        text_document_date,
+        url_date,
+    )
+
+    assert text_document_date("Förfrågningsunderlag. Beslutad av socialnämnden 2021-02-03. Sista dag 2021-03-01") == "2021-02-03"
+    assert text_document_date("Gäller från 1 januari 2022 enligt nämndbeslut") == "2022-01-01"
+    assert text_document_date("Enligt SFS 2008:962 och 2001-10-01 års lag") == ""  # no decision word
+    assert url_date("https://x.se/F%C3%B6rfr%C3%A5gningsunderlag%20LOV%20hemtj%C3%A4nst%20publicerad%2020210203.pdf") == "2021-02-03"
+
+    buffer = io.BytesIO()
+    page = canvas.Canvas(buffer)
+    page.setCreator("test")
+    page.drawString(72, 720, "text")
+    page.save()
+    created, modified = pdf_metadata_dates(buffer.getvalue())
+    assert created[:2] == "20" and len(created) == 10
+
+    html = FetchedDocument("https://k.se/p", "html", "a", 10, "", text_date="2025-04-09")
+    pdf = FetchedDocument("https://k.se/d.pdf", "pdf", "b", 10, "", pdf_modified="2021-02-05", url_date="2021-02-03")
+    assert best_document_date([html, pdf]) == ("2021-02-03", "pdf_url")
+    assert best_document_date([html]) == ("2025-04-09", "html_text")
+
+
+def test_year_uses_document_date_for_lov():
+    row = {"publication_date": "2025-04-09", "analysis_date": "2021-02-03", "document_text": "x",
+           "document_date": "2021-02-03", "document_date_source": "pdf_text", "advert_date": "2025-04-09"}
+    notice = normalize_notice(row, source="lov")
+    assert notice.year == 2021 and notice.advert_date == "2025-04-09" and notice.document_date_source == "pdf_text"

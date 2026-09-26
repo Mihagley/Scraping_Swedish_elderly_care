@@ -24,6 +24,7 @@ from municipal_research.network import Fetcher, FetchError
 from municipal_research.procurement import aggregate_by_year, is_elderly_care, normalize_notice
 from municipal_research.procurement_pipeline import (
     TedClient,
+    best_document_date,
     discover_lov_adverts,
     document_urls_in_text,
     fetch_documents,
@@ -74,6 +75,9 @@ def run_ted(args, cache: Path, audit: Audit, fetcher: Fetcher, docs_dir: Path) -
             )
             row["documents"] = [asdict(r) for r in records]
             row["document_url"] = urls[0] if urls else ""
+            row["advert_date"] = row["publication_date"]
+            row["document_date"], row["document_date_source"] = best_document_date(records)
+            row["analysis_date"] = row["publication_date"]  # TED publication date is authoritative
             rows.append(row)
             if number % 50 == 0:
                 print(f"  TED: {number} annonser genomgångna, {len(rows)} äldreomsorg", flush=True)
@@ -107,9 +111,16 @@ def run_lov(args, audit: Audit, fetcher: Fetcher, docs_dir: Path) -> list[dict]:
             fetcher, advert.document_links, docs_dir / "lov", audit,
             max_documents=args.max_documents,
         )
+        document_date, date_source = best_document_date(records)
+        advert_date = advert.updated or advert.start_date
         rows.append({
             "notice_id": advert.reference or url.rstrip("/").rsplit("/", 1)[-1],
-            "publication_date": advert.updated or advert.start_date,
+            "publication_date": advert_date,
+            "advert_date": advert_date,
+            "document_date": document_date,
+            "document_date_source": date_source,
+            # Year in summaries: the tender document's own date when found.
+            "analysis_date": document_date or advert_date,
             "buyer_name": advert.buyer_name,
             "municipality_name": advert.buyer_name,
             "title": advert.title,

@@ -34,6 +34,9 @@ class ProcurementNotice:
     source_url: str = ""
     document_url: str = ""
     coverage_status: str = "unknown"
+    advert_date: str = ""
+    document_date: str = ""
+    document_date_source: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -148,8 +151,11 @@ def _first(row: dict[str, Any], *names: str) -> str:
 def normalize_notice(row: dict[str, Any], *, source: str) -> ProcurementNotice:
     """Map UHM/TED exports (or a user CSV) into the common review schema."""
     date = _first(row, "publication_date", "publication-date", "date", "published")
+    # analysis_date decides the year used in summaries: for LOV adverts the date of
+    # the tender document when it could be found, otherwise the publication date.
+    year_basis = _first(row, "analysis_date") or date
     year = None
-    match = re.search(r"\b(20\d{2})\b", date)
+    match = re.search(r"\b(20\d{2})\b", year_basis)
     if match:
         year = int(match.group(1))
     title = _first(row, "title", "notice_title", "notice-title")
@@ -171,6 +177,9 @@ def normalize_notice(row: dict[str, Any], *, source: str) -> ProcurementNotice:
         source_url=_first(row, "source_url", "source", "notice_url"),
         document_url=document_url,
         coverage_status=_first(row, "coverage_status", "coverage") or "unknown",
+        advert_date=_first(row, "advert_date"),
+        document_date=_first(row, "document_date"),
+        document_date_source=_first(row, "document_date_source"),
     )
 
 
