@@ -5,6 +5,7 @@ import re
 from datetime import date
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlparse
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -102,6 +103,7 @@ class Municipality(StrictModel):
     id: str
     name: str
     domains: list[str]
+    meeting_archives: list[str] = Field(default_factory=list)
     seeds: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
@@ -110,10 +112,17 @@ class Municipality(StrictModel):
             raise ValueError("Municipality id must be a safe, unique ASCII identifier")
         if not self.domains:
             raise ValueError("At least one domain is required")
+        self.domains = [x.lower().strip(".") for x in self.domains]
         for domain in self.domains:
             if not re.fullmatch(r"[a-zA-Z0-9.-]+", domain) or "." not in domain:
                 raise ValueError("Use plain hostnames, without schemes, ports or wildcards")
-        self.domains = [x.lower().strip(".") for x in self.domains]
+        for url in self.meeting_archives + self.seeds:
+            parsed = urlparse(url)
+            if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+                raise ValueError(f"Invalid seed/archive URL: {url}")
+        # Archive pages are priority discovery seeds, but remain separately identified
+        # so coverage reports can say whether historical meeting material was searched.
+        self.seeds = list(dict.fromkeys(self.meeting_archives + self.seeds))
         return self
 
 
@@ -129,6 +138,9 @@ def load_municipalities(path: Path) -> list[Municipality]:
             id=r["id"],
             name=r["name"],
             domains=[v.strip() for v in r["domains"].split(";") if v.strip()],
+            meeting_archives=[
+                v.strip() for v in r.get("meeting_archives", "").split(";") if v.strip()
+            ],
             seeds=[v.strip() for v in r.get("seeds", "").split(";") if v.strip()],
         )
         for r in rows

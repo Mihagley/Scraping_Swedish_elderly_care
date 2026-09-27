@@ -22,7 +22,22 @@ class Decision(StrictModel):
     category: str
     rationale: str = Field(description="Brief evidence-based justification, not hidden reasoning")
     temporal_relation: Literal["before_cutoff", "at_or_after_cutoff", "unknown", "not_applicable"]
-    effective_date: str | None = Field(description="ISO day, month, or year only when supported")
+    publication_date: str | None = Field(
+        default=None, description="Source publication date, if explicit"
+    )
+    decision_date: str | None = Field(
+        default=None, description="Formal political/administrative decision date, if explicit"
+    )
+    implementation_date: str | None = Field(
+        default=None, description="Date implementation started, if explicit"
+    )
+    in_force_by_date: str | None = Field(
+        default=None,
+        description="Latest explicit date by which the requirement is shown already in force",
+    )
+    # Retained for backwards compatibility with earlier pilot outputs. National runs
+    # use the four semantically distinct fields above and normally leave this null.
+    effective_date: str | None = Field(default=None, description="Legacy generic effective date")
     scope: str | None
     attributes: list[Attribute]
     evidence: list[Quote]
@@ -35,7 +50,6 @@ class Verdict(StrictModel):
 
 
 def decision_schema(research: Research) -> type[Decision]:
-    # The configured codebook becomes an API-enforced enum, not just a prompt instruction.
     labels = Literal[tuple(research.labels)]
     return create_model("ResearchDecision", __base__=Decision, category=(labels, ...))
 

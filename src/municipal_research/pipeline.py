@@ -12,6 +12,15 @@ from .extraction import chunk_document, extract
 from .llm import Gateway
 from .network import Fetcher
 from .storage import Audit, canonical, digest, environment, utc_now, write_json
+from .triage import triage_chunk
+
+DATE_FIELDS = [
+    "publication_date",
+    "decision_date",
+    "implementation_date",
+    "in_force_by_date",
+    "effective_date",
+]
 
 
 def summarize(
@@ -21,13 +30,15 @@ def summarize(
     gaps: list[str],
     config: Config,
     collect_only=False,
+    *,
+    chunks_scanned: int = 0,
+    chunks_classified: int = 0,
 ) -> dict:
     accepted = [r for r in records if config.research.labels[r["decision"]["category"]].conclusive]
     labels = {r["decision"]["category"] for r in accepted}
     conflicts = []
-    # Missing data is not disagreement. Different explicit values remain a review item.
-    for key in ["effective_date", "scope"]:
-        if len({r["decision"][key] for r in accepted if r["decision"][key]}) > 1:
+    for key in [*DATE_FIELDS, "scope"]:
+        if len({r["decision"].get(key) for r in accepted if r["decision"].get(key)}) > 1:
             conflicts.append(key)
     for key in config.research.fields:
         values = {
@@ -54,22 +65,28 @@ def summarize(
         or bool(conflicts)
         or any(r["needs_review"] for r in records)
     )
-    return {
+    result = {
         "municipality_id": municipality.id,
         "municipality": municipality.name,
         "category": category,
         "needs_review": needs_review,
         "documents": len(documents),
+        "chunks_scanned": chunks_scanned,
+        "chunks_classified": chunks_classified,
         "chunks": len(records),
         "verified_quotes": sum(q["verified"] for r in records for q in r["quotes"]),
         "coverage": "bounded_with_gaps" if gaps else "bounded",
         "gaps": sorted(set(gaps)),
+        "meeting_archives": municipality.meeting_archives,
         "source_urls": sorted({d["url"] for d in documents}),
-        "effective_dates": sorted(
-            {r["decision"]["effective_date"] for r in accepted if r["decision"]["effective_date"]}
-        ),
         "scopes": sorted({r["decision"]["scope"] for r in accepted if r["decision"]["scope"]}),
-        **{
+    }
+    for field in DATE_FIELDS:
+        result[field + "s"] = sorted(
+            {r["decision"].get(field) for r in accepted if r["decision"].get(field)}
+        )
+    result.update(
+        {
             f"field:{key}": sorted(
                 {
                     a["value"]
@@ -79,8 +96,9 @@ def summarize(
                 }
             )
             for key in config.research.fields
-        },
-    }
+        }
+    )
+    return result
 
 
 def run_pipeline(
@@ -140,6 +158,8 @@ def run_pipeline(
         "documents": [],
         "classifications": [],
         "discovery": [],
+        "triage": [],
+        "pending_searches": [],
         "errors": [],
     }
     try:
@@ -147,6 +167,9 @@ def run_pipeline(
             audit.emit("municipality_start", municipality_id=municipality.id)
             discovery = Discoverer(config, fetcher, gateway, audit)
             documents, records, gaps = [], [], []
+            if not municipality.meeting_archives:
+                gaps.append("meeting_archive_seed_missing")
+            scanned = classified = 0
             for download in discovery.documents(municipality):
                 try:
                     document = extract(download, municipality.id, run, config.extraction)
@@ -158,11 +181,26 @@ def run_pipeline(
                     if limited:
                         gaps.append("chunk_limit:" + document.id)
                     for chunk in chunks:
+                        scanned += 1
                         write_json(
                             run / "chunks" / (digest(chunk.id) + ".json"), chunk.model_dump()
                         )
-                        if collect_only:
+                        triage = {
+                            "municipality_id": municipality.id,
+                            "url": document.url,
+                            **triage_chunk(chunk),
+                        }
+                        data["triage"].append(triage)
+                        write_json(run / "triage" / (digest(chunk.id) + ".json"), triage)
+                        audit.emit(
+                            "triage",
+                            municipality_id=municipality.id,
+                            chunk_id=chunk.id,
+                            status=triage["status"],
+                        )
+                        if collect_only or triage["status"] == "irrelevant":
                             continue
+                        classified += 1
                         record = classifier.classify(municipality, document, chunk)
                         records.append(record)
                         data["classifications"].append(record)
@@ -202,8 +240,41 @@ def run_pipeline(
             gaps.extend(discovery.gaps)
             if not documents:
                 gaps.append("no_documents_retrieved")
+            # Failed/limited searches stay pending. They are never translated to 'No'.
+            for gap in sorted(set(gaps)):
+                if any(
+                    token in gap
+                    for token in [
+                        "search",
+                        "download",
+                        "sitemap",
+                        "crawl",
+                        "document_limit",
+                        "no_documents",
+                        "meeting_archive",
+                    ]
+                ):
+                    data["pending_searches"].append(
+                        {
+                            "municipality_id": municipality.id,
+                            "municipality": municipality.name,
+                            "status": "pending",
+                            "reason": gap,
+                            "meeting_archives": municipality.meeting_archives,
+                            "queries": config.discovery.queries,
+                        }
+                    )
             data["summary"].append(
-                summarize(municipality, documents, records, gaps, config, collect_only)
+                summarize(
+                    municipality,
+                    documents,
+                    records,
+                    gaps,
+                    config,
+                    collect_only,
+                    chunks_scanned=scanned,
+                    chunks_classified=classified,
+                )
             )
             write_json(run / "results.json", data)
         audit.emit("run_finished", municipalities=len(municipalities), api_calls=gateway.calls)
@@ -216,7 +287,6 @@ def run_pipeline(
         )
         write_json(run / "manifest.json", manifest)
         export_workbook(run)
-        # Hash the durable run artifacts; the manifest excludes itself by definition.
         manifest["artifacts"] = {
             p.relative_to(run).as_posix(): digest(p.read_bytes())
             for p in sorted(run.rglob("*"))

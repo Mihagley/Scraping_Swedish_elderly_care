@@ -1,0 +1,115 @@
+research:
+  question: >-
+    Did the municipality have an explicit, formal Swedish-language proficiency
+    requirement for staff in elderly care in operation before 1 January 2025?
+    Identify each threshold exactly as stated, staff/provider scope, enforcement,
+    and distinguish source publication, formal decision, implementation and in-force-by dates.
+  cutoff: 2025-01-01
+  unknown_label: NoEvidence
+  instructions: >-
+    Include municipal elderly-care employers and clearly identified municipal contractors.
+    Search current pages, meeting archives, minutes, agendas, decisions, reports, budgets,
+    procurement material and historical references. A failed or bounded search is never No.
+    Preserve these independently and never translate one into another: Svenska 1;
+    Svenska som andraspråk 1; SFI; GERS/CEFR B1; GERS/CEFR B2; qualitative language
+    requirements. A source may support several at once. Distinguish a policy requirement
+    from language training and from a test used to operationalise an existing rule.
+    A decision made in 2024 with implementation in 2025 is not a pre-2025 requirement.
+    A later source may establish that a rule was already in force earlier only when it says so.
+  fields:
+    svenska_1: Explicit reference to Svenska 1; preserve exact source wording/value.
+    svenska_som_andrasprak_1: Explicit reference to Svenska som andraspråk 1/SVA 1; preserve exact wording/value.
+    sfi: Explicit SFI requirement or level/course; preserve exact source wording/value.
+    gers_b1: Explicit GERS/CEFR B1 threshold; preserve exact source wording/value.
+    gers_b2: Explicit GERS/CEFR B2 threshold; preserve exact source wording/value.
+    qualitative_language_requirement: Qualitative Swedish-language requirement without translating it to a course/CEFR level.
+    staff_group: New hires, existing staff, all staff, named occupations or another explicit group.
+    enforcement: How compliance is tested, assessed or enforced, if explicitly stated.
+    provider_scope: Municipal employer, municipal contractor, specific unit or another explicit scope.
+  labels:
+    'Yes':
+      definition: Explicit formal requirement shown to be in operation before the cutoff.
+      requires_before_cutoff: true
+    Pilot:
+      definition: The underlying requirement itself, not merely a testing instrument, was piloted before the cutoff.
+      requires_before_cutoff: true
+    'No':
+      definition: Explicit affirmative evidence that no such formal requirement applied in the defined pre-cutoff period and scope. Never infer from search failure, missing documents or silence.
+      requires_before_cutoff: true
+    Later:
+      definition: Explicit implementation only at or after the cutoff; no established pre-cutoff operation in this evidence.
+    Proposed:
+      definition: Proposal or adoption decision without evidence of implementation in the target period.
+      conclusive: false
+    Unclear:
+      definition: Relevant rule/activity is mentioned, but historical timing, formality, attribution, level or scope remains uncertain.
+      conclusive: false
+    NoEvidence:
+      definition: Retrieved material supplies no usable evidence to answer the question. This never means the municipality lacked a requirement.
+      requires_evidence: false
+      conclusive: false
+    Irrelevant:
+      definition: Material is outside the specified municipality, elderly-care employment scope or research topic.
+      requires_evidence: false
+      conclusive: false
+
+discovery:
+  provider: hybrid
+  queries:
+    - 'site:{domain} {municipality} äldreomsorg språkkrav språktest svenska personal'
+    - 'site:{domain} {municipality} äldreomsorg "Svenska 1" "svenska som andraspråk 1" SFI'
+    - 'site:{domain} {municipality} äldreomsorg GERS B1 B2 CEFR språkkrav'
+    - 'site:{domain} {municipality} protokoll nämnd äldreomsorg språkkrav 2019 2020 2021 2022 2023 2024'
+    - 'site:{domain} {municipality} tjänsteskrivelse beslut införande språkkrav äldreomsorg'
+    - 'site:{domain} {municipality} hemtjänst språkkrav rekrytering undersköterska vårdbiträde'
+    - 'site:{domain} {municipality} äldreboende språkkrav upphandling utförare entreprenör'
+    - 'site:{domain} {municipality} budget verksamhetsplan språk svenska äldreomsorg 2022 2023 2024'
+  keywords:
+    - språk
+    - sprak
+    - svenska
+    - SFI
+    - GERS
+    - CEFR
+    - B1
+    - B2
+    - äldre
+    - aldre
+    - omsorg
+    - hemtjänst
+    - protokoll
+    - handling
+    - nämnd
+    - beslut
+    - rekryter
+    - anställ
+    - personal
+  max_searches_per_municipality: 8
+  max_documents: 80
+  max_depth: 3
+  max_sitemaps: 12
+  max_sitemap_urls: 30000
+network:
+  user_agent: 'MunicipalResearch/0.1 (+https://github.com/Mihagley/Scraping_Swedish_elderly_care)'
+  interval_seconds: 1.0
+  timeout_seconds: 30
+  retries: 4
+  max_bytes: 25000000
+  respect_robots: true
+extraction:
+  chunk_chars: 14000
+  overlap_chars: 1500
+  max_chunks_per_document: 150
+  min_page_chars: 30
+llm:
+  models: [gpt-5-mini]
+  search_model: gpt-5-mini
+  verifier_model: gpt-5-mini
+  adjudicator_model: gpt-5-mini
+  passes: 3
+  max_output_tokens: 6000
+  timeout_seconds: 120
+  max_retries: 4
+  interval_seconds: 1
+  max_calls: 5000
+  reasoning_effort: null

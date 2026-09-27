@@ -88,15 +88,32 @@ def verify_decision(
             issues.append("Category requires evidence of operation before the exclusive cutoff")
         if not any(q.purpose == "timing" for q in valid):
             issues.append("Pre-cutoff claim lacks a verified timing quote")
-    if decision.effective_date:
+
+    date_fields = [
+        "publication_date",
+        "decision_date",
+        "implementation_date",
+        "in_force_by_date",
+        "effective_date",
+    ]
+    for field in date_fields:
+        value = getattr(decision, field)
+        if not value:
+            continue
         try:
-            bound = latest_date(decision.effective_date)
-            if rule.requires_before_cutoff and research.cutoff and bound >= research.cutoff:
-                issues.append("Effective-date interval is not wholly before cutoff")
+            bound = latest_date(value)
+            if (
+                field in {"implementation_date", "in_force_by_date", "effective_date"}
+                and rule.requires_before_cutoff
+                and research.cutoff
+                and bound >= research.cutoff
+            ):
+                issues.append(f"{field} interval is not wholly before cutoff")
         except ValueError:
-            issues.append("Invalid effective_date")
+            issues.append(f"Invalid {field}")
         if not any(q.purpose == "timing" for q in valid):
-            issues.append("Effective date requires a verified timing quote")
+            issues.append(f"{field} requires a verified timing quote")
+
     if decision.scope and not any(q.purpose == "scope" for q in valid):
         issues.append("Scope requires a verified scope quote")
     seen = set()

@@ -1,0 +1,205 @@
+name: National municipality research
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Collect sources only, or classify relevant/uncertain chunks
+        required: true
+        default: classify
+        type: choice
+        options: [collect, classify]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: national-municipal-research-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SHARD_COUNT: '12'
+  NATIONAL_RUN_ID: ${{ github.run_id }}
+
+jobs:
+  prepare-input:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Build and validate national municipality input
+        run: python scripts/build_municipalities.py
+      - name: Validate 290 rows and shard sizes
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          from municipal_research.config import load_municipalities
+          from municipal_research.national import shard_items
+          path = Path('research/municipalities-290.csv')
+          rows = list(csv.DictReader(path.open(encoding='utf-8')))
+          municipalities = load_municipalities(path)
+          assert len(rows) == len(municipalities) == 290
+          assert len({m.id for m in municipalities}) == 290
+          assert all(m.domains and m.seeds for m in municipalities)
+          sizes = [len(shard_items(municipalities, 12, i)) for i in range(12)]
+          assert min(sizes) >= 20 and max(sizes) <= 30 and sum(sizes) == 290
+          report = json.load(open('research/municipalities-290.validation.json', encoding='utf-8'))
+          print({'rows': len(rows), 'shard_sizes': sizes, 'archive_seeds_found': report['with_meeting_archive'], 'input_issues': len(report['issues'])})
+          PY
+      - name: Upload validated input
+        uses: actions/upload-artifact@v4
+        with:
+          name: municipalities-290-${{ github.run_id }}
+          path: |
+            research/municipalities-290.csv
+            research/municipalities-290.validation.json
+          if-no-files-found: error
+          retention-days: 90
+
+  shard:
+    needs: prepare-input
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - {index: 0, key: '00'}
+          - {index: 1, key: '01'}
+          - {index: 2, key: '02'}
+          - {index: 3, key: '03'}
+          - {index: 4, key: '04'}
+          - {index: 5, key: '05'}
+          - {index: 6, key: '06'}
+          - {index: 7, key: '07'}
+          - {index: 8, key: '08'}
+          - {index: 9, key: '09'}
+          - {index: 10, key: '10'}
+          - {index: 11, key: '11'}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - uses: actions/download-artifact@v4
+        with:
+          name: municipalities-290-${{ github.run_id }}
+          path: research
+      - name: Restore shard cache and checkpoints
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            data/national-cache/shard-${{ matrix.key }}
+            research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}
+          key: national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-${{ github.run_attempt }}
+          restore-keys: |
+            national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-
+      - name: Run shard
+        id: shard
+        continue-on-error: true
+        env:
+          SHARD_INDEX: ${{ matrix.index }}
+          RESEARCH_MODE: ${{ inputs.mode }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/run_shard.py
+      - name: Verify every completed municipality artifact
+        if: always()
+        env:
+          SHARD_INDEX: ${{ matrix.index }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from municipal_research.national import verify_manifest
+          root = Path('research/national-runs') / os.environ['NATIONAL_RUN_ID'] / f"shard-{int(os.environ['SHARD_INDEX']):02d}" / 'municipalities'
+          if root.exists():
+              for run in root.iterdir():
+                  if run.is_dir() and (run / 'manifest.json').is_file() and '.failed-' not in run.name:
+                      issues = verify_manifest(run)
+                      if issues:
+                          raise SystemExit(f'{run}: {issues}')
+          PY
+      - name: Save shard cache and checkpoints
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            data/national-cache/shard-${{ matrix.key }}
+            research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}
+          key: national-${{ github.run_id }}-shard-${{ matrix.key }}-attempt-${{ github.run_attempt }}
+      - name: Upload shard artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: national-shard-${{ matrix.key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: research/national-runs/${{ github.run_id }}/shard-${{ matrix.key }}/
+          if-no-files-found: error
+          retention-days: 90
+      - name: Propagate shard failure
+        if: steps.shard.outcome == 'failure'
+        run: exit 1
+
+  merge:
+    needs: shard
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Download all shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: national-shard-*-${{ github.run_id }}-${{ github.run_attempt }}
+          path: research/national-runs/${{ github.run_id }}
+          merge-multiple: false
+      - name: Normalize downloaded artifact directories
+        run: |
+          python - <<'PY'
+          import os, shutil
+          from pathlib import Path
+          base = Path('research/national-runs') / os.environ['NATIONAL_RUN_ID']
+          for artifact in list(base.glob('national-shard-*')):
+              key = artifact.name.split('-')[2]
+              target = base / f'shard-{key}'
+              if target.exists():
+                  shutil.rmtree(target)
+              shutil.move(str(artifact), str(target))
+          PY
+      - name: Merge manifests, sources, classifications and audit logs
+        run: python scripts/merge_shards.py
+      - name: Verify final artifact hashes
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from municipal_research.national import sha256_file
+          final = Path('research/national-runs') / os.environ['NATIONAL_RUN_ID'] / 'final'
+          manifest = json.load((final / 'manifest.json').open(encoding='utf-8'))
+          assert manifest['municipalities'] == 290
+          for rel, expected in manifest['artifacts'].items():
+              assert sha256_file(final / rel) == expected, rel
+          print({'status': manifest['status'], 'coverage_claim': manifest['coverage_claim'], 'artifacts': len(manifest['artifacts'])})
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: national-final-${{ github.run_id }}
+          path: research/national-runs/${{ github.run_id }}/final/
+          if-no-files-found: error
+          retention-days: 90

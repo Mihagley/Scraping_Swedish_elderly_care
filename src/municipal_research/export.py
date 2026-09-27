@@ -12,6 +12,14 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 
 from .storage import read_json
 
+DATE_FIELDS = [
+    "publication_date",
+    "decision_date",
+    "implementation_date",
+    "in_force_by_date",
+    "effective_date",
+]
+
 
 def cell_value(value):
     if value is None or isinstance(value, (bool, int, float)):
@@ -19,7 +27,6 @@ def cell_value(value):
     if isinstance(value, (list, dict)):
         value = json.dumps(value, ensure_ascii=False, sort_keys=True)
     value = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", " ", str(value))
-    # Excel's cell limit: preserve complete values in the accompanying JSON files.
     if len(value) > 32000:
         value = value[:31900] + " [DISPLAY TRUNCATED; complete value in results.json/audit.jsonl]"
     return value
@@ -40,7 +47,6 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
         for row in ws:
             for cell in row:
                 if isinstance(cell.value, str):
-                    # Force untrusted source strings to literal text, including =, +, -, @.
                     cell.data_type = "s"
                 cell.font = Font(name="Calibri", size=11)
                 cell.alignment = Alignment(vertical="top", wrap_text=True)
@@ -56,9 +62,14 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
                 "detail",
                 "definition",
                 "explanation",
+                "reason",
             }:
                 width = 65
-            elif "url" in header or "path" in header or header in {"issues", "gaps", "value"}:
+            elif (
+                "url" in header
+                or "path" in header
+                or header in {"issues", "gaps", "value", "queries", "hits", "meeting_archives"}
+            ):
                 width = 48
             elif "id" in header or header in {"chunk_id", "stage"}:
                 width = 30
@@ -83,7 +94,9 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
         ws.freeze_panes = "C2" if len(headers) > 2 else "A2"
         ws.auto_filter.ref = ws.dimensions
         if rows:
-            table = Table(displayName=name.replace("_", "") + "Table", ref=ws.dimensions)
+            table = Table(
+                displayName=re.sub(r"[^A-Za-z0-9]", "", name) + "Table", ref=ws.dimensions
+            )
             table.tableStyleInfo = TableStyleInfo(name="TableStyleMedium2", showRowStripes=True)
             ws.add_table(table)
         ws.sheet_properties.pageSetUpPr.fitToPage = True
@@ -101,12 +114,14 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
             "category",
             "needs_review",
             "documents",
-            "chunks",
+            "chunks_scanned",
+            "chunks_classified",
             "verified_quotes",
             "coverage",
             "gaps",
+            "meeting_archives",
             "source_urls",
-            "effective_dates",
+            *[f + "s" for f in DATE_FIELDS],
             "scopes",
             *[f"field:{key}" for key in data["config"]["research"]["fields"]],
         ],
@@ -160,7 +175,7 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
                                     "matched_text",
                                 ]
                             },
-                            "text_path": source_map[record["document_id"]]["text_path"],
+                            "text_path": source_map.get(record["document_id"], {}).get("text_path"),
                             "issue": quote["issue"],
                         }
                     )
@@ -175,13 +190,14 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
                     "error": entry.get("error"),
                 }
             )
+
     sheet(
         "Classifications",
         classifications,
         [
             "municipality_id",
             "category",
-            "effective_date",
+            *DATE_FIELDS,
             "temporal_relation",
             "scope",
             "rationale",
@@ -262,13 +278,23 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
         ],
     )
     sheet(
+        "Triage",
+        data.get("triage", []),
+        ["municipality_id", "status", "reason", "hits", "url", "document_id", "chunk_id"],
+    )
+    sheet(
+        "Pending_Searches",
+        data.get("pending_searches", []),
+        ["municipality_id", "municipality", "status", "reason", "meeting_archives", "queries"],
+    )
+    sheet(
         "Pass_Audit",
         passes,
         [
             "municipality_id",
             "stage",
             "category",
-            "effective_date",
+            *DATE_FIELDS,
             "scope",
             "rationale",
             "supported",
@@ -280,18 +306,36 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
         ],
     )
     sheet("Errors", data["errors"], ["municipality_id", "stage", "url", "detail"])
-    audit = [
-        json.loads(line) for line in (run / "audit.jsonl").read_text(encoding="utf-8").splitlines()
-    ]
+    audit_path = run / "audit.jsonl"
+    audit = (
+        [json.loads(line) for line in audit_path.read_text(encoding="utf-8").splitlines()]
+        if audit_path.exists()
+        else []
+    )
     sheet(
         "API_Usage",
-        [e for e in audit if e["stage"] == "llm"],
+        [e for e in audit if e.get("stage") == "llm"],
         ["timestamp", "role", "model", "cache_hit", "response_id", "usage", "status", "key"],
     )
+    shard_manifests = manifest.get("shard_manifests", [])
+    if shard_manifests:
+        sheet(
+            "Shard_Manifests",
+            shard_manifests,
+            ["shard_index", "status", "municipality_count", "manifest_path", "manifest_sha256"],
+        )
     methodology = [
         {"item": "Question", "definition": data["config"]["research"]["question"]},
         {"item": "Exclusive cutoff", "definition": data["config"]["research"]["cutoff"]},
         {"item": "Run kind", "definition": manifest["mode"]},
+        {
+            "item": "Chronology",
+            "definition": "Publication, formal decision, implementation and in-force-by dates are recorded separately and are never substituted for one another.",
+        },
+        {
+            "item": "Language thresholds",
+            "definition": "Svenska 1, Svenska som andraspråk 1, SFI, GERS B1, GERS B2 and qualitative requirements remain distinct; no equivalence is inferred.",
+        },
         {
             "item": "Location convention",
             "definition": "Zero-based Unicode characters, end-exclusive; one-based lines and physical PDF pages. HTML has no page number. Offsets refer to saved text.txt, not raw HTML byte positions.",
@@ -301,20 +345,20 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
             "definition": "Exact or whitespace-only; all occurrences within the supplied chunk are listed. No fuzzy matching. Quote presence is distinct from semantic support.",
         },
         {
+            "item": "Triage",
+            "definition": "Deterministic high-recall local triage precedes API classification. Only relevant/uncertain chunks are sent to the API. Excluded chunks are retained in Triage and never imply absence.",
+        },
+        {
             "item": "Summary rule",
-            "definition": "One conclusive category is retained. Multiple conclusive categories or conflicting date/scope/attribute values produce Review. Non-conclusive evidence is retained in Classifications. Absence of evidence never implies No.",
+            "definition": "One conclusive category is retained. Multiple conclusive categories or conflicting date/scope/attribute values produce Review. Missing evidence and search failures never imply No.",
         },
         {
             "item": "Coverage",
-            "definition": "Bounded search and crawl, never proof of exhaustive coverage. Failures and limits are recorded. Sparse PDFs require manual OCR/review.",
+            "definition": "Coverage is bounded and gap-aware, not automatically exhaustive. Failed/limited searches remain Pending_Searches; sparse PDFs require manual OCR/review.",
         },
         {
             "item": "Audit files",
-            "definition": "results.json, manifest.json, audit.jsonl, sources/, chunks/, units/, llm/. Long Excel display values may be truncated; JSON retains complete values.",
-        },
-        {
-            "item": "Reproduction",
-            "definition": "Use the saved configuration, inputs, source hashes, dependency versions, prompts, schemas and responses. Fresh model calls need not reproduce cached decisions.",
+            "definition": "results.json, manifest.json, audit.jsonl, raw sources, cleaned text, chunks, triage, units and cached LLM request/response material support audit and reproduction.",
         },
     ]
     methodology += [
@@ -325,7 +369,6 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
     output = output or run / "results.xlsx"
     output.parent.mkdir(parents=True, exist_ok=True)
     wb.save(output)
-    # Verify the saved package, not only the in-memory workbook.
     saved = load_workbook(output, read_only=True, data_only=False)
     if saved.sheetnames != wb.sheetnames:
         raise RuntimeError("Workbook round-trip changed the sheet inventory")

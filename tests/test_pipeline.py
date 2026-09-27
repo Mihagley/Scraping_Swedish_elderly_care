@@ -27,7 +27,20 @@ def test_full_html_pdf_pipeline_and_offline_replay(config, tmp_path):
     assert replay["classifications"] == data["classifications"]
     assert read_json(tmp_path / "replay/manifest.json")["api_calls"] == 0
     workbook = load_workbook(run / "results.xlsx")
-    assert len(workbook.sheetnames) == 10
+    assert set(workbook.sheetnames) == {
+        "Summary",
+        "Classifications",
+        "Evidence",
+        "Attributes",
+        "Sources",
+        "Discovery",
+        "Triage",
+        "Pending_Searches",
+        "Pass_Audit",
+        "Errors",
+        "API_Usage",
+        "Methodology",
+    }
     assert workbook["Summary"].freeze_panes == "C2"
     assert workbook["Summary"].max_row == 3
     for sheet in workbook:
