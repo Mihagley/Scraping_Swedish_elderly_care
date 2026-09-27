@@ -1,0 +1,59 @@
+name: Validate national registry
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/validate_registry.py
+      - .github/workflows/validate-registry.yml
+      - research/municipalities.csv
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registry-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.lock.txt
+      - run: python -m pip install --no-deps -e .
+      - name: Format validator consistently
+        run: python -m ruff format scripts/validate_registry.py
+      - name: Validate canonical IDs, domains, archives, and seeds
+        run: >-
+          python scripts/validate_registry.py
+          --registry research/municipalities.csv
+          --json-report research/registry-validation.json
+          --markdown-report research/REGISTRY_VALIDATION.md
+          --concurrency 20
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: national-registry-validation
+          path: |
+            research/registry-validation.json
+            research/REGISTRY_VALIDATION.md
+          retention-days: 90
+      - name: Commit validation report to this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/validate_registry.py research/registry-validation.json research/REGISTRY_VALIDATION.md
+          if git diff --cached --quiet; then
+            echo "Validation report unchanged."
+          else
+            git commit -m "Update national registry validation report"
+            git push
+          fi

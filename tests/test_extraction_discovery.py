@@ -114,3 +114,31 @@ def test_sitemap_and_html_link_discovery(config, municipality, tmp_path, audit):
     assert "https://town.example/policy" in urls and "https://town.example/linked-policy" in urls
     assert all("outside" not in url for url in urls)
     assert any(e["method"] == "sitemap" for e in discovery.events)
+
+
+def test_explicit_external_meeting_archive_is_allowed(config, municipality, tmp_path, audit):
+    config.discovery.provider = "crawl"
+    config.discovery.max_sitemaps = 0
+    config.discovery.max_documents = 1
+    municipality.meeting_archives = ["https://meetings.vendor.example/town"]
+
+    def respond(request):
+        if request.url.path == "/robots.txt":
+            return httpx.Response(200, text="User-agent: *\nAllow: /")
+        return httpx.Response(
+            200,
+            text="<html><main>Meeting archive with protocols.</main></html>",
+            headers={"content-type": "text/html"},
+        )
+
+    fetcher = Fetcher(
+        config.network,
+        tmp_path / "cache",
+        audit,
+        client=httpx.Client(transport=httpx.MockTransport(respond)),
+        address_check=lambda url: None,
+    )
+    discovery = Discoverer(config, fetcher, None, audit)
+    urls = [d.url for d in discovery.documents(municipality)]
+    assert urls == ["https://meetings.vendor.example/town"]
+    assert any(e["method"] == "meeting_archive" for e in discovery.events)

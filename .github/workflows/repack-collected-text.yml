@@ -1,0 +1,101 @@
+name: Repack collected text
+
+on:
+  push:
+    branches:
+      - feature/resumable-matrix-shards
+    paths:
+      - research/repack-text.trigger
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Source collection workflow run ID
+        required: true
+        default: '35310547108'
+
+permissions:
+  actions: read
+  contents: read
+
+env:
+  SOURCE_RUN_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_run_id || '35310547108' }}
+
+jobs:
+  repack:
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard:
+          - shard-00
+          - shard-01
+          - shard-02
+          - shard-03
+          - shard-04
+          - shard-05
+          - shard-06
+          - shard-07
+          - shard-08
+          - shard-09
+          - shard-10
+          - shard-11
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download collected shard
+        uses: actions/download-artifact@v4
+        with:
+          name: research-${{ matrix.shard }}
+          path: research/repack-input
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ env.SOURCE_RUN_ID }}
+
+      - name: Repack extracted chunks only
+        shell: bash
+        run: |
+          python - <<'PY'
+          import gzip
+          import json
+          from pathlib import Path
+
+          root = Path('research/repack-input')
+          shard = '${{ matrix.shard }}'
+          out_dir = Path('research/repacked') / shard
+          out_dir.mkdir(parents=True, exist_ok=True)
+          out_path = out_dir / 'chunks.jsonl.gz'
+
+          chunk_files = sorted(root.rglob('chunks/*.json'))
+          with gzip.open(out_path, 'wt', encoding='utf-8', compresslevel=6) as out:
+              for path in chunk_files:
+                  try:
+                      obj = json.loads(path.read_text(encoding='utf-8'))
+                  except Exception:
+                      continue
+                  obj['_source_member'] = str(path.relative_to(root))
+                  out.write(json.dumps(obj, ensure_ascii=False) + '\n')
+
+          manifest = {
+              'source_run_id': '${{ env.SOURCE_RUN_ID }}',
+              'shard': shard,
+              'chunk_files': len(chunk_files),
+              'output': str(out_path),
+          }
+          (out_dir / 'manifest.json').write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8'
+          )
+          print(json.dumps(manifest, indent=2))
+          PY
+
+      - name: Upload text-only shard
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-text-${{ matrix.shard }}
+          path: research/repacked/${{ matrix.shard }}/
+          retention-days: 30
+          compression-level: 0

@@ -1,0 +1,317 @@
+# National municipality registry validation
+
+Generated: `2026-09-18T04:16:32.341324+00:00`
+Overall status: **invalid**
+Matrix safe: **false**
+
+Canonical municipality IDs/names are checked against SCB 2026; official municipal web domains are checked against SKR's municipality list.
+Meeting archives and research seeds are registry data and are reported as missing or invalid when absent/unusable; no research matrix was launched.
+
+## Summary
+
+- Expected municipalities: 290
+- Registry rows: 279
+- Municipalities with issues: 290
+- Total issues: 337
+- Missing registry entries: 11
+- Invalid/mismatched IDs: 11
+- Missing/invalid official domains: 20
+- Missing/invalid meeting archives: 290
+- Missing/invalid seeds: 16
+
+## Municipality-level results
+
+| ID | Municipality | Expected official domain | ID | Domain | Meeting archive | Seed |
+|---|---|---|---|---|---|---|
+| 0114 | Upplands Väsby | `www.upplandsvasby.se` | valid | valid | missing | reachable |
+| 0115 | Vallentuna | `www.vallentuna.se` | valid | valid | missing | reachable |
+| 0117 | Österåker | `www.osteraker.se` | valid | valid | missing | reachable |
+| 0120 | Värmdö | `www.varmdo.se` | valid | valid | missing | reachable |
+| 0123 | Järfälla | `www.jarfalla.se` | valid | valid | missing | reachable |
+| 0125 | Ekerö | `www.ekero.se` | valid | valid | missing | reachable |
+| 0126 | Huddinge | `www.huddinge.se` | valid | valid | missing | reachable |
+| 0127 | Botkyrka | `www.botkyrka.se` | valid | valid | missing | reachable |
+| 0128 | Salem | `www.salem.se` | valid | valid | missing | reachable |
+| 0136 | Haninge | `www.haninge.se` | valid | valid | missing | reachable |
+| 0138 | Tyresö | `www.tyreso.se` | valid | valid | missing | reachable |
+| 0139 | Upplands-Bro | `www.upplands-bro.se` | valid | valid | missing | reachable |
+| 0140 | Nykvarn | `www.nykvarn.se` | valid | valid | missing | reachable |
+| 0160 | Täby | `www.taby.se` | valid | valid | missing | reachable |
+| 0162 | Danderyd | `www.danderyd.se` | valid | valid | missing | reachable |
+| 0163 | Sollentuna | `www.sollentuna.se` | valid | valid | missing | reachable |
+| 0180 | Stockholm | `www.stockholm.se` | valid | valid | missing | reachable |
+| 0181 | Södertälje | `www.sodertalje.se` | valid | valid | missing | reachable |
+| 0182 | Nacka | `www.nacka.se` | valid | valid | missing | reachable |
+| 0183 | Sundbyberg | `www.sundbyberg.se` | valid | valid | missing | reachable |
+| 0184 | Solna | `www.solna.se` | valid | valid | missing | reachable |
+| 0186 | Lidingö | `www.lidingo.se` | valid | valid | missing | reachable |
+| 0187 | Vaxholm | `www.vaxholm.se` | valid | valid | missing | reachable |
+| 0188 | Norrtälje | `www.norrtalje.se` | valid | valid | missing | reachable |
+| 0191 | Sigtuna | `www.sigtuna.se` | valid | valid | missing | reachable |
+| 0192 | Nynäshamn | `www.nynashamn.se` | valid | valid | missing | reachable |
+| 0305 | Håbo | `www.habo.se` | valid | valid | missing | reachable |
+| 0319 | Älvkarleby | `www.alvkarleby.se` | valid | valid | missing | reachable |
+| 0330 | Knivsta | `www.knivsta.se` | valid | valid | missing | reachable |
+| 0331 | Heby | `www.heby.se` | valid | valid | missing | reachable |
+| 0360 | Tierp | `www.tierp.se` | valid | valid | missing | reachable |
+| 0380 | Uppsala | `www.uppsala.se` | valid | valid | missing | reachable |
+| 0381 | Enköping | `enkoping.se` | valid | valid | missing | reachable |
+| 0382 | Östhammar | `www.osthammar.se` | valid | valid | missing | reachable |
+| 0428 | Vingåker | `www.vingaker.se` | valid | valid | missing | reachable |
+| 0461 | Gnesta | `www.gnesta.se` | valid | valid | missing | reachable |
+| 0480 | Nyköping | `www.nykoping.se` | valid | valid | missing | reachable |
+| 0481 | Oxelösund | `www.oxelosund.se` | valid | valid | missing | reachable |
+| 0482 | Flen | `www.flen.se` | valid | valid | missing | reachable |
+| 0483 | Katrineholm | `www.katrineholm.se` | valid | valid | missing | reachable |
+| 0484 | Eskilstuna | `www.eskilstuna.se` | valid | valid | missing | reachable |
+| 0486 | Strängnäs | `www.strangnas.se` | valid | valid | missing | reachable |
+| 0488 | Trosa | `www.trosa.se` | valid | valid | missing | reachable |
+| 0509 | Ödeshög | `www.odeshog.se` | valid | valid | missing | reachable |
+| 0512 | Ydre | `www.ydre.se` | valid | valid | missing | reachable |
+| 0513 | Kinda | `www.kinda.se` | valid | valid | missing | reachable |
+| 0560 | Boxholm | `www.boxholm.se` | valid | valid | missing | reachable |
+| 0561 | Åtvidaberg | `www.atvidaberg.se` | valid | valid | missing | reachable |
+| 0562 | Finspång | `www.finspang.se` | valid | valid | missing | reachable |
+| 0563 | Valdemarsvik | `www.valdemarsvik.se` | valid | valid | missing | reachable |
+| 0580 | Linköping | `www.linkoping.se` | valid | valid | missing | reachable |
+| 0581 | Norrköping | `www.norrkoping.se` | valid | valid | missing | reachable |
+| 0582 | Söderköping | `www.soderkoping.se` | valid | valid | missing | reachable |
+| 0583 | Motala | `www.motala.se` | valid | valid | missing | reachable |
+| 0584 | Vadstena | `www.vadstena.se` | missing | missing | missing | missing |
+| 0586 | Mjölby | `www.mjolby.se` | valid | valid | missing | reachable |
+| 0604 | Aneby | `www.aneby.se` | valid | valid | missing | reachable |
+| 0617 | Gnosjö | `www.gnosjo.se` | valid | valid | missing | reachable |
+| 0642 | Mullsjö | `www.mullsjo.se` | valid | valid | missing | reachable |
+| 0643 | Habo | `www.habokommun.se` | valid | valid | missing | reachable |
+| 0662 | Gislaved | `www.gislaved.se` | valid | valid | missing | reachable |
+| 0665 | Vaggeryd | `www.vaggeryd.se` | valid | valid | missing | reachable |
+| 0680 | Jönköping | `www.jonkoping.se` | valid | valid | missing | reachable |
+| 0682 | Nässjö | `www.nassjo.se` | valid | valid | missing | reachable |
+| 0683 | Värnamo | `www.varnamo.se` | valid | valid | missing | reachable |
+| 0684 | Sävsjö | `www.savsjo.se` | valid | valid | missing | reachable |
+| 0685 | Vetlanda | `www.vetlanda.se` | valid | valid | missing | reachable |
+| 0686 | Eksjö | `www.eksjo.se` | valid | valid | missing | reachable |
+| 0687 | Tranås | `www.tranas.se` | valid | valid | missing | reachable |
+| 0760 | Uppvidinge | `www.uppvidinge.se` | valid | valid | missing | reachable |
+| 0761 | Lessebo | `www.lessebo.se` | valid | valid | missing | reachable |
+| 0763 | Tingsryd | `www.tingsryd.se` | valid | valid | missing | reachable |
+| 0764 | Alvesta | `www.alvesta.se` | valid | valid | missing | reachable |
+| 0765 | Älmhult | `www.almhult.se` | valid | valid | missing | reachable |
+| 0767 | Markaryd | `www.markaryd.se` | valid | valid | missing | reachable |
+| 0780 | Växjö | `www.vaxjo.se` | valid | valid | missing | reachable |
+| 0781 | Ljungby | `www.ljungby.se` | valid | valid | missing | reachable |
+| 0821 | Högsby | `www.hogsby.se` | missing | missing | missing | missing |
+| 0834 | Torsås | `www.torsas.se` | valid | valid | missing | reachable |
+| 0840 | Mörbylånga | `www.morbylanga.se` | valid | valid | missing | reachable |
+| 0860 | Hultsfred | `www.hultsfred.se` | valid | valid | missing | reachable |
+| 0861 | Mönsterås | `www.monsteras.se` | valid | valid | missing | reachable |
+| 0862 | Emmaboda | `www.emmaboda.se` | valid | valid | missing | reachable |
+| 0880 | Kalmar | `www.kalmar.se` | valid | valid | missing | reachable |
+| 0881 | Nybro | `www.nybro.se` | valid | valid | missing | reachable |
+| 0882 | Oskarshamn | `www.oskarshamn.se` | valid | valid | missing | reachable |
+| 0883 | Västervik | `www.vastervik.se` | valid | valid | missing | reachable |
+| 0884 | Vimmerby | `www.vimmerby.se` | valid | valid | missing | reachable |
+| 0885 | Borgholm | `www.borgholm.se` | valid | valid | missing | reachable |
+| 0980 | Gotland | `www.gotland.se` | valid | valid | missing | reachable |
+| 1060 | Olofström | `www.olofstrom.se` | valid | valid | missing | reachable |
+| 1080 | Karlskrona | `www.karlskrona.se` | valid | valid | missing | reachable |
+| 1081 | Ronneby | `www.ronneby.se` | valid | valid | missing | reachable |
+| 1082 | Karlshamn | `www.karlshamn.se` | valid | valid | missing | reachable |
+| 1083 | Sölvesborg | `www.solvesborg.se` | valid | valid | missing | reachable |
+| 1214 | Svalöv | `www.svalov.se` | valid | valid | missing | reachable |
+| 1230 | Staffanstorp | `www.staffanstorp.se` | valid | valid | missing | reachable |
+| 1231 | Burlöv | `www.burlov.se` | valid | valid | missing | reachable |
+| 1233 | Vellinge | `www.vellinge.se` | valid | valid | missing | reachable |
+| 1256 | Östra Göinge | `www.ostragoinge.se` | valid | valid | missing | reachable |
+| 1257 | Örkelljunga | `www.orkelljunga.se` | valid | valid | missing | reachable |
+| 1260 | Bjuv | `www.bjuv.se` | valid | valid | missing | reachable |
+| 1261 | Kävlinge | `www.kavlinge.se` | valid | valid | missing | reachable |
+| 1262 | Lomma | `www.lomma.se` | valid | valid | missing | reachable |
+| 1263 | Svedala | `www.svedala.se` | valid | valid | missing | reachable |
+| 1264 | Skurup | `www.skurup.se` | valid | valid | missing | reachable |
+| 1265 | Sjöbo | `www.sjobo.se` | valid | valid | missing | reachable |
+| 1266 | Hörby | `www.horby.se` | valid | valid | missing | reachable |
+| 1267 | Höör | `www.hoor.se` | valid | valid | missing | reachable |
+| 1270 | Tomelilla | `www.tomelilla.se` | valid | valid | missing | reachable |
+| 1272 | Bromölla | `www.bromolla.se` | valid | valid | missing | reachable |
+| 1273 | Osby | `www.osby.se` | valid | valid | missing | reachable |
+| 1275 | Perstorp | `www.perstorp.se` | valid | valid | missing | reachable |
+| 1276 | Klippan | `www.klippan.se` | valid | valid | missing | reachable |
+| 1277 | Åstorp | `www.astorp.se` | valid | valid | missing | reachable |
+| 1278 | Båstad | `www.bastad.se` | valid | valid | missing | reachable |
+| 1280 | Malmö | `www.malmo.se` | missing | missing | missing | missing |
+| 1281 | Lund | `www.lund.se` | valid | valid | missing | reachable |
+| 1282 | Landskrona | `www.landskrona.se` | missing | missing | missing | missing |
+| 1283 | Helsingborg | `www.helsingborg.se` | valid | valid | missing | reachable |
+| 1284 | Höganäs | `www.hoganas.se` | valid | valid | missing | reachable |
+| 1285 | Eslöv | `www.eslov.se` | valid | valid | missing | reachable |
+| 1286 | Ystad | `www.ystad.se` | valid | valid | missing | reachable |
+| 1287 | Trelleborg | `www.trelleborg.se` | valid | valid | missing | reachable |
+| 1290 | Kristianstad | `www.kristianstad.se` | valid | valid | missing | reachable |
+| 1291 | Simrishamn | `www.simrishamn.se` | valid | valid | missing | reachable |
+| 1292 | Ängelholm | `www.engelholm.se` | valid | valid | missing | reachable |
+| 1293 | Hässleholm | `www.hassleholm.se` | valid | valid | missing | reachable |
+| 1315 | Hylte | `www.hylte.se` | valid | valid | missing | reachable |
+| 1380 | Halmstad | `www.halmstad.se` | valid | valid | missing | reachable |
+| 1381 | Laholm | `www.laholm.se` | valid | valid | missing | reachable |
+| 1382 | Falkenberg | `kommun.falkenberg.se` | valid | valid | missing | reachable |
+| 1383 | Varberg | `www.varberg.se` | valid | valid | missing | reachable |
+| 1384 | Kungsbacka | `www.kungsbacka.se` | valid | valid | missing | reachable |
+| 1401 | Härryda | `www.harryda.se` | valid | valid | missing | reachable |
+| 1402 | Partille | `www.partille.se` | valid | valid | missing | reachable |
+| 1407 | Öckerö | `www.ockero.se` | valid | valid | missing | reachable |
+| 1415 | Stenungsund | `www.stenungsund.se` | valid | valid | missing | reachable |
+| 1419 | Tjörn | `www.tjorn.se` | valid | valid | missing | reachable |
+| 1421 | Orust | `www.orust.se` | valid | valid | missing | reachable |
+| 1427 | Sotenäs | `www.sotenas.se` | valid | valid | missing | reachable |
+| 1430 | Munkedal | `www.munkedal.se` | valid | valid | missing | reachable |
+| 1435 | Tanum | `www.tanum.se` | valid | valid | missing | reachable |
+| 1438 | Dals-Ed | `www.dalsed.se` | valid | valid | missing | invalid |
+| 1439 | Färgelanda | `www.fargelanda.se` | valid | valid | missing | reachable |
+| 1440 | Ale | `www.ale.se` | valid | valid | missing | reachable |
+| 1441 | Lerum | `www.lerum.se` | valid | valid | missing | reachable |
+| 1442 | Vårgårda | `www.vargarda.se` | valid | valid | missing | reachable |
+| 1443 | Bollebygd | `www.bollebygd.se` | valid | valid | missing | reachable |
+| 1444 | Grästorp | `www.grastorp.se` | valid | valid | missing | invalid |
+| 1445 | Essunga | `www.essunga.se` | valid | valid | missing | invalid |
+| 1446 | Karlsborg | `www.karlsborg.se` | valid | valid | missing | reachable |
+| 1447 | Gullspång | `www.gullspang.se` | valid | valid | missing | reachable |
+| 1452 | Tranemo | `www.tranemo.se` | valid | valid | missing | reachable |
+| 1460 | Bengtsfors | `www.bengtsfors.se` | valid | valid | missing | reachable |
+| 1461 | Mellerud | `www.mellerud.se` | missing | missing | missing | missing |
+| 1462 | Lilla Edet | `www.lillaedet.se` | valid | valid | missing | reachable |
+| 1463 | Mark | `www.mark.se` | valid | valid | missing | reachable |
+| 1465 | Svenljunga | `www.svenljunga.se` | valid | valid | missing | reachable |
+| 1466 | Herrljunga | `www.herrljunga.se` | valid | valid | missing | reachable |
+| 1470 | Vara | `www.vara.se` | valid | valid | missing | reachable |
+| 1471 | Götene | `www.gotene.se` | valid | valid | missing | reachable |
+| 1472 | Tibro | `www.tibro.se` | valid | valid | missing | reachable |
+| 1473 | Töreboda | `www.toreboda.se` | valid | valid | missing | reachable |
+| 1480 | Göteborg | `www.goteborg.se` | valid | valid | missing | reachable |
+| 1481 | Mölndal | `www.molndal.se` | valid | valid | missing | reachable |
+| 1482 | Kungälv | `www.kungalv.se` | valid | valid | missing | reachable |
+| 1484 | Lysekil | `www.lysekil.se` | valid | valid | missing | reachable |
+| 1485 | Uddevalla | `www.uddevalla.se` | valid | valid | missing | reachable |
+| 1486 | Strömstad | `www.stromstad.se` | valid | valid | missing | reachable |
+| 1487 | Vänersborg | `www.vanersborg.se` | valid | valid | missing | reachable |
+| 1488 | Trollhättan | `www.trollhattan.se` | valid | valid | missing | reachable |
+| 1489 | Alingsås | `www.alingsas.se` | valid | valid | missing | reachable |
+| 1490 | Borås | `www.boras.se` | valid | valid | missing | reachable |
+| 1491 | Ulricehamn | `www.ulricehamn.se` | valid | valid | missing | reachable |
+| 1492 | Åmål | `www.amal.se` | valid | valid | missing | reachable |
+| 1493 | Mariestad | `www.mariestad.se` | valid | valid | missing | reachable |
+| 1494 | Lidköping | `www.lidkoping.se` | missing | missing | missing | missing |
+| 1495 | Skara | `www.skara.se` | missing | missing | missing | missing |
+| 1496 | Skövde | `www.skovde.se` | valid | valid | missing | reachable |
+| 1497 | Hjo | `www.hjo.se` | valid | valid | missing | reachable |
+| 1498 | Tidaholm | `www.tidaholm.se` | valid | valid | missing | reachable |
+| 1499 | Falköping | `www.falkoping.se` | valid | valid | missing | reachable |
+| 1715 | Kil | `www.kil.se` | valid | valid | missing | reachable |
+| 1730 | Eda | `www.eda.se` | valid | valid | missing | reachable |
+| 1737 | Torsby | `www.torsby.se` | valid | valid | missing | reachable |
+| 1760 | Storfors | `www.storfors.se` | valid | valid | missing | reachable |
+| 1761 | Hammarö | `www.hammaro.se` | valid | valid | missing | reachable |
+| 1762 | Munkfors | `www.munkfors.se` | valid | valid | missing | reachable |
+| 1763 | Forshaga | `www.forshaga.se` | valid | valid | missing | reachable |
+| 1764 | Grums | `www.grums.se` | valid | valid | missing | reachable |
+| 1765 | Årjäng | `www.arjang.se` | valid | valid | missing | reachable |
+| 1766 | Sunne | `www.sunne.se` | valid | valid | missing | reachable |
+| 1780 | Karlstad | `www.karlstad.se` | valid | valid | missing | reachable |
+| 1781 | Kristinehamn | `www.kristinehamn.se` | valid | valid | missing | reachable |
+| 1782 | Filipstad | `www.filipstad.se` | valid | valid | missing | reachable |
+| 1783 | Hagfors | `www.hagfors.se` | valid | valid | missing | reachable |
+| 1784 | Arvika | `www.arvika.se` | valid | valid | missing | reachable |
+| 1785 | Säffle | `www.saffle.se` | valid | valid | missing | reachable |
+| 1814 | Lekeberg | `www.lekeberg.se` | valid | valid | missing | reachable |
+| 1860 | Laxå | `www.laxa.se` | valid | valid | missing | reachable |
+| 1861 | Hallsberg | `www.hallsberg.se` | valid | valid | missing | reachable |
+| 1862 | Degerfors | `www.degerfors.se` | valid | valid | missing | reachable |
+| 1863 | Hällefors | `www.hellefors.se` | valid | valid | missing | reachable |
+| 1864 | Ljusnarsberg | `www.ljusnarsberg.se` | valid | valid | missing | reachable |
+| 1880 | Örebro | `www.orebro.se` | valid | valid | missing | reachable |
+| 1881 | Kumla | `www.kumla.se` | valid | valid | missing | reachable |
+| 1882 | Askersund | `www.askersund.se` | valid | valid | missing | reachable |
+| 1883 | Karlskoga | `www.karlskoga.se` | valid | valid | missing | reachable |
+| 1884 | Nora | `www.nora.se` | valid | valid | missing | reachable |
+| 1885 | Lindesberg | `www.lindesberg.se` | valid | valid | missing | reachable |
+| 1904 | Skinnskatteberg | `www.skinnskatteberg.se` | valid | valid | missing | reachable |
+| 1907 | Surahammar | `www.surahammar.se` | valid | valid | missing | reachable |
+| 1960 | Kungsör | `www.kungsor.se` | valid | valid | missing | reachable |
+| 1961 | Hallstahammar | `www.hallstahammar.se` | valid | valid | missing | reachable |
+| 1962 | Norberg | `www.norberg.se` | valid | valid | missing | reachable |
+| 1980 | Västerås | `www.vasteras.se` | valid | valid | missing | reachable |
+| 1981 | Sala | `www.sala.se` | valid | valid | missing | reachable |
+| 1982 | Fagersta | `www.fagersta.se` | valid | valid | missing | reachable |
+| 1983 | Köping | `www.koping.se` | valid | valid | missing | reachable |
+| 1984 | Arboga | `www.arboga.se` | valid | valid | missing | reachable |
+| 2021 | Vansbro | `www.vansbro.se` | valid | valid | missing | reachable |
+| 2023 | Malung-Sälen | `malung-salen.se` | valid | valid | missing | reachable |
+| 2026 | Gagnef | `www.gagnef.se` | valid | valid | missing | reachable |
+| 2029 | Leksand | `www.leksand.se` | valid | valid | missing | reachable |
+| 2031 | Rättvik | `www.rattvik.se` | valid | valid | missing | reachable |
+| 2034 | Orsa | `www.orsa.se` | valid | valid | missing | reachable |
+| 2039 | Älvdalen | `www.alvdalen.se` | valid | valid | missing | reachable |
+| 2061 | Smedjebacken | `www.smedjebacken.se` | valid | valid | missing | reachable |
+| 2062 | Mora | `morakommun.se` | valid | valid | missing | reachable |
+| 2080 | Falun | `www.falun.se` | valid | valid | missing | reachable |
+| 2081 | Borlänge | `www.borlange.se` | valid | valid | missing | reachable |
+| 2082 | Säter | `www.sater.se` | valid | valid | missing | reachable |
+| 2083 | Hedemora | `www.hedemora.se` | valid | valid | missing | reachable |
+| 2084 | Avesta | `www.avesta.se` | valid | valid | missing | reachable |
+| 2085 | Ludvika | `www.ludvika.se` | valid | valid | missing | reachable |
+| 2101 | Ockelbo | `www.ockelbo.se` | valid | valid | missing | reachable |
+| 2104 | Hofors | `www.hofors.se` | valid | valid | missing | reachable |
+| 2121 | Ovanåker | `www.ovanaker.se` | valid | valid | missing | reachable |
+| 2132 | Nordanstig | `www.nordanstig.se` | valid | valid | missing | reachable |
+| 2161 | Ljusdal | `www.ljusdal.se` | valid | valid | missing | reachable |
+| 2180 | Gävle | `www.gavle.se` | valid | valid | missing | reachable |
+| 2181 | Sandviken | `www.sandviken.se` | valid | valid | missing | reachable |
+| 2182 | Söderhamn | `www.soderhamn.se` | valid | valid | missing | reachable |
+| 2183 | Bollnäs | `www.bollnas.se` | valid | valid | missing | reachable |
+| 2184 | Hudiksvall | `www.hudiksvall.se` | valid | valid | missing | reachable |
+| 2260 | Ånge | `www.ange.se` | valid | valid | missing | reachable |
+| 2262 | Timrå | `www.timra.se` | valid | valid | missing | reachable |
+| 2280 | Härnösand | `www.harnosand.se` | valid | valid | missing | reachable |
+| 2281 | Sundsvall | `sundsvall.se` | valid | valid | missing | reachable |
+| 2282 | Kramfors | `www.kramfors.se` | valid | valid | missing | reachable |
+| 2283 | Sollefteå | `www.solleftea.se` | valid | valid | missing | reachable |
+| 2284 | Örnsköldsvik | `www.ornskoldsvik.se` | valid | valid | missing | reachable |
+| 2303 | Ragunda | `www.ragunda.se` | valid | valid | missing | reachable |
+| 2305 | Bräcke | `www.bracke.se` | valid | valid | missing | reachable |
+| 2309 | Krokom | `www.krokom.se` | valid | valid | missing | reachable |
+| 2313 | Strömsund | `www.stromsund.se` | valid | valid | missing | reachable |
+| 2321 | Åre | `www.are.se` | valid | valid | missing | reachable |
+| 2326 | Berg | `www.berg.se` | valid | valid | missing | reachable |
+| 2361 | Härjedalen | `www.herjedalen.se` | valid | valid | missing | reachable |
+| 2380 | Östersund | `www.ostersund.se` | valid | valid | missing | reachable |
+| 2401 | Nordmaling | `www.nordmaling.se` | valid | valid | missing | reachable |
+| 2403 | Bjurholm | `www.bjurholm.se` | valid | valid | missing | reachable |
+| 2404 | Vindeln | `www.vindeln.se` | valid | valid | missing | reachable |
+| 2409 | Robertsfors | `www.robertsfors.se` | valid | valid | missing | reachable |
+| 2417 | Norsjö | `www.norsjo.se` | valid | valid | missing | reachable |
+| 2418 | Malå | `www.mala.se` | valid | valid | missing | reachable |
+| 2421 | Storuman | `www.storuman.se` | missing | missing | missing | missing |
+| 2422 | Sorsele | `www.sorsele.se` | missing | missing | missing | missing |
+| 2425 | Dorotea | `www.dorotea.se` | valid | valid | missing | reachable |
+| 2460 | Vännäs | `www.vannas.se` | valid | valid | missing | reachable |
+| 2462 | Vilhelmina | `www.vilhelmina.se` | valid | valid | missing | reachable |
+| 2463 | Åsele | `www.asele.se` | valid | valid | missing | reachable |
+| 2480 | Umeå | `www.umea.se` | valid | valid | missing | reachable |
+| 2481 | Lycksele | `www.lycksele.se` | valid | valid | missing | invalid |
+| 2482 | Skellefteå | `www.skelleftea.se` | valid | valid | missing | reachable |
+| 2505 | Arvidsjaur | `www.arvidsjaur.se` | valid | valid | missing | reachable |
+| 2506 | Arjeplog | `www.arjeplog.se` | valid | valid | missing | reachable |
+| 2510 | Jokkmokk | `www.jokkmokk.se` | valid | valid | missing | invalid |
+| 2513 | Överkalix | `www.overkalix.se` | missing | missing | missing | missing |
+| 2514 | Kalix | `www.kalix.se` | valid | valid | missing | reachable |
+| 2518 | Övertorneå | `www.overtornea.se` | valid | valid | missing | reachable |
+| 2521 | Pajala | `www.pajala.se` | missing | missing | missing | missing |
+| 2523 | Gällivare | `gallivare.se` | valid | valid | missing | reachable |
+| 2560 | Älvsbyn | `www.alvsbyn.se` | valid | valid | missing | reachable |
+| 2580 | Luleå | `www.lulea.se` | valid | valid | missing | reachable |
+| 2581 | Piteå | `www.pitea.se` | valid | valid | missing | reachable |
+| 2582 | Boden | `www.boden.se` | valid | valid | missing | reachable |
+| 2583 | Haparanda | `www.haparanda.se` | valid | valid | missing | reachable |
+| 2584 | Kiruna | `kiruna.se` | valid | valid | missing | reachable |
+
+The JSON report contains every issue, source hash, HTTP probe result, redirect target, and row-level validation detail.

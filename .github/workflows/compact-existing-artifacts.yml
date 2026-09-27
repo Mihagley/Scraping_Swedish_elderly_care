@@ -1,0 +1,52 @@
+name: Compact existing collection artifacts
+
+on:
+  push:
+    branches:
+      - feature/resumable-matrix-shards
+    paths:
+      - research/run-compact.trigger
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      SOURCE_RUN_ID: "35310547108"
+      SHARDS: "00 01 05 09 10"
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download and compact existing artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p research/compact
+          : > research/compact/oversized_candidates.jsonl
+          for shard in $SHARDS; do
+            work="/tmp/research-shard-${shard}"
+            out="research/compact/candidates_shard${shard}.jsonl"
+            rm -rf "$work"
+            mkdir -p "$work"
+            gh run download "$SOURCE_RUN_ID"               --repo "$GITHUB_REPOSITORY"               --name "research-shard-${shard}"               --dir "$work"
+            python scripts/compact_collected_directory.py --root "$work" --out "$out"
+            cat "$out" >> research/compact/oversized_candidates.jsonl
+            rm -rf "$work"
+          done
+
+      - name: Upload compact text candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: compact-existing-artifacts-${{ github.run_id }}
+          path: research/compact/
+          retention-days: 30

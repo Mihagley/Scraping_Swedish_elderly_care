@@ -16,10 +16,20 @@ research:
     in force by that date, even if the exact introduction date is unknown. Leave
     effective_date null in that case. Never infer introduction from publication alone.
   fields:
-    language_level: Explicit CEFR/GERS, SFI or Swedish course threshold; preserve the source's terminology.
+    language_level: Exact language threshold as stated in the source; preserve source terminology without converting between frameworks.
+    svenska_1: Whether Svenska 1 is explicitly named as a threshold or requirement, including the exact formulation.
+    sva_1: Whether Svenska som andraspråk 1/SVA 1 is explicitly named as a threshold or requirement, including the exact formulation.
+    sfi: Any explicitly named SFI course/level or SFI-based threshold; preserve the exact level or wording.
+    gers_b1: Whether GERS/CEFR B1 is explicitly named, and how it is used.
+    gers_b2: Whether GERS/CEFR B2 is explicitly named, and how it is used.
+    qualitative_language_requirement: Any qualitative Swedish-language requirement without a formal course/GERS threshold; preserve the exact wording.
     staff_group: New hires, existing staff, all staff, named occupations or another explicit group.
-    enforcement: How compliance is tested or enforced, if explicitly stated.
+    enforcement: How compliance is tested, assessed or enforced, if explicitly stated.
     provider_scope: Municipal employer, municipal contractor, a specific unit or another explicit scope.
+    publication_date: Publication/document date when explicitly supported; do not treat it as the policy start date.
+    decision_date: Formal adoption/decision date when explicitly supported.
+    implementation_date: Explicit implementation/start date when explicitly supported.
+    in_force_by_date: A date by which the source explicitly establishes that the requirement was already in force, when the exact introduction date is unknown.
   labels:
     'Yes':
       definition: Explicit formal requirement shown to be in operation before the cutoff.
@@ -50,10 +60,12 @@ research:
 discovery:
   provider: hybrid
   queries:
-    - '{municipality} äldreomsorg språkkrav språktest B1 B2 före 2025'
-    - '{municipality} äldreomsorg SFI svenska nyanställning språkkrav protokoll 2022 2023 2024'
-    - '{municipality} vård omsorg språkkrav infördes beslut pilot'
-  keywords: [språk, sprak, äldre, aldre, omsorg, protokoll, rekryter, anställ, anstall, personal]
+    - '{municipality} äldreomsorg språkkrav språktest GERS B1 B2 Svenska 1 SVA 1 före 2025'
+    - '{municipality} äldreomsorg SFI svenska som andraspråk nyanställning språkkrav protokoll 2022 2023 2024'
+    - '{municipality} vård omsorg språkkrav språkbedömning infördes beslut pilot kallelse protokoll'
+  keywords:
+    [språk, sprak, svenska, andraspråk, andrasprak, sfi, gers, cefr, b1, b2, svenska1,
+     äldre, aldre, omsorg, protokoll, kallelse, beslut, rekryter, anställ, anstall, personal]
   max_searches_per_municipality: 3
   max_documents: 20
   max_depth: 2

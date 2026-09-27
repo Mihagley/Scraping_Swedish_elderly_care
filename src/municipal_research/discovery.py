@@ -45,7 +45,7 @@ class Discoverer:
             url = normalize_url(url)
         except (ValueError, RuntimeError):
             return
-        if url in self.seen or not domain_allowed(url, municipality.domains):
+        if url in self.seen or not domain_allowed(url, municipality.allowed_domains):
             return
         self.seen.add(url)
         score = self.score(url + " " + title) + priority
@@ -120,6 +120,8 @@ class Discoverer:
 
     def documents(self, municipality: Municipality):
         settings = self.config.discovery
+        for archive in municipality.meeting_archives:
+            self.add(municipality, archive, "meeting_archive", priority=1500)
         for seed in municipality.seeds:
             self.add(municipality, seed, "seed", priority=1000)
         for domain in municipality.domains:
@@ -159,7 +161,7 @@ class Discoverer:
             _, depth, _, url = heapq.heappop(self.queue)
             attempted += 1
             try:
-                download = self.fetcher.get(url, municipality.domains)
+                download = self.fetcher.get(url, municipality.allowed_domains)
                 identity = (download.url, download.sha256)
                 if identity in delivered:
                     continue
