@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "municipal-research"
 version = "0.1.0"
 description = "Evidence-first research on municipal websites, with auditable LLM coding"
-readme = "README.md"
+readme = { text = "Auditable Swedish public-source research. See README.pdf for documentation and LAS_MIG.pdf for Swedish launch instructions.", content-type = "text/plain" }
 requires-python = ">=3.11"
 dependencies = [
   "openai>=2.0,<3", "pydantic>=2.10,<3", "httpx>=0.28,<1",
