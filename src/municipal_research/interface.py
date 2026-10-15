@@ -50,7 +50,7 @@ def configure(
     local_timeout: float | None = None,
 ) -> Config:
     if not question.strip():
-        raise ValueError("Ange en forskningsfråga.")
+        raise ValueError("Ange en utredningsfråga.")
     query_list = [line.strip() for line in queries.splitlines() if line.strip()]
     try:
         for query in query_list:

@@ -71,7 +71,7 @@ def launch_job(settings=None):
         summary = (
             f"{len(locations)} valda platser · högst {config.discovery.max_documents} dokument per plats · "
             f"{'enbart insamling' if collect_only else 'klassificering med AI'}\n\n"
-            f"Forskningsfråga: {config.research.question}\n\n"
+            f"Utredningsfråga: {config.research.question}\n\n"
             f"Sökord: {', '.join(config.discovery.keywords)}"
         )
         if not collect_only:
@@ -183,7 +183,7 @@ def live_form(running):
         )
 
     st.subheader("2. Beskriv vad du vill hitta")
-    question = st.text_area("Forskningsfråga", base.research.question, disabled=running)
+    question = st.text_area("Utredningsfråga", base.research.question, disabled=running)
     keywords = st.text_area(
         "Sökord och fraser",
         ", ".join(base.discovery.keywords),
@@ -191,7 +191,7 @@ def live_form(running):
         help="Separera ord och fraser med kommatecken eller radbrytningar.",
     )
     st.caption(
-        "Sökorden hjälper till att hitta relevanta sidor. Forskningsfrågan och kodboken styr hur innehållet bedöms."
+        "Sökorden hjälper till att hitta relevanta sidor. Utredningsfrågan och kodboken styr hur innehållet bedöms."
     )
     ai_provider = st.selectbox(
         "AI för klassificering",
@@ -207,6 +207,13 @@ def live_form(running):
         st.caption(
             "Vid byte från en lokal YAML-konfiguration används OpenAI-exempelmodellen gpt-5-mini. Ladda upp en OpenAI-konfiguration för att välja andra molnmodeller."
         )
+    api_key = st.text_input(
+        "Din API-nyckel för OpenAI",
+        type="password",
+        disabled=running,
+        key="openai_api_key",
+        help="Valfri för genomsökning och lokal AI. Behövs för OpenAI-klassificering och OpenAI-webbsökning. Nyckeln skrivs inte till konfigurationsfiler.",
+    ).strip()
     local_model = local_url = None
     context_tokens = local_timeout = None
     if ai_provider == "ollama":
@@ -267,11 +274,16 @@ def live_form(running):
         st.session_state.discovery_provider = (
             "crawl" if ai_provider == "ollama" else base.discovery.provider
         )
+    if not api_key:
+        st.session_state.discovery_provider = "crawl"
+        st.caption(
+            "Ingen OpenAI-nyckel angiven: sökmetoden är automatiskt Genomsök webbplatser. Ange en nyckel för att aktivera OpenAI-webbsökning."
+        )
     with st.expander("Avancerade sökinställningar"):
         queries = st.text_area(
             "Sökfrågor (en per rad)",
             "\n".join(base.discovery.queries) or "{location} {question}",
-            help="{location} ersätts med platsens namn, {domain} med domänen och {question} med forskningsfrågan.",
+            help="{location} ersätts med platsens namn, {domain} med domänen och {question} med utredningsfrågan.",
             disabled=running,
         )
         provider = st.selectbox(
@@ -279,7 +291,7 @@ def live_form(running):
             list(PROVIDERS),
             format_func=PROVIDERS.get,
             index=None,
-            disabled=running,
+            disabled=running or not api_key,
             key="discovery_provider",
         )
         max_documents = st.number_input(
@@ -325,16 +337,13 @@ def live_form(running):
         )
     needs_key = requires_openai(provider, ai_provider, collect_only)
     st.subheader("3. Starta sökningen")
-    if needs_key:
-        api_key = st.text_input(
-            "Din API-nyckel för OpenAI",
-            type="password",
-            disabled=running,
-            help="Nyckeln skickas till din lokala körning och skrivs inte till konfigurationsfiler.",
+    if needs_key and not api_key:
+        st.warning(
+            "Genomsökning behöver ingen nyckel, men klassificering med OpenAI gör det. Ange en API-nyckel, välj Lokal AI via Ollama eller markera Samla bara in källor under Avancerade sökinställningar."
         )
+    elif needs_key:
         st.caption("Sökningen använder betalda API-anrop. Antalsgränsen är ingen kostnadsgräns.")
     else:
-        api_key = ""
         st.caption("Denna kombination kräver ingen OpenAI-nyckel.")
     if ai_provider == "ollama" and provider != "crawl":
         st.warning(
@@ -348,7 +357,11 @@ def live_form(running):
         st.warning(
             "Du har valt en stor sökning. Den kan ta lång tid. Börja gärna med några kommuner för att kontrollera frågan och resultaten."
         )
-    if st.button("Starta sökning", disabled=running or not selected, type="primary"):
+    if st.button(
+        "Starta sökning",
+        disabled=running or not selected or (needs_key and not api_key),
+        type="primary",
+    ):
         try:
             if needs_key and not api_key.strip():
                 st.error(

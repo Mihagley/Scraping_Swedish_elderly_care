@@ -8,7 +8,7 @@ research:
   unknown_label: Oklart
   labels:
     Fynd:
-      definition: Källan besvarar uttryckligen forskningsfrågan för den valda organisationen.
+      definition: Källan besvarar uttryckligen utredningsfrågan för den valda organisationen.
     Oklart:
       definition: Det hämtade materialet ger inget belagt svar. Det bevisar inte att en företeelse saknas.
       requires_evidence: false
