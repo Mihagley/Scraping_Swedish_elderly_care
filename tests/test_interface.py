@@ -1,3 +1,5 @@
+import csv
+import runpy
 import unittest
 from pathlib import Path
 
@@ -19,8 +21,6 @@ class InterfaceTests(unittest.TestCase):
         self.assertEqual(len({x.id for x in kommun + regions}), 311)
 
     def test_registry_matches_source_snapshots(self):
-        import runpy
-        import csv
         builder = runpy.run_path(str(ROOT / "scripts/build_municipality_registry.py"))
         expected = builder["build_rows"]()
         with (ROOT / "examples/municipalities.csv").open(encoding="utf-8", newline="") as handle:
