@@ -102,7 +102,7 @@ class LLM(StrictModel):
             or url.path not in {"", "/"}):
             raise ValueError("Ollama requires a localhost origin, e.g. http://localhost:11434, without credentials or an API path")
         try:
-            url.port
+            _ = url.port
         except ValueError as error:
             raise ValueError("Ollama port is invalid") from error
         self.ollama_base_url = self.ollama_base_url.rstrip("/")
