@@ -10,8 +10,9 @@ evidence, extracting text, independently coding it with structured LLM responses
 verifying quotations, and exporting an auditable Excel workbook.
 
 The default question concerns formal Swedish-language requirements for elderly-care
-staff before 1 January 2025. The supplied municipality list is a six-city starter list,
-not a completed study or an exhaustive list of Sweden's 290 municipalities.
+staff before 1 January 2025. The browser interface includes all 290 municipalities with websites and codes matched
+against SKR, plus all 21 regions. The national list is an input registry, not a completed study.
+The original six-city list is preserved in `examples/municipalities_pilot.csv`.
 
 ## Quick start
 
@@ -84,8 +85,8 @@ The municipality CSV has `id,name,domains,seeds`. IDs remain strings, including 
 zeroes. Separate domains and seed URLs with semicolons. Use hostnames without schemes
 or wildcards in `domains`; subdomains are automatically included. Add a document-hosting
 domain explicitly if an official source uses an external document archive. Sources
-outside this allowlist are not downloaded. The starter list is editable; supply a
-validated municipality registry to scale to all 290. The project does not fabricate one.
+outside this allowlist are not downloaded. The supplied national registry covers all 290 municipalities; see
+`examples/registry_sources/README.md` for sources and reproducible validation.
 
 ## Discovery and collection
 
@@ -298,8 +299,7 @@ semantic verification.
 
 A Streamlit interface supports keyword/query entry, research questions, individual
 kommun/region selection, CSV and YAML uploads, offline demos, live research, job
-activity, and Excel/JSON downloads. All 21 regions are included alongside the six
-starter municipalities. See [interface and hosting instructions](docs/interface.md).
+activity, and Excel/JSON downloads. The interface is in Swedish and includes all 290 municipalities and all 21 regions. See [interface and hosting instructions](docs/interface.md).
 
 ```sh
 python -m pip install -r requirements.txt

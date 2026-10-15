@@ -12,16 +12,34 @@ class InterfaceTests(unittest.TestCase):
         kommun = load_municipalities(ROOT / 'examples/municipalities.csv')
         regions = load_municipalities(ROOT / 'examples/regions.csv')
         self.assertEqual(len(regions), 21)
-        self.assertEqual(kommun[1].id, '0180')
+        self.assertEqual(len(kommun), 290)
+        self.assertEqual(next(x.id for x in kommun if x.name == 'Stockholm'), '0180')
         self.assertTrue(all(x.kind == 'kommun' for x in kommun))
         self.assertTrue(all(x.kind == 'region' for x in regions))
-        self.assertEqual(len({x.id for x in kommun + regions}), 27)
+        self.assertEqual(len({x.id for x in kommun + regions}), 311)
+
+    def test_registry_matches_source_snapshots(self):
+        import runpy
+        import csv
+        builder = runpy.run_path(str(ROOT / "scripts/build_municipality_registry.py"))
+        expected = builder["build_rows"]()
+        with (ROOT / "examples/municipalities.csv").open(encoding="utf-8", newline="") as handle:
+            self.assertEqual(list(csv.DictReader(handle)), expected)
+        self.assertTrue(all(len(row["id"]) == 4 and row["id"].isdigit() for row in expected))
+        names = {row["name"] for row in expected}
+        self.assertTrue({"Göteborg", "Malmö", "Gotland", "Malung-Sälen", "Övertorneå"} <= names)
+        pilot = load_municipalities(ROOT / "examples/municipalities_pilot.csv")
+        self.assertEqual(len(pilot), 6)
+        by_id = {row["id"]: row for row in expected}
+        self.assertTrue(all(by_id[row.id]["name"] == row.name for row in pilot))
 
     def test_upload_rejects_duplicate_ids_and_invalid_kind(self):
         for text in [
             'id,name,domains\nx,A,a.se\nx,B,b.se',
             'id,name,domains,kind\nx,A,a.se,county',
             'name,domains\nA,a.se',
+            'id,name,domains\nx,A',
+            'id,name,domains\nx,A,a.se,extra',
         ]:
             with self.assertRaises(ValueError):
                 parse_locations(text)

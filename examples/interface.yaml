@@ -1,16 +1,16 @@
 research:
-  question: What explicit language requirements apply to staff employed by the selected authority?
+  question: Vilka uttryckliga språkkrav gäller för personal som är anställd av den valda kommunen eller regionen?
   instructions: >-
-    Attribute findings to the selected authority and its stated responsibilities.
-    A region and a municipality are distinct employers, including when they share a name.
-    Distinguish formal requirements from general expectations, proposals and training.
-    Do not assume regional responsibility for municipal elderly care.
-  unknown_label: Unknown
+    Svara på svenska. Hänför varje fynd till den valda organisationen och dess angivna ansvar.
+    En region och en kommun är skilda arbetsgivare även om de har samma namn.
+    Skilj formella krav från allmänna förväntningar, förslag och utbildning.
+    Förutsätt inte att regionen ansvarar för kommunal äldreomsorg.
+  unknown_label: Oklart
   labels:
-    Finding:
-      definition: The source explicitly answers the research question for the selected authority.
-    Unknown:
-      definition: The source does not support an answer. This does not establish absence.
+    Fynd:
+      definition: Källan besvarar uttryckligen forskningsfrågan för den valda organisationen.
+    Oklart:
+      definition: Det hämtade materialet ger inget belagt svar. Det bevisar inte att en företeelse saknas.
       requires_evidence: false
       conclusive: false
 discovery:

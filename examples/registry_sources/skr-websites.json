@@ -1,0 +1,1166 @@
+{
+  "source_url": "https://skr.se/kommunerochregioner/kommunerlista.8288.html",
+  "retrieved_on": "2026-10-15",
+  "entries": [
+    {
+      "name": "Ale",
+      "host": "www.ale.se"
+    },
+    {
+      "name": "Alingsås",
+      "host": "www.alingsas.se"
+    },
+    {
+      "name": "Alvesta",
+      "host": "www.alvesta.se"
+    },
+    {
+      "name": "Aneby",
+      "host": "www.aneby.se"
+    },
+    {
+      "name": "Arboga",
+      "host": "www.arboga.se"
+    },
+    {
+      "name": "Arjeplog",
+      "host": "www.arjeplog.se"
+    },
+    {
+      "name": "Arvidsjaur",
+      "host": "www.arvidsjaur.se"
+    },
+    {
+      "name": "Arvika",
+      "host": "www.arvika.se"
+    },
+    {
+      "name": "Askersund",
+      "host": "www.askersund.se"
+    },
+    {
+      "name": "Avesta",
+      "host": "www.avesta.se"
+    },
+    {
+      "name": "Bengtsfors",
+      "host": "www.bengtsfors.se"
+    },
+    {
+      "name": "Berg",
+      "host": "www.berg.se"
+    },
+    {
+      "name": "Bjurholm",
+      "host": "www.bjurholm.se"
+    },
+    {
+      "name": "Bjuv",
+      "host": "www.bjuv.se"
+    },
+    {
+      "name": "Boden",
+      "host": "www.boden.se"
+    },
+    {
+      "name": "Bollebygd",
+      "host": "www.bollebygd.se"
+    },
+    {
+      "name": "Bollnäs",
+      "host": "www.bollnas.se"
+    },
+    {
+      "name": "Borgholm",
+      "host": "www.borgholm.se"
+    },
+    {
+      "name": "Borlänge",
+      "host": "www.borlange.se"
+    },
+    {
+      "name": "Borås",
+      "host": "www.boras.se"
+    },
+    {
+      "name": "Botkyrka",
+      "host": "www.botkyrka.se"
+    },
+    {
+      "name": "Boxholm",
+      "host": "www.boxholm.se"
+    },
+    {
+      "name": "Bromölla",
+      "host": "www.bromolla.se"
+    },
+    {
+      "name": "Bräcke",
+      "host": "www.bracke.se"
+    },
+    {
+      "name": "Burlöv",
+      "host": "www.burlov.se"
+    },
+    {
+      "name": "Båstad",
+      "host": "www.bastad.se"
+    },
+    {
+      "name": "Dals-Ed",
+      "host": "www.dalsed.se"
+    },
+    {
+      "name": "Danderyd",
+      "host": "www.danderyd.se"
+    },
+    {
+      "name": "Degerfors",
+      "host": "www.degerfors.se"
+    },
+    {
+      "name": "Dorotea",
+      "host": "www.dorotea.se"
+    },
+    {
+      "name": "Eda",
+      "host": "www.eda.se"
+    },
+    {
+      "name": "Ekerö",
+      "host": "www.ekero.se"
+    },
+    {
+      "name": "Eksjö",
+      "host": "www.eksjo.se"
+    },
+    {
+      "name": "Emmaboda",
+      "host": "www.emmaboda.se"
+    },
+    {
+      "name": "Enköping",
+      "host": "enkoping.se"
+    },
+    {
+      "name": "Eskilstuna",
+      "host": "www.eskilstuna.se"
+    },
+    {
+      "name": "Eslöv",
+      "host": "www.eslov.se"
+    },
+    {
+      "name": "Essunga",
+      "host": "www.essunga.se"
+    },
+    {
+      "name": "Fagersta",
+      "host": "www.fagersta.se"
+    },
+    {
+      "name": "Falkenberg",
+      "host": "kommun.falkenberg.se"
+    },
+    {
+      "name": "Falköping",
+      "host": "www.falkoping.se"
+    },
+    {
+      "name": "Falun",
+      "host": "www.falun.se"
+    },
+    {
+      "name": "Filipstad",
+      "host": "www.filipstad.se"
+    },
+    {
+      "name": "Finspång",
+      "host": "www.finspang.se"
+    },
+    {
+      "name": "Flen",
+      "host": "www.flen.se"
+    },
+    {
+      "name": "Forshaga",
+      "host": "www.forshaga.se"
+    },
+    {
+      "name": "Färgelanda",
+      "host": "www.fargelanda.se"
+    },
+    {
+      "name": "Gagnef",
+      "host": "www.gagnef.se"
+    },
+    {
+      "name": "Gislaved",
+      "host": "www.gislaved.se"
+    },
+    {
+      "name": "Gnesta",
+      "host": "www.gnesta.se"
+    },
+    {
+      "name": "Gnosjö",
+      "host": "www.gnosjo.se"
+    },
+    {
+      "name": "Gotland",
+      "host": "www.gotland.se"
+    },
+    {
+      "name": "Grums",
+      "host": "www.grums.se"
+    },
+    {
+      "name": "Grästorp",
+      "host": "www.grastorp.se"
+    },
+    {
+      "name": "Gullspång",
+      "host": "www.gullspang.se"
+    },
+    {
+      "name": "Gällivare",
+      "host": "gallivare.se"
+    },
+    {
+      "name": "Gävle",
+      "host": "www.gavle.se"
+    },
+    {
+      "name": "Göteborg",
+      "host": "www.goteborg.se"
+    },
+    {
+      "name": "Götene",
+      "host": "www.gotene.se"
+    },
+    {
+      "name": "Habo",
+      "host": "www.habokommun.se"
+    },
+    {
+      "name": "Hagfors",
+      "host": "www.hagfors.se"
+    },
+    {
+      "name": "Hallsberg",
+      "host": "www.hallsberg.se"
+    },
+    {
+      "name": "Hallstahammar",
+      "host": "www.hallstahammar.se"
+    },
+    {
+      "name": "Halmstad",
+      "host": "www.halmstad.se"
+    },
+    {
+      "name": "Hammarö",
+      "host": "www.hammaro.se"
+    },
+    {
+      "name": "Haninge",
+      "host": "www.haninge.se"
+    },
+    {
+      "name": "Haparanda",
+      "host": "www.haparanda.se"
+    },
+    {
+      "name": "Heby",
+      "host": "www.heby.se"
+    },
+    {
+      "name": "Hedemora",
+      "host": "www.hedemora.se"
+    },
+    {
+      "name": "Helsingborg",
+      "host": "www.helsingborg.se"
+    },
+    {
+      "name": "Herrljunga",
+      "host": "www.herrljunga.se"
+    },
+    {
+      "name": "Hjo",
+      "host": "www.hjo.se"
+    },
+    {
+      "name": "Hofors",
+      "host": "www.hofors.se"
+    },
+    {
+      "name": "Huddinge",
+      "host": "www.huddinge.se"
+    },
+    {
+      "name": "Hudiksvall",
+      "host": "www.hudiksvall.se"
+    },
+    {
+      "name": "Hultsfred",
+      "host": "www.hultsfred.se"
+    },
+    {
+      "name": "Hylte",
+      "host": "www.hylte.se"
+    },
+    {
+      "name": "Håbo",
+      "host": "www.habo.se"
+    },
+    {
+      "name": "Hällefors",
+      "host": "www.hellefors.se"
+    },
+    {
+      "name": "Härjedalen",
+      "host": "www.herjedalen.se"
+    },
+    {
+      "name": "Härnösand",
+      "host": "www.harnosand.se"
+    },
+    {
+      "name": "Härryda",
+      "host": "www.harryda.se"
+    },
+    {
+      "name": "Hässleholm",
+      "host": "www.hassleholm.se"
+    },
+    {
+      "name": "Höganäs",
+      "host": "www.hoganas.se"
+    },
+    {
+      "name": "Högsby",
+      "host": "www.hogsby.se"
+    },
+    {
+      "name": "Hörby",
+      "host": "www.horby.se"
+    },
+    {
+      "name": "Höör",
+      "host": "www.hoor.se"
+    },
+    {
+      "name": "Jokkmokk",
+      "host": "www.jokkmokk.se"
+    },
+    {
+      "name": "Järfälla",
+      "host": "www.jarfalla.se"
+    },
+    {
+      "name": "Jönköping",
+      "host": "www.jonkoping.se"
+    },
+    {
+      "name": "Kalix",
+      "host": "www.kalix.se"
+    },
+    {
+      "name": "Kalmar",
+      "host": "www.kalmar.se"
+    },
+    {
+      "name": "Karlsborg",
+      "host": "www.karlsborg.se"
+    },
+    {
+      "name": "Karlshamn",
+      "host": "www.karlshamn.se"
+    },
+    {
+      "name": "Karlskoga",
+      "host": "www.karlskoga.se"
+    },
+    {
+      "name": "Karlskrona",
+      "host": "www.karlskrona.se"
+    },
+    {
+      "name": "Karlstad",
+      "host": "www.karlstad.se"
+    },
+    {
+      "name": "Katrineholm",
+      "host": "www.katrineholm.se"
+    },
+    {
+      "name": "Kil",
+      "host": "www.kil.se"
+    },
+    {
+      "name": "Kinda",
+      "host": "www.kinda.se"
+    },
+    {
+      "name": "Kiruna",
+      "host": "kiruna.se"
+    },
+    {
+      "name": "Klippan",
+      "host": "www.klippan.se"
+    },
+    {
+      "name": "Knivsta",
+      "host": "www.knivsta.se"
+    },
+    {
+      "name": "Kramfors",
+      "host": "www.kramfors.se"
+    },
+    {
+      "name": "Kristianstad",
+      "host": "www.kristianstad.se"
+    },
+    {
+      "name": "Kristinehamn",
+      "host": "www.kristinehamn.se"
+    },
+    {
+      "name": "Krokom",
+      "host": "www.krokom.se"
+    },
+    {
+      "name": "Kumla",
+      "host": "www.kumla.se"
+    },
+    {
+      "name": "Kungsbacka",
+      "host": "www.kungsbacka.se"
+    },
+    {
+      "name": "Kungsör",
+      "host": "www.kungsor.se"
+    },
+    {
+      "name": "Kungälv",
+      "host": "www.kungalv.se"
+    },
+    {
+      "name": "Kävlinge",
+      "host": "www.kavlinge.se"
+    },
+    {
+      "name": "Köping",
+      "host": "www.koping.se"
+    },
+    {
+      "name": "Laholm",
+      "host": "www.laholm.se"
+    },
+    {
+      "name": "Landskrona",
+      "host": "www.landskrona.se"
+    },
+    {
+      "name": "Laxå",
+      "host": "www.laxa.se"
+    },
+    {
+      "name": "Lekeberg",
+      "host": "www.lekeberg.se"
+    },
+    {
+      "name": "Leksand",
+      "host": "www.leksand.se"
+    },
+    {
+      "name": "Lerum",
+      "host": "www.lerum.se"
+    },
+    {
+      "name": "Lessebo",
+      "host": "www.lessebo.se"
+    },
+    {
+      "name": "Lidingö",
+      "host": "www.lidingo.se"
+    },
+    {
+      "name": "Lidköping",
+      "host": "www.lidkoping.se"
+    },
+    {
+      "name": "Lilla Edet",
+      "host": "www.lillaedet.se"
+    },
+    {
+      "name": "Lindesberg",
+      "host": "www.lindesberg.se"
+    },
+    {
+      "name": "Linköping",
+      "host": "www.linkoping.se"
+    },
+    {
+      "name": "Ljungby",
+      "host": "www.ljungby.se"
+    },
+    {
+      "name": "Ljusdal",
+      "host": "www.ljusdal.se"
+    },
+    {
+      "name": "Ljusnarsberg",
+      "host": "www.ljusnarsberg.se"
+    },
+    {
+      "name": "Lomma",
+      "host": "www.lomma.se"
+    },
+    {
+      "name": "Ludvika",
+      "host": "www.ludvika.se"
+    },
+    {
+      "name": "Luleå",
+      "host": "www.lulea.se"
+    },
+    {
+      "name": "Lund",
+      "host": "www.lund.se"
+    },
+    {
+      "name": "Lycksele",
+      "host": "www.lycksele.se"
+    },
+    {
+      "name": "Lysekil",
+      "host": "www.lysekil.se"
+    },
+    {
+      "name": "Malmö",
+      "host": "www.malmo.se"
+    },
+    {
+      "name": "Malung-Sälen",
+      "host": "malung-salen.se"
+    },
+    {
+      "name": "Malå",
+      "host": "www.mala.se"
+    },
+    {
+      "name": "Mariestad",
+      "host": "www.mariestad.se"
+    },
+    {
+      "name": "Mark",
+      "host": "www.mark.se"
+    },
+    {
+      "name": "Markaryd",
+      "host": "www.markaryd.se"
+    },
+    {
+      "name": "Mellerud",
+      "host": "www.mellerud.se"
+    },
+    {
+      "name": "Mjölby",
+      "host": "www.mjolby.se"
+    },
+    {
+      "name": "Mora",
+      "host": "morakommun.se"
+    },
+    {
+      "name": "Motala",
+      "host": "www.motala.se"
+    },
+    {
+      "name": "Mullsjö",
+      "host": "www.mullsjo.se"
+    },
+    {
+      "name": "Munkedal",
+      "host": "www.munkedal.se"
+    },
+    {
+      "name": "Munkfors",
+      "host": "www.munkfors.se"
+    },
+    {
+      "name": "Mölndal",
+      "host": "www.molndal.se"
+    },
+    {
+      "name": "Mönsterås",
+      "host": "www.monsteras.se"
+    },
+    {
+      "name": "Mörbylånga",
+      "host": "www.morbylanga.se"
+    },
+    {
+      "name": "Nacka",
+      "host": "www.nacka.se"
+    },
+    {
+      "name": "Nora",
+      "host": "www.nora.se"
+    },
+    {
+      "name": "Norberg",
+      "host": "www.norberg.se"
+    },
+    {
+      "name": "Nordanstig",
+      "host": "www.nordanstig.se"
+    },
+    {
+      "name": "Nordmaling",
+      "host": "www.nordmaling.se"
+    },
+    {
+      "name": "Norrköping",
+      "host": "www.norrkoping.se"
+    },
+    {
+      "name": "Norrtälje",
+      "host": "www.norrtalje.se"
+    },
+    {
+      "name": "Norsjö",
+      "host": "www.norsjo.se"
+    },
+    {
+      "name": "Nybro",
+      "host": "www.nybro.se"
+    },
+    {
+      "name": "Nykvarn",
+      "host": "www.nykvarn.se"
+    },
+    {
+      "name": "Nyköping",
+      "host": "www.nykoping.se"
+    },
+    {
+      "name": "Nynäshamn",
+      "host": "www.nynashamn.se"
+    },
+    {
+      "name": "Nässjö",
+      "host": "www.nassjo.se"
+    },
+    {
+      "name": "Ockelbo",
+      "host": "www.ockelbo.se"
+    },
+    {
+      "name": "Olofström",
+      "host": "www.olofstrom.se"
+    },
+    {
+      "name": "Orsa",
+      "host": "www.orsa.se"
+    },
+    {
+      "name": "Orust",
+      "host": "www.orust.se"
+    },
+    {
+      "name": "Osby",
+      "host": "www.osby.se"
+    },
+    {
+      "name": "Oskarshamn",
+      "host": "www.oskarshamn.se"
+    },
+    {
+      "name": "Ovanåker",
+      "host": "www.ovanaker.se"
+    },
+    {
+      "name": "Oxelösund",
+      "host": "www.oxelosund.se"
+    },
+    {
+      "name": "Pajala",
+      "host": "www.pajala.se"
+    },
+    {
+      "name": "Partille",
+      "host": "www.partille.se"
+    },
+    {
+      "name": "Perstorp",
+      "host": "www.perstorp.se"
+    },
+    {
+      "name": "Piteå",
+      "host": "www.pitea.se"
+    },
+    {
+      "name": "Ragunda",
+      "host": "www.ragunda.se"
+    },
+    {
+      "name": "Robertsfors",
+      "host": "www.robertsfors.se"
+    },
+    {
+      "name": "Ronneby",
+      "host": "www.ronneby.se"
+    },
+    {
+      "name": "Rättvik",
+      "host": "www.rattvik.se"
+    },
+    {
+      "name": "Sala",
+      "host": "www.sala.se"
+    },
+    {
+      "name": "Salem",
+      "host": "www.salem.se"
+    },
+    {
+      "name": "Sandviken",
+      "host": "www.sandviken.se"
+    },
+    {
+      "name": "Sigtuna",
+      "host": "www.sigtuna.se"
+    },
+    {
+      "name": "Simrishamn",
+      "host": "www.simrishamn.se"
+    },
+    {
+      "name": "Sjöbo",
+      "host": "www.sjobo.se"
+    },
+    {
+      "name": "Skara",
+      "host": "www.skara.se"
+    },
+    {
+      "name": "Skellefteå",
+      "host": "www.skelleftea.se"
+    },
+    {
+      "name": "Skinnskatteberg",
+      "host": "www.skinnskatteberg.se"
+    },
+    {
+      "name": "Skurup",
+      "host": "www.skurup.se"
+    },
+    {
+      "name": "Skövde",
+      "host": "www.skovde.se"
+    },
+    {
+      "name": "Smedjebacken",
+      "host": "www.smedjebacken.se"
+    },
+    {
+      "name": "Sollefteå",
+      "host": "www.solleftea.se"
+    },
+    {
+      "name": "Sollentuna",
+      "host": "www.sollentuna.se"
+    },
+    {
+      "name": "Solna",
+      "host": "www.solna.se"
+    },
+    {
+      "name": "Sorsele",
+      "host": "www.sorsele.se"
+    },
+    {
+      "name": "Sotenäs",
+      "host": "www.sotenas.se"
+    },
+    {
+      "name": "Staffanstorp",
+      "host": "www.staffanstorp.se"
+    },
+    {
+      "name": "Stenungsund",
+      "host": "www.stenungsund.se"
+    },
+    {
+      "name": "Stockholm",
+      "host": "www.stockholm.se"
+    },
+    {
+      "name": "Storfors",
+      "host": "www.storfors.se"
+    },
+    {
+      "name": "Storuman",
+      "host": "www.storuman.se"
+    },
+    {
+      "name": "Strängnäs",
+      "host": "www.strangnas.se"
+    },
+    {
+      "name": "Strömstad",
+      "host": "www.stromstad.se"
+    },
+    {
+      "name": "Strömsund",
+      "host": "www.stromsund.se"
+    },
+    {
+      "name": "Sundbyberg",
+      "host": "www.sundbyberg.se"
+    },
+    {
+      "name": "Sundsvall",
+      "host": "sundsvall.se"
+    },
+    {
+      "name": "Sunne",
+      "host": "www.sunne.se"
+    },
+    {
+      "name": "Surahammar",
+      "host": "www.surahammar.se"
+    },
+    {
+      "name": "Svalöv",
+      "host": "www.svalov.se"
+    },
+    {
+      "name": "Svedala",
+      "host": "www.svedala.se"
+    },
+    {
+      "name": "Svenljunga",
+      "host": "www.svenljunga.se"
+    },
+    {
+      "name": "Säffle",
+      "host": "www.saffle.se"
+    },
+    {
+      "name": "Säter",
+      "host": "www.sater.se"
+    },
+    {
+      "name": "Sävsjö",
+      "host": "www.savsjo.se"
+    },
+    {
+      "name": "Söderhamn",
+      "host": "www.soderhamn.se"
+    },
+    {
+      "name": "Söderköping",
+      "host": "www.soderkoping.se"
+    },
+    {
+      "name": "Södertälje",
+      "host": "www.sodertalje.se"
+    },
+    {
+      "name": "Sölvesborg",
+      "host": "www.solvesborg.se"
+    },
+    {
+      "name": "Tanum",
+      "host": "www.tanum.se"
+    },
+    {
+      "name": "Tibro",
+      "host": "www.tibro.se"
+    },
+    {
+      "name": "Tidaholm",
+      "host": "www.tidaholm.se"
+    },
+    {
+      "name": "Tierp",
+      "host": "www.tierp.se"
+    },
+    {
+      "name": "Timrå",
+      "host": "www.timra.se"
+    },
+    {
+      "name": "Tingsryd",
+      "host": "www.tingsryd.se"
+    },
+    {
+      "name": "Tjörn",
+      "host": "www.tjorn.se"
+    },
+    {
+      "name": "Tomelilla",
+      "host": "www.tomelilla.se"
+    },
+    {
+      "name": "Torsby",
+      "host": "www.torsby.se"
+    },
+    {
+      "name": "Torsås",
+      "host": "www.torsas.se"
+    },
+    {
+      "name": "Tranemo",
+      "host": "www.tranemo.se"
+    },
+    {
+      "name": "Tranås",
+      "host": "www.tranas.se"
+    },
+    {
+      "name": "Trelleborg",
+      "host": "www.trelleborg.se"
+    },
+    {
+      "name": "Trollhättan",
+      "host": "www.trollhattan.se"
+    },
+    {
+      "name": "Trosa",
+      "host": "www.trosa.se"
+    },
+    {
+      "name": "Tyresö",
+      "host": "www.tyreso.se"
+    },
+    {
+      "name": "Täby",
+      "host": "www.taby.se"
+    },
+    {
+      "name": "Töreboda",
+      "host": "www.toreboda.se"
+    },
+    {
+      "name": "Uddevalla",
+      "host": "www.uddevalla.se"
+    },
+    {
+      "name": "Ulricehamn",
+      "host": "www.ulricehamn.se"
+    },
+    {
+      "name": "Umeå",
+      "host": "www.umea.se"
+    },
+    {
+      "name": "Upplands-Bro",
+      "host": "www.upplands-bro.se"
+    },
+    {
+      "name": "Upplands Väsby",
+      "host": "www.upplandsvasby.se"
+    },
+    {
+      "name": "Uppsala",
+      "host": "www.uppsala.se"
+    },
+    {
+      "name": "Uppvidinge",
+      "host": "www.uppvidinge.se"
+    },
+    {
+      "name": "Vadstena",
+      "host": "www.vadstena.se"
+    },
+    {
+      "name": "Vaggeryd",
+      "host": "www.vaggeryd.se"
+    },
+    {
+      "name": "Valdemarsvik",
+      "host": "www.valdemarsvik.se"
+    },
+    {
+      "name": "Vallentuna",
+      "host": "www.vallentuna.se"
+    },
+    {
+      "name": "Vansbro",
+      "host": "www.vansbro.se"
+    },
+    {
+      "name": "Vara",
+      "host": "www.vara.se"
+    },
+    {
+      "name": "Varberg",
+      "host": "www.varberg.se"
+    },
+    {
+      "name": "Vaxholm",
+      "host": "www.vaxholm.se"
+    },
+    {
+      "name": "Vellinge",
+      "host": "www.vellinge.se"
+    },
+    {
+      "name": "Vetlanda",
+      "host": "www.vetlanda.se"
+    },
+    {
+      "name": "Vilhelmina",
+      "host": "www.vilhelmina.se"
+    },
+    {
+      "name": "Vimmerby",
+      "host": "www.vimmerby.se"
+    },
+    {
+      "name": "Vindeln",
+      "host": "www.vindeln.se"
+    },
+    {
+      "name": "Vingåker",
+      "host": "www.vingaker.se"
+    },
+    {
+      "name": "Vårgårda",
+      "host": "www.vargarda.se"
+    },
+    {
+      "name": "Vänersborg",
+      "host": "www.vanersborg.se"
+    },
+    {
+      "name": "Vännäs",
+      "host": "www.vannas.se"
+    },
+    {
+      "name": "Värmdö",
+      "host": "www.varmdo.se"
+    },
+    {
+      "name": "Värnamo",
+      "host": "www.varnamo.se"
+    },
+    {
+      "name": "Västervik",
+      "host": "www.vastervik.se"
+    },
+    {
+      "name": "Västerås",
+      "host": "www.vasteras.se"
+    },
+    {
+      "name": "Växjö",
+      "host": "www.vaxjo.se"
+    },
+    {
+      "name": "Ydre",
+      "host": "www.ydre.se"
+    },
+    {
+      "name": "Ystad",
+      "host": "www.ystad.se"
+    },
+    {
+      "name": "Åmål",
+      "host": "www.amal.se"
+    },
+    {
+      "name": "Ånge",
+      "host": "www.ange.se"
+    },
+    {
+      "name": "Åre",
+      "host": "www.are.se"
+    },
+    {
+      "name": "Årjäng",
+      "host": "www.arjang.se"
+    },
+    {
+      "name": "Åsele",
+      "host": "www.asele.se"
+    },
+    {
+      "name": "Åstorp",
+      "host": "www.astorp.se"
+    },
+    {
+      "name": "Åtvidaberg",
+      "host": "www.atvidaberg.se"
+    },
+    {
+      "name": "Älmhult",
+      "host": "www.almhult.se"
+    },
+    {
+      "name": "Älvdalen",
+      "host": "www.alvdalen.se"
+    },
+    {
+      "name": "Älvkarleby",
+      "host": "www.alvkarleby.se"
+    },
+    {
+      "name": "Älvsbyn",
+      "host": "www.alvsbyn.se"
+    },
+    {
+      "name": "Ängelholm",
+      "host": "www.engelholm.se"
+    },
+    {
+      "name": "Öckerö",
+      "host": "www.ockero.se"
+    },
+    {
+      "name": "Ödeshög",
+      "host": "www.odeshog.se"
+    },
+    {
+      "name": "Örebro",
+      "host": "www.orebro.se"
+    },
+    {
+      "name": "Örkelljunga",
+      "host": "www.orkelljunga.se"
+    },
+    {
+      "name": "Örnsköldsvik",
+      "host": "www.ornskoldsvik.se"
+    },
+    {
+      "name": "Östersund",
+      "host": "www.ostersund.se"
+    },
+    {
+      "name": "Österåker",
+      "host": "www.osteraker.se"
+    },
+    {
+      "name": "Östhammar",
+      "host": "www.osthammar.se"
+    },
+    {
+      "name": "Östra Göinge",
+      "host": "www.ostragoinge.se"
+    },
+    {
+      "name": "Överkalix",
+      "host": "www.overkalix.se"
+    },
+    {
+      "name": "Övertorneå",
+      "host": "www.overtornea.se"
+    }
+  ]
+}

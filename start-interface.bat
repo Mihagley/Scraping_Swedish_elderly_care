@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 setlocal
 cd /d "%~dp0"
 if not exist ".venv\Scripts\python.exe" (
@@ -11,6 +12,6 @@ if errorlevel 1 goto :failed
 if errorlevel 1 goto :failed
 exit /b 0
 :failed
-echo Could not start the interface. Check the error above and that Python 3.11 or newer is installed.
+echo Gränssnittet kunde inte startas. Kontrollera felet ovan och att Python 3.11 eller senare är installerat.
 pause
 exit /b 1

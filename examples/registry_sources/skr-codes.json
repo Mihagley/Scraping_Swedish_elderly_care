@@ -1,0 +1,1456 @@
+{
+  "source_url": "https://skr.se/kommunerochregioner/kommunkoder.8282.html",
+  "retrieved_on": "2026-10-15",
+  "entries": [
+    {
+      "name": "Ale",
+      "county": "O",
+      "code": "1440"
+    },
+    {
+      "name": "Alingsås",
+      "county": "O",
+      "code": "1489"
+    },
+    {
+      "name": "Alvesta",
+      "county": "G",
+      "code": "0764"
+    },
+    {
+      "name": "Aneby",
+      "county": "F",
+      "code": "0604"
+    },
+    {
+      "name": "Arboga",
+      "county": "U",
+      "code": "1984"
+    },
+    {
+      "name": "Arjeplog",
+      "county": "BD",
+      "code": "2506"
+    },
+    {
+      "name": "Arvidsjaur",
+      "county": "BD",
+      "code": "2505"
+    },
+    {
+      "name": "Arvika",
+      "county": "S",
+      "code": "1784"
+    },
+    {
+      "name": "Askersund",
+      "county": "T",
+      "code": "1882"
+    },
+    {
+      "name": "Avesta",
+      "county": "W",
+      "code": "2084"
+    },
+    {
+      "name": "Bengtsfors",
+      "county": "O",
+      "code": "1460"
+    },
+    {
+      "name": "Berg",
+      "county": "Z",
+      "code": "2326"
+    },
+    {
+      "name": "Bjurholm",
+      "county": "AC",
+      "code": "2403"
+    },
+    {
+      "name": "Bjuv",
+      "county": "M",
+      "code": "1260"
+    },
+    {
+      "name": "Boden",
+      "county": "BD",
+      "code": "2582"
+    },
+    {
+      "name": "Bollebygd",
+      "county": "O",
+      "code": "1443"
+    },
+    {
+      "name": "Bollnäs",
+      "county": "X",
+      "code": "2183"
+    },
+    {
+      "name": "Borgholm",
+      "county": "H",
+      "code": "0885"
+    },
+    {
+      "name": "Borlänge",
+      "county": "W",
+      "code": "2081"
+    },
+    {
+      "name": "Borås",
+      "county": "O",
+      "code": "1490"
+    },
+    {
+      "name": "Botkyrka",
+      "county": "AB",
+      "code": "0127"
+    },
+    {
+      "name": "Boxholm",
+      "county": "E",
+      "code": "0560"
+    },
+    {
+      "name": "Bromölla",
+      "county": "M",
+      "code": "1272"
+    },
+    {
+      "name": "Bräcke",
+      "county": "Z",
+      "code": "2305"
+    },
+    {
+      "name": "Burlöv",
+      "county": "M",
+      "code": "1231"
+    },
+    {
+      "name": "Båstad",
+      "county": "M",
+      "code": "1278"
+    },
+    {
+      "name": "Dals-Ed",
+      "county": "O",
+      "code": "1438"
+    },
+    {
+      "name": "Danderyd",
+      "county": "AB",
+      "code": "0162"
+    },
+    {
+      "name": "Degerfors",
+      "county": "T",
+      "code": "1862"
+    },
+    {
+      "name": "Dorotea",
+      "county": "AC",
+      "code": "2425"
+    },
+    {
+      "name": "Eda",
+      "county": "S",
+      "code": "1730"
+    },
+    {
+      "name": "Ekerö",
+      "county": "AB",
+      "code": "0125"
+    },
+    {
+      "name": "Eksjö",
+      "county": "F",
+      "code": "0686"
+    },
+    {
+      "name": "Emmaboda",
+      "county": "H",
+      "code": "0862"
+    },
+    {
+      "name": "Enköping",
+      "county": "C",
+      "code": "0381"
+    },
+    {
+      "name": "Eskilstuna",
+      "county": "D",
+      "code": "0484"
+    },
+    {
+      "name": "Eslöv",
+      "county": "M",
+      "code": "1285"
+    },
+    {
+      "name": "Essunga",
+      "county": "O",
+      "code": "1445"
+    },
+    {
+      "name": "Fagersta",
+      "county": "U",
+      "code": "1982"
+    },
+    {
+      "name": "Falkenberg",
+      "county": "N",
+      "code": "1382"
+    },
+    {
+      "name": "Falköping",
+      "county": "O",
+      "code": "1499"
+    },
+    {
+      "name": "Falun",
+      "county": "W",
+      "code": "2080"
+    },
+    {
+      "name": "Filipstad",
+      "county": "S",
+      "code": "1782"
+    },
+    {
+      "name": "Finspång",
+      "county": "E",
+      "code": "0562"
+    },
+    {
+      "name": "Flen",
+      "county": "D",
+      "code": "0482"
+    },
+    {
+      "name": "Forshaga",
+      "county": "S",
+      "code": "1763"
+    },
+    {
+      "name": "Färgelanda",
+      "county": "O",
+      "code": "1439"
+    },
+    {
+      "name": "Gagnef",
+      "county": "W",
+      "code": "2026"
+    },
+    {
+      "name": "Gislaved",
+      "county": "F",
+      "code": "0662"
+    },
+    {
+      "name": "Gnesta",
+      "county": "D",
+      "code": "0461"
+    },
+    {
+      "name": "Gnosjö",
+      "county": "F",
+      "code": "0617"
+    },
+    {
+      "name": "Gotland",
+      "county": "I",
+      "code": "0980"
+    },
+    {
+      "name": "Grums",
+      "county": "S",
+      "code": "1764"
+    },
+    {
+      "name": "Grästorp",
+      "county": "O",
+      "code": "1444"
+    },
+    {
+      "name": "Gullspång",
+      "county": "O",
+      "code": "1447"
+    },
+    {
+      "name": "Gällivare",
+      "county": "BD",
+      "code": "2523"
+    },
+    {
+      "name": "Gävle",
+      "county": "X",
+      "code": "2180"
+    },
+    {
+      "name": "Göteborg",
+      "county": "O",
+      "code": "1480"
+    },
+    {
+      "name": "Götene",
+      "county": "O",
+      "code": "1471"
+    },
+    {
+      "name": "Habo",
+      "county": "F",
+      "code": "0643"
+    },
+    {
+      "name": "Hagfors",
+      "county": "S",
+      "code": "1783"
+    },
+    {
+      "name": "Hallsberg",
+      "county": "T",
+      "code": "1861"
+    },
+    {
+      "name": "Hallstahammar",
+      "county": "U",
+      "code": "1961"
+    },
+    {
+      "name": "Halmstad",
+      "county": "N",
+      "code": "1380"
+    },
+    {
+      "name": "Hammarö",
+      "county": "S",
+      "code": "1761"
+    },
+    {
+      "name": "Haninge",
+      "county": "AB",
+      "code": "0136"
+    },
+    {
+      "name": "Haparanda",
+      "county": "BD",
+      "code": "2583"
+    },
+    {
+      "name": "Heby",
+      "county": "C",
+      "code": "0331"
+    },
+    {
+      "name": "Hedemora",
+      "county": "W",
+      "code": "2083"
+    },
+    {
+      "name": "Helsingborg",
+      "county": "M",
+      "code": "1283"
+    },
+    {
+      "name": "Herrljunga",
+      "county": "O",
+      "code": "1466"
+    },
+    {
+      "name": "Hjo",
+      "county": "O",
+      "code": "1497"
+    },
+    {
+      "name": "Hofors",
+      "county": "X",
+      "code": "2104"
+    },
+    {
+      "name": "Huddinge",
+      "county": "AB",
+      "code": "0126"
+    },
+    {
+      "name": "Hudiksvall",
+      "county": "X",
+      "code": "2184"
+    },
+    {
+      "name": "Hultsfred",
+      "county": "H",
+      "code": "0860"
+    },
+    {
+      "name": "Hylte",
+      "county": "N",
+      "code": "1315"
+    },
+    {
+      "name": "Håbo",
+      "county": "C",
+      "code": "0305"
+    },
+    {
+      "name": "Hällefors",
+      "county": "T",
+      "code": "1863"
+    },
+    {
+      "name": "Härjedalen",
+      "county": "Z",
+      "code": "2361"
+    },
+    {
+      "name": "Härnösand",
+      "county": "Y",
+      "code": "2280"
+    },
+    {
+      "name": "Härryda",
+      "county": "O",
+      "code": "1401"
+    },
+    {
+      "name": "Hässleholm",
+      "county": "M",
+      "code": "1293"
+    },
+    {
+      "name": "Höganäs",
+      "county": "M",
+      "code": "1284"
+    },
+    {
+      "name": "Högsby",
+      "county": "H",
+      "code": "0821"
+    },
+    {
+      "name": "Hörby",
+      "county": "M",
+      "code": "1266"
+    },
+    {
+      "name": "Höör",
+      "county": "M",
+      "code": "1267"
+    },
+    {
+      "name": "Jokkmokk",
+      "county": "BD",
+      "code": "2510"
+    },
+    {
+      "name": "Järfälla",
+      "county": "AB",
+      "code": "0123"
+    },
+    {
+      "name": "Jönköping",
+      "county": "F",
+      "code": "0680"
+    },
+    {
+      "name": "Kalix",
+      "county": "BD",
+      "code": "2514"
+    },
+    {
+      "name": "Kalmar",
+      "county": "H",
+      "code": "0880"
+    },
+    {
+      "name": "Karlsborg",
+      "county": "O",
+      "code": "1446"
+    },
+    {
+      "name": "Karlshamn",
+      "county": "K",
+      "code": "1082"
+    },
+    {
+      "name": "Karlskoga",
+      "county": "T",
+      "code": "1883"
+    },
+    {
+      "name": "Karlskrona",
+      "county": "K",
+      "code": "1080"
+    },
+    {
+      "name": "Karlstad",
+      "county": "S",
+      "code": "1780"
+    },
+    {
+      "name": "Katrineholm",
+      "county": "D",
+      "code": "0483"
+    },
+    {
+      "name": "Kil",
+      "county": "S",
+      "code": "1715"
+    },
+    {
+      "name": "Kinda",
+      "county": "E",
+      "code": "0513"
+    },
+    {
+      "name": "Kiruna",
+      "county": "BD",
+      "code": "2584"
+    },
+    {
+      "name": "Klippan",
+      "county": "M",
+      "code": "1276"
+    },
+    {
+      "name": "Knivsta",
+      "county": "C",
+      "code": "0330"
+    },
+    {
+      "name": "Kramfors",
+      "county": "Y",
+      "code": "2282"
+    },
+    {
+      "name": "Kristianstad",
+      "county": "M",
+      "code": "1290"
+    },
+    {
+      "name": "Kristinehamn",
+      "county": "S",
+      "code": "1781"
+    },
+    {
+      "name": "Krokom",
+      "county": "Z",
+      "code": "2309"
+    },
+    {
+      "name": "Kumla",
+      "county": "T",
+      "code": "1881"
+    },
+    {
+      "name": "Kungsbacka",
+      "county": "N",
+      "code": "1384"
+    },
+    {
+      "name": "Kungsör",
+      "county": "U",
+      "code": "1960"
+    },
+    {
+      "name": "Kungälv",
+      "county": "O",
+      "code": "1482"
+    },
+    {
+      "name": "Kävlinge",
+      "county": "M",
+      "code": "1261"
+    },
+    {
+      "name": "Köping",
+      "county": "U",
+      "code": "1983"
+    },
+    {
+      "name": "Laholm",
+      "county": "N",
+      "code": "1381"
+    },
+    {
+      "name": "Landskrona",
+      "county": "M",
+      "code": "1282"
+    },
+    {
+      "name": "Laxå",
+      "county": "T",
+      "code": "1860"
+    },
+    {
+      "name": "Lekeberg",
+      "county": "T",
+      "code": "1814"
+    },
+    {
+      "name": "Leksand",
+      "county": "W",
+      "code": "2029"
+    },
+    {
+      "name": "Lerum",
+      "county": "O",
+      "code": "1441"
+    },
+    {
+      "name": "Lessebo",
+      "county": "G",
+      "code": "0761"
+    },
+    {
+      "name": "Lidingö",
+      "county": "AB",
+      "code": "0186"
+    },
+    {
+      "name": "Lidköping",
+      "county": "O",
+      "code": "1494"
+    },
+    {
+      "name": "Lilla Edet",
+      "county": "O",
+      "code": "1462"
+    },
+    {
+      "name": "Lindesberg",
+      "county": "T",
+      "code": "1885"
+    },
+    {
+      "name": "Linköping",
+      "county": "E",
+      "code": "0580"
+    },
+    {
+      "name": "Ljungby",
+      "county": "G",
+      "code": "0781"
+    },
+    {
+      "name": "Ljusdal",
+      "county": "X",
+      "code": "2161"
+    },
+    {
+      "name": "Ljusnarsberg",
+      "county": "T",
+      "code": "1864"
+    },
+    {
+      "name": "Lomma",
+      "county": "M",
+      "code": "1262"
+    },
+    {
+      "name": "Ludvika",
+      "county": "W",
+      "code": "2085"
+    },
+    {
+      "name": "Luleå",
+      "county": "BD",
+      "code": "2580"
+    },
+    {
+      "name": "Lund",
+      "county": "M",
+      "code": "1281"
+    },
+    {
+      "name": "Lycksele",
+      "county": "AC",
+      "code": "2481"
+    },
+    {
+      "name": "Lysekil",
+      "county": "O",
+      "code": "1484"
+    },
+    {
+      "name": "Malmö",
+      "county": "M",
+      "code": "1280"
+    },
+    {
+      "name": "Malung – Sälen",
+      "county": "W",
+      "code": "2023"
+    },
+    {
+      "name": "Malå",
+      "county": "AC",
+      "code": "2418"
+    },
+    {
+      "name": "Mariestad",
+      "county": "O",
+      "code": "1493"
+    },
+    {
+      "name": "Mark",
+      "county": "O",
+      "code": "1463"
+    },
+    {
+      "name": "Markaryd",
+      "county": "G",
+      "code": "0767"
+    },
+    {
+      "name": "Mellerud",
+      "county": "O",
+      "code": "1461"
+    },
+    {
+      "name": "Mjölby",
+      "county": "E",
+      "code": "0586"
+    },
+    {
+      "name": "Mora",
+      "county": "W",
+      "code": "2062"
+    },
+    {
+      "name": "Motala",
+      "county": "E",
+      "code": "0583"
+    },
+    {
+      "name": "Mullsjö",
+      "county": "F",
+      "code": "0642"
+    },
+    {
+      "name": "Munkedal",
+      "county": "O",
+      "code": "1430"
+    },
+    {
+      "name": "Munkfors",
+      "county": "S",
+      "code": "1762"
+    },
+    {
+      "name": "Mölndal",
+      "county": "O",
+      "code": "1481"
+    },
+    {
+      "name": "Mönsterås",
+      "county": "H",
+      "code": "0861"
+    },
+    {
+      "name": "Mörbylånga",
+      "county": "H",
+      "code": "0840"
+    },
+    {
+      "name": "Nacka",
+      "county": "AB",
+      "code": "0182"
+    },
+    {
+      "name": "Norberg",
+      "county": "U",
+      "code": "1962"
+    },
+    {
+      "name": "Nora",
+      "county": "T",
+      "code": "1884"
+    },
+    {
+      "name": "Nordanstig",
+      "county": "X",
+      "code": "2132"
+    },
+    {
+      "name": "Nordmaling",
+      "county": "AC",
+      "code": "2401"
+    },
+    {
+      "name": "Norrköping",
+      "county": "E",
+      "code": "0581"
+    },
+    {
+      "name": "Norrtälje",
+      "county": "AB",
+      "code": "0188"
+    },
+    {
+      "name": "Norsjö",
+      "county": "AC",
+      "code": "2417"
+    },
+    {
+      "name": "Nybro",
+      "county": "H",
+      "code": "0881"
+    },
+    {
+      "name": "Nykvarn",
+      "county": "AB",
+      "code": "0140"
+    },
+    {
+      "name": "Nyköping",
+      "county": "D",
+      "code": "0480"
+    },
+    {
+      "name": "Nynäshamn",
+      "county": "AB",
+      "code": "0192"
+    },
+    {
+      "name": "Nässjö",
+      "county": "F",
+      "code": "0682"
+    },
+    {
+      "name": "Ockelbo",
+      "county": "X",
+      "code": "2101"
+    },
+    {
+      "name": "Olofström",
+      "county": "K",
+      "code": "1060"
+    },
+    {
+      "name": "Orsa",
+      "county": "W",
+      "code": "2034"
+    },
+    {
+      "name": "Orust",
+      "county": "O",
+      "code": "1421"
+    },
+    {
+      "name": "Osby",
+      "county": "M",
+      "code": "1273"
+    },
+    {
+      "name": "Oskarshamn",
+      "county": "H",
+      "code": "0882"
+    },
+    {
+      "name": "Ovanåker",
+      "county": "X",
+      "code": "2121"
+    },
+    {
+      "name": "Oxelösund",
+      "county": "D",
+      "code": "0481"
+    },
+    {
+      "name": "Pajala",
+      "county": "BD",
+      "code": "2521"
+    },
+    {
+      "name": "Partille",
+      "county": "O",
+      "code": "1402"
+    },
+    {
+      "name": "Perstorp",
+      "county": "M",
+      "code": "1275"
+    },
+    {
+      "name": "Piteå",
+      "county": "BD",
+      "code": "2581"
+    },
+    {
+      "name": "Ragunda",
+      "county": "Z",
+      "code": "2303"
+    },
+    {
+      "name": "Robertsfors",
+      "county": "AC",
+      "code": "2409"
+    },
+    {
+      "name": "Ronneby",
+      "county": "K",
+      "code": "1081"
+    },
+    {
+      "name": "Rättvik",
+      "county": "W",
+      "code": "2031"
+    },
+    {
+      "name": "Sala",
+      "county": "U",
+      "code": "1981"
+    },
+    {
+      "name": "Salem",
+      "county": "AB",
+      "code": "0128"
+    },
+    {
+      "name": "Sandviken",
+      "county": "X",
+      "code": "2181"
+    },
+    {
+      "name": "Sigtuna",
+      "county": "AB",
+      "code": "0191"
+    },
+    {
+      "name": "Simrishamn",
+      "county": "M",
+      "code": "1291"
+    },
+    {
+      "name": "Sjöbo",
+      "county": "M",
+      "code": "1265"
+    },
+    {
+      "name": "Skara",
+      "county": "O",
+      "code": "1495"
+    },
+    {
+      "name": "Skellefteå",
+      "county": "AC",
+      "code": "2482"
+    },
+    {
+      "name": "Skinnskatteberg",
+      "county": "U",
+      "code": "1904"
+    },
+    {
+      "name": "Skurup",
+      "county": "M",
+      "code": "1264"
+    },
+    {
+      "name": "Skövde",
+      "county": "O",
+      "code": "1496"
+    },
+    {
+      "name": "Smedjebacken",
+      "county": "W",
+      "code": "2061"
+    },
+    {
+      "name": "Sollefteå",
+      "county": "Y",
+      "code": "2283"
+    },
+    {
+      "name": "Sollentuna",
+      "county": "AB",
+      "code": "0163"
+    },
+    {
+      "name": "Solna",
+      "county": "AB",
+      "code": "0184"
+    },
+    {
+      "name": "Sorsele",
+      "county": "AC",
+      "code": "2422"
+    },
+    {
+      "name": "Sotenäs",
+      "county": "O",
+      "code": "1427"
+    },
+    {
+      "name": "Staffanstorp",
+      "county": "M",
+      "code": "1230"
+    },
+    {
+      "name": "Stenungsund",
+      "county": "O",
+      "code": "1415"
+    },
+    {
+      "name": "Stockholm",
+      "county": "AB",
+      "code": "0180"
+    },
+    {
+      "name": "Storfors",
+      "county": "S",
+      "code": "1760"
+    },
+    {
+      "name": "Storuman",
+      "county": "AC",
+      "code": "2421"
+    },
+    {
+      "name": "Strängnäs",
+      "county": "D",
+      "code": "0486"
+    },
+    {
+      "name": "Strömstad",
+      "county": "O",
+      "code": "1486"
+    },
+    {
+      "name": "Strömsund",
+      "county": "Z",
+      "code": "2313"
+    },
+    {
+      "name": "Sundbyberg",
+      "county": "AB",
+      "code": "0183"
+    },
+    {
+      "name": "Sundsvall",
+      "county": "Y",
+      "code": "2281"
+    },
+    {
+      "name": "Sunne",
+      "county": "S",
+      "code": "1766"
+    },
+    {
+      "name": "Surahammar",
+      "county": "U",
+      "code": "1907"
+    },
+    {
+      "name": "Svalöv",
+      "county": "M",
+      "code": "1214"
+    },
+    {
+      "name": "Svedala",
+      "county": "M",
+      "code": "1263"
+    },
+    {
+      "name": "Svenljunga",
+      "county": "O",
+      "code": "1465"
+    },
+    {
+      "name": "Säffle",
+      "county": "S",
+      "code": "1785"
+    },
+    {
+      "name": "Säter",
+      "county": "W",
+      "code": "2082"
+    },
+    {
+      "name": "Sävsjö",
+      "county": "F",
+      "code": "0684"
+    },
+    {
+      "name": "Söderhamn",
+      "county": "X",
+      "code": "2182"
+    },
+    {
+      "name": "Söderköping",
+      "county": "E",
+      "code": "0582"
+    },
+    {
+      "name": "Södertälje",
+      "county": "AB",
+      "code": "0181"
+    },
+    {
+      "name": "Sölvesborg",
+      "county": "K",
+      "code": "1083"
+    },
+    {
+      "name": "Tanum",
+      "county": "O",
+      "code": "1435"
+    },
+    {
+      "name": "Tibro",
+      "county": "O",
+      "code": "1472"
+    },
+    {
+      "name": "Tidaholm",
+      "county": "O",
+      "code": "1498"
+    },
+    {
+      "name": "Tierp",
+      "county": "C",
+      "code": "0360"
+    },
+    {
+      "name": "Timrå",
+      "county": "Y",
+      "code": "2262"
+    },
+    {
+      "name": "Tingsryd",
+      "county": "G",
+      "code": "0763"
+    },
+    {
+      "name": "Tjörn",
+      "county": "O",
+      "code": "1419"
+    },
+    {
+      "name": "Tomelilla",
+      "county": "M",
+      "code": "1270"
+    },
+    {
+      "name": "Torsby",
+      "county": "S",
+      "code": "1737"
+    },
+    {
+      "name": "Torsås",
+      "county": "H",
+      "code": "0834"
+    },
+    {
+      "name": "Tranemo",
+      "county": "O",
+      "code": "1452"
+    },
+    {
+      "name": "Tranås",
+      "county": "F",
+      "code": "0687"
+    },
+    {
+      "name": "Trelleborg",
+      "county": "M",
+      "code": "1287"
+    },
+    {
+      "name": "Trollhättan",
+      "county": "O",
+      "code": "1488"
+    },
+    {
+      "name": "Trosa",
+      "county": "D",
+      "code": "0488"
+    },
+    {
+      "name": "Tyresö",
+      "county": "AB",
+      "code": "0138"
+    },
+    {
+      "name": "Täby",
+      "county": "AB",
+      "code": "0160"
+    },
+    {
+      "name": "Töreboda",
+      "county": "O",
+      "code": "1473"
+    },
+    {
+      "name": "Uddevalla",
+      "county": "O",
+      "code": "1485"
+    },
+    {
+      "name": "Ulricehamn",
+      "county": "O",
+      "code": "1491"
+    },
+    {
+      "name": "Umeå",
+      "county": "AC",
+      "code": "2480"
+    },
+    {
+      "name": "Upplands-Bro",
+      "county": "AB",
+      "code": "0139"
+    },
+    {
+      "name": "Upplands Väsby",
+      "county": "AB",
+      "code": "0114"
+    },
+    {
+      "name": "Uppsala",
+      "county": "C",
+      "code": "0380"
+    },
+    {
+      "name": "Uppvidinge",
+      "county": "G",
+      "code": "0760"
+    },
+    {
+      "name": "Vadstena",
+      "county": "E",
+      "code": "0584"
+    },
+    {
+      "name": "Vaggeryd",
+      "county": "F",
+      "code": "0665"
+    },
+    {
+      "name": "Valdemarsvik",
+      "county": "E",
+      "code": "0563"
+    },
+    {
+      "name": "Vallentuna",
+      "county": "AB",
+      "code": "0115"
+    },
+    {
+      "name": "Vansbro",
+      "county": "W",
+      "code": "2021"
+    },
+    {
+      "name": "Vara",
+      "county": "O",
+      "code": "1470"
+    },
+    {
+      "name": "Varberg",
+      "county": "N",
+      "code": "1383"
+    },
+    {
+      "name": "Vaxholm",
+      "county": "AB",
+      "code": "0187"
+    },
+    {
+      "name": "Vellinge",
+      "county": "M",
+      "code": "1233"
+    },
+    {
+      "name": "Vetlanda",
+      "county": "F",
+      "code": "0685"
+    },
+    {
+      "name": "Vilhelmina",
+      "county": "AC",
+      "code": "2462"
+    },
+    {
+      "name": "Vimmerby",
+      "county": "H",
+      "code": "0884"
+    },
+    {
+      "name": "Vindeln",
+      "county": "AC",
+      "code": "2404"
+    },
+    {
+      "name": "Vingåker",
+      "county": "D",
+      "code": "0428"
+    },
+    {
+      "name": "Vårgårda",
+      "county": "O",
+      "code": "1442"
+    },
+    {
+      "name": "Vänersborg",
+      "county": "O",
+      "code": "1487"
+    },
+    {
+      "name": "Vännäs",
+      "county": "AC",
+      "code": "2460"
+    },
+    {
+      "name": "Värmdö",
+      "county": "AB",
+      "code": "0120"
+    },
+    {
+      "name": "Värnamo",
+      "county": "F",
+      "code": "0683"
+    },
+    {
+      "name": "Västervik",
+      "county": "H",
+      "code": "0883"
+    },
+    {
+      "name": "Västerås",
+      "county": "U",
+      "code": "1980"
+    },
+    {
+      "name": "Växjö",
+      "county": "G",
+      "code": "0780"
+    },
+    {
+      "name": "Ydre",
+      "county": "E",
+      "code": "0512"
+    },
+    {
+      "name": "Ystad",
+      "county": "M",
+      "code": "1286"
+    },
+    {
+      "name": "Åmål",
+      "county": "O",
+      "code": "1492"
+    },
+    {
+      "name": "Ånge",
+      "county": "Y",
+      "code": "2260"
+    },
+    {
+      "name": "Åre",
+      "county": "Z",
+      "code": "2321"
+    },
+    {
+      "name": "Årjäng",
+      "county": "S",
+      "code": "1765"
+    },
+    {
+      "name": "Åsele",
+      "county": "AC",
+      "code": "2463"
+    },
+    {
+      "name": "Åstorp",
+      "county": "M",
+      "code": "1277"
+    },
+    {
+      "name": "Åtvidaberg",
+      "county": "E",
+      "code": "0561"
+    },
+    {
+      "name": "Älmhult",
+      "county": "G",
+      "code": "0765"
+    },
+    {
+      "name": "Älvdalen",
+      "county": "W",
+      "code": "2039"
+    },
+    {
+      "name": "Älvkarleby",
+      "county": "C",
+      "code": "0319"
+    },
+    {
+      "name": "Älvsbyn",
+      "county": "BD",
+      "code": "2560"
+    },
+    {
+      "name": "Ängelholm",
+      "county": "M",
+      "code": "1292"
+    },
+    {
+      "name": "Öckerö",
+      "county": "O",
+      "code": "1407"
+    },
+    {
+      "name": "Ödeshög",
+      "county": "E",
+      "code": "0509"
+    },
+    {
+      "name": "Örebro",
+      "county": "T",
+      "code": "1880"
+    },
+    {
+      "name": "Örkelljunga",
+      "county": "M",
+      "code": "1257"
+    },
+    {
+      "name": "Örnsköldsvik",
+      "county": "Y",
+      "code": "2284"
+    },
+    {
+      "name": "Östersund",
+      "county": "Z",
+      "code": "2380"
+    },
+    {
+      "name": "Österåker",
+      "county": "AB",
+      "code": "0117"
+    },
+    {
+      "name": "Östhammar",
+      "county": "C",
+      "code": "0382"
+    },
+    {
+      "name": "Östra Göinge",
+      "county": "M",
+      "code": "1256"
+    },
+    {
+      "name": "Överkalix",
+      "county": "BD",
+      "code": "2513"
+    },
+    {
+      "name": "Övertorneå",
+      "county": "BD",
+      "code": "2518"
+    }
+  ]
+}
