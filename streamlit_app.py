@@ -139,19 +139,27 @@ def live_form(running):
     if st.session_state.get("selection_context") != selection_context:
         st.session_state.selection_context = selection_context
         st.session_state.location_ids = list(lookup)[:1]
-    left, right = st.columns(2)
-    if left.button(f"Välj alla ({len(options)})", disabled=running or not options):
-        st.session_state.location_ids = list(lookup)
-    if right.button("Rensa val", disabled=running):
-        st.session_state.location_ids = []
-    selected = st.multiselect(
-        "Sök och välj i listan",
-        list(lookup),
-        key="location_ids",
+    selection_mode = st.radio(
+        "Vilka platser vill du ta med?",
+        ["Välj enskilda", "Alla i listan"],
+        horizontal=True,
         disabled=running,
-        format_func=lambda key: f"{lookup[key].name} ({lookup[key].kind})",
-        placeholder="Skriv ett namn eller använd Välj alla",
+        key="selection_mode",
     )
+    if selection_mode == "Alla i listan":
+        selected = list(lookup)
+        st.success(f"Alla {len(selected)} i listan är valda.")
+    else:
+        if st.button("Rensa val", disabled=running):
+            st.session_state.location_ids = []
+        selected = st.multiselect(
+            "Sök och välj i listan",
+            list(lookup),
+            key="location_ids",
+            disabled=running,
+            format_func=lambda key: f"{lookup[key].name} ({lookup[key].kind})",
+            placeholder="Skriv ett namn för att hitta en kommun eller region",
+        )
     st.caption(f"Valda: {len(selected)} av {len(options)}.")
     st.info(
         "Regionsökning söker på regionernas egna webbplatser. Kommunernas webbplatser väljs separat."

@@ -22,7 +22,7 @@ kollegorna, exempelvis genom skärmdelning. Ingen webbpublicering behövs.
 - **Demonstration** använder fasta påhittade exempel, utan API-nyckel eller nätanrop.
 - **Verklig sökning** använder dina valda kommuner/regioner, fråga och sökord.
 
-I verklig sökning väljer du Kommuner, Regioner eller båda. Använd **Välj alla** för
+I verklig sökning väljer du Kommuner, Regioner eller båda. Använd **Alla i listan** för
 hela listan, eller skriv namn och välj enskilda platser. **Rensa val** tömmer urvalet.
 Regionsökning söker regionens egna webbplatser; välj kommunerna separat för att
 undersöka kommunala verksamheter.

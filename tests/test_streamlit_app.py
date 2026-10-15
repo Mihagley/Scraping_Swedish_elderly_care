@@ -39,13 +39,17 @@ def test_national_selection_and_region_scope():
     app.radio[0].set_value("Verklig sökning").run()
     assert not app.exception
     assert len(app.multiselect[0].options) == 290
-    button(app, "Välj alla (290)").click().run()
-    assert len(app.multiselect[0].value) == 290
+    app.radio[2].set_value("Alla i listan").run()
+    assert not app.multiselect
+    assert any("Alla 290 i listan" in item.value for item in app.success)
+    app.radio[1].set_value("Regioner").run()
+    assert not app.multiselect
+    assert any("Alla 21 i listan" in item.value for item in app.success)
+    app.radio[1].set_value("Både kommuner och regioner").run()
+    assert any("Alla 311 i listan" in item.value for item in app.success)
+    app.radio[2].set_value("Välj enskilda").run()
+    assert len(app.multiselect[0].options) == 311
     button(app, "Rensa val").click().run()
     assert app.multiselect[0].value == []
     assert button(app, "Starta sökning").disabled
-    app.radio[1].set_value("Regioner").run()
-    assert len(app.multiselect[0].options) == 21
-    app.radio[1].set_value("Både kommuner och regioner").run()
-    assert len(app.multiselect[0].options) == 311
     assert not app.exception

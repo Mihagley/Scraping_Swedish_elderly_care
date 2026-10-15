@@ -29,7 +29,7 @@ codebook are Swedish; technical Excel sheet names and log events remain unchange
 See LAS_MIG.md for Swedish launch and usage instructions.
 
 For live runs, choose Kommuner, Regioner, or Både kommuner och regioner (a mixed list), select
-one or more authorities, or use Välj alla / Rensa val, and enter the question, keywords and query templates.
+one or more authorities, or use Alla i listan / Rensa val, and enter the question, keywords and query templates.
 Each visitor supplies their own OpenAI API key. Crawl + collect only needs no key.
 The Swedish interface includes all 290 municipalities. Their names, official website
 hosts and codes are matched against SKR; see examples/registry_sources/README.md.
