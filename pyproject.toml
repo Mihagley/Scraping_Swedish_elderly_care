@@ -20,7 +20,7 @@ ui = ["streamlit>=1.40,<2", "reportlab>=4.4,<5"]
 dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "reportlab>=4.4,<5", "build>=1.2,<2"]
 
 [project.gui-scripts]
-kommunutredaren = "municipal_research.desktop:main"
+utredningsstodet = "municipal_research.desktop:main"
 
 [project.scripts]
 municipal-research = "municipal_research.cli:main"

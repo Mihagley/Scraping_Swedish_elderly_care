@@ -15,6 +15,6 @@ if __name__ == "__main__":
         if "--smoke-test" not in sys.argv and "--worker" not in sys.argv:
             from tkinter import messagebox
 
-            messagebox.showerror("Kommunutredaren", details)
+            messagebox.showerror("Utredningsstödet", details)
         code = 1
     raise SystemExit(code)

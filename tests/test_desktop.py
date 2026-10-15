@@ -33,5 +33,5 @@ def test_registry_roundtrip_preserves_codes_and_regions(tmp_path):
 def test_data_directory_uses_writable_user_directory(tmp_path, monkeypatch):
     monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
     path = desktop.data_directory()
-    assert path == tmp_path / "Kommunutredaren"
+    assert path == tmp_path / "Utredningsstödet"
     assert path.is_dir()

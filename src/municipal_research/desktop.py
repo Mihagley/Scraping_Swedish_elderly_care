@@ -22,7 +22,8 @@ def resources() -> Path:
 
 def data_directory() -> Path:
     base = Path(os.environ.get("LOCALAPPDATA", Path.home() / ".local" / "share"))
-    path = base / "Kommunutredaren"
+    legacy = base / "Kommunutredaren"
+    path = legacy if legacy.is_dir() else base / "Utredningsstödet"
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -71,13 +72,13 @@ class Desktop:
             self.locations += parse_locations(
                 (resources() / "examples" / name).read_text(encoding="utf-8")
             )
-        root.title("Kommunutredaren")
+        root.title("Utredningsstödet")
         root.geometry("1000x800")
         root.minsize(800, 650)
         root.protocol("WM_DELETE_WINDOW", self.close)
         outer = ttk.Frame(root, padding=16)
         outer.pack(fill="both", expand=True)
-        ttk.Label(outer, text="Kommunutredaren", font=("Segoe UI", 20, "bold")).pack(anchor="w")
+        ttk.Label(outer, text="Utredningsstödet", font=("Segoe UI", 20, "bold")).pack(anchor="w")
         ttk.Label(outer, text="Sök i kommuners och regioners officiella webbplatser.").pack(
             anchor="w", pady=(0, 12)
         )
