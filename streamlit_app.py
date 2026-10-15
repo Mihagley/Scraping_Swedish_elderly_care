@@ -102,7 +102,7 @@ def live_form(running):
         locations += parse_locations((ROOT / "examples/regions.csv").read_text(encoding="utf-8"))
         base = load_config(ROOT / "examples/interface.yaml")
         with st.sidebar.expander("Egna listor och kodbok"):
-            st.caption("CSV ersätter hela platslistan. YAML ersätter kodboken för forskningen.")
+            st.caption("CSV ersätter hela platslistan. YAML ersätter kodboken för utredningen.")
             upload = st.file_uploader(
                 "Egen lista med kommuner och regioner (CSV)", type=["csv"], disabled=running
             )
@@ -117,6 +117,18 @@ def live_form(running):
         show_error("Det gick inte att läsa platslistan eller kodboken. Kontrollera filerna.", error)
         return
 
+    st.subheader("1. Vad vill du ta reda på?")
+    question = st.text_area("Utredningsfråga", base.research.question, disabled=running)
+    keywords = st.text_area(
+        "Sökord och fraser",
+        ", ".join(base.discovery.keywords),
+        disabled=running,
+        help="Separera ord och fraser med kommatecken eller radbrytningar.",
+    )
+    st.caption(
+        "Sökorden hjälper till att hitta relevanta sidor. Utredningsfrågan och kodboken styr hur innehållet bedöms."
+    )
+
     count_kommun = sum(location.kind == "kommun" for location in locations)
     count_region = sum(location.kind == "region" for location in locations)
     st.caption(f"Tillgängligt: {count_kommun} kommuner och {count_region} regioner.")
@@ -124,7 +136,7 @@ def live_form(running):
         st.caption(
             "Kommunernas webbplatser och koder är hämtade från SKR:s listor, kontrollerade 15 oktober 2026."
         )
-    st.subheader("1. Välj kommuner eller regioner")
+    st.subheader("2. Var vill du söka?")
     scope = st.radio(
         "Var vill du söka?",
         ["Kommuner", "Regioner", "Både kommuner och regioner"],
@@ -166,9 +178,10 @@ def live_form(running):
             placeholder="Skriv ett namn för att hitta en kommun eller region",
         )
     st.caption(f"Valda: {len(selected)} av {len(options)}.")
-    st.info(
-        "Regionsökning söker på regionernas egna webbplatser. Kommunernas webbplatser väljs separat."
-    )
+    if "region" in kinds[scope]:
+        st.caption(
+            "Regionsökning söker på regionernas egna webbplatser. Kommunernas webbplatser väljs separat."
+        )
     with st.expander("Visa valda webbplatser"):
         st.dataframe(
             [
@@ -182,164 +195,156 @@ def live_form(running):
             hide_index=True,
         )
 
-    st.subheader("2. Beskriv vad du vill hitta")
-    question = st.text_area("Utredningsfråga", base.research.question, disabled=running)
-    keywords = st.text_area(
-        "Sökord och fraser",
-        ", ".join(base.discovery.keywords),
-        disabled=running,
-        help="Separera ord och fraser med kommatecken eller radbrytningar.",
-    )
-    st.caption(
-        "Sökorden hjälper till att hitta relevanta sidor. Utredningsfrågan och kodboken styr hur innehållet bedöms."
-    )
-    ai_provider = st.selectbox(
-        "AI för klassificering",
-        ["openai", "ollama"],
-        format_func=lambda value: (
-            "OpenAI (molntjänst)" if value == "openai" else "Lokal AI via Ollama"
-        ),
-        index=["openai", "ollama"].index(base.llm.provider),
-        disabled=running,
-        key="ai_provider",
-    )
-    if ai_provider == "openai" and base.llm.provider == "ollama":
-        st.caption(
-            "Vid byte från en lokal YAML-konfiguration används OpenAI-exempelmodellen gpt-5-mini. Ladda upp en OpenAI-konfiguration för att välja andra molnmodeller."
-        )
-    api_key = st.text_input(
-        "Din API-nyckel för OpenAI",
-        type="password",
-        disabled=running,
-        key="openai_api_key",
-        help="Valfri för genomsökning och lokal AI. Behövs för OpenAI-klassificering och OpenAI-webbsökning. Nyckeln skrivs inte till konfigurationsfiler.",
-    ).strip()
-    local_model = local_url = None
-    context_tokens = local_timeout = None
-    if ai_provider == "ollama":
-        st.info(
-            "Textanalys och verifiering körs med din nedladdade modell i Ollama. Ingen OpenAI-nyckel behövs när sökmetoden är Genomsök webbplatser."
-        )
-        local_model = st.text_input(
-            "Lokal modell (inklusive tagg)",
-            value=base.llm.models[0] if base.llm.provider == "ollama" else "llama3.1:8b",
+    with st.sidebar:
+        st.subheader("Analys och sökinställningar")
+        ai_provider = st.selectbox(
+            "AI för klassificering",
+            ["openai", "ollama"],
+            format_func=lambda value: (
+                "OpenAI (molntjänst)" if value == "openai" else "Lokal AI via Ollama"
+            ),
+            index=["openai", "ollama"].index(base.llm.provider),
             disabled=running,
+            key="ai_provider",
         )
-        local_url = st.text_input(
-            "Ollama-adress på din dator", base.llm.ollama_base_url, disabled=running
-        )
-        st.caption(
-            "Installera och starta Ollama. Hämta en lokal modell med exempelvis ollama pull llama3.1:8b. Välj inte en molnmodell."
-        )
-        with st.expander("Inställningar för lokal modell"):
-            context_tokens = st.number_input(
-                "Kontextfönster (token)",
-                2048,
-                262144,
-                base.llm.ollama_num_ctx,
-                step=1024,
+        if ai_provider == "openai" and base.llm.provider == "ollama":
+            st.caption(
+                "Vid byte från en lokal YAML-konfiguration används OpenAI-exempelmodellen gpt-5-mini. Ladda upp en OpenAI-konfiguration för att välja andra molnmodeller."
+            )
+        api_key = st.text_input(
+            "Din API-nyckel för OpenAI",
+            type="password",
+            disabled=running,
+            key="openai_api_key",
+            help="Valfri för genomsökning och lokal AI. Behövs för OpenAI-klassificering och OpenAI-webbsökning. Nyckeln skrivs inte till konfigurationsfiler.",
+        ).strip()
+        local_model = local_url = None
+        context_tokens = local_timeout = None
+        if ai_provider == "ollama":
+            st.info(
+                "Textanalys och verifiering körs med din nedladdade modell i Ollama. Ingen OpenAI-nyckel behövs när sökmetoden är Genomsök webbplatser."
+            )
+            local_model = st.text_input(
+                "Lokal modell (inklusive tagg)",
+                value=base.llm.models[0] if base.llm.provider == "ollama" else "llama3.1:8b",
                 disabled=running,
             )
-            local_timeout = st.number_input(
-                "Väntetid per modellanrop (sekunder)",
-                30,
-                3600,
-                int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 600,
-                disabled=running,
+            local_url = st.text_input(
+                "Ollama-adress på din dator", base.llm.ollama_base_url, disabled=running
             )
             st.caption(
-                "Ett större kontextfönster kräver mer minne. Det måste rymma instruktioner, källtext och modellens svar. Kontrollera resultaten med din valda modell."
+                "Installera och starta Ollama. Hämta en lokal modell med exempelvis ollama pull llama3.1:8b. Välj inte en molnmodell."
             )
-        if st.button("Testa anslutning till Ollama", disabled=running):
-            try:
-                settings = LLM(
-                    provider="ollama",
-                    models=[local_model.strip()],
-                    verifier_model=local_model.strip(),
-                    adjudicator_model=local_model.strip(),
-                    ollama_base_url=local_url.strip(),
+            with st.expander("Inställningar för lokal modell"):
+                context_tokens = st.number_input(
+                    "Kontextfönster (token)",
+                    2048,
+                    262144,
+                    base.llm.ollama_num_ctx,
+                    step=1024,
+                    disabled=running,
                 )
-                check_ollama(settings)
-                st.success(
-                    "Ollama svarar och modellen finns installerad. Modellsvaren valideras när sökningen körs."
+                local_timeout = st.number_input(
+                    "Väntetid per modellanrop (sekunder)",
+                    30,
+                    3600,
+                    int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 600,
+                    disabled=running,
                 )
-            except Exception as error:
-                show_error(
-                    "Ollama kunde inte kontrolleras. Starta tjänsten och kontrollera modellnamnet.",
-                    error,
+                st.caption(
+                    "Ett större kontextfönster kräver mer minne. Det måste rymma instruktioner, källtext och modellens svar. Kontrollera resultaten med din valda modell."
                 )
-    discovery_context = (ai_provider, base.discovery.provider)
-    if st.session_state.get("discovery_context") != discovery_context:
-        st.session_state.discovery_context = discovery_context
-        st.session_state.discovery_provider = (
-            "crawl" if ai_provider == "ollama" else base.discovery.provider
-        )
-    if not api_key:
-        st.session_state.discovery_provider = "crawl"
-        st.caption(
-            "Ingen OpenAI-nyckel angiven: sökmetoden är automatiskt Genomsök webbplatser. Ange en nyckel för att aktivera OpenAI-webbsökning."
-        )
-    with st.expander("Avancerade sökinställningar"):
-        queries = st.text_area(
-            "Sökfrågor (en per rad)",
-            "\n".join(base.discovery.queries) or "{location} {question}",
-            help="{location} ersätts med platsens namn, {domain} med domänen och {question} med utredningsfrågan.",
-            disabled=running,
-        )
-        provider = st.selectbox(
-            "Sökmetod",
-            list(PROVIDERS),
-            format_func=PROVIDERS.get,
-            index=None,
-            disabled=running or not api_key,
-            key="discovery_provider",
-        )
-        max_documents = st.number_input(
-            "Högst antal dokument per plats",
-            1,
-            10000,
-            base.discovery.max_documents,
-            disabled=running,
-        )
-        max_calls = st.number_input(
-            "Högst antal modellanrop under hela körningen",
-            1,
-            100000,
-            base.llm.max_calls,
-            disabled=running,
-        )
-        use_cutoff = st.checkbox(
-            "Avgränsa till regler som gällde före ett visst datum",
-            value=base.research.cutoff is not None,
-            disabled=running,
-        )
-        cutoff = (
-            st.date_input(
-                "Gränsdatum (själva datumet ingår inte)",
-                value=base.research.cutoff or date.today(),
-                format="YYYY-MM-DD",
+            if st.button("Testa anslutning till Ollama", disabled=running):
+                try:
+                    settings = LLM(
+                        provider="ollama",
+                        models=[local_model.strip()],
+                        verifier_model=local_model.strip(),
+                        adjudicator_model=local_model.strip(),
+                        ollama_base_url=local_url.strip(),
+                    )
+                    check_ollama(settings)
+                    st.success(
+                        "Ollama svarar och modellen finns installerad. Modellsvaren valideras när sökningen körs."
+                    )
+                except Exception as error:
+                    show_error(
+                        "Ollama kunde inte kontrolleras. Starta tjänsten och kontrollera modellnamnet.",
+                        error,
+                    )
+        discovery_context = (ai_provider, base.discovery.provider)
+        if st.session_state.get("discovery_context") != discovery_context:
+            st.session_state.discovery_context = discovery_context
+            st.session_state.discovery_provider = (
+                "crawl" if ai_provider == "ollama" else base.discovery.provider
+            )
+        if not api_key:
+            st.session_state.discovery_provider = "crawl"
+            st.caption(
+                "Ingen OpenAI-nyckel angiven: sökmetoden är automatiskt Genomsök webbplatser. Ange en nyckel för att aktivera OpenAI-webbsökning."
+            )
+        collect_only = st.checkbox("Samla bara in källor, utan klassificering", disabled=running)
+        with st.expander("Avancerade sökinställningar"):
+            queries = st.text_area(
+                "Sökfrågor (en per rad)",
+                "\n".join(base.discovery.queries) or "{location} {question}",
+                help="{location} ersätts med platsens namn, {domain} med domänen och {question} med utredningsfrågan.",
                 disabled=running,
             )
-            if use_cutoff
-            else None
-        )
-        collect_only = st.checkbox("Samla bara in källor, utan klassificering", disabled=running)
-        st.caption(
-            "För att ändra bedömningskategorier eller instruktioner, ladda upp en egen kodbok i sidopanelen. Att ändra sökord skriver inte om kodboken."
-        )
-        st.write("**Instruktioner i aktuell kodbok**")
-        st.write(base.research.instructions)
-        st.table(
-            [
-                {"Kategori": label, "Definition": rule.definition}
-                for label, rule in base.research.labels.items()
-            ]
-        )
+            provider = st.selectbox(
+                "Sökmetod",
+                list(PROVIDERS),
+                format_func=PROVIDERS.get,
+                index=None,
+                disabled=running or not api_key,
+                key="discovery_provider",
+            )
+            max_documents = st.number_input(
+                "Högst antal dokument per plats",
+                1,
+                10000,
+                base.discovery.max_documents,
+                disabled=running,
+            )
+            max_calls = st.number_input(
+                "Högst antal modellanrop under hela körningen",
+                1,
+                100000,
+                base.llm.max_calls,
+                disabled=running,
+            )
+            use_cutoff = st.checkbox(
+                "Avgränsa till regler som gällde före ett visst datum",
+                value=base.research.cutoff is not None,
+                disabled=running,
+            )
+            cutoff = (
+                st.date_input(
+                    "Gränsdatum (själva datumet ingår inte)",
+                    value=base.research.cutoff or date.today(),
+                    format="YYYY-MM-DD",
+                    disabled=running,
+                )
+                if use_cutoff
+                else None
+            )
+            st.caption(
+                "För att ändra bedömningskategorier eller instruktioner, ladda upp en egen kodbok i sidopanelen. Att ändra sökord skriver inte om kodboken."
+            )
+            st.write("**Instruktioner i aktuell kodbok**")
+            st.write(base.research.instructions)
+            st.table(
+                [
+                    {"Kategori": label, "Definition": rule.definition}
+                    for label, rule in base.research.labels.items()
+                ]
+            )
     needs_key = requires_openai(provider, ai_provider, collect_only)
-    st.subheader("3. Starta sökningen")
+    st.divider()
+    st.subheader("3. Granska och starta")
     if needs_key and not api_key:
         st.warning(
-            "Genomsökning behöver ingen nyckel, men klassificering med OpenAI gör det. Ange en API-nyckel, välj Lokal AI via Ollama eller markera Samla bara in källor under Avancerade sökinställningar."
+            "Genomsökning behöver ingen nyckel, men klassificering med OpenAI gör det. Ange en API-nyckel, välj Lokal AI via Ollama eller markera Samla bara in källor i sidopanelen."
         )
     elif needs_key:
         st.caption("Sökningen använder betalda API-anrop. Antalsgränsen är ingen kostnadsgräns.")
@@ -349,16 +354,17 @@ def live_form(running):
         st.warning(
             "Webbsökningen skickar sökfrågor till OpenAI och kräver en API-nyckel. Textklassificeringen använder fortfarande Ollama. Välj Genomsök webbplatser för att undvika OpenAI helt."
         )
-    st.write(
-        f"**{len(selected)} valda platser** · högst {max_documents} dokument per plats · "
-        + ("enbart insamling" if collect_only else "klassificering med AI")
-    )
+    summary_columns = st.columns(3)
+    summary_columns[0].metric("Valda organisationer", len(selected))
+    summary_columns[1].metric("Dokument per organisation", max_documents)
+    summary_columns[2].metric("Analys", "Enbart insamling" if collect_only else "Ollama" if ai_provider == "ollama" else "OpenAI")
     if len(selected) >= 100:
         st.warning(
             "Du har valt en stor sökning. Den kan ta lång tid. Börja gärna med några kommuner för att kontrollera frågan och resultaten."
         )
     if st.button(
         "Starta sökning",
+        use_container_width=True,
         disabled=running or not selected or (needs_key and not api_key),
         type="primary",
     ):
@@ -400,7 +406,7 @@ def show_job():
     if code is not None and not st.session_state.get("completion_shown", False):
         st.session_state.completion_shown = True
         st.rerun()
-    st.subheader("Aktuell körning")
+    st.subheader("Resultat och aktivitet")
     st.write(st.session_state.submitted_summary)
     if not st.session_state.was_demo:
         with st.expander("Platser som ingår i körningen"):
@@ -468,8 +474,23 @@ def show_job():
         st.code("\n".join(parts) or "Ingen aktivitet har registrerats ännu.")
 
 
-st.set_page_config(page_title="Sök i offentliga källor", page_icon="🔎", layout="wide")
-st.title("Sök i offentliga källor")
+st.set_page_config(page_title="Utredningsstödet", page_icon="🔎", layout="wide")
+st.markdown(
+    """
+    <style>
+    .block-container {max-width: 1040px; padding-top: 2.5rem; padding-bottom: 4rem;}
+    h1 {letter-spacing: -0.045em; font-weight: 750;}
+    h2, h3 {letter-spacing: -0.025em;}
+    [data-testid="stSidebar"] {border-right: 1px solid #dce5e2;}
+    [data-testid="stTextArea"] textarea {line-height: 1.6;}
+    [data-testid="stButton"] button {border-radius: 0.65rem; min-height: 2.7rem;}
+    [data-testid="stDownloadButton"] button {border-radius: 0.65rem;}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+st.caption("OFFENTLIGA KÄLLOR · SPÅRBARA RESULTAT")
+st.title("Utredningsstödet")
 st.caption(
     "Hitta uppgifter på kommuners och regioners webbplatser, spara källorna och ladda ner resultaten."
 )
@@ -477,6 +498,8 @@ if "job_root" not in st.session_state:
     st.session_state.job_root = tempfile.mkdtemp(prefix="municipal-ui-")
 active = st.session_state.get("process")
 running = active is not None and active.poll() is None
+st.sidebar.title("Inställningar")
+st.sidebar.caption("Välj AI och anpassa sökningen här. Din fråga och dina val finns i huvudvyn.")
 mode = st.radio("Välj körläge", [DEMO, LIVE], horizontal=True, disabled=running)
 show_job()
 if mode == DEMO:

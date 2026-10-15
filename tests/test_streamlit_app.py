@@ -17,7 +17,7 @@ def button(app, label):
 def test_demo_is_separate_from_live_settings():
     app = AppTest.from_file(str(APP), default_timeout=15).run()
     assert not app.exception
-    assert app.title[0].value == "Sök i offentliga källor"
+    assert app.title[0].value == "Utredningsstödet"
     assert not app.multiselect
     assert not app.text_input
     button(app, "Starta demonstration").click().run()
