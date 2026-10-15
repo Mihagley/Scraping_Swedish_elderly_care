@@ -292,3 +292,16 @@ Implementation patterns were checked against the official documentation on 2026-
 
 See `docs/architecture.md` for the module map and the boundaries of mechanical and
 semantic verification.
+
+
+## Browser interface: kommun and region
+
+A Streamlit interface supports keyword/query entry, research questions, individual
+kommun/region selection, CSV and YAML uploads, offline demos, live research, job
+activity, and Excel/JSON downloads. All 21 regions are included alongside the six
+starter municipalities. See [interface and hosting instructions](docs/interface.md).
+
+```sh
+python -m pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
+```

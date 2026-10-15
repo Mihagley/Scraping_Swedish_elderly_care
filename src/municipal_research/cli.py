@@ -16,7 +16,7 @@ def main(argv=None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="Discover, download, classify, verify and export")
     run.add_argument("--config", type=Path, required=True)
-    run.add_argument("--municipalities", type=Path, required=True)
+    run.add_argument("--municipalities", "--locations", dest="municipalities", type=Path, required=True)
     run.add_argument("--run-dir", type=Path, required=True)
     run.add_argument("--cache-dir", type=Path, default=Path("data/cache"))
     mode = run.add_mutually_exclusive_group()
@@ -98,3 +98,4 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

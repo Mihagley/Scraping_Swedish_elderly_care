@@ -99,6 +99,8 @@ class Config(StrictModel):
 
 
 class Municipality(StrictModel):
+    # Legacy name retained for CLI and saved-run compatibility.
+    kind: Literal["kommun", "region"] = "kommun"
     id: str
     name: str
     domains: list[str]
@@ -107,7 +109,7 @@ class Municipality(StrictModel):
     @model_validator(mode="after")
     def validate_input(self):
         if not re.fullmatch(r"[a-zA-Z0-9_-]+", self.id):
-            raise ValueError("Municipality id must be a safe, unique ASCII identifier")
+            raise ValueError("Location id must be a safe, unique ASCII identifier")
         if not self.domains:
             raise ValueError("At least one domain is required")
         for domain in self.domains:
@@ -128,6 +130,7 @@ def load_municipalities(path: Path) -> list[Municipality]:
         Municipality(
             id=r["id"],
             name=r["name"],
+            kind=r.get("kind") or "kommun",
             domains=[v.strip() for v in r["domains"].split(";") if v.strip()],
             seeds=[v.strip() for v in r.get("seeds", "").split(";") if v.strip()],
         )
@@ -136,3 +139,9 @@ def load_municipalities(path: Path) -> list[Municipality]:
     if not result or len({r.id for r in result}) != len(result):
         raise ValueError("Municipality CSV must be nonempty and have unique ids")
     return result
+
+
+
+# New generic names; existing imports and CSVs remain supported.
+Location = Municipality
+load_locations = load_municipalities

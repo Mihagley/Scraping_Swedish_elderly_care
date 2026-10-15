@@ -129,6 +129,8 @@ class Discoverer:
             for template in queries[: settings.max_searches_per_municipality]:
                 query = template.format(
                     municipality=municipality.name,
+                    location=municipality.name,
+                    region=municipality.name if municipality.kind == "region" else "",
                     domain=municipality.domains[0],
                     question=self.config.research.question,
                 )
@@ -200,3 +202,4 @@ class Discoverer:
                 )
         if self.queue:
             self.gaps.append("document_limit")
+

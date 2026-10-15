@@ -57,6 +57,7 @@ def summarize(
     return {
         "municipality_id": municipality.id,
         "municipality": municipality.name,
+        "location_type": municipality.kind,
         "category": category,
         "needs_review": needs_review,
         "documents": len(documents),
@@ -238,3 +239,4 @@ def run_pipeline(
         gateway.close()
         logger.removeHandler(handler)
         handler.close()
+

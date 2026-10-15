@@ -59,7 +59,7 @@ class Classifier:
         settings = self.config.llm
         payload = {
             "research": self.config.research.model_dump(mode="json"),
-            "municipality": municipality.model_dump(),
+            "location": municipality.model_dump(),
             "source_url": document.url,
             "source_title": document.title,
             "chunk_id": chunk.id,
@@ -109,7 +109,7 @@ class Classifier:
                     role,
                     settings.verifier_model,
                     BASE_INSTRUCTIONS
-                    + "\nVerify the proposed decision. Check that quotes entail EVERY substantive claim, municipality attribution, date, scope, category and attributes. Reject unsupported chronology and misleading excerpts. Quote existence alone does not imply support. Return supported=false for any substantive defect.",
+                    + "\nVerify the proposed decision. Check that quotes entail EVERY substantive claim, location attribution, date, scope, category and attributes. Reject unsupported chronology and misleading excerpts. Quote existence alone does not imply support. Return supported=false for any substantive defect.",
                     {**payload, "proposed_decision": decision.model_dump(mode="json")},
                     Verdict,
                 )
@@ -183,3 +183,4 @@ class Classifier:
             needs_review=result["needs_review"],
         )
         return result
+

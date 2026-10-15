@@ -1,0 +1,22 @@
+id,name,kind,domains,seeds
+region-01,Region Stockholm,region,regionstockholm.se,https://www.regionstockholm.se/
+region-03,Region Uppsala,region,regionuppsala.se,https://regionuppsala.se/
+region-04,Region Sörmland,region,regionsormland.se,https://regionsormland.se/
+region-05,Region Östergötland,region,regionostergotland.se,https://www.regionostergotland.se/
+region-06,Region Jönköpings län,region,rjl.se,https://www.rjl.se/
+region-07,Region Kronoberg,region,regionkronoberg.se,https://www.regionkronoberg.se/
+region-08,Region Kalmar län,region,regionkalmar.se,https://regionkalmar.se/
+region-09,Region Gotland,region,gotland.se,https://gotland.se/
+region-10,Region Blekinge,region,regionblekinge.se,https://regionblekinge.se/
+region-12,Region Skåne,region,skane.se,https://www.skane.se/
+region-13,Region Halland,region,regionhalland.se,https://www.regionhalland.se/
+region-14,Västra Götalandsregionen,region,vgregion.se,https://www.vgregion.se/
+region-17,Region Värmland,region,regionvarmland.se,https://www.regionvarmland.se/
+region-18,Region Örebro län,region,regionorebrolan.se,https://www.regionorebrolan.se/
+region-19,Region Västmanland,region,regionvastmanland.se,https://regionvastmanland.se/
+region-20,Region Dalarna,region,regiondalarna.se,https://www.regiondalarna.se/
+region-21,Region Gävleborg,region,regiongavleborg.se,https://www.regiongavleborg.se/
+region-22,Region Västernorrland,region,rvn.se,https://www.rvn.se/
+region-23,Region Jämtland Härjedalen,region,regionjh.se,https://www.regionjh.se/
+region-24,Region Västerbotten,region,regionvasterbotten.se,https://www.regionvasterbotten.se/
+region-25,Region Norrbotten,region,norrbotten.se,https://www.norrbotten.se/
