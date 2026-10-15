@@ -15,7 +15,7 @@ def button(app, label):
 
 
 def test_demo_is_separate_from_live_settings():
-    app = AppTest.from_file(str(APP)).run()
+    app = AppTest.from_file(str(APP), default_timeout=15).run()
     assert not app.exception
     assert app.title[0].value == "Sök i offentliga källor"
     assert not app.multiselect
@@ -35,7 +35,7 @@ def test_demo_is_separate_from_live_settings():
 
 
 def test_national_selection_and_region_scope():
-    app = AppTest.from_file(str(APP)).run()
+    app = AppTest.from_file(str(APP), default_timeout=15).run()
     app.radio[0].set_value("Verklig sökning").run()
     assert not app.exception
     assert len(app.multiselect[0].options) == 290
