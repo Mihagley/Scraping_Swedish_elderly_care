@@ -22,7 +22,9 @@ def test_worker_arguments_for_source_and_frozen(monkeypatch):
 
 
 def test_registry_roundtrip_preserves_codes_and_regions(tmp_path):
-    locations = parse_locations("id,name,kind,domains,seeds\n0123,Å kommun,kommun,example.se,https://example.se/\nregion-01,En region,region,region.se,\n")
+    locations = parse_locations(
+        "id,name,kind,domains,seeds\n0123,Å kommun,kommun,example.se,https://example.se/\nregion-01,En region,region,region.se,\n"
+    )
     path = tmp_path / "locations.csv"
     desktop.write_locations(path, locations)
     assert parse_locations(path.read_text(encoding="utf-8")) == locations

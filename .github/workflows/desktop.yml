@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [codex/kommun-region-interface, main]
-    paths: ['src/**', 'desktop_app.py', 'examples/**', 'pyproject.toml', '.github/workflows/desktop.yml']
+    paths: ['src/**', 'desktop_app.py', 'examples/**', 'docs/skrivbordsapp.pdf', 'pyproject.toml', '.github/workflows/desktop.yml']
 permissions:
   contents: read
 jobs:
@@ -16,6 +16,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install ".[desktop]" "pyinstaller>=6.16,<7"
       - run: python -m PyInstaller --noconfirm --clean --windowed --name Kommunutredaren --collect-all trafilatura --add-data "examples;examples" desktop_app.py
+      - run: Copy-Item docs/skrivbordsapp.pdf dist/Kommunutredaren/STARTA_HAR.pdf
       - name: Test packaged application and scraper
         shell: pwsh
         run: |
