@@ -141,7 +141,6 @@ def load_municipalities(path: Path) -> list[Municipality]:
     return result
 
 
-
 # New generic names; existing imports and CSVs remain supported.
 Location = Municipality
 load_locations = load_municipalities

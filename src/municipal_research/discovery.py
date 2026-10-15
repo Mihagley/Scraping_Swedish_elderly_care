@@ -202,4 +202,3 @@ class Discoverer:
                 )
         if self.queue:
             self.gaps.append("document_limit")
-

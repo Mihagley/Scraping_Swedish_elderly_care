@@ -14,6 +14,7 @@ audit log) except the TED search itself, which is a POST and is cached separatel
 Re-running the same command reuses the caches, so an interrupted run resumes cheaply.
 A document that cannot be reached is recorded as ``missing_document``, never as a zero.
 """
+
 from __future__ import annotations
 
 import io
@@ -148,12 +149,19 @@ class TedClient:
                 raise FetchError(f"TED HTTP {response.status_code}: {response.text[:300]}")
             payload = response.json()
             write_json(path, payload)
-            self.audit.emit("ted_search", cache_hit=False, key=key, n=len(payload.get("notices", [])))
+            self.audit.emit(
+                "ted_search", cache_hit=False, key=key, n=len(payload.get("notices", []))
+            )
             return payload
         raise FetchError("TED retries exhausted")
 
     def search(
-        self, query: str, fields: Iterable[str] = TED_FIELDS, *, limit: int = 100, max_pages: int = 200
+        self,
+        query: str,
+        fields: Iterable[str] = TED_FIELDS,
+        *,
+        limit: int = 100,
+        max_pages: int = 200,
     ) -> Iterator[dict[str, Any]]:
         token: str | None = None
         for _ in range(max_pages):
@@ -251,7 +259,9 @@ def parse_lov_advert(html: bytes | str, url: str) -> LovAdvert:
     title = heading.get_text(" ", strip=True) if heading else ""
     slug_parts = urlsplit(url).path.strip("/").split("/")
     buyer_slug = slug_parts[2] if len(slug_parts) > 2 else ""
-    buyer = " ".join(word.capitalize() for word in buyer_slug.split("-")).replace(" Kommun", " kommun")
+    buyer = " ".join(word.capitalize() for word in buyer_slug.split("-")).replace(
+        " Kommun", " kommun"
+    )
     main = soup.find("main") or soup.body or soup
     links = []
     for anchor in main.find_all("a", href=True):

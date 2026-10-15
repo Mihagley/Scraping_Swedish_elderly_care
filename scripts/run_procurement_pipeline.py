@@ -9,6 +9,7 @@ Example:
 Re-running the same command reuses the HTTP and TED caches, so an interrupted run
 resumes where it stopped. Use --offline to rebuild outputs from the cache only.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -48,7 +49,10 @@ def run_ted(args, cache: Path, audit: Audit, fetcher: Fetcher, docs_dir: Path) -
             doc_text, records = "", []
             if args.ted_documents and row["document_urls"]:
                 doc_text, records = fetch_documents(
-                    fetcher, row["document_urls"], docs_dir / "ted", audit,
+                    fetcher,
+                    row["document_urls"],
+                    docs_dir / "ted",
+                    audit,
                     max_documents=args.max_documents,
                 )
             row["document_text"] = "\n\n".join(t for t in (row["description"], doc_text) if t)
@@ -66,8 +70,11 @@ def run_ted(args, cache: Path, audit: Audit, fetcher: Fetcher, docs_dir: Path) -
 def run_lov(args, audit: Audit, fetcher: Fetcher, docs_dir: Path) -> list[dict]:
     seeds = []
     if args.lov_seed_file:
-        seeds = [line.strip() for line in args.lov_seed_file.read_text(encoding="utf-8").splitlines()
-                 if line.strip().startswith("http")]
+        seeds = [
+            line.strip()
+            for line in args.lov_seed_file.read_text(encoding="utf-8").splitlines()
+            if line.strip().startswith("http")
+        ]
     adverts = discover_lov_adverts(fetcher, audit, max_pages=args.lov_max_pages, seeds=seeds)
     print(f"  LOV: {len(adverts)} annonser hittade", flush=True)
     rows = []
@@ -83,23 +90,28 @@ def run_lov(args, audit: Audit, fetcher: Fetcher, docs_dir: Path) -> list[dict]:
             audit.emit("lov_skipped_not_elderly_care", url=url, title=advert.title)
             continue
         doc_text, records = fetch_documents(
-            fetcher, advert.document_links, docs_dir / "lov", audit,
+            fetcher,
+            advert.document_links,
+            docs_dir / "lov",
+            audit,
             max_documents=args.max_documents,
         )
-        rows.append({
-            "notice_id": advert.reference or url.rstrip("/").rsplit("/", 1)[-1],
-            "publication_date": advert.updated or advert.start_date,
-            "buyer_name": advert.buyer_name,
-            "municipality_name": advert.buyer_name,
-            "title": advert.title,
-            "description": advert.service_area,
-            "document_text": doc_text,
-            "document_url": records[0].url if records else "",
-            "documents": [asdict(r) for r in records],
-            "source_url": url,
-            # Adverts are the *currently published* LOV systems, dated by last update.
-            "coverage_status": "lov_current_adverts",
-        })
+        rows.append(
+            {
+                "notice_id": advert.reference or url.rstrip("/").rsplit("/", 1)[-1],
+                "publication_date": advert.updated or advert.start_date,
+                "buyer_name": advert.buyer_name,
+                "municipality_name": advert.buyer_name,
+                "title": advert.title,
+                "description": advert.service_area,
+                "document_text": doc_text,
+                "document_url": records[0].url if records else "",
+                "documents": [asdict(r) for r in records],
+                "source_url": url,
+                # Adverts are the *currently published* LOV systems, dated by last update.
+                "coverage_status": "lov_current_adverts",
+            }
+        )
         if number % 25 == 0:
             print(f"  LOV: {number}/{len(adverts)} annonser behandlade", flush=True)
     return rows
@@ -124,39 +136,61 @@ def write_outputs(out: Path, source_rows: dict[str, list[dict]], args) -> None:
         for source in source_rows
     }
     write_json(out / "year_summary.json", summary)
-    write_json(out / "manifest.json", {
-        "finished_at": utc_now(),
-        "arguments": {k: str(v) for k, v in vars(args).items()},
-        "counts": {source: len(rows) for source, rows in source_rows.items()},
-        "n_documents_downloaded": sum(
-            1 for rows in source_rows.values() for row in rows
-            for doc in row.get("documents", []) if doc.get("sha256")
-        ),
-        "notes": [
-            "TED covers only notices above the EU thresholds.",
-            "LOV rows are adverts published at run time; publication_date is the advert's "
-            "last update, not the date the requirement was introduced.",
-            "missing_document means no text could be retrieved, not that no requirement exists.",
-        ],
-    })
+    write_json(
+        out / "manifest.json",
+        {
+            "finished_at": utc_now(),
+            "arguments": {k: str(v) for k, v in vars(args).items()},
+            "counts": {source: len(rows) for source, rows in source_rows.items()},
+            "n_documents_downloaded": sum(
+                1
+                for rows in source_rows.values()
+                for row in rows
+                for doc in row.get("documents", [])
+                if doc.get("sha256")
+            ),
+            "notes": [
+                "TED covers only notices above the EU thresholds.",
+                "LOV rows are adverts published at run time; publication_date is the advert's "
+                "last update, not the date the requirement was introduced.",
+                "missing_document means no text could be retrieved, not that no requirement exists.",
+            ],
+        },
+    )
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--contact", required=True, help="E-mail put in the User-Agent so site owners can reach you.")
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        "--contact",
+        required=True,
+        help="E-mail put in the User-Agent so site owners can reach you.",
+    )
     parser.add_argument("--sources", default="ted,lov", help="Comma-separated: ted, lov")
     parser.add_argument("--output-dir", type=Path, default=Path("research/procurement/pipeline"))
     parser.add_argument("--from-year", type=int, default=2018)
     parser.add_argument("--to-year", type=int, default=date.today().year)
     parser.add_argument("--ted-query", help="Override the TED expert query.")
     parser.add_argument("--ted-max-pages", type=int, default=50)
-    parser.add_argument("--no-ted-documents", dest="ted_documents", action="store_false",
-                        help="Classify TED notice text only; do not follow document links.")
+    parser.add_argument(
+        "--no-ted-documents",
+        dest="ted_documents",
+        action="store_false",
+        help="Classify TED notice text only; do not follow document links.",
+    )
     parser.add_argument("--lov-max-pages", type=int, default=60)
-    parser.add_argument("--lov-seed-file", type=Path, help="Text file with extra advert URLs, one per line.")
-    parser.add_argument("--all-services", action="store_true", help="Keep LOV adverts outside elderly care.")
+    parser.add_argument(
+        "--lov-seed-file", type=Path, help="Text file with extra advert URLs, one per line."
+    )
+    parser.add_argument(
+        "--all-services", action="store_true", help="Keep LOV adverts outside elderly care."
+    )
     parser.add_argument("--max-documents", type=int, default=6, help="Per advert/notice.")
-    parser.add_argument("--interval", type=float, default=1.5, help="Seconds between requests per host.")
+    parser.add_argument(
+        "--interval", type=float, default=1.5, help="Seconds between requests per host."
+    )
     parser.add_argument("--offline", action="store_true", help="Use cache only.")
     args = parser.parse_args()
     args.user_agent = f"MunicipalResearch/0.1 (academic research; contact {args.contact})"
@@ -181,7 +215,9 @@ def main() -> int:
         write_outputs(out, results, args)
     for source, rows in results.items():
         explicit = sum(
-            1 for r in rows if normalize_notice(r, source=source).language_category == "explicit_requirement"
+            1
+            for r in rows
+            if normalize_notice(r, source=source).language_category == "explicit_requirement"
         )
         print(f"{source}: {len(rows)} annonser, {explicit} med uttryckligt svenskkrav")
     print(f"Resultat i {out}/notices.csv, year_summary.json och manifest.json")

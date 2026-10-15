@@ -335,4 +335,3 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
             raise RuntimeError("Unexpected Excel formula/error from untrusted text")
     saved.close()
     return output
-

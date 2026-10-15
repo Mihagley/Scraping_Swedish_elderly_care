@@ -1,4 +1,5 @@
 """Browser-script checks, including a real offline demonstration subprocess."""
+
 from pathlib import Path
 
 import pytest

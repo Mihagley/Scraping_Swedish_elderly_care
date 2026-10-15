@@ -84,15 +84,20 @@ def test_documents_follow_one_html_hop_to_tender_pdf(tmp_path):
         if path == "/robots.txt":
             return httpx.Response(404)
         if path == "/leverantor-hemtjanst/":
-            return httpx.Response(200, content=MUNICIPALITY_PAGE, headers={"content-type": "text/html"})
+            return httpx.Response(
+                200, content=MUNICIPALITY_PAGE, headers={"content-type": "text/html"}
+            )
         if path == "/download/forfragningsunderlag-hemtjanst.pdf":
             return httpx.Response(200, content=pdf, headers={"content-type": "application/pdf"})
         return httpx.Response(404)
 
     fetcher = _fetcher(tmp_path, handler)
     text, records = fetch_documents(
-        fetcher, ["https://www.skovde.se/leverantor-hemtjanst/"], tmp_path / "docs",
-        Audit(tmp_path / "audit.jsonl"), max_documents=2,
+        fetcher,
+        ["https://www.skovde.se/leverantor-hemtjanst/"],
+        tmp_path / "docs",
+        Audit(tmp_path / "audit.jsonl"),
+        max_documents=2,
     )
     kinds = [r.kind for r in records]
     assert kinds[:2] == ["html", "pdf"]  # tender PDF ranked before the map
@@ -111,16 +116,23 @@ def test_unreachable_document_is_recorded_not_dropped(tmp_path):
 def test_ted_iteration_cache_and_row_mapping(tmp_path):
     calls = []
     pages = [
-        {"notices": [{
-            "publication-number": "123456-2021",
-            "publication-date": "2021-03-04+01:00",
-            "notice-title": {"swe": ["Drift av vård- och omsorgsboende"]},
-            "buyer-name": {"swe": ["Testkommun"]},
-            "buyer-city": {"swe": ["Teststad"]},
-            "classification-cpv": ["85311100"],
-            "description-lot": {"swe": ["Personalen ska behärska svenska i tal och skrift."]},
-            "document-url-lot": ["https://www.e-avrop.com/x/docs"],
-        }], "iterationNextToken": "t1"},
+        {
+            "notices": [
+                {
+                    "publication-number": "123456-2021",
+                    "publication-date": "2021-03-04+01:00",
+                    "notice-title": {"swe": ["Drift av vård- och omsorgsboende"]},
+                    "buyer-name": {"swe": ["Testkommun"]},
+                    "buyer-city": {"swe": ["Teststad"]},
+                    "classification-cpv": ["85311100"],
+                    "description-lot": {
+                        "swe": ["Personalen ska behärska svenska i tal och skrift."]
+                    },
+                    "document-url-lot": ["https://www.e-avrop.com/x/docs"],
+                }
+            ],
+            "iterationNextToken": "t1",
+        },
         {"notices": [], "iterationNextToken": None},
     ]
 
@@ -130,13 +142,20 @@ def test_ted_iteration_cache_and_row_mapping(tmp_path):
         return httpx.Response(200, json=pages[1] if body.get("iterationNextToken") else pages[0])
 
     audit = Audit(tmp_path / "audit.jsonl")
-    client = TedClient(tmp_path, audit, client=httpx.Client(transport=httpx.MockTransport(handler)), interval=0)
+    client = TedClient(
+        tmp_path, audit, client=httpx.Client(transport=httpx.MockTransport(handler)), interval=0
+    )
     notices = list(client.search(ted_default_query(2018, 2025)))
     assert len(notices) == 1 and calls[1]["iterationNextToken"] == "t1"
     assert "buyer-country IN (SWE)" in calls[0]["query"] and "85311100" in calls[0]["query"]
 
     # Second run is served entirely from the cache.
-    offline = TedClient(tmp_path, audit, client=httpx.Client(transport=httpx.MockTransport(lambda r: 1 / 0)), offline=True)
+    offline = TedClient(
+        tmp_path,
+        audit,
+        client=httpx.Client(transport=httpx.MockTransport(lambda r: 1 / 0)),
+        offline=True,
+    )
     assert len(list(offline.search(ted_default_query(2018, 2025)))) == 1
 
     row = ted_notice_to_row(notices[0])
@@ -156,7 +175,12 @@ def test_ted_network_failure_raises_fetch_error_not_crash(tmp_path):
     def handler(request):
         raise httpx.ConnectError("blocked")
 
-    client = TedClient(tmp_path, Audit(tmp_path / "a.jsonl"), client=httpx.Client(transport=httpx.MockTransport(handler)), interval=0)
+    client = TedClient(
+        tmp_path,
+        Audit(tmp_path / "a.jsonl"),
+        client=httpx.Client(transport=httpx.MockTransport(handler)),
+        interval=0,
+    )
     client.pacer.sleep = lambda seconds: None
     with pytest.raises(FetchError):
         list(client.search("x"))

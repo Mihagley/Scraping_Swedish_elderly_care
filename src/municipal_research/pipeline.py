@@ -239,4 +239,3 @@ def run_pipeline(
         gateway.close()
         logger.removeHandler(handler)
         handler.close()
-

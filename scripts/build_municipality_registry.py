@@ -1,4 +1,5 @@
 """Build the national CSV from the checked SKR metadata snapshots (no network)."""
+
 from __future__ import annotations
 
 import csv
@@ -30,15 +31,24 @@ def build_rows() -> list[dict[str, str]]:
         if item["name"] == "Stockholm":
             domains += ";start.stockholm"
             seeds += ";https://start.stockholm/"
-        rows.append({"id": by_name[item["name"]], "name": item["name"], "kind": "kommun",
-                     "domains": domains, "seeds": seeds})
+        rows.append(
+            {
+                "id": by_name[item["name"]],
+                "name": item["name"],
+                "kind": "kommun",
+                "domains": domains,
+                "seeds": seeds,
+            }
+        )
     return rows
 
 
 def main():
     output = ROOT / "examples/municipalities.csv"
     with output.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=["id", "name", "kind", "domains", "seeds"], lineterminator="\n")
+        writer = csv.DictWriter(
+            handle, fieldnames=["id", "name", "kind", "domains", "seeds"], lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(build_rows())
     print("Wrote 290 municipalities to", output)
