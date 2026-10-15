@@ -1,0 +1,38 @@
+name: Windows desktop
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/kommun-region-interface, main]
+    paths: ['src/**', 'desktop_app.py', 'examples/**', 'pyproject.toml', '.github/workflows/desktop.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install ".[desktop]" "pyinstaller>=6.16,<7"
+      - run: python -m PyInstaller --noconfirm --clean --windowed --name Kommunutredaren --collect-all trafilatura --add-data "examples;examples" desktop_app.py
+      - name: Test packaged application and scraper
+        shell: pwsh
+        run: |
+          $exe = "$PWD/dist/Kommunutredaren/Kommunutredaren.exe"
+          $gui = Start-Process $exe -ArgumentList '--smoke-test' -PassThru -Wait
+          if ($gui.ExitCode -ne 0) { throw "Desktop smoke test failed" }
+          $worker = Start-Process $exe -ArgumentList '--worker-log smoke.log --worker demo --config _internal/examples/language_requirements.yaml --run-dir smoke-results --cache-dir smoke-cache' -WorkingDirectory "$PWD/dist/Kommunutredaren" -PassThru -Wait
+          if ($worker.ExitCode -ne 0) { Get-Content dist/Kommunutredaren/smoke.log; throw "Packaged scraper failed" }
+          if (!(Test-Path dist/Kommunutredaren/smoke-results/results.xlsx)) { throw "Missing Excel result" }
+          Remove-Item dist/Kommunutredaren/smoke* -Recurse -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kommunutredaren-Windows
+          path: dist/Kommunutredaren/
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: desktop-diagnostics
+          path: dist/Kommunutredaren/smoke.log
