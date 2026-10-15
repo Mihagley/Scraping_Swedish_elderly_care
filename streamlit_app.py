@@ -357,7 +357,10 @@ def live_form(running):
     summary_columns = st.columns(3)
     summary_columns[0].metric("Valda organisationer", len(selected))
     summary_columns[1].metric("Dokument per organisation", max_documents)
-    summary_columns[2].metric("Analys", "Enbart insamling" if collect_only else "Ollama" if ai_provider == "ollama" else "OpenAI")
+    summary_columns[2].metric(
+        "Analys",
+        "Enbart insamling" if collect_only else "Ollama" if ai_provider == "ollama" else "OpenAI",
+    )
     if len(selected) >= 100:
         st.warning(
             "Du har valt en stor sökning. Den kan ta lång tid. Börja gärna med några kommuner för att kontrollera frågan och resultaten."
