@@ -5,6 +5,7 @@ import re
 from datetime import date
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlsplit
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -77,6 +78,9 @@ class Extraction(StrictModel):
 
 
 class LLM(StrictModel):
+    provider: Literal["openai", "ollama"] = "openai"
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_num_ctx: int = Field(default=32768, ge=2048, le=262144)
     models: list[str] = Field(default_factory=lambda: ["gpt-5-mini"], min_length=1)
     search_model: str = "gpt-5-mini"
     verifier_model: str = "gpt-5-mini"
@@ -88,6 +92,31 @@ class LLM(StrictModel):
     interval_seconds: float = Field(default=1, ge=0)
     max_calls: int = Field(default=1000, ge=1)
     reasoning_effort: str | None = None
+
+    @model_validator(mode="after")
+    def local_settings(self):
+        url = urlsplit(self.ollama_base_url)
+        if (url.scheme not in {"http", "https"}
+            or url.hostname not in {"localhost", "127.0.0.1", "::1"}
+            or url.username or url.password or url.query or url.fragment
+            or url.path not in {"", "/"}):
+            raise ValueError("Ollama requires a localhost origin, e.g. http://localhost:11434, without credentials or an API path")
+        try:
+            url.port
+        except ValueError as error:
+            raise ValueError("Ollama port is invalid") from error
+        self.ollama_base_url = self.ollama_base_url.rstrip("/")
+        if self.provider == "ollama":
+            names = [*self.models, self.verifier_model, self.adjudicator_model]
+            if any(not name.strip() or name != name.strip() for name in names):
+                raise ValueError("Ollama model names must be nonempty and have no surrounding whitespace")
+            if any(name.lower().endswith((":cloud", "-cloud")) for name in names):
+                raise ValueError("Choose a downloaded local Ollama model, not a cloud model")
+            if self.max_output_tokens >= self.ollama_num_ctx:
+                raise ValueError("Ollama context must exceed the maximum output tokens")
+            if self.reasoning_effort:
+                raise ValueError("reasoning_effort is an OpenAI-only option")
+        return self
 
 
 class Config(StrictModel):

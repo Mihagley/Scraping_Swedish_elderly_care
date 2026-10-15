@@ -6,7 +6,7 @@ import csv
 import io
 from string import Formatter
 
-from .config import Config, Location
+from .config import LLM, Config, Location
 
 
 def parse_locations(text: str) -> list[Location]:
@@ -42,6 +42,12 @@ def configure(
     max_documents: int,
     max_calls: int,
     cutoff=None,
+    *,
+    ai_provider: str | None = None,
+    local_model: str | None = None,
+    local_url: str | None = None,
+    context_tokens: int | None = None,
+    local_timeout: float | None = None,
 ) -> Config:
     if not question.strip():
         raise ValueError("Ange en forskningsfråga.")
@@ -68,4 +74,27 @@ def configure(
         max_documents=max_documents,
     )
     data["llm"]["max_calls"] = max_calls
+    if ai_provider is not None:
+        data["llm"]["provider"] = ai_provider
+    if ai_provider == "openai" and base.llm.provider == "ollama":
+        defaults = LLM()
+        data["llm"].update(
+            models=defaults.models, verifier_model=defaults.verifier_model,
+            adjudicator_model=defaults.adjudicator_model, search_model=defaults.search_model,
+            timeout_seconds=defaults.timeout_seconds, reasoning_effort=defaults.reasoning_effort,
+        )
+    if data["llm"]["provider"] == "ollama":
+        model = data["llm"]["models"][0] if local_model is None else local_model.strip()
+        data["llm"].update(
+            models=[model], verifier_model=model, adjudicator_model=model,
+            ollama_base_url=data["llm"]["ollama_base_url"] if local_url is None else local_url.strip(), reasoning_effort=None,
+        )
+        if context_tokens is not None:
+            data["llm"]["ollama_num_ctx"] = context_tokens
+        if local_timeout is not None:
+            data["llm"]["timeout_seconds"] = local_timeout
     return Config.model_validate(data)
+
+
+def requires_openai(discovery: str, ai_provider: str, collect_only: bool) -> bool:
+    return discovery != "crawl" or (ai_provider == "openai" and not collect_only)

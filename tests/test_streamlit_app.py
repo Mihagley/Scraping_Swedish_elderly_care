@@ -53,3 +53,19 @@ def test_national_selection_and_region_scope():
     assert app.multiselect[0].value == []
     assert button(app, "Starta sökning").disabled
     assert not app.exception
+
+
+def test_local_model_defaults_to_crawl_without_openai_key():
+    app = AppTest.from_file(str(APP), default_timeout=15).run()
+    app.radio[0].set_value("Verklig sökning").run()
+    ai = next(item for item in app.selectbox if item.label == "AI för klassificering")
+    ai.set_value("ollama").run()
+    assert not app.exception
+    discovery = next(item for item in app.selectbox if item.label == "Sökmetod")
+    assert discovery.value == "crawl"
+    assert not any(item.label == "Din API-nyckel för OpenAI" for item in app.text_input)
+    assert any(item.label == "Lokal modell (inklusive tagg)" for item in app.text_input)
+    discovery.set_value("hybrid").run()
+    assert any(item.label == "Din API-nyckel för OpenAI" for item in app.text_input)
+    assert any("skickar sökfrågor till OpenAI" in item.value for item in app.warning)
+    assert not app.exception

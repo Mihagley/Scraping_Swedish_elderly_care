@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from municipal_research.config import load_config, load_municipalities
-from municipal_research.interface import configure, parse_locations
+from municipal_research.interface import configure, parse_locations, requires_openai
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -57,6 +57,29 @@ class InterfaceTests(unittest.TestCase):
                 configure(base, "Question", "", query, "crawl", 2, 10)
         with self.assertRaises(ValueError):
             configure(base, "Question", "", "", "crawl", 0, 10)
+
+    def test_local_settings_cover_all_classification_roles(self):
+        base = load_config(ROOT / "examples/interface.yaml")
+        config = configure(
+            base, "Fråga?", "språk", "{location}", "crawl", 2, 10,
+            ai_provider="ollama", local_model="llama3.1:8b",
+            local_url="http://localhost:11434", context_tokens=32768, local_timeout=600,
+        )
+        self.assertEqual(config.llm.provider, "ollama")
+        self.assertEqual(config.llm.models, ["llama3.1:8b"])
+        self.assertEqual(config.llm.verifier_model, "llama3.1:8b")
+        self.assertEqual(config.llm.adjudicator_model, "llama3.1:8b")
+        self.assertFalse(requires_openai("crawl", "ollama", False))
+        self.assertTrue(requires_openai("hybrid", "ollama", False))
+        self.assertFalse(requires_openai("crawl", "openai", True))
+        self.assertTrue(requires_openai("crawl", "openai", False))
+        switched = configure(
+            config, "Fråga?", "språk", "{location}", "crawl", 2, 10, ai_provider="openai",
+        )
+        self.assertEqual(switched.llm.models, ["gpt-5-mini"])
+        self.assertEqual(switched.llm.verifier_model, "gpt-5-mini")
+        self.assertEqual(switched.llm.adjudicator_model, "gpt-5-mini")
+        self.assertEqual(switched.llm.timeout_seconds, 120)
 
     def test_historical_codebook_requires_cutoff(self):
         base = load_config(ROOT / "examples/language_requirements.yaml")

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import httpx
 from openai import OpenAI
 from pydantic import BaseModel
 
@@ -17,7 +18,7 @@ class LLMError(RuntimeError):
 
 
 class Gateway:
-    """Responses API adapter with strict Pydantic parsing and disk replay.
+    """OpenAI Responses/Ollama adapter with strict parsing and disk replay.
 
     SDK handles transient API retries (including Retry-After). The cache key includes
     the full prompt, schema, model, role/pass identity, and request settings.
@@ -33,17 +34,22 @@ class Gateway:
         offline=False,
         refresh=False,
         client=None,
+        local_client=None,
     ):
         self.config, self.cache, self.run, self.audit = config, cache, run, audit
         self.offline, self.refresh, self.client = offline, refresh, client
+        self.local_client = local_client
         self.calls = 0
         self.pacer = Pacer(config.interval_seconds)
 
     def close(self):
         if self.client is not None:
             self.client.close()
+        if self.local_client is not None:
+            self.local_client.close()
 
     def _call(self, role: str, model: str, messages: list[dict], schema=None, **extras):
+        local = schema is not None and self.config.provider == "ollama"
         request = {
             "model": model,
             "input": messages,
@@ -51,7 +57,16 @@ class Gateway:
             "max_output_tokens": self.config.max_output_tokens,
             **extras,
         }
-        if self.config.reasoning_effort:
+        if local:
+            request = {
+                "model": model,
+                "messages": messages,
+                "stream": False,
+                "format": schema.model_json_schema(),
+                "options": {"temperature": 0, "num_ctx": self.config.ollama_num_ctx,
+                            "num_predict": self.config.max_output_tokens},
+            }
+        if self.config.reasoning_effort and not local:
             request["reasoning"] = {"effort": self.config.reasoning_effort}
         identity = {
             "version": PROMPT_VERSION,
@@ -59,6 +74,8 @@ class Gateway:
             "request": request,
             "schema": schema.model_json_schema() if schema else None,
         }
+        if local:
+            identity.update(provider="ollama", endpoint=self.config.ollama_base_url)
         key = digest(canonical(identity))
         cache_file = self.cache / (key + ".json")
         run_folder = self.run / "llm" / key
@@ -75,14 +92,29 @@ class Gateway:
                 raise LLMError("Offline LLM cache miss: " + key)
             if self.calls >= self.config.max_calls:
                 raise LLMError("Configured API call budget exhausted")
-            if self.client is None:
+            if not local and self.client is None:
                 self.client = OpenAI(
                     timeout=self.config.timeout_seconds, max_retries=self.config.max_retries
                 )
-            self.pacer.wait("openai")
+            self.pacer.wait("ollama" if local else "openai")
             self.calls += 1
             try:
-                if schema:
+                if local:
+                    if self.local_client is None:
+                        self.local_client = httpx.Client(
+                            timeout=self.config.timeout_seconds, trust_env=False,
+                            transport=httpx.HTTPTransport(retries=self.config.max_retries),
+                        )
+                    response = self.local_client.post(
+                        self.config.ollama_base_url + "/api/chat", json=request,
+                        timeout=self.config.timeout_seconds,
+                    )
+                    response.raise_for_status()
+                    raw = response.json()
+                    if not isinstance(raw, dict):
+                        raise LLMError("Ollama returned a non-object response")
+                    headers = response.headers
+                elif schema:
                     response = self.client.responses.with_raw_response.parse(
                         **request, text_format=schema
                     )
@@ -90,14 +122,16 @@ class Gateway:
                     response = self.client.responses.with_raw_response.create(**request)
                 # Preserve API JSON before parsing. This also keeps invalid structured
                 # outputs auditable and avoids reserializing SDK union/generic models.
-                raw = response.http_response.json()
+                if not local:
+                    raw = response.http_response.json()
+                    headers = response.headers
                 # Save refusals and incomplete responses too; never reinterpret them as negative findings.
                 record = {
                     "key": key,
                     "identity": identity,
                     "response": raw,
                     "response_sha256": digest(canonical(raw)),
-                    "request_id": response.headers.get("x-request-id"),
+                    "request_id": headers.get("x-request-id"),
                 }
                 write_json(cache_file, record)
             except Exception as error:
@@ -109,23 +143,41 @@ class Gateway:
                         "request_id": getattr(error, "request_id", None),
                     },
                 )
-                raise LLMError(f"OpenAI call failed ({type(error).__name__}); see audit") from error
+                provider = "Ollama" if local else "OpenAI"
+                raise LLMError(f"{provider} call failed ({type(error).__name__}); see audit") from error
         write_json(run_folder / "response.json", record)
         raw = record["response"]
+        usage = raw.get("usage")
+        status = raw.get("status")
+        if local:
+            usage = {"input_tokens": raw.get("prompt_eval_count"), "output_tokens": raw.get("eval_count")}
+            status = "completed" if raw.get("done") is True and raw.get("done_reason") == "stop" else "incomplete"
         self.audit.emit(
             "llm",
+            provider="ollama" if local else "openai",
             role=role,
             model=model,
             key=key,
             cache_hit=cached,
             response_id=raw.get("id"),
-            usage=raw.get("usage"),
-            status=raw.get("status"),
+            usage=usage,
+            status=status,
         )
-        if raw.get("status") != "completed":
+        if status != "completed":
             raise LLMError("Incomplete or failed model response; inspect saved response")
         if not schema:
             return raw
+        if local:
+            message = raw.get("message")
+            if not isinstance(message, dict) or message.get("role") != "assistant":
+                raise LLMError("Ollama returned no assistant message")
+            content = message.get("content")
+            if not isinstance(content, str) or not content:
+                raise LLMError("Ollama returned no structured output")
+            try:
+                return schema.model_validate_json(content, strict=True)
+            except ValueError as error:
+                raise LLMError("Structured output failed local validation") from error
         texts = []
         for item in raw.get("output", []):
             if item.get("type") == "message":
@@ -189,3 +241,21 @@ class Gateway:
         if not urls:
             raise LLMError("Web search returned no source URLs; inspect the saved response")
         return list(urls.values())
+
+
+def check_ollama(config: LLM, *, client=None) -> None:
+    """Check local connectivity/model availability without downloading or generating."""
+    owned = client is None
+    client = client or httpx.Client(timeout=5, trust_env=False)
+    try:
+        response = client.get(config.ollama_base_url + "/api/tags", timeout=5)
+        response.raise_for_status()
+        models = response.json().get("models", [])
+        names = {item.get("name") for item in models if isinstance(item, dict)}
+        if config.models[0] not in names:
+            raise LLMError("Modellen saknas i Ollama. Hämta den med ollama pull och ange dess fullständiga namn, inklusive tagg.")
+    except (httpx.HTTPError, ValueError, AttributeError) as error:
+        raise LLMError("Det gick inte att nå Ollama på din dator. Starta Ollama och kontrollera serveradressen.") from error
+    finally:
+        if owned:
+            client.close()
