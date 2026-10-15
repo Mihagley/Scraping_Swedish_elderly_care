@@ -61,9 +61,18 @@ class InterfaceTests(unittest.TestCase):
     def test_local_settings_cover_all_classification_roles(self):
         base = load_config(ROOT / "examples/interface.yaml")
         config = configure(
-            base, "Fråga?", "språk", "{location}", "crawl", 2, 10,
-            ai_provider="ollama", local_model="llama3.1:8b",
-            local_url="http://localhost:11434", context_tokens=32768, local_timeout=600,
+            base,
+            "Fråga?",
+            "språk",
+            "{location}",
+            "crawl",
+            2,
+            10,
+            ai_provider="ollama",
+            local_model="llama3.1:8b",
+            local_url="http://localhost:11434",
+            context_tokens=32768,
+            local_timeout=600,
         )
         self.assertEqual(config.llm.provider, "ollama")
         self.assertEqual(config.llm.models, ["llama3.1:8b"])
@@ -74,7 +83,14 @@ class InterfaceTests(unittest.TestCase):
         self.assertFalse(requires_openai("crawl", "openai", True))
         self.assertTrue(requires_openai("crawl", "openai", False))
         switched = configure(
-            config, "Fråga?", "språk", "{location}", "crawl", 2, 10, ai_provider="openai",
+            config,
+            "Fråga?",
+            "språk",
+            "{location}",
+            "crawl",
+            2,
+            10,
+            ai_provider="openai",
         )
         self.assertEqual(switched.llm.models, ["gpt-5-mini"])
         self.assertEqual(switched.llm.verifier_model, "gpt-5-mini")

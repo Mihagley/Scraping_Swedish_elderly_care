@@ -96,11 +96,18 @@ class LLM(StrictModel):
     @model_validator(mode="after")
     def local_settings(self):
         url = urlsplit(self.ollama_base_url)
-        if (url.scheme not in {"http", "https"}
+        if (
+            url.scheme not in {"http", "https"}
             or url.hostname not in {"localhost", "127.0.0.1", "::1"}
-            or url.username or url.password or url.query or url.fragment
-            or url.path not in {"", "/"}):
-            raise ValueError("Ollama requires a localhost origin, e.g. http://localhost:11434, without credentials or an API path")
+            or url.username
+            or url.password
+            or url.query
+            or url.fragment
+            or url.path not in {"", "/"}
+        ):
+            raise ValueError(
+                "Ollama requires a localhost origin, e.g. http://localhost:11434, without credentials or an API path"
+            )
         try:
             _ = url.port
         except ValueError as error:
@@ -109,7 +116,9 @@ class LLM(StrictModel):
         if self.provider == "ollama":
             names = [*self.models, self.verifier_model, self.adjudicator_model]
             if any(not name.strip() or name != name.strip() for name in names):
-                raise ValueError("Ollama model names must be nonempty and have no surrounding whitespace")
+                raise ValueError(
+                    "Ollama model names must be nonempty and have no surrounding whitespace"
+                )
             if any(name.lower().endswith((":cloud", "-cloud")) for name in names):
                 raise ValueError("Choose a downloaded local Ollama model, not a cloud model")
             if self.max_output_tokens >= self.ollama_num_ctx:

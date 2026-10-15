@@ -78,23 +78,29 @@ def test_native_schema_audit_and_offline_replay(tmp_path, audit, monkeypatch):
     assert replay.parse("verify", MODEL, "System", {"source": "Svensk text"}, Verdict).supported
     assert replay.calls == 0 and len(requests) == 1
     changed = gateway(
-        tmp_path, audit, lambda r: pytest.fail("Offline HTTP"), offline=True,
+        tmp_path,
+        audit,
+        lambda r: pytest.fail("Offline HTTP"),
+        offline=True,
         settings=local_config(ollama_base_url="http://127.0.0.1:11434"),
     )
     with pytest.raises(LLMError, match="cache miss"):
         changed.parse("verify", MODEL, "System", {"source": "Svensk text"}, Verdict)
 
 
-@pytest.mark.parametrize("response", [
-    envelope(done=False),
-    envelope(done_reason="length"),
-    envelope(done_reason=None),
-    envelope(message={"role": "assistant", "content": "not JSON"}),
-    envelope(message={"role": "assistant", "content": ""}),
-    envelope(message={"role": "user", "content": json.dumps(GOOD)}),
-    envelope({**GOOD, "supported": "true"}),
-    envelope({**GOOD, "unexpected": "field"}),
-])
+@pytest.mark.parametrize(
+    "response",
+    [
+        envelope(done=False),
+        envelope(done_reason="length"),
+        envelope(done_reason=None),
+        envelope(message={"role": "assistant", "content": "not JSON"}),
+        envelope(message={"role": "assistant", "content": ""}),
+        envelope(message={"role": "user", "content": json.dumps(GOOD)}),
+        envelope({**GOOD, "supported": "true"}),
+        envelope({**GOOD, "unexpected": "field"}),
+    ],
+)
 def test_incomplete_or_invalid_output_abstains(tmp_path, audit, response):
     instance = gateway(tmp_path, audit, lambda r: httpx.Response(200, json=response))
     with pytest.raises(LLMError):
@@ -106,6 +112,7 @@ def test_incomplete_or_invalid_output_abstains(tmp_path, audit, response):
 def test_context_and_endpoint_separate_caches(tmp_path, audit):
     def handler(request):
         return httpx.Response(200, json=envelope())
+
     first = gateway(tmp_path, audit, handler)
     first.parse("one", MODEL, "System", {}, Verdict)
     other = gateway(tmp_path, audit, handler, settings=local_config(ollama_num_ctx=65536))
@@ -117,7 +124,9 @@ def test_context_and_endpoint_separate_caches(tmp_path, audit):
 def test_budget_and_http_errors(tmp_path, audit, monkeypatch):
     monkeypatch.setattr("municipal_research.llm.OpenAI", lambda **kw: pytest.fail("Cloud call"))
     instance = gateway(
-        tmp_path, audit, lambda r: httpx.Response(404, json={"error": "model not found"}),
+        tmp_path,
+        audit,
+        lambda r: httpx.Response(404, json={"error": "model not found"}),
         settings=local_config(max_calls=1),
     )
     with pytest.raises(LLMError, match="Ollama call failed"):
@@ -127,11 +136,18 @@ def test_budget_and_http_errors(tmp_path, audit, monkeypatch):
         instance.parse("two", MODEL, "System", {}, Verdict)
 
 
-@pytest.mark.parametrize("url", [
-    "https://api.openai.com", "http://localhost.evil:11434", "http://127.0.0.1:11434/v1",
-    "http://name:secret@localhost:11434", "ftp://localhost", "http://localhost:bad",
-    "http://localhost:11434?token=abc",
-])
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://api.openai.com",
+        "http://localhost.evil:11434",
+        "http://127.0.0.1:11434/v1",
+        "http://name:secret@localhost:11434",
+        "ftp://localhost",
+        "http://localhost:bad",
+        "http://localhost:11434?token=abc",
+    ],
+)
 def test_only_explicit_local_origin_is_allowed(url):
     with pytest.raises(ValueError):
         local_config(ollama_base_url=url)
@@ -139,8 +155,10 @@ def test_only_explicit_local_origin_is_allowed(url):
 
 def test_local_parameter_validation():
     for updates in [
-        {"ollama_num_ctx": 2048}, {"models": ["llama3.1:8b-cloud"]},
-        {"models": [""]}, {"reasoning_effort": "high"},
+        {"ollama_num_ctx": 2048},
+        {"models": ["llama3.1:8b-cloud"]},
+        {"models": [""]},
+        {"reasoning_effort": "high"},
     ]:
         with pytest.raises(ValueError):
             local_config(**updates)
@@ -164,7 +182,15 @@ def test_connection_check_does_not_generate_or_download():
 
 @pytest.mark.parametrize("fabricated", [False, True])
 def test_local_classification_preserves_quote_verification(
-    config, tmp_path, audit, municipality, document, chunk, yes_decision, monkeypatch, fabricated,
+    config,
+    tmp_path,
+    audit,
+    municipality,
+    document,
+    chunk,
+    yes_decision,
+    monkeypatch,
+    fabricated,
 ):
     monkeypatch.setattr("municipal_research.llm.OpenAI", lambda **kw: pytest.fail("Cloud call"))
     config.llm = local_config()

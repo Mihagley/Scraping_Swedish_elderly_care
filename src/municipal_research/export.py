@@ -287,7 +287,17 @@ def export_workbook(run: Path, output: Path | None = None) -> Path:
     sheet(
         "API_Usage",
         [e for e in audit if e["stage"] == "llm"],
-        ["timestamp", "provider", "role", "model", "cache_hit", "response_id", "usage", "status", "key"],
+        [
+            "timestamp",
+            "provider",
+            "role",
+            "model",
+            "cache_hit",
+            "response_id",
+            "usage",
+            "status",
+            "key",
+        ],
     )
     methodology = [
         {"item": "Question", "definition": data["config"]["research"]["question"]},

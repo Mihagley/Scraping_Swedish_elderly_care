@@ -194,39 +194,79 @@ def live_form(running):
         "Sökorden hjälper till att hitta relevanta sidor. Forskningsfrågan och kodboken styr hur innehållet bedöms."
     )
     ai_provider = st.selectbox(
-        "AI för klassificering", ["openai", "ollama"],
-        format_func=lambda value: "OpenAI (molntjänst)" if value == "openai" else "Lokal AI via Ollama",
-        index=["openai", "ollama"].index(base.llm.provider), disabled=running,
+        "AI för klassificering",
+        ["openai", "ollama"],
+        format_func=lambda value: (
+            "OpenAI (molntjänst)" if value == "openai" else "Lokal AI via Ollama"
+        ),
+        index=["openai", "ollama"].index(base.llm.provider),
+        disabled=running,
         key="ai_provider",
     )
     if ai_provider == "openai" and base.llm.provider == "ollama":
-        st.caption("Vid byte från en lokal YAML-konfiguration används OpenAI-exempelmodellen gpt-5-mini. Ladda upp en OpenAI-konfiguration för att välja andra molnmodeller.")
+        st.caption(
+            "Vid byte från en lokal YAML-konfiguration används OpenAI-exempelmodellen gpt-5-mini. Ladda upp en OpenAI-konfiguration för att välja andra molnmodeller."
+        )
     local_model = local_url = None
     context_tokens = local_timeout = None
     if ai_provider == "ollama":
-        st.info("Textanalys och verifiering körs med din nedladdade modell i Ollama. Ingen OpenAI-nyckel behövs när sökmetoden är Genomsök webbplatser.")
+        st.info(
+            "Textanalys och verifiering körs med din nedladdade modell i Ollama. Ingen OpenAI-nyckel behövs när sökmetoden är Genomsök webbplatser."
+        )
         local_model = st.text_input(
             "Lokal modell (inklusive tagg)",
             value=base.llm.models[0] if base.llm.provider == "ollama" else "llama3.1:8b",
             disabled=running,
         )
-        local_url = st.text_input("Ollama-adress på din dator", base.llm.ollama_base_url, disabled=running)
-        st.caption("Installera och starta Ollama. Hämta en lokal modell med exempelvis ollama pull llama3.1:8b. Välj inte en molnmodell.")
+        local_url = st.text_input(
+            "Ollama-adress på din dator", base.llm.ollama_base_url, disabled=running
+        )
+        st.caption(
+            "Installera och starta Ollama. Hämta en lokal modell med exempelvis ollama pull llama3.1:8b. Välj inte en molnmodell."
+        )
         with st.expander("Inställningar för lokal modell"):
-            context_tokens = st.number_input("Kontextfönster (token)", 2048, 262144, base.llm.ollama_num_ctx, step=1024, disabled=running)
-            local_timeout = st.number_input("Väntetid per modellanrop (sekunder)", 30, 3600, int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 600, disabled=running)
-            st.caption("Ett större kontextfönster kräver mer minne. Det måste rymma instruktioner, källtext och modellens svar. Kontrollera resultaten med din valda modell.")
+            context_tokens = st.number_input(
+                "Kontextfönster (token)",
+                2048,
+                262144,
+                base.llm.ollama_num_ctx,
+                step=1024,
+                disabled=running,
+            )
+            local_timeout = st.number_input(
+                "Väntetid per modellanrop (sekunder)",
+                30,
+                3600,
+                int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 600,
+                disabled=running,
+            )
+            st.caption(
+                "Ett större kontextfönster kräver mer minne. Det måste rymma instruktioner, källtext och modellens svar. Kontrollera resultaten med din valda modell."
+            )
         if st.button("Testa anslutning till Ollama", disabled=running):
             try:
-                settings = LLM(provider="ollama", models=[local_model.strip()], verifier_model=local_model.strip(), adjudicator_model=local_model.strip(), ollama_base_url=local_url.strip())
+                settings = LLM(
+                    provider="ollama",
+                    models=[local_model.strip()],
+                    verifier_model=local_model.strip(),
+                    adjudicator_model=local_model.strip(),
+                    ollama_base_url=local_url.strip(),
+                )
                 check_ollama(settings)
-                st.success("Ollama svarar och modellen finns installerad. Modellsvaren valideras när sökningen körs.")
+                st.success(
+                    "Ollama svarar och modellen finns installerad. Modellsvaren valideras när sökningen körs."
+                )
             except Exception as error:
-                show_error("Ollama kunde inte kontrolleras. Starta tjänsten och kontrollera modellnamnet.", error)
+                show_error(
+                    "Ollama kunde inte kontrolleras. Starta tjänsten och kontrollera modellnamnet.",
+                    error,
+                )
     discovery_context = (ai_provider, base.discovery.provider)
     if st.session_state.get("discovery_context") != discovery_context:
         st.session_state.discovery_context = discovery_context
-        st.session_state.discovery_provider = "crawl" if ai_provider == "ollama" else base.discovery.provider
+        st.session_state.discovery_provider = (
+            "crawl" if ai_provider == "ollama" else base.discovery.provider
+        )
     with st.expander("Avancerade sökinställningar"):
         queries = st.text_area(
             "Sökfrågor (en per rad)",
@@ -297,7 +337,9 @@ def live_form(running):
         api_key = ""
         st.caption("Denna kombination kräver ingen OpenAI-nyckel.")
     if ai_provider == "ollama" and provider != "crawl":
-        st.warning("Webbsökningen skickar sökfrågor till OpenAI och kräver en API-nyckel. Textklassificeringen använder fortfarande Ollama. Välj Genomsök webbplatser för att undvika OpenAI helt.")
+        st.warning(
+            "Webbsökningen skickar sökfrågor till OpenAI och kräver en API-nyckel. Textklassificeringen använder fortfarande Ollama. Välj Genomsök webbplatser för att undvika OpenAI helt."
+        )
     st.write(
         f"**{len(selected)} valda platser** · högst {max_documents} dokument per plats · "
         + ("enbart insamling" if collect_only else "klassificering med AI")
@@ -322,8 +364,11 @@ def live_form(running):
                 int(max_documents),
                 int(max_calls),
                 cutoff,
-                ai_provider=ai_provider, local_model=local_model, local_url=local_url,
-                context_tokens=context_tokens, local_timeout=local_timeout,
+                ai_provider=ai_provider,
+                local_model=local_model,
+                local_url=local_url,
+                context_tokens=context_tokens,
+                local_timeout=local_timeout,
             )
             launch_job((config, [lookup[key] for key in selected], api_key.strip(), collect_only))
         except Exception as error:

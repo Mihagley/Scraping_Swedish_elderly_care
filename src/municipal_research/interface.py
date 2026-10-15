@@ -79,15 +79,23 @@ def configure(
     if ai_provider == "openai" and base.llm.provider == "ollama":
         defaults = LLM()
         data["llm"].update(
-            models=defaults.models, verifier_model=defaults.verifier_model,
-            adjudicator_model=defaults.adjudicator_model, search_model=defaults.search_model,
-            timeout_seconds=defaults.timeout_seconds, reasoning_effort=defaults.reasoning_effort,
+            models=defaults.models,
+            verifier_model=defaults.verifier_model,
+            adjudicator_model=defaults.adjudicator_model,
+            search_model=defaults.search_model,
+            timeout_seconds=defaults.timeout_seconds,
+            reasoning_effort=defaults.reasoning_effort,
         )
     if data["llm"]["provider"] == "ollama":
         model = data["llm"]["models"][0] if local_model is None else local_model.strip()
         data["llm"].update(
-            models=[model], verifier_model=model, adjudicator_model=model,
-            ollama_base_url=data["llm"]["ollama_base_url"] if local_url is None else local_url.strip(), reasoning_effort=None,
+            models=[model],
+            verifier_model=model,
+            adjudicator_model=model,
+            ollama_base_url=data["llm"]["ollama_base_url"]
+            if local_url is None
+            else local_url.strip(),
+            reasoning_effort=None,
         )
         if context_tokens is not None:
             data["llm"]["ollama_num_ctx"] = context_tokens

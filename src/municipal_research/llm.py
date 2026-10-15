@@ -63,8 +63,11 @@ class Gateway:
                 "messages": messages,
                 "stream": False,
                 "format": schema.model_json_schema(),
-                "options": {"temperature": 0, "num_ctx": self.config.ollama_num_ctx,
-                            "num_predict": self.config.max_output_tokens},
+                "options": {
+                    "temperature": 0,
+                    "num_ctx": self.config.ollama_num_ctx,
+                    "num_predict": self.config.max_output_tokens,
+                },
             }
         if self.config.reasoning_effort and not local:
             request["reasoning"] = {"effort": self.config.reasoning_effort}
@@ -102,11 +105,13 @@ class Gateway:
                 if local:
                     if self.local_client is None:
                         self.local_client = httpx.Client(
-                            timeout=self.config.timeout_seconds, trust_env=False,
+                            timeout=self.config.timeout_seconds,
+                            trust_env=False,
                             transport=httpx.HTTPTransport(retries=self.config.max_retries),
                         )
                     response = self.local_client.post(
-                        self.config.ollama_base_url + "/api/chat", json=request,
+                        self.config.ollama_base_url + "/api/chat",
+                        json=request,
                         timeout=self.config.timeout_seconds,
                     )
                     response.raise_for_status()
@@ -144,14 +149,23 @@ class Gateway:
                     },
                 )
                 provider = "Ollama" if local else "OpenAI"
-                raise LLMError(f"{provider} call failed ({type(error).__name__}); see audit") from error
+                raise LLMError(
+                    f"{provider} call failed ({type(error).__name__}); see audit"
+                ) from error
         write_json(run_folder / "response.json", record)
         raw = record["response"]
         usage = raw.get("usage")
         status = raw.get("status")
         if local:
-            usage = {"input_tokens": raw.get("prompt_eval_count"), "output_tokens": raw.get("eval_count")}
-            status = "completed" if raw.get("done") is True and raw.get("done_reason") == "stop" else "incomplete"
+            usage = {
+                "input_tokens": raw.get("prompt_eval_count"),
+                "output_tokens": raw.get("eval_count"),
+            }
+            status = (
+                "completed"
+                if raw.get("done") is True and raw.get("done_reason") == "stop"
+                else "incomplete"
+            )
         self.audit.emit(
             "llm",
             provider="ollama" if local else "openai",
@@ -253,9 +267,13 @@ def check_ollama(config: LLM, *, client=None) -> None:
         models = response.json().get("models", [])
         names = {item.get("name") for item in models if isinstance(item, dict)}
         if config.models[0] not in names:
-            raise LLMError("Modellen saknas i Ollama. Hämta den med ollama pull och ange dess fullständiga namn, inklusive tagg.")
+            raise LLMError(
+                "Modellen saknas i Ollama. Hämta den med ollama pull och ange dess fullständiga namn, inklusive tagg."
+            )
     except (httpx.HTTPError, ValueError, AttributeError) as error:
-        raise LLMError("Det gick inte att nå Ollama på din dator. Starta Ollama och kontrollera serveradressen.") from error
+        raise LLMError(
+            "Det gick inte att nå Ollama på din dator. Starta Ollama och kontrollera serveradressen."
+        ) from error
     finally:
         if owned:
             client.close()
