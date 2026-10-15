@@ -1,6 +1,20 @@
 """PyInstaller entry point for the native desktop application."""
 
+import sys
+import traceback
+from pathlib import Path
+
 from municipal_research.desktop import main
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        code = main()
+    except Exception:
+        details = traceback.format_exc()
+        Path("desktop-error.log").write_text(details, encoding="utf-8")
+        if "--smoke-test" not in sys.argv and "--worker" not in sys.argv:
+            from tkinter import messagebox
+
+            messagebox.showerror("Kommunutredaren", details)
+        code = 1
+    raise SystemExit(code)

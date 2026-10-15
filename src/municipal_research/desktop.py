@@ -364,10 +364,15 @@ class Desktop:
     def poll(self):
         if self.process is not None:
             log = self.job / "worker.log"
-            if log.exists():
+            pipeline_log = self.run / "pipeline.log"
+            if log.exists() or pipeline_log.exists():
                 self.log.configure(state="normal")
                 self.log.delete("1.0", "end")
-                self.log.insert("end", log.read_text(encoding="utf-8", errors="replace")[-60000:])
+                content = ""
+                for path in (pipeline_log, log):
+                    if path.exists():
+                        content += path.read_text(encoding="utf-8", errors="replace")[-60000:]
+                self.log.insert("end", content[-60000:])
                 self.log.see("end")
                 self.log.configure(state="disabled")
             code = self.process.poll()

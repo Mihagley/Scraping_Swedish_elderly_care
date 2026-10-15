@@ -9,6 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,4 +37,7 @@ jobs:
         if: failure()
         with:
           name: desktop-diagnostics
-          path: dist/Kommunutredaren/smoke.log
+          path: |
+            dist/Kommunutredaren/smoke.log
+            dist/Kommunutredaren/desktop-error.log
+            desktop-error.log
