@@ -6,6 +6,7 @@ import httpx
 from openai import OpenAI
 from pydantic import BaseModel
 
+from .budget import BudgetExhausted, bounded_call
 from .config import LLM
 from .network import Pacer
 from .storage import Audit, canonical, digest, read_json, write_json
@@ -15,6 +16,20 @@ PROMPT_VERSION = "research-v1"
 
 class LLMError(RuntimeError):
     pass
+
+
+def model_exchange(local, endpoint, request, schema_json, schema_name, timeout):
+    # SDK retries are deliberately disabled: every actual call has a visible budget slot.
+    if local:
+        with httpx.Client(timeout=timeout, trust_env=False) as client:
+            response = client.post(endpoint + "/api/chat", json=request)
+            response.raise_for_status()
+            return response.json(), dict(response.headers)
+    with OpenAI(timeout=timeout, max_retries=0) as client:
+        if schema_json is not None:
+            request = {**request, "text": {"format": {"type": "json_schema", "name": schema_name, "strict": True, "schema": schema_json}}}
+        response = client.responses.with_raw_response.create(**request)
+        return response.http_response.json(), dict(response.headers)
 
 
 class Gateway:
@@ -35,12 +50,17 @@ class Gateway:
         refresh=False,
         client=None,
         local_client=None,
+        budget=None,
     ):
         self.config, self.cache, self.run, self.audit = config, cache, run, audit
         self.offline, self.refresh, self.client = offline, refresh, client
         self.local_client = local_client
         self.calls = 0
-        self.pacer = Pacer(config.interval_seconds)
+        self.organisation_calls = 0
+        self.budget = budget
+        self.local_calls = 0
+        self.paid_calls = 0
+        self.pacer = Pacer(config.interval_seconds, sleep=budget.wait if budget else __import__("time").sleep)
 
     def close(self):
         if self.client is not None:
@@ -49,6 +69,8 @@ class Gateway:
             self.local_client.close()
 
     def _call(self, role: str, model: str, messages: list[dict], schema=None, **extras):
+        if self.budget:
+            self.budget.check()
         local = schema is not None and self.config.provider == "ollama"
         request = {
             "model": model,
@@ -83,6 +105,12 @@ class Gateway:
         cache_file = self.cache / (key + ".json")
         run_folder = self.run / "llm" / key
         write_json(run_folder / "request.json", identity)
+        # UTF-8 bytes give a deliberately conservative token upper bound, not an
+        # exact tokenizer estimate. Reject overlarge inputs; never truncate sources.
+        input_bound = len(canonical({"messages": messages, "schema": identity["schema"]}).encode("utf-8"))
+        ceiling = min(self.config.input_tokens, self.config.ollama_num_ctx - self.config.max_output_tokens - 256) if local else self.config.input_tokens
+        if input_bound > ceiling:
+            raise LLMError(f"Input/context budget exceeded: upper bound {input_bound}, cap {ceiling}; source and prompt retained")
         cached = cache_file.exists() and (self.offline or not self.refresh)
         if cached:
             record = read_json(cache_file)
@@ -94,25 +122,33 @@ class Gateway:
             if self.offline:
                 raise LLMError("Offline LLM cache miss: " + key)
             if self.calls >= self.config.max_calls:
+                if self.budget:
+                    raise BudgetExhausted("model_call_limit", "run")
                 raise LLMError("Configured API call budget exhausted")
-            if not local and self.client is None:
-                self.client = OpenAI(
-                    timeout=self.config.timeout_seconds, max_retries=self.config.max_retries
-                )
+            if self.budget and self.organisation_calls >= self.config.max_calls_per_organisation:
+                raise BudgetExhausted("model_call_limit")
             self.pacer.wait("ollama" if local else "openai")
+            timeout = self.budget.timeout(self.config.timeout_seconds) if self.budget else self.config.timeout_seconds
+            if self.budget:
+                self.budget.request("local_model" if local else "paid_model")
             self.calls += 1
+            self.organisation_calls += 1
+            self.local_calls += int(local)
+            self.paid_calls += int(not local)
             try:
-                if local:
+                if (local and self.local_client is None) or (not local and self.client is None):
+                    raw, headers = bounded_call(model_exchange, (local, self.config.ollama_base_url, request, identity["schema"], schema.__name__ if schema else "response", timeout), timeout, check=self.budget.check if self.budget else None)
+                elif local:
                     if self.local_client is None:
                         self.local_client = httpx.Client(
                             timeout=self.config.timeout_seconds,
                             trust_env=False,
-                            transport=httpx.HTTPTransport(retries=self.config.max_retries),
+                            transport=httpx.HTTPTransport(retries=0),
                         )
                     response = self.local_client.post(
                         self.config.ollama_base_url + "/api/chat",
                         json=request,
-                        timeout=self.config.timeout_seconds,
+                        timeout=timeout,
                     )
                     response.raise_for_status()
                     raw = response.json()
@@ -120,16 +156,18 @@ class Gateway:
                         raise LLMError("Ollama returned a non-object response")
                     headers = response.headers
                 elif schema:
-                    response = self.client.responses.with_raw_response.parse(
+                    response = self.client.with_options(timeout=timeout, max_retries=0).responses.with_raw_response.parse(
                         **request, text_format=schema
                     )
                 else:
-                    response = self.client.responses.with_raw_response.create(**request)
+                    response = self.client.with_options(timeout=timeout, max_retries=0).responses.with_raw_response.create(**request)
                 # Preserve API JSON before parsing. This also keeps invalid structured
                 # outputs auditable and avoids reserializing SDK union/generic models.
-                if not local:
+                if not local and self.client is not None:
                     raw = response.http_response.json()
                     headers = response.headers
+                if self.budget:
+                    self.budget.check()
                 # Save refusals and incomplete responses too; never reinterpret them as negative findings.
                 record = {
                     "key": key,
@@ -139,7 +177,11 @@ class Gateway:
                     "request_id": headers.get("x-request-id"),
                 }
                 write_json(cache_file, record)
+            except BudgetExhausted:
+                raise
             except Exception as error:
+                if self.budget:
+                    self.budget.check()
                 self.audit.emit("llm_error", role=role, key=key, error=type(error).__name__)
                 write_json(
                     run_folder / "error.json",

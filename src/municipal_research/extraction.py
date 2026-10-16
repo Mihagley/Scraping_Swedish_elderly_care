@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import io
+import json
 import re
 import unicodedata
 from pathlib import Path
@@ -15,7 +16,7 @@ from .models import Chunk, Document, Page
 from .network import Download
 from .storage import atomic_bytes, digest, write_json
 
-EXTRACTOR_VERSION = "text-v2"
+EXTRACTOR_VERSION = "text-v3-bounded"
 
 
 def clean_text(value: str) -> str:
@@ -27,10 +28,11 @@ def clean_text(value: str) -> str:
 
 def extract(download: Download, municipality_id: str, run: Path, config: Extraction) -> Document:
     is_pdf = download.body.lstrip().startswith(b"%PDF-")
-    media = "pdf" if is_pdf else "html"
+    is_json = "json" in download.content_type.lower()
+    media = "pdf" if is_pdf else "json" if is_json else "html"
     identifier = digest(municipality_id + "\n" + download.url + "\n" + download.sha256)[:24]
     folder = run / "sources" / identifier
-    raw = folder / ("source.pdf" if is_pdf else "source.html")
+    raw = folder / ("source.pdf" if is_pdf else "source.json" if is_json else "source.html")
     # Preserve the received body even when decoding or extraction subsequently fails.
     atomic_bytes(raw, download.body)
     write_json(
@@ -51,7 +53,11 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             raise ValueError("Encrypted PDF cannot be extracted")
         title = str((reader.metadata or {}).get("/Title", "") or "")
         pieces, offset = [], 0
+        if len(reader.pages) > config.max_pdf_pages:
+            warnings.append("pdf_page_limit_recovery_not_attempted")
         for number, page in enumerate(reader.pages, 1):
+            if number > config.max_pdf_pages:
+                break
             try:
                 text = clean_text(page.extract_text() or "")
             except Exception as error:
@@ -59,11 +65,19 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
                 warnings.append(f"page_{number}_extraction_failed:{type(error).__name__}")
             if len(text) < config.min_page_chars:
                 warnings.append(f"page_{number}_sparse_or_scanned_needs_review")
+                warnings.append("ocr_unavailable_not_attempted")
             pages.append(Page(page=number, start=offset, end=offset + len(text)))
             pieces.append(text)
             offset += len(text) + 3
         text = "\n\f\n".join(pieces)
         extractor = "pypdf/" + EXTRACTOR_VERSION
+    elif is_json:
+        value = json.loads(download.body)
+        text = clean_text(json.dumps(value, ensure_ascii=False, indent=2))
+        title = "Offentlig datakälla"
+        pages = [Page(page=None, start=0, end=len(text))]
+        extractor = "json/" + EXTRACTOR_VERSION
+        warnings.append("public_endpoint_json_review_scope")
     else:
         if not (
             "html" in download.content_type.lower()
@@ -72,6 +86,13 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             raise ValueError("Unsupported content type: " + download.content_type)
         soup = BeautifulSoup(download.body, "html.parser")
         title = soup.title.get_text(" ", strip=True) if soup.title else ""
+        scripts = len(soup.find_all("script"))
+        visible = BeautifulSoup(download.body, "html.parser")
+        for element in visible(["script", "style", "noscript"]):
+            element.decompose()
+        visible_text = visible.get_text(" ", strip=True)
+        if scripts and (len(visible_text) < 200 or re.search(r"enable javascript|aktivera javascript|requires javascript", visible_text, re.I)):
+            warnings.extend(["javascript_only_suspected", "browser_rendering_unavailable_not_attempted"])
         error_title = re.match(
             r"^(?:404\b|page not found\b|sidan (?:saknas|finns inte|kunde inte hittas)\b)",
             title.strip(),
@@ -128,7 +149,7 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
 
 def chunk_document(document: Document, config: Extraction) -> tuple[list[Chunk], bool]:
     # Keep raw and extracted error pages for the audit, but do not send them to the LLM.
-    if "suspected_error_page_not_classified" in document.warnings:
+    if "suspected_error_page_not_classified" in document.warnings or "javascript_only_suspected" in document.warnings:
         return [], False
     chunks, start = [], 0
     while start < len(document.text) and len(chunks) < config.max_chunks_per_document:

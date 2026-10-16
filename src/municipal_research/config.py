@@ -48,10 +48,18 @@ class Discovery(StrictModel):
     queries: list[str] = Field(default_factory=list)
     keywords: list[str] = Field(default_factory=list)
     max_searches_per_municipality: int = Field(default=3, ge=0, le=50)
-    max_documents: int = Field(default=20, ge=1, le=10000)
+    max_documents: int = Field(default=5, ge=1, le=10000)
     max_depth: int = Field(default=2, ge=0, le=10)
     max_sitemaps: int = Field(default=8, ge=0, le=100)
     max_sitemap_urls: int = Field(default=10000, ge=1)
+
+
+class Limits(StrictModel):
+    run_requests: int = Field(default=500, ge=1, le=100000)
+    organisation_requests: int = Field(default=40, ge=1, le=10000)
+    run_seconds: float = Field(default=1800, gt=0, le=86400)
+    organisation_seconds: float = Field(default=180, gt=0, le=3600)
+    extraction_seconds: float = Field(default=20, gt=0, le=120)
 
 
 class Network(StrictModel):
@@ -65,6 +73,7 @@ class Network(StrictModel):
 
 
 class Extraction(StrictModel):
+    max_pdf_pages: int = Field(default=100, ge=1, le=2000)
     chunk_chars: int = Field(default=14000, ge=100)
     overlap_chars: int = Field(default=1500, ge=0)
     max_chunks_per_document: int = Field(default=100, ge=1)
@@ -78,6 +87,10 @@ class Extraction(StrictModel):
 
 
 class LLM(StrictModel):
+    max_calls_per_organisation: int = Field(default=20, ge=1)
+    analysis_mode: Literal["verified", "light"] = "verified"
+    adjudicate: bool = True
+    input_tokens: int = Field(default=24000, ge=256, le=200000)
     provider: Literal["openai", "ollama"] = "openai"
     ollama_base_url: str = "http://localhost:11434"
     ollama_num_ctx: int = Field(default=32768, ge=2048, le=262144)
@@ -130,6 +143,7 @@ class LLM(StrictModel):
 
 class Config(StrictModel):
     research: Research
+    limits: Limits = Field(default_factory=Limits)
     discovery: Discovery = Field(default_factory=Discovery)
     network: Network = Field(default_factory=Network)
     extraction: Extraction = Field(default_factory=Extraction)
@@ -143,6 +157,12 @@ class Municipality(StrictModel):
     name: str
     domains: list[str]
     seeds: list[str] = Field(default_factory=list)
+    portal_hosts: list[str] = Field(default_factory=list)
+    public_endpoints: list[str] = Field(default_factory=list)
+
+    @property
+    def allowed_domains(self):
+        return self.domains + self.portal_hosts
 
     @model_validator(mode="after")
     def validate_input(self):
@@ -150,7 +170,7 @@ class Municipality(StrictModel):
             raise ValueError("Location id must be a safe, unique ASCII identifier")
         if not self.domains:
             raise ValueError("At least one domain is required")
-        for domain in self.domains:
+        for domain in self.domains + self.portal_hosts:
             if not re.fullmatch(r"[a-zA-Z0-9.-]+", domain) or "." not in domain:
                 raise ValueError("Use plain hostnames, without schemes, ports or wildcards")
         self.domains = [x.lower().strip(".") for x in self.domains]
@@ -171,6 +191,8 @@ def load_municipalities(path: Path) -> list[Municipality]:
             kind=r.get("kind") or "kommun",
             domains=[v.strip() for v in r["domains"].split(";") if v.strip()],
             seeds=[v.strip() for v in r.get("seeds", "").split(";") if v.strip()],
+            portal_hosts=[v.strip() for v in (r.get("portal_hosts") or "").split(";") if v.strip()],
+            public_endpoints=[v.strip() for v in (r.get("public_endpoints") or "").split(";") if v.strip()],
         )
         for r in rows
     ]

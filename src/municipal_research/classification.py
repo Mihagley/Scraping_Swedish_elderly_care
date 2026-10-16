@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from .budget import BudgetExhausted
 from .config import Config, Municipality
 from .llm import Gateway
 from .models import Chunk, Decision, Document, Verdict, decision_schema
@@ -73,7 +74,8 @@ class Classifier:
             quotes, issues = verify_decision(decision, document, chunk, self.config.research)
             return [q.model_dump(mode="json") for q in quotes], issues
 
-        for index in range(settings.passes):
+        passes = 1 if settings.analysis_mode == "light" else settings.passes
+        for index in range(passes):
             role = f"classify_{index + 1}"
             try:
                 # Fresh, stateless requests: no previous pass's answer is included.
@@ -81,7 +83,7 @@ class Classifier:
                     role,
                     settings.models[index % len(settings.models)],
                     BASE_INSTRUCTIONS,
-                    {**payload, "independent_pass": index + 1},
+                    {**payload, "pass_number": index + 1},
                     self.schema,
                 )
                 quotes, issues = check(decision)
@@ -94,11 +96,13 @@ class Classifier:
                     }
                 )
                 candidates.append((decision, issues))
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append(role + ": " + str(error))
                 drafts.append({"stage": role, "error": str(error)})
         valid = [d for d, issues in candidates if not issues]
-        agree = len(valid) == settings.passes and len({signature(d) for d in valid}) == 1
+        agree = len(valid) == passes and len({signature(d) for d in valid}) == 1
 
         def review(decision: Decision, role: str):
             quotes, issues = check(decision)
@@ -119,24 +123,29 @@ class Classifier:
                     verdict.issues or ([] if verdict.supported else [verdict.explanation]),
                     quotes,
                 )
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append(role + ": " + str(error))
                 drafts.append({"stage": role, "error": str(error)})
                 return False, [str(error)], quotes
 
         selected, method, selected_quotes = None, "unresolved", []
-        if agree:
+        if settings.analysis_mode == "light" and valid:
+            selected, method = valid[0], "single_pass_mechanical_review_required"
+            selected_quotes, _ = check(selected)
+        if agree and settings.analysis_mode != "light":
             supported, issues, quotes = review(valid[0], "verify_consensus")
             if supported:
                 selected, method, selected_quotes = valid[0], "consensus_verified", quotes
-        if selected is None and candidates:
+        if selected is None and candidates and settings.adjudicate and settings.analysis_mode != "light":
             try:
                 decision = self.gateway.parse(
                     "adjudicate",
                     settings.adjudicator_model,
                     BASE_INSTRUCTIONS
                     + "\nResolve the candidates using the actual source. They can all be wrong. Correct unsupported details or return the unknown category. Do not count votes as evidence.",
-                    {**payload, "candidate_audit": drafts},
+                    {**payload, "candidate_audit": [{k: v for k, v in draft.items() if k in {"stage", "decision", "issues", "error"}} for draft in drafts]},
                     self.schema,
                 )
                 quotes, issues = check(decision)
@@ -151,6 +160,8 @@ class Classifier:
                 supported, issues, quotes = review(decision, "verify_adjudication")
                 if supported:
                     selected, method, selected_quotes = decision, "adjudicated_verified", quotes
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append("adjudicate: " + str(error))
                 drafts.append({"stage": "adjudicate", "error": str(error)})
@@ -172,7 +183,8 @@ class Classifier:
             "agreement": agree,
             "passes": drafts,
             "errors": failures,
-            "needs_review": method == "unresolved" or bool(failures),
+            "needs_review": settings.analysis_mode == "light" or method == "unresolved" or bool(failures),
+            "confirmation_note": "Repeated same-model passes are not independent confirmation.",
         }
         self.audit.emit(
             "classification",
