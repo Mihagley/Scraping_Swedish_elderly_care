@@ -47,6 +47,7 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
         },
     )
     warnings, pages = [], []
+    navigation_page = False
     if is_pdf:
         reader = PdfReader(io.BytesIO(download.body))
         if reader.is_encrypted and not reader.decrypt(""):
@@ -86,6 +87,7 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             raise ValueError("Unsupported content type: " + download.content_type)
         soup = BeautifulSoup(download.body, "html.parser")
         title = soup.title.get_text(" ", strip=True) if soup.title else ""
+        anchors = len(soup.select("a[href]"))
         scripts = len(soup.find_all("script"))
         visible = BeautifulSoup(download.body, "html.parser")
         for element in visible(["script", "style", "noscript"]):
@@ -116,6 +118,7 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             warnings.append("html_fallback_extractor_review_layout")
             extractor = "beautifulsoup/" + EXTRACTOR_VERSION
         text = clean_text(value)
+        navigation_page = bool(anchors and (urlsplit(download.url).path in {"", "/"} or len(text) < anchors * 60))
         if len(text) < config.min_page_chars:
             warnings.append("sparse_html_possible_javascript_or_empty_page")
         pages = [Page(page=None, start=0, end=len(text))]
@@ -137,6 +140,7 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
         text_path=text_path.relative_to(run).as_posix(),
         numbered_path=numbered.relative_to(run).as_posix(),
         media_type=media,
+        navigation_page=navigation_page,
         title=title,
         text=text,
         pages=pages,

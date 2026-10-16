@@ -1,5 +1,6 @@
 """PyInstaller entry point for the native desktop application."""
 
+import multiprocessing
 import sys
 import traceback
 from pathlib import Path
@@ -7,6 +8,7 @@ from pathlib import Path
 from municipal_research.desktop import main
 
 if __name__ == "__main__":
+    multiprocessing.freeze_support()
     try:
         code = main()
     except Exception:

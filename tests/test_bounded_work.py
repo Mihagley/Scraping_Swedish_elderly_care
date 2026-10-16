@@ -1,19 +1,18 @@
 """Bounded offline regressions; no live services, crawls or paid calls."""
 
 import time
-from pathlib import Path
 
 import httpx
 import pytest
 
 from municipal_research.budget import Budget, BudgetExhausted, bounded_call
 from municipal_research.classification import Classifier
-from municipal_research.config import Config, Discovery, Limits
+from municipal_research.config import Discovery, Limits
 from municipal_research.discovery import Discoverer
 from municipal_research.llm import Gateway, LLMError
 from municipal_research.network import Fetcher
 from municipal_research.pipeline import run_pipeline
-from municipal_research.storage import Audit, read_json
+from municipal_research.storage import read_json
 from test_classification import FakeGateway
 
 
@@ -145,3 +144,55 @@ def test_explicit_portal_hosts_only(municipality):
     municipality.portal_hosts = ["documents.example"]
     assert domain_allowed("https://documents.example/opaque.pdf", municipality.allowed_domains)
     assert not domain_allowed("https://untrusted.example/opaque.pdf", municipality.allowed_domains)
+
+
+def test_cancellation_interrupts_owned_operation(tmp_path):
+    marker = tmp_path / "cancel"
+    marker.touch()
+    budget = Budget(Limits(), cancel_file=marker)
+    with pytest.raises(BudgetExhausted, match="cancelled"):
+        bounded_call(hang, (), 10, check=budget.check)
+
+
+def test_sitemap_opaque_urls_are_candidates(config, municipality, tmp_path, audit):
+    config.discovery.provider = "crawl"
+    config.discovery.keywords = ["språkkrav"]
+    config.discovery.max_sitemaps = 1
+    config.discovery.max_documents = 1
+    config.network.retries = 0
+    def respond(request):
+        if request.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if request.url.path == "/sitemap.xml":
+            return httpx.Response(200, text="<urlset><url><loc>https://town.example/239238.pdf</loc></url></urlset>")
+        return httpx.Response(200, content=b"opaque bytes", headers={"content-type": "application/pdf"})
+    fetcher = Fetcher(config.network, tmp_path / "cache", audit, client=httpx.Client(transport=httpx.MockTransport(respond)), address_check=lambda url: None)
+    discovery = Discoverer(config, fetcher, None, audit)
+    assert list(discovery.documents(municipality))[0].url.endswith("239238.pdf")
+    assert discovery.attempted == 1
+
+
+def test_javascript_gap_is_not_classified(tmp_path):
+    from municipal_research.extraction import chunk_document, extract
+    from municipal_research.config import Extraction
+    from test_extraction_discovery import download
+    result = extract(download(b'<html><script src="/app.js"></script><body>Enable JavaScript</body></html>', "text/html"), "demo", tmp_path, Extraction())
+    assert "javascript_only_suspected" in result.warnings
+    assert chunk_document(result, Extraction()) == ([], False)
+    assert (tmp_path / result.raw_path).exists()
+
+
+def test_evaluation_packet_has_no_suggestions_or_reference_labels(config, tmp_path):
+    from municipal_research.demo import run_demo
+    from municipal_research.evaluation import prepare, run_comparison, score
+    source = tmp_path / "saved"
+    run_demo(config, source, tmp_path / "cache")
+    packet_path = tmp_path / "packet.json"
+    packet = prepare(source, packet_path, limit=2)
+    assert len(packet["items"]) == 2
+    assert "classifications" not in packet and "summary" not in packet
+    assert all("decision" not in item and "category" not in item for item in packet["items"])
+    report = run_comparison(packet_path, tmp_path / "rules", "rules", 2, 30)
+    assert report["calls"] == 0 and len(report["items"]) == 2
+    with pytest.raises(ValueError, match="Independent"):
+        score(packet_path, tmp_path / "rules/predictions.json", tmp_path / "packet.reference-template.json")

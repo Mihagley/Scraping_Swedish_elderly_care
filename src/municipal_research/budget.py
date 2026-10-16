@@ -94,12 +94,15 @@ class Budget:
 
     def wait(self, seconds):
         self.check()
-        if seconds >= self.remaining():
-            self.sleep(self.remaining())
+        limited = seconds >= self.remaining()
+        delay = min(seconds, self.remaining())
+        while delay > 0:
+            step = min(0.1, delay)
+            self.sleep(step)
+            delay -= step
             self.check()
+        if limited:
             raise BudgetExhausted("elapsed_time")
-        self.sleep(seconds)
-        self.check()
 
     def request(self, kind):
         self.check()

@@ -9,11 +9,35 @@ from xml.etree import ElementTree
 
 from bs4 import BeautifulSoup
 
-from .budget import BudgetExhausted
+from .budget import BudgetExhausted, bounded_call
 from .config import Config, Municipality
 from .llm import Gateway
 from .network import Fetcher, domain_allowed, normalize_url
 from .storage import Audit, write_json
+
+
+def html_links(body, limit):
+    soup = BeautifulSoup(body, "html.parser")
+    return [(node["href"], node.get_text(" ", strip=True)) for node in soup.select("a[href]")[:limit]]
+
+
+def sitemap_entries(body, max_bytes, limit):
+    if body.startswith(b"\x1f\x8b"):
+        with gzip.GzipFile(fileobj=io.BytesIO(body)) as compressed:
+            body = compressed.read(max_bytes + 1)
+    if len(body) > max_bytes:
+        raise ValueError("Decompressed sitemap too large")
+    if b"<!DOCTYPE" in body.upper() or b"<!ENTITY" in body.upper():
+        raise ValueError("XML entity declarations are not supported")
+    root = ElementTree.fromstring(body)
+    is_index = root.tag.rsplit("}", 1)[-1] == "sitemapindex"
+    values = []
+    for node in root.iter():
+        if node.tag.rsplit("}", 1)[-1] == "loc" and node.text:
+            values.append(node.text.strip())
+            if len(values) > limit:
+                break
+    return is_index, values
 
 
 class Discoverer:
@@ -27,6 +51,8 @@ class Discoverer:
         self.budget = getattr(fetcher, "budget", None)
         self.attempted = 0
         self.inflight = None
+        self.inflight_downloaded = False
+        self.replay_url = None
         self.restored = checkpoint is not None
         if checkpoint:
             self.queue = [tuple(row) for row in checkpoint["queue"]]
@@ -34,6 +60,8 @@ class Discoverer:
             self.sequence = checkpoint["sequence"]
             if checkpoint.get("inflight"):
                 heapq.heappush(self.queue, tuple(checkpoint["inflight"]))
+                if checkpoint.get("inflight_downloaded"):
+                    self.replay_url = checkpoint["inflight"][3]
 
     def matching_terms(self, value):
         value = unquote(value).casefold()
@@ -43,7 +71,7 @@ class Discoverer:
         return len(self.matching_terms(value))
 
     def checkpoint(self, municipality):
-        write_json(self.audit.path.parent / "checkpoints" / (municipality.id + ".json"), {"queue": self.queue, "seen": sorted(self.seen), "sequence": self.sequence, "inflight": self.inflight, "attempts_this_run": self.attempted})
+        write_json(self.audit.path.parent / "checkpoints" / (municipality.id + ".json"), {"queue": self.queue, "seen": sorted(self.seen), "sequence": self.sequence, "inflight": self.inflight, "inflight_downloaded": self.inflight_downloaded, "attempts_this_run": self.attempted})
 
     def event(self, **data):
         self.events.append(data)
@@ -59,6 +87,8 @@ class Discoverer:
         title: str = "",
         priority: int = 0,
     ):
+        if self.budget:
+            self.budget.check()
         try:
             url = normalize_url(url)
         except (ValueError, RuntimeError):
@@ -117,29 +147,24 @@ class Discoverer:
             visited.add(url)
             try:
                 download = self.fetcher.get(url, municipality.allowed_domains, kind="sitemap")
-                body = download.body
-                if body.startswith(b"\x1f\x8b"):
-                    with gzip.GzipFile(fileobj=io.BytesIO(body)) as compressed:
-                        body = compressed.read(self.config.network.max_bytes + 1)
-                if len(body) > self.config.network.max_bytes:
-                    raise ValueError("Decompressed sitemap too large")
-                if b"<!DOCTYPE" in body.upper() or b"<!ENTITY" in body.upper():
-                    raise ValueError("XML entity declarations are not supported")
-                root = ElementTree.fromstring(body)
-                is_index = root.tag.rsplit("}", 1)[-1] == "sitemapindex"
-                for node in root.iter():
-                    if node.tag.rsplit("}", 1)[-1] != "loc" or not node.text:
-                        continue
-                    location = node.text.strip()
+                arguments = (download.body, self.config.network.max_bytes, settings_limit := self.config.discovery.max_sitemap_urls)
+                if self.budget:
+                    is_index, values = bounded_call(sitemap_entries, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check)
+                else:
+                    is_index, values = sitemap_entries(*arguments)
+                for location in values:
+                    if self.budget:
+                        self.budget.check()
                     if is_index:
-                        pending.append(location)
+                        if len(pending) < settings_limit:
+                            pending.append(location)
                     else:
                         url_count += 1
-                        if url_count > self.config.discovery.max_sitemap_urls:
+                        if url_count > settings_limit:
                             self.gaps.append("sitemap_url_limit")
                             return
-                        # Include opaque URLs too; terms rank rather than filter them out.
                         self.add(municipality, location, "sitemap", parent=url, priority=int(location.lower().split("?")[0].endswith(".pdf")))
+                self.checkpoint(municipality)
             except BudgetExhausted:
                 raise
             except Exception as error:
@@ -203,12 +228,21 @@ class Discoverer:
             item = heapq.heappop(self.queue)
             _, depth, _, url = item
             self.inflight = item
+            self.inflight_downloaded = url == self.replay_url
             self.attempted += 1
             if self.budget:
                 self.budget.count("attempted_retrievals")
             self.checkpoint(municipality)
             try:
-                download = self.fetcher.get(url, municipality.allowed_domains)
+                old_offline = self.fetcher.offline
+                try:
+                    if url == self.replay_url:
+                        self.fetcher.offline = True
+                    download = self.fetcher.get(url, municipality.allowed_domains)
+                finally:
+                    self.fetcher.offline = old_offline
+                self.inflight_downloaded = True
+                self.checkpoint(municipality)
                 identity = (download.url, download.sha256)
                 if identity in delivered:
                     self.inflight = None
@@ -227,16 +261,11 @@ class Discoverer:
                     "hybrid",
                 }:
                     if depth < settings.max_depth:
-                        soup = BeautifulSoup(download.body, "html.parser")
-                        for anchor in soup.select("a[href]"):
-                            self.add(
-                                municipality,
-                                urljoin(download.url, anchor["href"]),
-                                "link",
-                                parent=download.url,
-                                depth=depth + 1,
-                                title=anchor.get_text(" ", strip=True),
-                            )
+                        arguments = (download.body, settings.max_sitemap_urls)
+                        links = bounded_call(html_links, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check) if self.budget else html_links(*arguments)
+                        for href, title in links:
+                            self.add(municipality, urljoin(download.url, href), "link", parent=download.url, depth=depth + 1, title=title)
+                        self.checkpoint(municipality)
                     else:
                         self.gaps.append("crawl_depth_limit")
                 if download.requested_url in municipality.public_endpoints and "json" in download.content_type.lower():

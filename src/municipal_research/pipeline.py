@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import shutil
-from bs4 import BeautifulSoup
 from pathlib import Path
 
 from . import __version__
@@ -128,6 +127,8 @@ def run_pipeline(
         if read_json(resume_from / "manifest.json")["collect_only"] != collect_only:
             raise ValueError("Resume must preserve collection/analysis mode")
         manifest_old = read_json(resume_from / "manifest.json")
+        if cache.resolve() != Path(manifest_old["cache_dir"]).resolve():
+            raise ValueError("Resume must use the original cache; use a separate fresh-source run to change sources")
         for name, expected in manifest_old.get("artifacts", {}).items():
             if digest((resume_from / name).read_bytes()) != expected:
                 raise ValueError("Resume source integrity check failed: " + name)
@@ -210,6 +211,7 @@ def run_pipeline(
                         source_id = digest(municipality.id + "\n" + download.url + "\n" + download.sha256)[:24]
                         source_path = run / "sources" / source_id / ("source.pdf" if download.body.lstrip().startswith(b"%PDF-") else "source.json" if "json" in download.content_type.lower() else "source.html")
                         atomic_bytes(source_path, download.body)
+                        write_json(source_path.parent / "download.json", {"url": download.url, "requested_url": download.requested_url, "sha256": download.sha256, "retrieved_at": download.retrieved_at, "content_type": download.content_type, "raw_path": str(source_path.relative_to(run))})
                         document = bounded_call(extract, (download, municipality.id, run, config.extraction), budget.timeout(config.limits.extraction_seconds), check=budget.check)
                         budget.check()
                         doc_meta = document.model_dump(mode="json", exclude={"text"})
@@ -217,8 +219,7 @@ def run_pipeline(
                         if document.id not in existing:
                             documents.append(doc_meta)
                             data["documents"].append(doc_meta)
-                        anchors = len(BeautifulSoup(download.body, "html.parser").select("a[href]")) if document.media_type == "html" else 0
-                        navigation = bool(anchors and (download.url.rstrip("/").split("://", 1)[-1].find("/") == -1 or len(document.text) < anchors * 60))
+                        navigation = document.navigation_page
                         if navigation:
                             budget.count("navigation_pages")
                         usable = len(document.text) >= config.extraction.min_page_chars and not any(x in document.warnings for x in ("suspected_error_page_not_classified", "javascript_only_suspected"))
