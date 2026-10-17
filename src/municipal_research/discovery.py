@@ -70,6 +70,8 @@ class Discoverer:
         self.attempted = 0
         self.inflight = None
         self.inflight_downloaded = False
+        self.inflight_sha256 = None
+        self.replay_sha256 = None
         self.replay_url = None
         self.restored = checkpoint is not None
         if checkpoint:
@@ -80,6 +82,7 @@ class Discoverer:
                 heapq.heappush(self.queue, tuple(checkpoint["inflight"]))
                 if checkpoint.get("inflight_downloaded"):
                     self.replay_url = checkpoint["inflight"][3]
+                    self.replay_sha256 = checkpoint.get("inflight_sha256")
 
     def matching_terms(self, value):
         value = unquote(value).casefold()
@@ -97,6 +100,7 @@ class Discoverer:
                 "sequence": self.sequence,
                 "inflight": self.inflight,
                 "inflight_downloaded": self.inflight_downloaded,
+                "inflight_sha256": self.inflight_sha256,
                 "attempts_this_run": self.attempted,
             },
         )
@@ -282,6 +286,7 @@ class Discoverer:
             _, depth, _, url = item
             self.inflight = item
             self.inflight_downloaded = url == self.replay_url
+            self.inflight_sha256 = self.replay_sha256 if url == self.replay_url else None
             self.attempted += 1
             if self.budget:
                 self.budget.count("attempted_retrievals")
@@ -294,7 +299,11 @@ class Discoverer:
                     download = self.fetcher.get(url, municipality.allowed_domains)
                 finally:
                     self.fetcher.offline = old_offline
+                if url == self.replay_url and self.replay_sha256:
+                    if download.sha256 != self.replay_sha256:
+                        raise ValueError("Resumed source hash changed; use a separate fresh-source run")
                 self.inflight_downloaded = True
+                self.inflight_sha256 = download.sha256
                 self.checkpoint(municipality)
                 identity = (download.url, download.sha256)
                 if identity in delivered:

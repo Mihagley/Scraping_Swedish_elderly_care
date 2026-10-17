@@ -2,7 +2,7 @@ name: Streamlit delivery
 on:
   push:
     branches: [codex/kommun-region-interface, main]
-    paths: ['scripts/build_streamlit_delivery.py', '.github/workflows/streamlit-delivery.yml']
+    paths: ['scripts/build_streamlit_delivery.py', '.github/workflows/streamlit-delivery.yml', 'src/**', 'streamlit_app.py', '.streamlit/**', 'examples/**', 'docs/**', '*.pdf', 'requirements*', 'pyproject.toml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,5 +20,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Utredningsstodet-Streamlit-budgetar
-          path: delivery/Utredningsstodet-Streamlit-budgetar.zip
+          path: delivery/Utredningsstodet/
           retention-days: 30

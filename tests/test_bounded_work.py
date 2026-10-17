@@ -328,3 +328,28 @@ def test_http_retries_and_redirects_share_request_cap(config, tmp_path, audit):
     with pytest.raises(BudgetExhausted, match="request_limit"):
         client.get("https://town.example/redirect", ["town.example"])
     assert len(calls) == 2 and budget.total["requests"] == 2
+
+
+def test_resume_rejects_replaced_cached_representation(config, municipality, audit):
+    from test_extraction_discovery import download
+
+    url = "https://town.example/doc"
+
+    class SavedFetcher:
+        offline = False
+
+        def get(self, requested, domains):
+            return download(b"new representation", "text/html")
+
+    checkpoint = {
+        "queue": [],
+        "seen": [url],
+        "sequence": 1,
+        "inflight": [-1, 0, 1, url],
+        "inflight_downloaded": True,
+        "inflight_sha256": "original-sha256",
+    }
+    discovery = Discoverer(config, SavedFetcher(), None, audit, checkpoint=checkpoint)
+    assert list(discovery.documents(municipality)) == []
+    assert "download_failed" in discovery.gaps
+    assert any("source hash changed" in event.get("error", "") for event in discovery.events)
