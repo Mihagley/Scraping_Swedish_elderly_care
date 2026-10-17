@@ -126,6 +126,7 @@ def run_demo(config: Config, run, cache, *, offline=False):
     ):
         raise ValueError("The synthetic demo requires the language-requirements example codebook")
     config = config.model_copy(deep=True)
+    config.llm.provider = "openai"  # The demo always uses its mocked SDK, never a local server.
     config.discovery.provider = "crawl"
     config.discovery.max_sitemaps = 0
     config.discovery.max_depth = 1

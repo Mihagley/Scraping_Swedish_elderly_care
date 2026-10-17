@@ -4,6 +4,7 @@ The module deliberately keeps missing documents and source coverage separate fro
 the language result. A missing attachment is not evidence that a tender had no
 Swedish requirement.
 """
+
 from __future__ import annotations
 
 import re
@@ -71,7 +72,9 @@ _USER_CONTEXT = re.compile(
     r"tolk\w*|minoritetsspråk\w*|modersmål\w*|finska|meänkieli|samiska|jiddisch|romani|"
     r"inte talar|inte behärskar|annat språk än svenska)\b"
 )
-_STAFF_CONTEXT = re.compile(r"\b(?:personal\w*|medarbetare\w*|anställd\w*|utförare\w*|den som utför)\b")
+_STAFF_CONTEXT = re.compile(
+    r"\b(?:personal\w*|medarbetare\w*|anställd\w*|utförare\w*|den som utför)\b"
+)
 
 
 def _sentence_bounds(text: str, start: int, end: int) -> tuple[int, int]:
@@ -82,7 +85,7 @@ def _sentence_bounds(text: str, start: int, end: int) -> tuple[int, int]:
 
 
 def _snippet(text: str, start: int, end: int) -> str:
-    return text[max(0, start - 100): min(len(text), end + 140)].strip()
+    return text[max(0, start - 100) : min(len(text), end + 140)].strip()
 
 
 def classify_language_requirement(text: str | None) -> LanguageFinding:
@@ -104,15 +107,21 @@ def classify_language_requirement(text: str | None) -> LanguageFinding:
             sentence = normalized[s_start:s_end]
             if _USER_CONTEXT.search(sentence) and not _STAFF_CONTEXT.search(sentence):
                 if downgraded is None:
-                    downgraded = LanguageFinding("language_related", _snippet(readable, match.start(), match.end()), "medium")
+                    downgraded = LanguageFinding(
+                        "language_related", _snippet(readable, match.start(), match.end()), "medium"
+                    )
                 continue
-            return LanguageFinding("explicit_requirement", _snippet(readable, match.start(), match.end()), "high")
+            return LanguageFinding(
+                "explicit_requirement", _snippet(readable, match.start(), match.end()), "high"
+            )
     if downgraded is not None:
         return downgraded
     for pattern in _RELATED:
         match = re.search(pattern, normalized)
         if match:
-            return LanguageFinding("language_related", _snippet(readable, match.start(), match.end()), "medium")
+            return LanguageFinding(
+                "language_related", _snippet(readable, match.start(), match.end()), "medium"
+            )
     return LanguageFinding("no_evidence", "", "high")
 
 
@@ -180,13 +189,18 @@ def aggregate_by_year(notices: Iterable[ProcurementNotice]) -> list[dict[str, An
         buckets.setdefault(notice.year, []).append(notice)
     result = []
     for year, rows in sorted(buckets.items(), key=lambda item: (item[0] is None, item[0] or 0)):
-        result.append({
-            "year": year,
-            "n_notices": len(rows),
-            "n_documents": sum(row.document_status == "available" for row in rows),
-            "n_explicit_swedish": sum(row.language_category == "explicit_requirement" for row in rows),
-            "n_language_related": sum(row.language_category == "language_related" for row in rows),
-            "coverage_statuses": sorted({row.coverage_status for row in rows}),
-        })
+        result.append(
+            {
+                "year": year,
+                "n_notices": len(rows),
+                "n_documents": sum(row.document_status == "available" for row in rows),
+                "n_explicit_swedish": sum(
+                    row.language_category == "explicit_requirement" for row in rows
+                ),
+                "n_language_related": sum(
+                    row.language_category == "language_related" for row in rows
+                ),
+                "coverage_statuses": sorted({row.coverage_status for row in rows}),
+            }
+        )
     return result
-

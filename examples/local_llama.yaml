@@ -1,0 +1,35 @@
+research:
+  question: Vilka uttryckliga språkkrav gäller för personal som är anställd av den
+    valda kommunen eller regionen?
+  instructions: Svara på svenska. Hänför varje fynd till den valda organisationen
+    och dess angivna ansvar. En region och en kommun är skilda arbetsgivare även om
+    de har samma namn. Skilj formella krav från allmänna förväntningar, förslag och
+    utbildning. Förutsätt inte att regionen ansvarar för kommunal äldreomsorg.
+  unknown_label: Oklart
+  labels:
+    Fynd:
+      definition: Källan besvarar uttryckligen utredningsfrågan för den valda organisationen.
+    Oklart:
+      definition: Det hämtade materialet ger inget belagt svar. Det bevisar inte att
+        en företeelse saknas.
+      requires_evidence: false
+      conclusive: false
+discovery:
+  provider: crawl
+  queries:
+  - '{location} {question}'
+  keywords:
+  - språkkrav
+  - språktest
+  - personal
+  max_documents: 5
+llm:
+  provider: ollama
+  ollama_base_url: http://localhost:11434
+  ollama_num_ctx: 32768
+  models:
+  - llama3.1:8b
+  verifier_model: llama3.1:8b
+  adjudicator_model: llama3.1:8b
+  timeout_seconds: 600
+  max_calls: 50

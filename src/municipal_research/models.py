@@ -58,6 +58,7 @@ class Document(StrictModel):
     text_path: str
     numbered_path: str
     media_type: str
+    navigation_page: bool = False
     title: str
     text: str
     pages: list[Page]

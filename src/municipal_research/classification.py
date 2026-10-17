@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from .budget import BudgetExhausted
 from .config import Config, Municipality
 from .llm import Gateway
 from .models import Chunk, Decision, Document, Verdict, decision_schema
@@ -59,7 +60,7 @@ class Classifier:
         settings = self.config.llm
         payload = {
             "research": self.config.research.model_dump(mode="json"),
-            "municipality": municipality.model_dump(),
+            "location": municipality.model_dump(),
             "source_url": document.url,
             "source_title": document.title,
             "chunk_id": chunk.id,
@@ -73,7 +74,8 @@ class Classifier:
             quotes, issues = verify_decision(decision, document, chunk, self.config.research)
             return [q.model_dump(mode="json") for q in quotes], issues
 
-        for index in range(settings.passes):
+        passes = 1 if settings.analysis_mode == "light" else settings.passes
+        for index in range(passes):
             role = f"classify_{index + 1}"
             try:
                 # Fresh, stateless requests: no previous pass's answer is included.
@@ -94,11 +96,13 @@ class Classifier:
                     }
                 )
                 candidates.append((decision, issues))
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append(role + ": " + str(error))
                 drafts.append({"stage": role, "error": str(error)})
         valid = [d for d, issues in candidates if not issues]
-        agree = len(valid) == settings.passes and len({signature(d) for d in valid}) == 1
+        agree = len(valid) == passes and len({signature(d) for d in valid}) == 1
 
         def review(decision: Decision, role: str):
             quotes, issues = check(decision)
@@ -109,7 +113,7 @@ class Classifier:
                     role,
                     settings.verifier_model,
                     BASE_INSTRUCTIONS
-                    + "\nVerify the proposed decision. Check that quotes entail EVERY substantive claim, municipality attribution, date, scope, category and attributes. Reject unsupported chronology and misleading excerpts. Quote existence alone does not imply support. Return supported=false for any substantive defect.",
+                    + "\nVerify the proposed decision. Check that quotes entail EVERY substantive claim, location attribution, date, scope, category and attributes. Reject unsupported chronology and misleading excerpts. Quote existence alone does not imply support. Return supported=false for any substantive defect.",
                     {**payload, "proposed_decision": decision.model_dump(mode="json")},
                     Verdict,
                 )
@@ -119,24 +123,44 @@ class Classifier:
                     verdict.issues or ([] if verdict.supported else [verdict.explanation]),
                     quotes,
                 )
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append(role + ": " + str(error))
                 drafts.append({"stage": role, "error": str(error)})
                 return False, [str(error)], quotes
 
         selected, method, selected_quotes = None, "unresolved", []
-        if agree:
+        if settings.analysis_mode == "light" and valid:
+            selected, method = valid[0], "single_pass_mechanical_review_required"
+            selected_quotes, _ = check(selected)
+        if agree and settings.analysis_mode != "light":
             supported, issues, quotes = review(valid[0], "verify_consensus")
             if supported:
                 selected, method, selected_quotes = valid[0], "consensus_verified", quotes
-        if selected is None and candidates:
+        if (
+            selected is None
+            and candidates
+            and settings.adjudicate
+            and settings.analysis_mode != "light"
+        ):
             try:
                 decision = self.gateway.parse(
                     "adjudicate",
                     settings.adjudicator_model,
                     BASE_INSTRUCTIONS
                     + "\nResolve the candidates using the actual source. They can all be wrong. Correct unsupported details or return the unknown category. Do not count votes as evidence.",
-                    {**payload, "candidate_audit": drafts},
+                    {
+                        **payload,
+                        "candidate_audit": [
+                            {
+                                k: v
+                                for k, v in draft.items()
+                                if k in {"stage", "decision", "issues", "error"}
+                            }
+                            for draft in drafts
+                        ],
+                    },
                     self.schema,
                 )
                 quotes, issues = check(decision)
@@ -151,6 +175,8 @@ class Classifier:
                 supported, issues, quotes = review(decision, "verify_adjudication")
                 if supported:
                     selected, method, selected_quotes = decision, "adjudicated_verified", quotes
+            except BudgetExhausted:
+                raise
             except Exception as error:
                 failures.append("adjudicate: " + str(error))
                 drafts.append({"stage": "adjudicate", "error": str(error)})
@@ -172,7 +198,10 @@ class Classifier:
             "agreement": agree,
             "passes": drafts,
             "errors": failures,
-            "needs_review": method == "unresolved" or bool(failures),
+            "needs_review": settings.analysis_mode == "light"
+            or method == "unresolved"
+            or bool(failures),
+            "confirmation_note": "Repeated same-model passes are not independent confirmation.",
         }
         self.audit.emit(
             "classification",

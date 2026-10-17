@@ -16,13 +16,21 @@ def main(argv=None) -> int:
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="Discover, download, classify, verify and export")
     run.add_argument("--config", type=Path, required=True)
-    run.add_argument("--municipalities", type=Path, required=True)
+    run.add_argument(
+        "--municipalities", "--locations", dest="municipalities", type=Path, required=True
+    )
     run.add_argument("--run-dir", type=Path, required=True)
     run.add_argument("--cache-dir", type=Path, default=Path("data/cache"))
     mode = run.add_mutually_exclusive_group()
     mode.add_argument("--offline", action="store_true")
     mode.add_argument("--refresh", action="store_true")
     run.add_argument("--collect-only", action="store_true")
+    run.add_argument(
+        "--resume-from",
+        type=Path,
+        help="Continue checkpoints in a NEW run directory with explicit new budgets",
+    )
+    run.add_argument("--cancel-file", type=Path, help="Stop cleanly when this file exists")
     run.add_argument("--limit", type=int, help="First N municipalities, for a small pilot")
     export = commands.add_parser("export", help="Rebuild Excel from an existing run")
     export.add_argument("run_dir", type=Path)
@@ -56,6 +64,8 @@ def main(argv=None) -> int:
                 offline=args.offline,
                 refresh=args.refresh,
                 collect_only=args.collect_only,
+                resume_from=args.resume_from,
+                cancel_file=args.cancel_file,
             )
             print(
                 json.dumps(
@@ -64,7 +74,13 @@ def main(argv=None) -> int:
                     indent=2,
                 )
             )
-            return 2 if data["errors"] or any(s["needs_review"] for s in data["summary"]) else 0
+            return (
+                2
+                if data["progress"]["stopping_reasons"]
+                or data["errors"]
+                or any(s["needs_review"] for s in data["summary"])
+                else 0
+            )
         if args.command == "export":
             if args.output.resolve().is_relative_to(args.run_dir.resolve()):
                 raise ValueError(

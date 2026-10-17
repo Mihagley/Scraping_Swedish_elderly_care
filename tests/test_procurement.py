@@ -19,11 +19,17 @@ def test_missing_document_is_not_no_evidence():
 
 
 def test_normalization_and_year_aggregation():
-    notice = normalize_notice({"publication-date": "2022-04-01", "publication-number": "X1", "municipality": "Test", "document_text": "Krav på svenska."}, source="uhm")
+    notice = normalize_notice(
+        {
+            "publication-date": "2022-04-01",
+            "publication-number": "X1",
+            "municipality": "Test",
+            "document_text": "Krav på svenska.",
+        },
+        source="uhm",
+    )
     assert notice.year == 2022
     assert aggregate_by_year([notice])[0]["n_explicit_swedish"] == 1
-
-
 
 
 @pytest.mark.parametrize(
@@ -66,7 +72,10 @@ def test_evidence_contains_match_despite_extra_whitespace():
 
 
 def test_unrelated_numbers_are_not_course_levels():
-    assert classify_language_requirement("Priset anges i svenska 2025 års kronor.").category == "no_evidence"
+    assert (
+        classify_language_requirement("Priset anges i svenska 2025 års kronor.").category
+        == "no_evidence"
+    )
 
 
 def test_elderly_care_filter():
