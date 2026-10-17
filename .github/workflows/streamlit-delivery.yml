@@ -21,4 +21,5 @@ jobs:
         with:
           name: Utredningsstodet-Streamlit-budgetar
           path: delivery/Utredningsstodet/
+          if-no-files-found: error
           retention-days: 30

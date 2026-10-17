@@ -158,6 +158,7 @@ def build():
                 continue
             zipped.write(path, "Utredningsstodet/" + str(relative))
     with zipfile.ZipFile(archive) as zipped:
+        zipped.extractall(destination)
         assert "Utredningsstodet/.streamlit/config.toml" in zipped.namelist()
         assert "Utredningsstodet/docs/budgetar-och-utvardering.pdf" in zipped.namelist()
         assert (
