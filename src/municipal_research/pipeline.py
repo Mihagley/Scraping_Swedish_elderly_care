@@ -66,7 +66,7 @@ def summarize(
         "chunks": len(records),
         "verified_quotes": sum(q["verified"] for r in records for q in r["quotes"]),
         "coverage": "bounded_with_gaps" if gaps else "bounded",
-        "finding_status": "evidence_found" if labels else "not_found_within_configured_limits",
+        "finding_status": "not_analysed" if collect_only else "evidence_found" if labels else "not_found_within_configured_limits",
         "gaps": sorted(set(gaps)),
         "source_urls": sorted({d["url"] for d in documents}),
         "effective_dates": sorted(
@@ -287,6 +287,9 @@ def run_pipeline(
                             "detail": event["error"],
                         }
                     )
+            if stopping is None and "candidate_attempt_limit" in discovery.gaps:
+                stopping = {"municipality_id": municipality.id, "scope": "organisation", "reason": "candidate_attempt_limit"}
+                data["progress"]["stopping_reasons"].append(stopping)
             gaps.extend(discovery.gaps)
             if not documents:
                 gaps.append("no_documents_retrieved")

@@ -58,6 +58,8 @@ class Gateway:
         self.calls = 0
         self.organisation_calls = 0
         self.budget = budget
+        if budget:
+            budget.model_caps = {"total": config.max_calls, "per_organisation": config.max_calls_per_organisation}
         self.local_calls = 0
         self.paid_calls = 0
         self.pacer = Pacer(config.interval_seconds, sleep=budget.wait if budget else __import__("time").sleep)
@@ -109,7 +111,8 @@ class Gateway:
         # exact tokenizer estimate. Reject overlarge inputs; never truncate sources.
         input_bound = len(canonical({"messages": messages, "schema": identity["schema"]}).encode("utf-8"))
         ceiling = min(self.config.input_tokens, self.config.ollama_num_ctx - self.config.max_output_tokens - 256) if local else self.config.input_tokens
-        if input_bound > ceiling:
+        if input_bound > ceiling and not (cache_file.exists() and (self.offline or not self.refresh)):
+            write_json(run_folder / "input_rejected.json", {"input_upper_bound": input_bound, "cap": ceiling})
             raise LLMError(f"Input/context budget exceeded: upper bound {input_bound}, cap {ceiling}; source and prompt retained")
         cached = cache_file.exists() and (self.offline or not self.refresh)
         if cached:
@@ -168,6 +171,8 @@ class Gateway:
                     headers = response.headers
                 if self.budget:
                     self.budget.check()
+                if not isinstance(raw, dict):
+                    raise LLMError("Model returned a non-object response")
                 # Save refusals and incomplete responses too; never reinterpret them as negative findings.
                 record = {
                     "key": key,

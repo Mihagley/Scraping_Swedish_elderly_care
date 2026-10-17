@@ -323,6 +323,11 @@ def live_form(running):
                 help="Försök, inte antal lyckade dokument. Navigationssidor och misslyckade kandidathämtningar ingår i samma tak. Robots, sitemaps, omförsök, omdirigeringar och AI-anrop ingår dessutom i de separata anropstaken.",
                 disabled=running,
             )
+            max_sitemaps = st.number_input("Högst sitemap-filer per organisation", 0, 100, base.discovery.max_sitemaps, disabled=running)
+            max_chunks = st.number_input("Högst textdelar per läsbar källa", 1, 1000, min(1000, base.extraction.max_chunks_per_document), disabled=running)
+            max_pdf_pages = st.number_input("Högst PDF-sidor per källa", 1, 2000, base.extraction.max_pdf_pages, disabled=running)
+            extraction_seconds = st.number_input("Sekunder per text-/länkextraktion", 1, 120, int(base.limits.extraction_seconds), disabled=running)
+            st.caption(f"HTTP: högst {base.network.retries} omförsök och {base.network.max_redirects} omdirigeringar per URL; högst {base.network.max_bytes} byte per svar. Alla verkliga försök ryms i anropstaken. Inget extra navigationsutrymme läggs till kandidattaket.")
             max_calls = st.number_input(
                 "Högst antal modellanrop under hela körningen",
                 1,
@@ -374,7 +379,9 @@ def live_form(running):
     upper_per_chunk = per_chunk + (2 if adjudicate and analysis_mode == "verified" and not collect_only else 0)
     scenario = len(selected) * int(max_documents) * per_chunk
     st.caption(f"Planeringsscenario: om varje kandidathämtning ger en textdel behövs {scenario} analysanrop ({per_chunk} per textdel). Verklig mängd beror på läsbarhet och textlängd; i flerpassetsläget kan högst {upper_per_chunk} anrop behövas per textdel. Webbsökning kan tillkomma men ryms i samma AI-tak.")
+    st.caption(f"Teknisk övregräns för analys före budgetstopp: {len(selected) * int(max_documents) * int(max_chunks) * upper_per_chunk} anrop, om alla kandidater gav {max_chunks} textdelar. Det valda AI-taket gäller alltid först.")
     st.caption(f"Hårda tak: {max_documents} kandidathämtningar/organisation; {run_requests} anrop och {run_seconds} sekunder totalt; {org_requests} anrop och {org_seconds} sekunder/organisation. AI: {max_calls} totalt, högst {org_calls}/organisation. Oanvänd budget flyttas inte automatiskt till en ny körning.")
+    st.caption(f"Organisationer behandlas i listordning. Första organisationen kan använda upp till {min(int(org_calls), int(max_calls))} AI-anrop; budgeten delas inte automatiskt lika. Sänk organisationstaket för att reservera fler anrop till senare organisationer.")
     st.caption("AI-analysen gör lokala Ollama-anrop." if ai_provider == "ollama" else "OpenAI-analysen använder betalda anrop.")
     if scenario > max_calls and not collect_only:
         st.warning("AI-taket räcker inte till planeringsscenariot. Delresultat sparas när taket nås. Minska urval/pass, välj lättläge eller ange ett nytt uttryckligt tak.")
@@ -433,7 +440,9 @@ def live_form(running):
                 local_timeout=local_timeout,
             )
             settings = config.model_dump(mode="json")
-            settings["limits"].update(run_requests=int(run_requests), organisation_requests=int(org_requests), run_seconds=int(run_seconds), organisation_seconds=int(org_seconds))
+            settings["limits"].update(run_requests=int(run_requests), organisation_requests=int(org_requests), run_seconds=int(run_seconds), organisation_seconds=int(org_seconds), extraction_seconds=int(extraction_seconds))
+            settings["extraction"].update(max_pdf_pages=int(max_pdf_pages), max_chunks_per_document=int(max_chunks))
+            settings["discovery"]["max_sitemaps"] = int(max_sitemaps)
             settings["llm"].update(analysis_mode=analysis_mode, passes=int(passes), adjudicate=adjudicate, max_calls_per_organisation=int(org_calls), input_tokens=int(input_tokens))
             config = Config.model_validate(settings)
             st.session_state.resume_source = None
@@ -459,6 +468,7 @@ def show_job():
     if budget_path.exists():
         budget_data = json.loads(budget_path.read_text(encoding="utf-8"))
         used = budget_data.get("used", {})
+        st.caption(f"Lokala modellanrop: {used.get('local_model_requests', 0)} · betalda modellanrop: {used.get('paid_model_requests', 0)} · AI-anrop kvar: {budget_data.get('remaining_model_calls', 0)}.")
         st.caption(f"Anrop: {used.get('requests', 0)} / {budget_data['limits']['run_requests']}; kvar {budget_data['remaining_requests']}. Senast registrerat tidsutrymme: {budget_data['remaining_seconds']} s. Organisation: {budget_data['organisation_id']}, {budget_data['organisation_remaining_requests']} anrop kvar.")
         st.caption(f"Kandidathämtningar {used.get('attempted_retrievals', 0)} · misslyckade {used.get('failed_downloads', 0)} · navigationssidor {used.get('navigation_pages', 0)} · läsbara underlag {used.get('usable_documents', 0)}. Navigation och läsbara underlag kan överlappa; läsbarhet är inte ett bevis för ett fynd.")
     st.write(st.session_state.submitted_summary)
@@ -527,7 +537,7 @@ def show_job():
     progress_path = job / "run/results.json"
     if code is not None and progress_path.exists():
         progress = json.loads(progress_path.read_text(encoding="utf-8")).get("progress", {})
-        translations = {"request_limit": "anropstaket nått", "model_call_limit": "AI-taket nått", "elapsed_time": "tidsgränsen nådd", "cancelled": "avbruten av användaren"}
+        translations = {"candidate_attempt_limit": "taket för kandidathämtningar nått", "request_limit": "anropstaket nått", "model_call_limit": "AI-taket nått", "elapsed_time": "tidsgränsen nådd", "cancelled": "avbruten av användaren"}
         for stop in progress.get("stopping_reasons", []):
             st.warning(f"{stop['municipality_id']}: {translations.get(stop['reason'], stop['reason'])} ({'hela körningen' if stop['scope'] == 'run' else 'organisationen'}). Delresultat har sparats.")
         st.caption("Inte påbörjade organisationer: " + (", ".join(progress.get("unprocessed_organisations", [])) or "inga"))
@@ -572,7 +582,10 @@ st.caption(
     "Hitta uppgifter på kommuners och regioners webbplatser, spara källorna och ladda ner resultaten."
 )
 if "job_root" not in st.session_state:
-    st.session_state.job_root = tempfile.mkdtemp(prefix="municipal-ui-")
+    local_data = Path(os.environ.get("LOCALAPPDATA", Path.home() / ".local" / "share")) / "Utredningsstodet" / "korningar"
+    local_data.mkdir(parents=True, exist_ok=True)
+    st.session_state.job_root = tempfile.mkdtemp(prefix="session-", dir=local_data)
+st.sidebar.caption("Körningsfiler sparas lokalt i: " + st.session_state.job_root)
 active = st.session_state.get("process")
 running = active is not None and active.poll() is None
 st.sidebar.title("Inställningar")

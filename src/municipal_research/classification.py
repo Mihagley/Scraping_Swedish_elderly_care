@@ -83,7 +83,7 @@ class Classifier:
                     role,
                     settings.models[index % len(settings.models)],
                     BASE_INSTRUCTIONS,
-                    {**payload, "pass_number": index + 1},
+                    {**payload, "independent_pass": index + 1},
                     self.schema,
                 )
                 quotes, issues = check(decision)

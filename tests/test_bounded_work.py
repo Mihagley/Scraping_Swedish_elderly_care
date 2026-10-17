@@ -196,3 +196,36 @@ def test_evaluation_packet_has_no_suggestions_or_reference_labels(config, tmp_pa
     assert report["calls"] == 0 and len(report["items"]) == 2
     with pytest.raises(ValueError, match="Independent"):
         score(packet_path, tmp_path / "rules/predictions.json", tmp_path / "packet.reference-template.json")
+
+
+def test_budget_exhaustion_is_not_swallowed_by_classifier(config, municipality, document, chunk, audit):
+    gateway = FakeGateway({"default": BudgetExhausted("model_call_limit", "run")})
+    with pytest.raises(BudgetExhausted, match="model_call_limit"):
+        Classifier(config, gateway, audit).classify(municipality, document, chunk)
+
+
+def test_same_host_title_and_anchor_terms_are_auditable(config, municipality, tmp_path, audit):
+    config.discovery.keywords = ["kunskaper i svenska"]
+    discovery = Discoverer(config, None, None, audit)
+    discovery.add(municipality, "https://town.example/123.pdf", "sitemap")
+    discovery.add(municipality, "https://town.example/123.pdf", "link", title="Kunskaper i svenska för personal")
+    assert discovery.queue[0][0] == -1
+    assert discovery.events[-1]["matched_terms"] == ["kunskaper i svenska"]
+    assert discovery.events[-1]["method"] == "link"
+
+
+def test_http_retries_and_redirects_share_request_cap(config, tmp_path, audit):
+    config.network.respect_robots = False
+    config.network.retries = 3
+    config.limits.run_requests = 2
+    budget = Budget(config.limits, sleep=lambda seconds: None)
+    calls = []
+    def respond(request):
+        calls.append(str(request.url))
+        if request.url.path == "/redirect":
+            return httpx.Response(302, headers={"location": "/retry"})
+        return httpx.Response(503, headers={"retry-after": "0"})
+    client = Fetcher(config.network, tmp_path / "cache", audit, client=httpx.Client(transport=httpx.MockTransport(respond)), address_check=lambda url: None, budget=budget)
+    with pytest.raises(BudgetExhausted, match="request_limit"):
+        client.get("https://town.example/redirect", ["town.example"])
+    assert len(calls) == 2 and budget.total["requests"] == 2

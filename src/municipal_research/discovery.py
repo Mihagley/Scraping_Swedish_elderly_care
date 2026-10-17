@@ -40,6 +40,20 @@ def sitemap_entries(body, max_bytes, limit):
     return is_index, values
 
 
+def public_json_links(body, limit):
+    pending, result, examined = [json.loads(body)], [], 0
+    while pending and examined < limit:
+        value = pending.pop()
+        examined += 1
+        if isinstance(value, dict):
+            pending.extend(list(value.values())[:limit])
+        elif isinstance(value, list):
+            pending.extend(value[:limit])
+        elif isinstance(value, str) and value.startswith(("http://", "https://")):
+            result.append(value)
+    return result
+
+
 class Discoverer:
     def __init__(self, config: Config, fetcher: Fetcher, gateway: Gateway, audit: Audit, *, checkpoint=None):
         self.config, self.fetcher, self.gateway, self.audit = config, fetcher, gateway, audit
@@ -269,17 +283,11 @@ class Discoverer:
                     else:
                         self.gaps.append("crawl_depth_limit")
                 if download.requested_url in municipality.public_endpoints and "json" in download.content_type.lower():
-                    payload = json.loads(download.body)
-                    pending_values, visited_values = [payload], 0
-                    while pending_values and visited_values < settings.max_sitemap_urls:
-                        value = pending_values.pop()
-                        visited_values += 1
-                        if isinstance(value, dict):
-                            pending_values.extend(list(value.values())[:settings.max_sitemap_urls])
-                        elif isinstance(value, list):
-                            pending_values.extend(value[:settings.max_sitemap_urls])
-                        elif isinstance(value, str) and value.startswith(("https://", "http://")):
-                            self.add(municipality, value, "configured_public_endpoint", parent=download.url, depth=depth + 1)
+                    arguments = (download.body, settings.max_sitemap_urls)
+                    links = bounded_call(public_json_links, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check) if self.budget else public_json_links(*arguments)
+                    for value in links:
+                        self.add(municipality, value, "configured_public_endpoint", parent=download.url, depth=depth + 1)
+                    self.checkpoint(municipality)
                 yield download
                 self.inflight = None
                 self.checkpoint(municipality)

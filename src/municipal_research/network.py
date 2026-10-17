@@ -3,7 +3,7 @@ from __future__ import annotations
 import ipaddress
 import socket
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
@@ -223,6 +223,10 @@ class Fetcher:
                     raise FetchError("304 without a verified cached representation")
                 cached.retrieved_at = utc_now()
                 cached.cache_hit = True
+                cached.etag = headers.get("etag", cached.etag)
+                cached.last_modified = headers.get("last-modified", cached.last_modified)
+                meta = {key: value for key, value in asdict(cached).items() if key not in {"body", "cache_hit"}}
+                write_json(self.cache / "urls" / (digest(original) + ".json"), meta)
                 self.audit.emit("fetch", url=original, final_url=cached.url, status=304, sha256=cached.sha256, cache_hit=True, revalidated=True)
                 return cached
             if status in {301, 302, 303, 307, 308}:

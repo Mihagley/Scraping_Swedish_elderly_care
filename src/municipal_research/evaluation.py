@@ -140,6 +140,8 @@ def score(packet_path, predictions_path, reference_path):
             fp += actual == category and expected != category
             fn += expected == category and actual != category
         metrics[category] = {"precision": tp / (tp + fp) if tp + fp else None, "recall": tp / (tp + fn) if tp + fn else None, "tp": tp, "fp": fp, "fn": fn}
+    if any(item["category"] not in packet["config"]["research"]["labels"] for item in gold.values()):
+        raise ValueError("Reference categories must belong to the codebook")
     relevant = set(reference.get("relevant_urls", []))
     retrieved = set(packet["retrieved_urls"])
     rows = predictions["items"]
@@ -149,7 +151,10 @@ def score(packet_path, predictions_path, reference_path):
     human_audit = reference.get("prediction_audits", {}).get(digest(predictions_path.read_bytes()))
     unsupported = None
     if human_audit and human_audit.get("reviewer") and human_audit.get("provenance"):
-        unsupported = sum(bool(item["unsupported_claim"]) for item in human_audit["items"])
+        audited = human_audit.get("items", [])
+        if {item.get("id") for item in audited} != set(predicted):
+            raise ValueError("Human unsupported-claim audit must cover every prediction")
+        unsupported = sum(bool(item["unsupported_claim"]) for item in audited)
     return {"classification_by_category": metrics, "retrieval_recall_within_human_reference_set": len(relevant & retrieved) / len(relevant) if relevant else None, "retrieval_reference_count": len(relevant), "retrieval_note": "Reference-set recall, not nationwide/web-wide recall; null without independently enumerated relevant URLs.", "date_scope_accuracy": checks, "unsupported_claims_human_audit": unsupported, "mechanical_quote_failures": mechanical_failures, "abstentions": sum(row["decision"]["category"] == unknown for row in rows), "unprocessed": predictions["unprocessed"], "runtime_seconds": predictions["runtime_seconds"], "calls": predictions["calls"], "local_calls": predictions["local_calls"], "paid_calls": predictions["paid_calls"], "validation_note": "Reference attestations are supplied by humans, not verified by software. Null unsupported-claim counts mean not human-audited, never zero."}
 
 

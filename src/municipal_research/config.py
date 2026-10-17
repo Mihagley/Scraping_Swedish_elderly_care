@@ -51,7 +51,7 @@ class Discovery(StrictModel):
     max_documents: int = Field(default=5, ge=1, le=10000)
     max_depth: int = Field(default=2, ge=0, le=10)
     max_sitemaps: int = Field(default=8, ge=0, le=100)
-    max_sitemap_urls: int = Field(default=10000, ge=1)
+    max_sitemap_urls: int = Field(default=10000, ge=1, le=100000)
 
 
 class Limits(StrictModel):
@@ -76,7 +76,7 @@ class Extraction(StrictModel):
     max_pdf_pages: int = Field(default=100, ge=1, le=2000)
     chunk_chars: int = Field(default=14000, ge=100)
     overlap_chars: int = Field(default=1500, ge=0)
-    max_chunks_per_document: int = Field(default=100, ge=1)
+    max_chunks_per_document: int = Field(default=100, ge=1, le=1000)
     min_page_chars: int = Field(default=30, ge=0)
 
     @model_validator(mode="after")
@@ -99,7 +99,7 @@ class LLM(StrictModel):
     verifier_model: str = "gpt-5-mini"
     adjudicator_model: str = "gpt-5-mini"
     passes: int = Field(default=3, ge=1, le=10)
-    max_output_tokens: int = Field(default=6000, ge=100)
+    max_output_tokens: int = Field(default=6000, ge=100, le=65536)
     timeout_seconds: float = Field(default=120, gt=0)
     max_retries: int = Field(default=3, ge=0, le=10)
     interval_seconds: float = Field(default=1, ge=0)
@@ -174,6 +174,7 @@ class Municipality(StrictModel):
             if not re.fullmatch(r"[a-zA-Z0-9.-]+", domain) or "." not in domain:
                 raise ValueError("Use plain hostnames, without schemes, ports or wildcards")
         self.domains = [x.lower().strip(".") for x in self.domains]
+        self.portal_hosts = [x.lower().strip(".") for x in self.portal_hosts]
         return self
 
 
