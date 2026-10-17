@@ -100,6 +100,59 @@ def summarize(
     }
 
 
+def copy_previous_sources(source, target):
+    for name in ("sources", "chunks", "units", "llm", "checkpoints"):
+        if (source / name).exists():
+            shutil.copytree(source / name, target / name)
+
+
+def finish_artifacts(run):
+    temporary = run / "results.pending.xlsx"
+    export_workbook(run, temporary)
+    temporary.replace(run / "results.xlsx")
+    return {
+        path.relative_to(run).as_posix(): digest(path.read_bytes())
+        for path in sorted(run.rglob("*"))
+        if path.is_file() and path.name not in {"manifest.json", "pipeline.log"}
+    }
+
+
+def load_previous(config, municipalities, resume_from, cache, collect_only):
+    previous = read_json(resume_from / "results.json")
+    old_config = Config.model_validate(previous["config"])
+
+    # A continuation may change explicit budgets, not the investigation/codebook.
+    def identity(value):
+        value = value.model_dump(mode="json")
+        value.pop("limits", None)
+        value["discovery"].pop("max_documents", None)
+        for key in ("max_calls", "max_calls_per_organisation", "timeout_seconds"):
+            value["llm"].pop(key, None)
+        return value
+
+    if identity(old_config) != identity(config) or read_json(
+        resume_from / "municipalities.json"
+    ) != [m.model_dump() for m in municipalities]:
+        raise ValueError(
+            "Resume must preserve sources, question, codebook and analysis settings; only budgets may change"
+        )
+    if read_json(resume_from / "manifest.json")["collect_only"] != collect_only:
+        raise ValueError("Resume must preserve collection/analysis mode")
+    manifest_old = read_json(resume_from / "manifest.json")
+    if cache.resolve() != Path(manifest_old["cache_dir"]).resolve():
+        raise ValueError(
+            "Resume must use the original cache; use a separate fresh-source run to change sources"
+        )
+    for name, expected in manifest_old.get("artifacts", {}).items():
+        if digest((resume_from / name).read_bytes()) != expected:
+            raise ValueError("Resume source integrity check failed: " + name)
+    for document in previous["documents"]:
+        for path_key, hash_key in (("raw_path", "raw_sha256"), ("text_path", "text_sha256")):
+            if digest((resume_from / document[path_key]).read_bytes()) != document[hash_key]:
+                raise ValueError("Resume partial-source integrity check failed")
+    return previous
+
+
 def run_pipeline(
     config: Config,
     municipalities: list[Municipality],
@@ -115,6 +168,7 @@ def run_pipeline(
     resume_from: Path | None = None,
     cancel_file: Path | None = None,
 ) -> dict:
+    budget = Budget(config.limits, cancel_file=cancel_file)
     if run.exists() and any(run.iterdir()):
         raise ValueError("Run directory is not empty; choose a new directory (cache is reusable)")
     if offline and refresh:
@@ -127,39 +181,20 @@ def run_pipeline(
             raise ValueError(
                 "Resume is separate from immutable offline replay and fresh-source refresh"
             )
-        previous = read_json(resume_from / "results.json")
-        old_config = Config.model_validate(previous["config"])
-
-        # A continuation may change explicit budgets, not the investigation/codebook.
-        def identity(value):
-            value = value.model_dump(mode="json")
-            value.pop("limits", None)
-            value["discovery"].pop("max_documents", None)
-            for key in ("max_calls", "max_calls_per_organisation", "timeout_seconds"):
-                value["llm"].pop(key, None)
-            return value
-
-        if identity(old_config) != identity(config) or read_json(
-            resume_from / "municipalities.json"
-        ) != [m.model_dump() for m in municipalities]:
-            raise ValueError(
-                "Resume must preserve sources, question, codebook and analysis settings; only budgets may change"
-            )
-        if read_json(resume_from / "manifest.json")["collect_only"] != collect_only:
-            raise ValueError("Resume must preserve collection/analysis mode")
-        manifest_old = read_json(resume_from / "manifest.json")
-        if cache.resolve() != Path(manifest_old["cache_dir"]).resolve():
-            raise ValueError(
-                "Resume must use the original cache; use a separate fresh-source run to change sources"
-            )
-        for name, expected in manifest_old.get("artifacts", {}).items():
-            if digest((resume_from / name).read_bytes()) != expected:
-                raise ValueError("Resume source integrity check failed: " + name)
+        previous = bounded_call(
+            load_previous,
+            (config, municipalities, resume_from, cache, collect_only),
+            budget.timeout(config.limits.run_seconds),
+            check=budget.check_run,
+        )
     run.mkdir(parents=True, exist_ok=True)
     if resume_from:
-        for name in ("sources", "chunks", "units", "llm", "checkpoints"):
-            if (resume_from / name).exists():
-                shutil.copytree(resume_from / name, run / name)
+        bounded_call(
+            copy_previous_sources,
+            (resume_from, run),
+            budget.timeout(config.limits.run_seconds),
+            check=budget.check_run,
+        )
 
     handler = logging.FileHandler(run / "pipeline.log", encoding="utf-8")
     logger = logging.getLogger("municipal_research")
@@ -185,7 +220,7 @@ def run_pipeline(
         "cache_dir": str(cache.resolve()),
     }
     write_json(run / "manifest.json", manifest)
-    budget = Budget(config.limits, audit=audit, cancel_file=cancel_file)
+    budget.audit = audit
     fetcher = (fetcher_factory or Fetcher)(
         config.network, cache / "http", audit, offline=offline, refresh=refresh, budget=budget
     )
@@ -407,13 +442,22 @@ def run_pipeline(
         data["budget"] = budget.snapshot()
         write_json(run / "results.json", data)
         write_json(run / "manifest.json", manifest)
-        export_workbook(run)
-        # Hash the durable run artifacts; the manifest excludes itself by definition.
-        manifest["artifacts"] = {
-            p.relative_to(run).as_posix(): digest(p.read_bytes())
-            for p in sorted(run.rglob("*"))
-            if p.is_file() and p.name not in {"manifest.json", "pipeline.log"}
-        }
+        remaining = max(0.0, config.limits.run_seconds - (budget.clock() - budget.started))
+        cancelled = bool(cancel_file and cancel_file.exists())
+        try:
+            if remaining <= 0 or cancelled:
+                raise TimeoutError("No finalisation time remains")
+            manifest["artifacts"] = bounded_call(
+                finish_artifacts, (run,), remaining, check=budget.check_run
+            )
+            manifest["finalisation"] = "completed_within_run_deadline"
+        except (TimeoutError, BudgetExhausted):
+            manifest["finalisation"] = "skipped_or_interrupted_at_run_deadline_or_cancellation"
+            manifest["status"] = "stopped_with_partial_results"
+            data["progress"]["stopping_reasons"].append(
+                {"municipality_id": "slutexport", "scope": "run", "reason": "finalisation_limit"}
+            )
+            write_json(run / "results.json", data)
         write_json(run / "manifest.json", manifest)
         return data
     except BaseException as error:

@@ -28,7 +28,7 @@ SECTIONS = [
     ),
     (
         "Även långsamma operationer har slut",
-        "Produktionens DNS/HTTP, modellbegäranden och text-/länkextraktion körs i ägda processer som kan avslutas vid deadline. HTTP: normalt 30 sekunder per begäran, högst 3 omförsök, 5 omdirigeringar och 25 MB per svar. Allt kläms till återstående budget. Dolda SDK-omförsök för modeller är avstängda. Textutvinning: normalt högst 20 sekunder och 100 PDF-sidor per källa. Sitemap-, textdels- och PDF-tak visas i avancerade inställningar. Slutlig lokal Excel-export och kontrollsummering tillkommer. En timeout garanterar inte att en redan accepterad leverantörsbegäran är kostnadsfri.",
+        "Produktionens DNS/HTTP, modellbegäranden och text-/länkextraktion körs i ägda processer som kan avslutas vid deadline. HTTP: normalt 30 sekunder per begäran, högst 3 omförsök, 5 omdirigeringar och 25 MB per svar. Allt kläms till återstående budget. Dolda SDK-omförsök för modeller är avstängda. Textutvinning: normalt högst 20 sekunder och 100 PDF-sidor per källa. Sitemap-, textdels- och PDF-tak visas i avancerade inställningar. Även slutexport och kontrollsummering måste rymmas i körningens återstående tid. Vid tidsgräns eller avbrott kan Excel/försegling hoppas över; JSON, råkällor och kontrollpunkter finns kvar. En separat uttrycklig CLI-export kan göras senare. En timeout garanterar inte att en redan accepterad leverantörsbegäran är kostnadsfri.",
     ),
     (
         "Tydliga räknare och delresultat",
@@ -158,7 +158,6 @@ def build():
                 continue
             zipped.write(path, "Utredningsstodet/" + str(relative))
     with zipfile.ZipFile(archive) as zipped:
-        zipped.extractall(destination)
         assert "Utredningsstodet/.streamlit/config.toml" in zipped.namelist()
         assert "Utredningsstodet/docs/budgetar-och-utvardering.pdf" in zipped.namelist()
         assert (

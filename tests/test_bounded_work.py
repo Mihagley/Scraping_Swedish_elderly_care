@@ -353,3 +353,32 @@ def test_resume_rejects_replaced_cached_representation(config, municipality, aud
     assert list(discovery.documents(municipality)) == []
     assert "download_failed" in discovery.gaps
     assert any("source hash changed" in event.get("error", "") for event in discovery.events)
+
+
+def test_elapsed_run_cap_preserves_json_without_unbounded_export(config, municipality, tmp_path):
+    config.limits.run_seconds = 0.000001
+    output = tmp_path / "deadline"
+    data = run_pipeline(config, [municipality], output, tmp_path / "cache", collect_only=True)
+    assert (output / "results.json").exists()
+    assert not (output / "results.xlsx").exists()
+    assert data["budget"]["used"].get("requests", 0) == 0
+    assert any(
+        stop["reason"] == "finalisation_limit"
+        for stop in data["progress"]["stopping_reasons"]
+    )
+    assert read_json(output / "manifest.json")["status"] == "stopped_with_partial_results"
+
+
+def test_finalisation_checks_whole_run_not_expired_organisation():
+    now = [0.0]
+    budget = Budget(
+        Limits(run_seconds=10, organisation_seconds=1), clock=lambda: now[0]
+    )
+    budget.begin("a")
+    now[0] = 2.0
+    with pytest.raises(BudgetExhausted, match="organisation:elapsed_time"):
+        budget.check()
+    budget.check_run()
+    now[0] = 11.0
+    with pytest.raises(BudgetExhausted, match="run:elapsed_time"):
+        budget.check_run()

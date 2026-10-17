@@ -669,6 +669,7 @@ def show_job():
         progress = json.loads(progress_path.read_text(encoding="utf-8")).get("progress", {})
         translations = {
             "candidate_attempt_limit": "taket för kandidathämtningar nått",
+            "finalisation_limit": "slutexport avbruten eller hoppad över vid tidsgräns/avbrott",
             "request_limit": "anropstaket nått",
             "model_call_limit": "AI-taket nått",
             "elapsed_time": "tidsgränsen nådd",

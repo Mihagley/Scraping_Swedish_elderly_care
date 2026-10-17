@@ -85,17 +85,23 @@ class Budget:
             0.0,
             min(
                 self.limits.run_seconds - (self.clock() - self.started),
-                self.limits.organisation_seconds - (self.clock() - self.org_started),
+                self.limits.organisation_seconds - (self.clock() - self.org_started)
+                if self.organisation is not None
+                else float("inf"),
             ),
         )
 
-    def check(self):
+    def check_run(self):
         if self.cancel_file and self.cancel_file.exists():
             raise BudgetExhausted("cancelled", "run")
         if self.clock() - self.started >= self.limits.run_seconds:
             raise BudgetExhausted("elapsed_time", "run")
-        if self.clock() - self.org_started >= self.limits.organisation_seconds:
-            raise BudgetExhausted("elapsed_time")
+
+    def check(self):
+        self.check_run()
+        if self.organisation is not None:
+            if self.clock() - self.org_started >= self.limits.organisation_seconds:
+                raise BudgetExhausted("elapsed_time")
 
     def timeout(self, configured):
         self.check()
