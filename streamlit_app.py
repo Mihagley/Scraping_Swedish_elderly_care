@@ -156,7 +156,15 @@ def live_form(running):
             disabled=running,
             help="Läggs till sökorden för rangordning. Höjer aldrig hämtningsgränsen. Inga språkvarianter läggs till automatiskt.",
         )
-        keywords = keywords + "," + variants
+        apply_variants = st.checkbox(
+            "Använd termvarianterna för denna fråga",
+            key="apply_variants_" + str(hash(question)),
+            disabled=running,
+        )
+        if apply_variants:
+            keywords = keywords + "," + variants
+    if apply_variants and variants.strip():
+        st.caption("Aktiva termvarianter för denna fråga: " + variants)
     st.caption(
         "Sökorden hjälper till att hitta relevanta sidor. Utredningsfrågan och kodboken styr hur innehållet bedöms."
     )
