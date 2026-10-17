@@ -143,7 +143,7 @@ def build():
         bottomMargin=40,
         title="Utredningsstödet – budgetar och utvärdering",
     ).build(flow)
-    for target in (root / "LAS_MIG.pdf", root / "docs/interface.pdf"):
+    for target in (root / "LAS_MIG.pdf", root / "docs/interface.pdf", root / "docs/lokal-ai.pdf"):
         target.write_bytes(guide.read_bytes())
     print("DELIVERY_PDF_BASE64:" + base64.b64encode(guide.read_bytes()).decode())
     destination = root / "delivery"

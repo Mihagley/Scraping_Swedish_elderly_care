@@ -257,9 +257,7 @@ def test_qwen_thinking_is_separate_from_final_json(tmp_path, audit, thinking):
 
 
 def test_qwen_thinking_cannot_replace_missing_final_message(tmp_path, audit):
-    response = envelope(
-        message={"role": "assistant", "thinking": json.dumps(GOOD), "content": ""}
-    )
+    response = envelope(message={"role": "assistant", "thinking": json.dumps(GOOD), "content": ""})
     instance = gateway(tmp_path, audit, lambda request: httpx.Response(200, json=response))
     with pytest.raises(LLMError, match="no structured output"):
         instance.parse("verify", MODEL, "System", {}, Verdict)

@@ -274,8 +274,11 @@ def live_form(running):
             default_preset = "Qwen3.5 9B"
             if base.llm.provider == "ollama":
                 default_preset = next(
-                    (name for name, item in LOCAL_MODEL_PRESETS.items()
-                     if item["model"] == base.llm.models[0]),
+                    (
+                        name
+                        for name, item in LOCAL_MODEL_PRESETS.items()
+                        if item["model"] == base.llm.models[0]
+                    ),
                     "Egen modell",
                 )
             preset_names = [*LOCAL_MODEL_PRESETS, "Egen modell"]
@@ -636,8 +639,12 @@ def live_form(running):
                 )
                 if preset_settings:
                     settings["extraction"].update(
-                        chunk_chars=min(base.extraction.chunk_chars, preset_settings["chunk_chars"]),
-                        overlap_chars=min(base.extraction.overlap_chars, preset_settings["overlap_chars"]),
+                        chunk_chars=min(
+                            base.extraction.chunk_chars, preset_settings["chunk_chars"]
+                        ),
+                        overlap_chars=min(
+                            base.extraction.overlap_chars, preset_settings["overlap_chars"]
+                        ),
                     )
             config = Config.model_validate(settings)
             st.session_state.resume_source = None
@@ -813,7 +820,10 @@ if "job_root" not in st.session_state:
     try:
         local_data.mkdir(parents=True, exist_ok=True)
     except OSError as error:
-        show_error("Packa upp appen i en skrivbar mapp. Inställningar, cache och resultat sparas tillsammans i appens data-mapp.", error)
+        show_error(
+            "Packa upp appen i en skrivbar mapp. Inställningar, cache och resultat sparas tillsammans i appens data-mapp.",
+            error,
+        )
         st.stop()
     st.session_state.job_root = tempfile.mkdtemp(prefix="session-", dir=local_data)
 st.sidebar.caption("Körningsfiler sparas lokalt i: " + st.session_state.job_root)
