@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import httpx
 import pytest
@@ -215,3 +216,82 @@ def test_demo_stays_mocked_when_given_local_config(config, tmp_path):
     config.llm = local_config()
     data = run_demo(config, tmp_path / "demo", tmp_path / "cache")
     assert not data["errors"]
+
+
+@pytest.mark.parametrize("thinking", [False, True, None])
+def test_qwen_thinking_is_separate_from_final_json(tmp_path, audit, thinking):
+    model = "qwen3.5:9b"
+    settings = local_config(
+        models=[model],
+        verifier_model=model,
+        adjudicator_model=model,
+        ollama_num_ctx=16384,
+        max_output_tokens=2000,
+        ollama_think=thinking,
+    )
+
+    def respond(request):
+        body = json.loads(request.content)
+        assert body["options"]["num_ctx"] == 16384
+        assert body["options"]["num_predict"] == 2000
+        if thinking is None:
+            assert "think" not in body
+        else:
+            assert body["think"] is thinking
+        return httpx.Response(
+            200,
+            json=envelope(
+                model=model,
+                message={
+                    "role": "assistant",
+                    "thinking": json.dumps({**GOOD, "supported": False}),
+                    "content": json.dumps(GOOD),
+                },
+            ),
+        )
+
+    instance = gateway(tmp_path, audit, respond, settings=settings)
+    assert instance.parse("verify", model, "System", {}, Verdict).supported
+    saved = read_json(next((tmp_path / "run/llm").glob("*/response.json")))
+    assert "thinking" in saved["response"]["message"]
+
+
+def test_qwen_thinking_cannot_replace_missing_final_message(tmp_path, audit):
+    response = envelope(
+        message={"role": "assistant", "thinking": json.dumps(GOOD), "content": ""}
+    )
+    instance = gateway(tmp_path, audit, lambda request: httpx.Response(200, json=response))
+    with pytest.raises(LLMError, match="no structured output"):
+        instance.parse("verify", MODEL, "System", {}, Verdict)
+
+
+def test_qwen_context_guard_prevents_oversized_local_call(tmp_path, audit):
+    settings = local_config(
+        ollama_num_ctx=16384,
+        max_output_tokens=2000,
+        input_tokens=200000,
+        ollama_think=False,
+    )
+    instance = gateway(
+        tmp_path,
+        audit,
+        lambda request: pytest.fail("Oversized request reached Ollama"),
+        settings=settings,
+    )
+    with pytest.raises(LLMError, match="context budget"):
+        instance.parse("verify", MODEL, "System", {"source": "漢" * 6000}, Verdict)
+    assert instance.calls == 0
+
+
+def test_qwen_example_preserves_small_candidate_and_call_caps():
+    from municipal_research.config import load_config
+
+    example = Path(__file__).parents[1] / "examples/local_qwen.yaml"
+    config = load_config(example)
+    assert config.llm.models == ["qwen3.5:9b"]
+    assert config.llm.ollama_num_ctx == 16384
+    assert config.llm.ollama_think is False
+    assert config.llm.max_output_tokens == 2000
+    assert config.llm.max_calls == 50
+    assert config.discovery.max_documents == 5
+    assert config.extraction.chunk_chars == 3000

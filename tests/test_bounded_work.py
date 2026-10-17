@@ -417,3 +417,22 @@ def test_cached_robots_policy_still_obeys_elapsed_budget(config, tmp_path, audit
     now[0] = 2.0
     with pytest.raises(BudgetExhausted, match="elapsed_time"):
         fetcher.robot_policy("https://town.example/", ["town.example"])
+
+
+def test_qwen_preset_uses_external_service_and_app_owned_state():
+    from pathlib import Path
+
+    from streamlit.testing.v1 import AppTest
+    from test_streamlit_app import APP
+
+    app = AppTest.from_file(str(APP), default_timeout=20).run()
+    app.radio[0].set_value("Verklig sökning").run()
+    provider = next(item for item in app.selectbox if item.label == "AI för klassificering")
+    provider.set_value("ollama").run()
+    model = next(item for item in app.text_input if item.label == "Lokal modell (inklusive tagg)")
+    context = next(item for item in app.number_input if item.label == "Kontextfönster (token)")
+    thinking = next(item for item in app.selectbox if item.label == "Tänkande i Ollama")
+    assert model.value == "qwen3.5:9b"
+    assert context.value == 16384 and thinking.value == "Av"
+    assert Path(app.session_state["job_root"]).is_relative_to(APP.parent / "data")
+    assert not app.exception

@@ -94,6 +94,7 @@ class LLM(StrictModel):
     provider: Literal["openai", "ollama"] = "openai"
     ollama_base_url: str = "http://localhost:11434"
     ollama_num_ctx: int = Field(default=32768, ge=2048, le=262144)
+    ollama_think: bool | None = None
     models: list[str] = Field(default_factory=lambda: ["gpt-5-mini"], min_length=1)
     search_model: str = "gpt-5-mini"
     verifier_model: str = "gpt-5-mini"

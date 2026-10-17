@@ -108,6 +108,8 @@ class Gateway:
                     "num_predict": self.config.max_output_tokens,
                 },
             }
+        if local and self.config.ollama_think is not None:
+            request["think"] = self.config.ollama_think
         if self.config.reasoning_effort and not local:
             request["reasoning"] = {"effort": self.config.reasoning_effort}
         identity = {

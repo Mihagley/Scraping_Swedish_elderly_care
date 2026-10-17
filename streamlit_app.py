@@ -16,7 +16,12 @@ import streamlit as st
 import yaml
 
 from municipal_research.config import LLM, Config, load_config
-from municipal_research.interface import configure, parse_locations, requires_openai
+from municipal_research.interface import (
+    LOCAL_MODEL_PRESETS,
+    configure,
+    parse_locations,
+    requires_openai,
+)
 from municipal_research.llm import check_ollama
 
 ROOT = Path(__file__).resolve().parent
@@ -260,39 +265,82 @@ def live_form(running):
         ).strip()
         local_model = local_url = None
         context_tokens = local_timeout = None
+        local_output = local_thinking = None
+        preset_settings = {}
         if ai_provider == "ollama":
             st.info(
                 "Textanalys och verifiering körs med din nedladdade modell i Ollama. Ingen OpenAI-nyckel behövs när sökmetoden är Genomsök webbplatser."
             )
+            default_preset = "Qwen3.5 9B"
+            if base.llm.provider == "ollama":
+                default_preset = next(
+                    (name for name, item in LOCAL_MODEL_PRESETS.items()
+                     if item["model"] == base.llm.models[0]),
+                    "Egen modell",
+                )
+            preset_names = [*LOCAL_MODEL_PRESETS, "Egen modell"]
+            preset_name = st.selectbox(
+                "Lokal modellpreset",
+                preset_names,
+                index=preset_names.index(default_preset),
+                disabled=running,
+            )
+            preset_settings = LOCAL_MODEL_PRESETS.get(preset_name, {})
             local_model = st.text_input(
                 "Lokal modell (inklusive tagg)",
-                value=base.llm.models[0] if base.llm.provider == "ollama" else "llama3.1:8b",
+                value=preset_settings.get(
+                    "model", base.llm.models[0] if base.llm.provider == "ollama" else "qwen3.5:9b"
+                ),
+                key="local_model_" + preset_name,
                 disabled=running,
             )
             local_url = st.text_input(
-                "Ollama-adress på din dator", base.llm.ollama_base_url, disabled=running
+                "Ollama-adress på din dator",
+                "http://127.0.0.1:11434" if preset_settings else base.llm.ollama_base_url,
+                key="local_url_" + preset_name,
+                disabled=running,
             )
             st.caption(
-                "Installera och starta Ollama. Hämta en lokal modell med exempelvis ollama pull llama3.1:8b. Välj inte en molnmodell."
+                "Appen ansluter till din befintliga Ollama-installation och laddar inte ned runtime eller modellvikter. Välj qwen3.5:9b när dess nedladdning i Ollama är klar."
             )
             with st.expander("Inställningar för lokal modell"):
                 context_tokens = st.number_input(
                     "Kontextfönster (token)",
                     2048,
                     262144,
-                    base.llm.ollama_num_ctx,
+                    preset_settings.get("context", base.llm.ollama_num_ctx),
                     step=1024,
+                    key="local_context_" + preset_name,
                     disabled=running,
                 )
+                local_output = st.number_input(
+                    "Högst svarstoken per anrop",
+                    100,
+                    65536,
+                    preset_settings.get("output", base.llm.max_output_tokens),
+                    key="local_output_" + preset_name,
+                    disabled=running,
+                )
+                thinking_labels = ["Av", "På", "Modellens standard"]
+                thinking_default = preset_settings.get("think", base.llm.ollama_think)
+                thinking = st.selectbox(
+                    "Tänkande i Ollama",
+                    thinking_labels,
+                    index=0 if thinking_default is False else 1 if thinking_default else 2,
+                    key="local_thinking_" + preset_name,
+                    disabled=running,
+                    help="Av skickar think=false. Bara det avslutade JSON-svaret i message.content valideras; message.thinking används aldrig som sakfynd.",
+                )
+                local_thinking = {"Av": False, "På": True, "Modellens standard": None}[thinking]
                 local_timeout = st.number_input(
                     "Väntetid per modellanrop (sekunder)",
                     30,
                     3600,
-                    int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 600,
+                    int(base.llm.timeout_seconds) if base.llm.provider == "ollama" else 120,
                     disabled=running,
                 )
                 st.caption(
-                    "Ett större kontextfönster kräver mer minne. Det måste rymma instruktioner, källtext och modellens svar. Kontrollera resultaten med din valda modell."
+                    "Qwen-preseten börjar med 16 384 kontexttoken, 2 000 svarstoken, tänkande av och kortare textdelar på högst 3 000 tecken. Det är en försiktig startpunkt för 32 GB RAM/8 GB VRAM, ingen garanti om GPU-minnesåtgång. Alla anrops- och tidsgränser gäller fortfarande."
                 )
             if st.button("Testa anslutning till Ollama", disabled=running):
                 try:
@@ -302,6 +350,9 @@ def live_form(running):
                         verifier_model=local_model.strip(),
                         adjudicator_model=local_model.strip(),
                         ollama_base_url=local_url.strip(),
+                        ollama_num_ctx=int(context_tokens),
+                        max_output_tokens=int(local_output),
+                        ollama_think=local_thinking,
                     )
                     check_ollama(settings)
                     st.success(
@@ -469,7 +520,9 @@ def live_form(running):
             "Högsta indata (konservativ tokenövregräns)",
             256,
             200000,
-            base.llm.input_tokens,
+            min(base.llm.input_tokens, 12000)
+            if preset_settings.get("model") == "qwen3.5:9b"
+            else base.llm.input_tokens,
             disabled=running,
         )
         st.caption(
@@ -556,6 +609,7 @@ def live_form(running):
                 local_url=local_url,
                 context_tokens=context_tokens,
                 local_timeout=local_timeout,
+                max_output_tokens=local_output if ai_provider == "ollama" else None,
             )
             settings = config.model_dump(mode="json")
             settings["limits"].update(
@@ -576,6 +630,15 @@ def live_form(running):
                 max_calls_per_organisation=int(org_calls),
                 input_tokens=int(input_tokens),
             )
+            if ai_provider == "ollama":
+                settings["llm"].update(
+                    max_output_tokens=int(local_output), ollama_think=local_thinking
+                )
+                if preset_settings:
+                    settings["extraction"].update(
+                        chunk_chars=min(base.extraction.chunk_chars, preset_settings["chunk_chars"]),
+                        overlap_chars=min(base.extraction.overlap_chars, preset_settings["overlap_chars"]),
+                    )
             config = Config.model_validate(settings)
             st.session_state.resume_source = None
             launch_job((config, [lookup[key] for key in selected], api_key.strip(), collect_only))
@@ -746,12 +809,12 @@ st.caption(
     "Hitta uppgifter på kommuners och regioners webbplatser, spara källorna och ladda ner resultaten."
 )
 if "job_root" not in st.session_state:
-    local_data = (
-        Path(os.environ.get("LOCALAPPDATA", Path.home() / ".local" / "share"))
-        / "Utredningsstodet"
-        / "korningar"
-    )
-    local_data.mkdir(parents=True, exist_ok=True)
+    local_data = ROOT / "data" / "utredningsstodet"
+    try:
+        local_data.mkdir(parents=True, exist_ok=True)
+    except OSError as error:
+        show_error("Packa upp appen i en skrivbar mapp. Inställningar, cache och resultat sparas tillsammans i appens data-mapp.", error)
+        st.stop()
     st.session_state.job_root = tempfile.mkdtemp(prefix="session-", dir=local_data)
 st.sidebar.caption("Körningsfiler sparas lokalt i: " + st.session_state.job_root)
 active = st.session_state.get("process")

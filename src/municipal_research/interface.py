@@ -9,6 +9,26 @@ from string import Formatter
 from .config import LLM, Config, Location
 
 
+LOCAL_MODEL_PRESETS = {
+    "Qwen3.5 9B": {
+        "model": "qwen3.5:9b",
+        "context": 16384,
+        "output": 2000,
+        "chunk_chars": 3000,
+        "overlap_chars": 300,
+        "think": False,
+    },
+    "Llama3.1 8B": {
+        "model": "llama3.1:8b",
+        "context": 32768,
+        "output": 6000,
+        "chunk_chars": 14000,
+        "overlap_chars": 1500,
+        "think": None,
+    },
+}
+
+
 def parse_locations(text: str) -> list[Location]:
     rows = csv.DictReader(io.StringIO(text.lstrip("\ufeff")))
     if not {"id", "name", "domains"} <= set(rows.fieldnames or []):
@@ -54,6 +74,7 @@ def configure(
     local_url: str | None = None,
     context_tokens: int | None = None,
     local_timeout: float | None = None,
+    max_output_tokens: int | None = None,
 ) -> Config:
     if not question.strip():
         raise ValueError("Ange en utredningsfråga.")
@@ -107,6 +128,8 @@ def configure(
             data["llm"]["ollama_num_ctx"] = context_tokens
         if local_timeout is not None:
             data["llm"]["timeout_seconds"] = local_timeout
+        if max_output_tokens is not None:
+            data["llm"]["max_output_tokens"] = max_output_tokens
     return Config.model_validate(data)
 
 

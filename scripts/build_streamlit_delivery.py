@@ -15,6 +15,18 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
 SECTIONS = [
     (
+        "Qwen3.5 9B i din befintliga Ollama",
+        "Den gamla Streamlit-kopian saknar Ollama-stöd. Packa upp HELA det uppdaterade paketet i en ny skrivbar mapp och kör dess start-interface.bat. Välj Verklig sökning, Lokal AI via Ollama och preset Qwen3.5 9B. Modell: qwen3.5:9b. Adress: http://127.0.0.1:11434. Vänta tills din pågående modellnedladdning i Ollama är klar och använd Testa anslutning. Paketet installerar ingen extra AI-runtime och kopierar inga modellvikter. Ollama får ligga i sin vanliga Windows-installation och använda sitt vanliga modellager.",
+    ),
+    (
+        "Qwen: försiktig start och kontrollerat slutsvar",
+        "Preseten börjar med 16 384 kontexttoken, högst 2 000 svarstoken, tänkande av (think=false) och textdelar på högst 3 000 tecken. Det är en startpunkt för 32 GB RAM/8 GB VRAM, inte en garanti om GPU-minnesåtgång. Kortare textdelar kan ge fler analysenheter men utökar aldrig dina anrops-/tidsbudgetar. Du kan välja På eller Modellens standard för tänkande. Endast det färdiga svaret i message.content läses som strikt JSON; message.thinking får aldrig ersätta slutsvaret. Ofullständiga, tomma eller felaktiga slutsvar underkänns. CLI-exempelkonfiguration finns i examples/local_qwen.yaml. Modellens faktiska hastighet och kvalitet behöver verifieras lokalt.",
+    ),
+    (
+        "Allt skraparägt tillstånd i appmappen",
+        "Nya inställningskopior, råkällor, resultat, cache och kontrollpunkter sparas tillsammans under appens data/utredningsstodet/. Ingen ny skrapardata läggs i LOCALAPPDATA. Välj därför en skrivbar appmapp; ingen tyst reservmapp används. Modellvikter och Ollama ligger kvar externt. Äldre resultat flyttas eller raderas inte automatiskt.",
+    ),
+    (
         "Utredningsstödet – avgränsad sökning",
         "Packa upp hela ZIP-filen. Windows: starta start-interface.bat. macOS/Linux: kör sh start-interface.sh. Python 3.11 eller senare behövs vid installation. Behåll terminalen öppen. Prova Demonstration innan en verklig sökning. Gränssnitt och skrapare körs på din dator.",
     ),
@@ -64,7 +76,7 @@ SECTIONS = [
     ),
     (
         "CLI för fortsättning",
-        "För andra nya budgetar: municipal-research run --config nya-budgetar.yaml --locations organisationer.csv --run-dir runs/fortsatt-01 --cache-dir data/cache --resume-from runs/avbruten-01 . Behåll samma fråga, kodbok, analysmetod och organisationslista samt originalets cache. Lägg till --collect-only om originalet enbart samlade källor. Källhashar kontrolleras; en pågående redan hämtad källa återspelas från cache. Streamlit visar run-sökvägen i sidopanelen; nya sessioner sparas beständigt under LOCALAPPDATA/Utredningsstodet/korningar på Windows.",
+        "För andra nya budgetar: municipal-research run --config nya-budgetar.yaml --locations organisationer.csv --run-dir runs/fortsatt-01 --cache-dir data/cache --resume-from runs/avbruten-01 . Behåll samma fråga, kodbok, analysmetod och organisationslista samt originalets cache. Lägg till --collect-only om originalet enbart samlade källor. Källhashar kontrolleras; en pågående redan hämtad källa återspelas från cache. Streamlit visar run-sökvägen i sidopanelen; nya sessioner sparas beständigt under appens data/utredningsstodet/.",
     ),
     (
         "Offline replay och färska källor är skilda val",
