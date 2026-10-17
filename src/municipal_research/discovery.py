@@ -301,7 +301,9 @@ class Discoverer:
                     self.fetcher.offline = old_offline
                 if url == self.replay_url and self.replay_sha256:
                     if download.sha256 != self.replay_sha256:
-                        raise ValueError("Resumed source hash changed; use a separate fresh-source run")
+                        raise ValueError(
+                            "Resumed source hash changed; use a separate fresh-source run"
+                        )
                 self.inflight_downloaded = True
                 self.inflight_sha256 = download.sha256
                 self.checkpoint(municipality)
