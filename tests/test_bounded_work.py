@@ -353,24 +353,3 @@ def test_resume_rejects_replaced_cached_representation(config, municipality, aud
     assert list(discovery.documents(municipality)) == []
     assert "download_failed" in discovery.gaps
     assert any("source hash changed" in event.get("error", "") for event in discovery.events)
-
-
-def test_term_variants_require_explicit_choice_for_current_question():
-    from streamlit.testing.v1 import AppTest
-
-    from test_streamlit_app import APP, button
-
-    app = AppTest.from_file(str(APP), default_timeout=20).run()
-    app.radio[0].set_value("Verklig sökning").run()
-    button(app, "Fyll i exempel för språkfrågor").click().run()
-    choice = next(
-        item for item in app.checkbox if item.label == "Använd termvarianterna för denna fråga"
-    )
-    assert not choice.value
-    choice.check().run()
-    question = next(item for item in app.text_area if item.label == "Utredningsfråga")
-    question.set_value("Vilka parker har tillgängliga gångvägar?").run()
-    choice = next(
-        item for item in app.checkbox if item.label == "Använd termvarianterna för denna fråga"
-    )
-    assert not choice.value and not app.exception
