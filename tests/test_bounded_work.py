@@ -399,3 +399,21 @@ def test_term_variants_require_explicit_choice_for_current_question():
         item for item in app.checkbox if item.label == "Använd termvarianterna för denna fråga"
     )
     assert not choice.value and not app.exception
+
+
+def test_cached_robots_policy_still_obeys_elapsed_budget(config, tmp_path, audit):
+    now = [0.0]
+    budget = Budget(Limits(organisation_seconds=1), clock=lambda: now[0])
+    budget.begin("a")
+    fetcher = Fetcher(
+        config.network,
+        tmp_path / "cache",
+        audit,
+        client=httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(404))),
+        address_check=lambda url: None,
+        budget=budget,
+    )
+    fetcher.robot_policy("https://town.example/", ["town.example"])
+    now[0] = 2.0
+    with pytest.raises(BudgetExhausted, match="elapsed_time"):
+        fetcher.robot_policy("https://town.example/", ["town.example"])

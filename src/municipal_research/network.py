@@ -157,6 +157,8 @@ class Fetcher:
         return Download(**meta, body=body, cache_hit=True)
 
     def _request(self, url: str, domains: list[str], *, robots=False) -> Download:
+        if self.budget:
+            self.budget.check()
         original = url = normalize_url(url)
         if not domain_allowed(url, domains):
             raise FetchError("URL is outside municipality domain allowlist")
@@ -289,6 +291,8 @@ class Fetcher:
         raise FetchError("Redirect limit reached")
 
     def robot_policy(self, url: str, domains: list[str]) -> RobotFileParser:
+        if self.budget:
+            self.budget.check()
         parsed = urlsplit(url)
         origin = f"{parsed.scheme}://{parsed.netloc}"
         if origin not in self.robots:
