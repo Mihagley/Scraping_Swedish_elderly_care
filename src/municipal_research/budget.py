@@ -62,7 +62,9 @@ def bounded_call(function, args, seconds: float, *, check=None):
 
 
 class Budget:
-    def __init__(self, limits, *, clock=time.monotonic, sleep=time.sleep, audit=None, cancel_file=None):
+    def __init__(
+        self, limits, *, clock=time.monotonic, sleep=time.sleep, audit=None, cancel_file=None
+    ):
         self.limits, self.clock, self.sleep, self.audit = limits, clock, sleep, audit
         self.cancel_file = cancel_file
         self.started = clock()
@@ -79,7 +81,13 @@ class Budget:
         self.publish()
 
     def remaining(self):
-        return max(0.0, min(self.limits.run_seconds - (self.clock() - self.started), self.limits.organisation_seconds - (self.clock() - self.org_started)))
+        return max(
+            0.0,
+            min(
+                self.limits.run_seconds - (self.clock() - self.started),
+                self.limits.organisation_seconds - (self.clock() - self.org_started),
+            ),
+        )
 
     def check(self):
         if self.cancel_file and self.cancel_file.exists():
@@ -120,7 +128,24 @@ class Budget:
         self.publish()
 
     def snapshot(self):
-        return {"model_caps": self.model_caps, "remaining_model_calls": max(0, self.model_caps.get("total", 0) - self.total["local_model_requests"] - self.total["paid_model_requests"]), "limits": self.limits.model_dump(), "used": dict(self.total), "organisation_used": dict(self.current), "organisation_id": self.organisation, "remaining_requests": max(0, self.limits.run_requests - self.total["requests"]), "organisation_remaining_requests": max(0, self.limits.organisation_requests - self.current["requests"]), "remaining_seconds": round(self.remaining(), 2)}
+        return {
+            "model_caps": self.model_caps,
+            "remaining_model_calls": max(
+                0,
+                self.model_caps.get("total", 0)
+                - self.total["local_model_requests"]
+                - self.total["paid_model_requests"],
+            ),
+            "limits": self.limits.model_dump(),
+            "used": dict(self.total),
+            "organisation_used": dict(self.current),
+            "organisation_id": self.organisation,
+            "remaining_requests": max(0, self.limits.run_requests - self.total["requests"]),
+            "organisation_remaining_requests": max(
+                0, self.limits.organisation_requests - self.current["requests"]
+            ),
+            "remaining_seconds": round(self.remaining(), 2),
+        }
 
     def publish(self):
         if self.audit:

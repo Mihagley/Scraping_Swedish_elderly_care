@@ -45,7 +45,15 @@ def write_locations(path: Path, locations) -> None:
     writer.writerow(["id", "name", "kind", "domains", "seeds", "portal_hosts", "public_endpoints"])
     for item in locations:
         writer.writerow(
-            [item.id, item.name, item.kind, ";".join(item.domains), ";".join(item.seeds), ";".join(item.portal_hosts), ";".join(item.public_endpoints)]
+            [
+                item.id,
+                item.name,
+                item.kind,
+                ";".join(item.domains),
+                ";".join(item.seeds),
+                ";".join(item.portal_hosts),
+                ";".join(item.public_endpoints),
+            ]
         )
     path.write_text(stream.getvalue(), encoding="utf-8")
 
@@ -176,7 +184,9 @@ class Desktop:
         ttk.Checkbutton(
             self.settings, text="Samla bara dokument – ingen AI-analys", variable=self.collect
         ).pack(anchor="w", pady=8)
-        self.documents = self.entry(self.settings, "Högsta antal hämtningsförsök per organisation", "5")
+        self.documents = self.entry(
+            self.settings, "Högsta antal hämtningsförsök per organisation", "5"
+        )
         self.calls = self.entry(self.settings, "Högsta antal AI-anrop totalt", "50")
         self.queries = self.entry(
             self.settings, "Sökfråga för webbsökning", "{location} {question}"

@@ -26,8 +26,12 @@ def parse_locations(text: str) -> list[Location]:
                 kind=row.get("kind") or "kommun",
                 domains=[x.strip() for x in row["domains"].split(";") if x.strip()],
                 seeds=[x.strip() for x in (row.get("seeds") or "").split(";") if x.strip()],
-                portal_hosts=[x.strip() for x in (row.get("portal_hosts") or "").split(";") if x.strip()],
-                public_endpoints=[x.strip() for x in (row.get("public_endpoints") or "").split(";") if x.strip()],
+                portal_hosts=[
+                    x.strip() for x in (row.get("portal_hosts") or "").split(";") if x.strip()
+                ],
+                public_endpoints=[
+                    x.strip() for x in (row.get("public_endpoints") or "").split(";") if x.strip()
+                ],
             )
         )
     if not locations or len({x.id for x in locations}) != len(locations):

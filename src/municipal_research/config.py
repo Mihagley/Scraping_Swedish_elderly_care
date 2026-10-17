@@ -193,7 +193,9 @@ def load_municipalities(path: Path) -> list[Municipality]:
             domains=[v.strip() for v in r["domains"].split(";") if v.strip()],
             seeds=[v.strip() for v in r.get("seeds", "").split(";") if v.strip()],
             portal_hosts=[v.strip() for v in (r.get("portal_hosts") or "").split(";") if v.strip()],
-            public_endpoints=[v.strip() for v in (r.get("public_endpoints") or "").split(";") if v.strip()],
+            public_endpoints=[
+                v.strip() for v in (r.get("public_endpoints") or "").split(";") if v.strip()
+            ],
         )
         for r in rows
     ]

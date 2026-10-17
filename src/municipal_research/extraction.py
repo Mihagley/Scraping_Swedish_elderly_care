@@ -93,8 +93,15 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
         for element in visible(["script", "style", "noscript"]):
             element.decompose()
         visible_text = visible.get_text(" ", strip=True)
-        if scripts and (len(visible_text) < 200 or re.search(r"enable javascript|aktivera javascript|requires javascript", visible_text, re.I)):
-            warnings.extend(["javascript_only_suspected", "browser_rendering_unavailable_not_attempted"])
+        if scripts and (
+            len(visible_text) < 200
+            or re.search(
+                r"enable javascript|aktivera javascript|requires javascript", visible_text, re.I
+            )
+        ):
+            warnings.extend(
+                ["javascript_only_suspected", "browser_rendering_unavailable_not_attempted"]
+            )
         error_title = re.match(
             r"^(?:404\b|page not found\b|sidan (?:saknas|finns inte|kunde inte hittas)\b)",
             title.strip(),
@@ -118,7 +125,9 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
             warnings.append("html_fallback_extractor_review_layout")
             extractor = "beautifulsoup/" + EXTRACTOR_VERSION
         text = clean_text(value)
-        navigation_page = bool(anchors and (urlsplit(download.url).path in {"", "/"} or len(text) < anchors * 60))
+        navigation_page = bool(
+            anchors and (urlsplit(download.url).path in {"", "/"} or len(text) < anchors * 60)
+        )
         if len(text) < config.min_page_chars:
             warnings.append("sparse_html_possible_javascript_or_empty_page")
         pages = [Page(page=None, start=0, end=len(text))]
@@ -153,7 +162,10 @@ def extract(download: Download, municipality_id: str, run: Path, config: Extract
 
 def chunk_document(document: Document, config: Extraction) -> tuple[list[Chunk], bool]:
     # Keep raw and extracted error pages for the audit, but do not send them to the LLM.
-    if "suspected_error_page_not_classified" in document.warnings or "javascript_only_suspected" in document.warnings:
+    if (
+        "suspected_error_page_not_classified" in document.warnings
+        or "javascript_only_suspected" in document.warnings
+    ):
         return [], False
     chunks, start = [], 0
     while start < len(document.text) and len(chunks) < config.max_chunks_per_document:

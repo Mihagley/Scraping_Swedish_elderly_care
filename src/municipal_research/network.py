@@ -90,7 +90,9 @@ class Download:
 def http_exchange(url, headers, timeout, max_bytes, user_agent):
     # DNS and transport are inside a killable worker, including trickling bodies.
     require_public_address(url)
-    with httpx.Client(timeout=timeout, follow_redirects=False, headers={"User-Agent": user_agent}) as client:
+    with httpx.Client(
+        timeout=timeout, follow_redirects=False, headers={"User-Agent": user_agent}
+    ) as client:
         return read_exchange(client, url, headers, timeout, max_bytes)
 
 
@@ -188,7 +190,11 @@ class Fetcher:
             for attempt in range(self.config.retries + 1):
                 self.pacer.wait(urlsplit(url).netloc, crawl_delay)
                 try:
-                    timeout = self.budget.timeout(self.config.timeout_seconds) if self.budget else self.config.timeout_seconds
+                    timeout = (
+                        self.budget.timeout(self.config.timeout_seconds)
+                        if self.budget
+                        else self.config.timeout_seconds
+                    )
                     headers_in = {}
                     if cached and url == cached.url:
                         if cached.etag:
@@ -198,9 +204,22 @@ class Fetcher:
                     if self.budget:
                         self.budget.request("robots" if robots else self._kind)
                     if self.injected:
-                        status, headers, body = read_exchange(self.client, url, headers_in, timeout, self.config.max_bytes)
+                        status, headers, body = read_exchange(
+                            self.client, url, headers_in, timeout, self.config.max_bytes
+                        )
                     else:
-                        status, headers, body = bounded_call(http_exchange, (url, headers_in, timeout, self.config.max_bytes, self.config.user_agent), timeout, check=self.budget.check if self.budget else None)
+                        status, headers, body = bounded_call(
+                            http_exchange,
+                            (
+                                url,
+                                headers_in,
+                                timeout,
+                                self.config.max_bytes,
+                                self.config.user_agent,
+                            ),
+                            timeout,
+                            check=self.budget.check if self.budget else None,
+                        )
                     if self.budget:
                         self.budget.check()
                     if status == 429 or status in {500, 502, 503, 504}:
@@ -225,9 +244,21 @@ class Fetcher:
                 cached.cache_hit = True
                 cached.etag = headers.get("etag", cached.etag)
                 cached.last_modified = headers.get("last-modified", cached.last_modified)
-                meta = {key: value for key, value in asdict(cached).items() if key not in {"body", "cache_hit"}}
+                meta = {
+                    key: value
+                    for key, value in asdict(cached).items()
+                    if key not in {"body", "cache_hit"}
+                }
                 write_json(self.cache / "urls" / (digest(original) + ".json"), meta)
-                self.audit.emit("fetch", url=original, final_url=cached.url, status=304, sha256=cached.sha256, cache_hit=True, revalidated=True)
+                self.audit.emit(
+                    "fetch",
+                    url=original,
+                    final_url=cached.url,
+                    status=304,
+                    sha256=cached.sha256,
+                    cache_hit=True,
+                    revalidated=True,
+                )
                 return cached
             if status in {301, 302, 303, 307, 308}:
                 if redirect == self.config.max_redirects or not headers.get("location"):

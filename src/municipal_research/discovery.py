@@ -18,7 +18,9 @@ from .storage import Audit, write_json
 
 def html_links(body, limit):
     soup = BeautifulSoup(body, "html.parser")
-    return [(node["href"], node.get_text(" ", strip=True)) for node in soup.select("a[href]")[:limit]]
+    return [
+        (node["href"], node.get_text(" ", strip=True)) for node in soup.select("a[href]")[:limit]
+    ]
 
 
 def sitemap_entries(body, max_bytes, limit):
@@ -55,7 +57,9 @@ def public_json_links(body, limit):
 
 
 class Discoverer:
-    def __init__(self, config: Config, fetcher: Fetcher, gateway: Gateway, audit: Audit, *, checkpoint=None):
+    def __init__(
+        self, config: Config, fetcher: Fetcher, gateway: Gateway, audit: Audit, *, checkpoint=None
+    ):
         self.config, self.fetcher, self.gateway, self.audit = config, fetcher, gateway, audit
         self.events: list[dict] = []
         self.gaps: list[str] = []
@@ -85,7 +89,17 @@ class Discoverer:
         return len(self.matching_terms(value))
 
     def checkpoint(self, municipality):
-        write_json(self.audit.path.parent / "checkpoints" / (municipality.id + ".json"), {"queue": self.queue, "seen": sorted(self.seen), "sequence": self.sequence, "inflight": self.inflight, "inflight_downloaded": self.inflight_downloaded, "attempts_this_run": self.attempted})
+        write_json(
+            self.audit.path.parent / "checkpoints" / (municipality.id + ".json"),
+            {
+                "queue": self.queue,
+                "seen": sorted(self.seen),
+                "sequence": self.sequence,
+                "inflight": self.inflight,
+                "inflight_downloaded": self.inflight_downloaded,
+                "attempts_this_run": self.attempted,
+            },
+        )
 
     def event(self, **data):
         self.events.append(data)
@@ -119,7 +133,15 @@ class Discoverer:
                 if item[3] == url and -score < item[0]:
                     self.queue[index] = (-score, item[1], item[2], url)
                     heapq.heapify(self.queue)
-                    self.event(municipality_id=municipality.id, url=url, method=method, parent=parent, title=title, matched_terms=self.matching_terms(title + " " + url), outcome="rank_updated")
+                    self.event(
+                        municipality_id=municipality.id,
+                        url=url,
+                        method=method,
+                        parent=parent,
+                        title=title,
+                        matched_terms=self.matching_terms(title + " " + url),
+                        outcome="rank_updated",
+                    )
                     break
             return
         self.seen.add(url)
@@ -141,7 +163,9 @@ class Discoverer:
         pending = [f"https://{d}/sitemap.xml" for d in municipality.allowed_domains]
         for domain in municipality.domains:
             try:
-                robots = self.fetcher.robot_policy(f"https://{domain}/", municipality.allowed_domains)
+                robots = self.fetcher.robot_policy(
+                    f"https://{domain}/", municipality.allowed_domains
+                )
                 pending.extend(robots.site_maps() or [])
             except BudgetExhausted:
                 raise
@@ -161,9 +185,18 @@ class Discoverer:
             visited.add(url)
             try:
                 download = self.fetcher.get(url, municipality.allowed_domains, kind="sitemap")
-                arguments = (download.body, self.config.network.max_bytes, settings_limit := self.config.discovery.max_sitemap_urls)
+                arguments = (
+                    download.body,
+                    self.config.network.max_bytes,
+                    settings_limit := self.config.discovery.max_sitemap_urls,
+                )
                 if self.budget:
-                    is_index, values = bounded_call(sitemap_entries, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check)
+                    is_index, values = bounded_call(
+                        sitemap_entries,
+                        arguments,
+                        self.budget.timeout(self.config.limits.extraction_seconds),
+                        check=self.budget.check,
+                    )
                 else:
                     is_index, values = sitemap_entries(*arguments)
                 for location in values:
@@ -177,7 +210,13 @@ class Discoverer:
                         if url_count > settings_limit:
                             self.gaps.append("sitemap_url_limit")
                             return
-                        self.add(municipality, location, "sitemap", parent=url, priority=int(location.lower().split("?")[0].endswith(".pdf")))
+                        self.add(
+                            municipality,
+                            location,
+                            "sitemap",
+                            parent=url,
+                            priority=int(location.lower().split("?")[0].endswith(".pdf")),
+                        )
                 self.checkpoint(municipality)
             except BudgetExhausted:
                 raise
@@ -276,17 +315,51 @@ class Discoverer:
                 }:
                     if depth < settings.max_depth:
                         arguments = (download.body, settings.max_sitemap_urls)
-                        links = bounded_call(html_links, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check) if self.budget else html_links(*arguments)
+                        links = (
+                            bounded_call(
+                                html_links,
+                                arguments,
+                                self.budget.timeout(self.config.limits.extraction_seconds),
+                                check=self.budget.check,
+                            )
+                            if self.budget
+                            else html_links(*arguments)
+                        )
                         for href, title in links:
-                            self.add(municipality, urljoin(download.url, href), "link", parent=download.url, depth=depth + 1, title=title)
+                            self.add(
+                                municipality,
+                                urljoin(download.url, href),
+                                "link",
+                                parent=download.url,
+                                depth=depth + 1,
+                                title=title,
+                            )
                         self.checkpoint(municipality)
                     else:
                         self.gaps.append("crawl_depth_limit")
-                if download.requested_url in municipality.public_endpoints and "json" in download.content_type.lower():
+                if (
+                    download.requested_url in municipality.public_endpoints
+                    and "json" in download.content_type.lower()
+                ):
                     arguments = (download.body, settings.max_sitemap_urls)
-                    links = bounded_call(public_json_links, arguments, self.budget.timeout(self.config.limits.extraction_seconds), check=self.budget.check) if self.budget else public_json_links(*arguments)
+                    links = (
+                        bounded_call(
+                            public_json_links,
+                            arguments,
+                            self.budget.timeout(self.config.limits.extraction_seconds),
+                            check=self.budget.check,
+                        )
+                        if self.budget
+                        else public_json_links(*arguments)
+                    )
                     for value in links:
-                        self.add(municipality, value, "configured_public_endpoint", parent=download.url, depth=depth + 1)
+                        self.add(
+                            municipality,
+                            value,
+                            "configured_public_endpoint",
+                            parent=download.url,
+                            depth=depth + 1,
+                        )
                     self.checkpoint(municipality)
                 yield download
                 self.inflight = None

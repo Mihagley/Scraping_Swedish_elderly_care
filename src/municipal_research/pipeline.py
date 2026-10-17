@@ -13,7 +13,16 @@ from .export import export_workbook
 from .extraction import chunk_document, extract
 from .llm import Gateway
 from .network import Fetcher
-from .storage import Audit, atomic_bytes, canonical, digest, environment, read_json, utc_now, write_json
+from .storage import (
+    Audit,
+    atomic_bytes,
+    canonical,
+    digest,
+    environment,
+    read_json,
+    utc_now,
+    write_json,
+)
 
 
 def summarize(
@@ -66,7 +75,11 @@ def summarize(
         "chunks": len(records),
         "verified_quotes": sum(q["verified"] for r in records for q in r["quotes"]),
         "coverage": "bounded_with_gaps" if gaps else "bounded",
-        "finding_status": "not_analysed" if collect_only else "evidence_found" if labels else "not_found_within_configured_limits",
+        "finding_status": "not_analysed"
+        if collect_only
+        else "evidence_found"
+        if labels
+        else "not_found_within_configured_limits",
         "gaps": sorted(set(gaps)),
         "source_urls": sorted({d["url"] for d in documents}),
         "effective_dates": sorted(
@@ -111,9 +124,12 @@ def run_pipeline(
     previous = None
     if resume_from:
         if offline or refresh:
-            raise ValueError("Resume is separate from immutable offline replay and fresh-source refresh")
+            raise ValueError(
+                "Resume is separate from immutable offline replay and fresh-source refresh"
+            )
         previous = read_json(resume_from / "results.json")
         old_config = Config.model_validate(previous["config"])
+
         # A continuation may change explicit budgets, not the investigation/codebook.
         def identity(value):
             value = value.model_dump(mode="json")
@@ -122,13 +138,20 @@ def run_pipeline(
             for key in ("max_calls", "max_calls_per_organisation", "timeout_seconds"):
                 value["llm"].pop(key, None)
             return value
-        if identity(old_config) != identity(config) or read_json(resume_from / "municipalities.json") != [m.model_dump() for m in municipalities]:
-            raise ValueError("Resume must preserve sources, question, codebook and analysis settings; only budgets may change")
+
+        if identity(old_config) != identity(config) or read_json(
+            resume_from / "municipalities.json"
+        ) != [m.model_dump() for m in municipalities]:
+            raise ValueError(
+                "Resume must preserve sources, question, codebook and analysis settings; only budgets may change"
+            )
         if read_json(resume_from / "manifest.json")["collect_only"] != collect_only:
             raise ValueError("Resume must preserve collection/analysis mode")
         manifest_old = read_json(resume_from / "manifest.json")
         if cache.resolve() != Path(manifest_old["cache_dir"]).resolve():
-            raise ValueError("Resume must use the original cache; use a separate fresh-source run to change sources")
+            raise ValueError(
+                "Resume must use the original cache; use a separate fresh-source run to change sources"
+            )
         for name, expected in manifest_old.get("artifacts", {}).items():
             if digest((resume_from / name).read_bytes()) != expected:
                 raise ValueError("Resume source integrity check failed: " + name)
@@ -183,7 +206,13 @@ def run_pipeline(
             data[key] = previous[key]
         manifest["resume_from"] = str(resume_from.resolve())
         manifest["parent_manifest_sha256"] = digest((resume_from / "manifest.json").read_bytes())
-    data["progress"] = {"stopping_reasons": [], "unprocessed_organisations": [m.id for m in municipalities], "completed_organisations": [], "incomplete_organisations": [], "resumed_from": str(resume_from) if resume_from else None}
+    data["progress"] = {
+        "stopping_reasons": [],
+        "unprocessed_organisations": [m.id for m in municipalities],
+        "completed_organisations": [],
+        "incomplete_organisations": [],
+        "resumed_from": str(resume_from) if resume_from else None,
+    }
     run_stopped = False
     write_json(run / "results.json", data)
     try:
@@ -191,7 +220,9 @@ def run_pipeline(
             budget.begin(municipality.id)
             gateway.organisation_calls = 0
             checkpoint_path = run / "checkpoints" / (municipality.id + ".json")
-            checkpoint = read_json(checkpoint_path) if previous and checkpoint_path.exists() else None
+            checkpoint = (
+                read_json(checkpoint_path) if previous and checkpoint_path.exists() else None
+            )
             if checkpoint and not checkpoint["queue"] and not checkpoint.get("inflight"):
                 data["progress"]["completed_organisations"].append(municipality.id)
                 data["progress"]["unprocessed_organisations"].remove(municipality.id)
@@ -199,7 +230,9 @@ def run_pipeline(
             audit.emit("municipality_start", municipality_id=municipality.id)
             discovery = Discoverer(config, fetcher, gateway, audit, checkpoint=checkpoint)
             documents = [d for d in data["documents"] if d["municipality_id"] == municipality.id]
-            records = [r for r in data["classifications"] if r["municipality_id"] == municipality.id]
+            records = [
+                r for r in data["classifications"] if r["municipality_id"] == municipality.id
+            ]
             gaps = [w for d in documents for w in d.get("warnings", [])]
             stopping = None
             try:
@@ -208,11 +241,39 @@ def run_pipeline(
                     try:
                         budget.check()
                         # Preserve raw bytes before entering the parser subprocess.
-                        source_id = digest(municipality.id + "\n" + download.url + "\n" + download.sha256)[:24]
-                        source_path = run / "sources" / source_id / ("source.pdf" if download.body.lstrip().startswith(b"%PDF-") else "source.json" if "json" in download.content_type.lower() else "source.html")
+                        source_id = digest(
+                            municipality.id + "\n" + download.url + "\n" + download.sha256
+                        )[:24]
+                        source_path = (
+                            run
+                            / "sources"
+                            / source_id
+                            / (
+                                "source.pdf"
+                                if download.body.lstrip().startswith(b"%PDF-")
+                                else "source.json"
+                                if "json" in download.content_type.lower()
+                                else "source.html"
+                            )
+                        )
                         atomic_bytes(source_path, download.body)
-                        write_json(source_path.parent / "download.json", {"url": download.url, "requested_url": download.requested_url, "sha256": download.sha256, "retrieved_at": download.retrieved_at, "content_type": download.content_type, "raw_path": str(source_path.relative_to(run))})
-                        document = bounded_call(extract, (download, municipality.id, run, config.extraction), budget.timeout(config.limits.extraction_seconds), check=budget.check)
+                        write_json(
+                            source_path.parent / "download.json",
+                            {
+                                "url": download.url,
+                                "requested_url": download.requested_url,
+                                "sha256": download.sha256,
+                                "retrieved_at": download.retrieved_at,
+                                "content_type": download.content_type,
+                                "raw_path": str(source_path.relative_to(run)),
+                            },
+                        )
+                        document = bounded_call(
+                            extract,
+                            (download, municipality.id, run, config.extraction),
+                            budget.timeout(config.limits.extraction_seconds),
+                            check=budget.check,
+                        )
                         budget.check()
                         doc_meta = document.model_dump(mode="json", exclude={"text"})
                         existing = {d["id"] for d in documents}
@@ -222,7 +283,13 @@ def run_pipeline(
                         navigation = document.navigation_page
                         if navigation:
                             budget.count("navigation_pages")
-                        usable = len(document.text) >= config.extraction.min_page_chars and not any(x in document.warnings for x in ("suspected_error_page_not_classified", "javascript_only_suspected"))
+                        usable = len(document.text) >= config.extraction.min_page_chars and not any(
+                            x in document.warnings
+                            for x in (
+                                "suspected_error_page_not_classified",
+                                "javascript_only_suspected",
+                            )
+                        )
                         if usable:
                             budget.count("usable_documents")
                         write_json(run / "results.json", data)
@@ -271,7 +338,11 @@ def run_pipeline(
                             "processing_error", **{k: v for k, v in entry.items() if k != "stage"}
                         )
             except BudgetExhausted as error:
-                stopping = {"municipality_id": municipality.id, "scope": error.scope, "reason": error.reason}
+                stopping = {
+                    "municipality_id": municipality.id,
+                    "scope": error.scope,
+                    "reason": error.reason,
+                }
                 gaps.append(str(error))
                 data["progress"]["stopping_reasons"].append(stopping)
                 audit.emit("budget_exhausted", **stopping)
@@ -288,16 +359,26 @@ def run_pipeline(
                         }
                     )
             if stopping is None and "candidate_attempt_limit" in discovery.gaps:
-                stopping = {"municipality_id": municipality.id, "scope": "organisation", "reason": "candidate_attempt_limit"}
+                stopping = {
+                    "municipality_id": municipality.id,
+                    "scope": "organisation",
+                    "reason": "candidate_attempt_limit",
+                }
                 data["progress"]["stopping_reasons"].append(stopping)
             gaps.extend(discovery.gaps)
             if not documents:
                 gaps.append("no_documents_retrieved")
-            data["summary"] = [row for row in data["summary"] if row["municipality_id"] != municipality.id]
+            data["summary"] = [
+                row for row in data["summary"] if row["municipality_id"] != municipality.id
+            ]
             row = summarize(municipality, documents, records, gaps, config, collect_only)
-            row.update(counts=dict(budget.current), stop_reason=stopping, remaining=budget.snapshot())
+            row.update(
+                counts=dict(budget.current), stop_reason=stopping, remaining=budget.snapshot()
+            )
             if checkpoint:
-                row["counts_scope"] = "this_explicit_continuation_only; documents/classifications are cumulative"
+                row["counts_scope"] = (
+                    "this_explicit_continuation_only; documents/classifications are cumulative"
+                )
             data["summary"].append(row)
             data["progress"]["unprocessed_organisations"].remove(municipality.id)
             if stopping is None and not discovery.queue:
@@ -311,7 +392,9 @@ def run_pipeline(
                 break
         audit.emit("run_finished", municipalities=len(municipalities), api_calls=gateway.calls)
         manifest.update(
-            status="stopped_with_partial_results" if data["progress"]["stopping_reasons"] else "completed_with_gaps"
+            status="stopped_with_partial_results"
+            if data["progress"]["stopping_reasons"]
+            else "completed_with_gaps"
             if data["errors"] or any(s["needs_review"] for s in data["summary"])
             else "completed",
             finished_at=utc_now(),

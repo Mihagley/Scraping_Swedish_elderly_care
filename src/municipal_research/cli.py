@@ -25,7 +25,11 @@ def main(argv=None) -> int:
     mode.add_argument("--offline", action="store_true")
     mode.add_argument("--refresh", action="store_true")
     run.add_argument("--collect-only", action="store_true")
-    run.add_argument("--resume-from", type=Path, help="Continue checkpoints in a NEW run directory with explicit new budgets")
+    run.add_argument(
+        "--resume-from",
+        type=Path,
+        help="Continue checkpoints in a NEW run directory with explicit new budgets",
+    )
     run.add_argument("--cancel-file", type=Path, help="Stop cleanly when this file exists")
     run.add_argument("--limit", type=int, help="First N municipalities, for a small pilot")
     export = commands.add_parser("export", help="Rebuild Excel from an existing run")
@@ -70,7 +74,13 @@ def main(argv=None) -> int:
                     indent=2,
                 )
             )
-            return 2 if data["progress"]["stopping_reasons"] or data["errors"] or any(s["needs_review"] for s in data["summary"]) else 0
+            return (
+                2
+                if data["progress"]["stopping_reasons"]
+                or data["errors"]
+                or any(s["needs_review"] for s in data["summary"])
+                else 0
+            )
         if args.command == "export":
             if args.output.resolve().is_relative_to(args.run_dir.resolve()):
                 raise ValueError(

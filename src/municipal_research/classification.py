@@ -138,14 +138,29 @@ class Classifier:
             supported, issues, quotes = review(valid[0], "verify_consensus")
             if supported:
                 selected, method, selected_quotes = valid[0], "consensus_verified", quotes
-        if selected is None and candidates and settings.adjudicate and settings.analysis_mode != "light":
+        if (
+            selected is None
+            and candidates
+            and settings.adjudicate
+            and settings.analysis_mode != "light"
+        ):
             try:
                 decision = self.gateway.parse(
                     "adjudicate",
                     settings.adjudicator_model,
                     BASE_INSTRUCTIONS
                     + "\nResolve the candidates using the actual source. They can all be wrong. Correct unsupported details or return the unknown category. Do not count votes as evidence.",
-                    {**payload, "candidate_audit": [{k: v for k, v in draft.items() if k in {"stage", "decision", "issues", "error"}} for draft in drafts]},
+                    {
+                        **payload,
+                        "candidate_audit": [
+                            {
+                                k: v
+                                for k, v in draft.items()
+                                if k in {"stage", "decision", "issues", "error"}
+                            }
+                            for draft in drafts
+                        ],
+                    },
                     self.schema,
                 )
                 quotes, issues = check(decision)
@@ -183,7 +198,9 @@ class Classifier:
             "agreement": agree,
             "passes": drafts,
             "errors": failures,
-            "needs_review": settings.analysis_mode == "light" or method == "unresolved" or bool(failures),
+            "needs_review": settings.analysis_mode == "light"
+            or method == "unresolved"
+            or bool(failures),
             "confirmation_note": "Repeated same-model passes are not independent confirmation.",
         }
         self.audit.emit(
