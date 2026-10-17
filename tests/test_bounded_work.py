@@ -363,8 +363,7 @@ def test_elapsed_run_cap_preserves_json_without_unbounded_export(config, municip
     assert not (output / "results.xlsx").exists()
     assert data["budget"]["used"].get("requests", 0) == 0
     assert any(
-        stop["reason"] == "finalisation_limit"
-        for stop in data["progress"]["stopping_reasons"]
+        stop["reason"] == "finalisation_limit" for stop in data["progress"]["stopping_reasons"]
     )
     assert read_json(output / "manifest.json")["status"] == "stopped_with_partial_results"
 
