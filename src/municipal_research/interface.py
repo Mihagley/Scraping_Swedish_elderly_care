@@ -8,7 +8,6 @@ from string import Formatter
 
 from .config import LLM, Config, Location
 
-
 LOCAL_MODEL_PRESETS = {
     "Qwen3.5 9B": {
         "model": "qwen3.5:9b",
